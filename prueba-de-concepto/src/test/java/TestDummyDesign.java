@@ -11,4 +11,11 @@ public class TestDummyDesign {
 		assertEquals(1, this.testObject.integrante1());
 	}
 
+	@Test
+	public void testIntegrante2(){
+		assertEquals(2, this.testObject.integrante2());
+	}
+
+
 }
+
