@@ -8,4 +8,8 @@ public class DummyDesign {
 		return 2;
 	}
 
+	int integrante4() {
+		return 4;
+	}
+	
 }
