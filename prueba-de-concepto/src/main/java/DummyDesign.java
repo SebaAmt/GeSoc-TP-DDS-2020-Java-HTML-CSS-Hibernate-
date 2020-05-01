@@ -20,4 +20,8 @@ public class DummyDesign {
 	int integrante5() {
 		return 5;
 	}
+	
+	int integrante6(){
+		return 6;
+	}
 }
