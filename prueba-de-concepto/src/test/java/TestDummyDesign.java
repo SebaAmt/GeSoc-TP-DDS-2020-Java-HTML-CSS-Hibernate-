@@ -33,6 +33,6 @@ public class TestDummyDesign {
 	
 	@Test
 	public void testIntegrante6() {
-		assertEquals(5, testObject.integrante6());
+		assertEquals(6, testObject.integrante6());
 	}
 }
