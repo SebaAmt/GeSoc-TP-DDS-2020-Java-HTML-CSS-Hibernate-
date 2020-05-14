@@ -1,3 +1,4 @@
+package dds.mediosDePago;
 
 public class TarjetaDebito implements MedioDePago {
 	private int identificador;

@@ -1,3 +1,4 @@
+package dds.mediosDePago;
 
 public class Efectivo implements MedioDePago {
 	private int identificador;

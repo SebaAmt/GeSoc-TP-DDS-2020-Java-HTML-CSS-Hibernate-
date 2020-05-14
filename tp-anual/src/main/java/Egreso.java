@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import dds.mediosDePago.MedioDePago;
+
 public class Egreso {
 	
 	private LocalDate fechaDeOperacion;

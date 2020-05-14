@@ -1,3 +1,4 @@
+package dds.mediosDePago;
 import java.math.BigDecimal;
 
 public class Cajero implements MedioDePago {
