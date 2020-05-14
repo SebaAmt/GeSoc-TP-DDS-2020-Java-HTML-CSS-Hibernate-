@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class EntidadBase {
 	private String nombreFicticio;
 	private String descripcion;
@@ -10,7 +12,7 @@ public class EntidadBase {
 		this.entidadJuridica = entidadJuridica;
 	}
 	
-	public void entidadJuridica(){
+	public EntidadJuridica entidadJuridica(){
 		return this.entidadJuridica;
 	}
 	
