@@ -9,11 +9,11 @@ public class MasDe8Caracteres implements Validacion {
 	}
 
 	@Override
-	public void validar(String password) throws PasswordException {
+	public void validar(String username, String password) throws PasswordException {
 		// TODO Auto-generated method stub
 
 		if (password.length() < 8) { // Revisa la longitud minima de 8 caracteres del password
-			throw new PasswordException("Inutilizable: no cumple con el mínimo de caracteres!!");
+			throw new PasswordException("Inutilizable: no cumple con el minimo de caracteres!!");
 		}
 	}
 }

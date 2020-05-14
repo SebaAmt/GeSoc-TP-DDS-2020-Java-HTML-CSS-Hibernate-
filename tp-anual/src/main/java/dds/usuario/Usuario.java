@@ -8,7 +8,10 @@ import java.util.List;
 import dds.exception.PasswordException;
 import dds.validaciones.MasDe8Caracteres;
 import dds.validaciones.NoConsecutivosORepetidos;
+import dds.validaciones.NoPuedeIncluirNombreUsuario;
 import dds.validaciones.Validacion;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 public abstract class Usuario {
 
@@ -17,31 +20,39 @@ public abstract class Usuario {
 
 	public Usuario(String username, String password) throws PasswordException {
 
-		this.username = username;
-		validarContrasenia(password);
-		if (this.password == null) {
-			throw new PasswordException("Cambie la contrasenia");
-		}
+		try {
 
+			validarContrasenia(username, password);
+
+		} catch (Exception e) {
+			throw new PasswordException(e.getMessage());
+		}
+		
+		this.password = encriptarPassword();
 	}
 
-	public void validarContrasenia(String password) {
+	private String encriptarPassword() {
+		String textoEncriptadoConMD5 = DigestUtils.md5Hex(password + username);
+		return textoEncriptadoConMD5;
+	}
 
-		List<Validacion> recomendaciones = Arrays.asList(new MasDe8Caracteres(), new NoConsecutivosORepetidos());
+	public void validarContrasenia(String username, String password) throws PasswordException {
+
+		List<Validacion> recomendaciones = Arrays.asList(new MasDe8Caracteres(), new NoConsecutivosORepetidos(), new NoPuedeIncluirNombreUsuario());
 
 		try {
 			verificarConTopPeoresContrasenias(password);// Verifica mediante un archivo txt de 10k peores contrasenias
 
 			for (Validacion recomendacion : recomendaciones) {// Valida todas las recomendaciones/validaciones
-				recomendacion.validar(password);
+				recomendacion.validar(username, password);
 			}
 
+			this.username = username;
 			this.password = password;
 
 		} catch (PasswordException e) {
 			// TODO Auto-generated catch block
-			e.getMessage();
-			e.printStackTrace();
+			throw new PasswordException(e.getMessage());
 		}
 	}
 
@@ -58,18 +69,27 @@ public abstract class Usuario {
 	private String leerTxt(String direccion) {
 		String texto = "";
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader(direccion));
+			BufferedReader buffer = new BufferedReader(new FileReader(direccion));
 			String bfRead;
 			String temp = "";
-			while ((bfRead = bf.readLine()) != null) {
+			while ((bfRead = buffer.readLine()) != null) {
 				temp = temp + bfRead + ",";
 			}
 
 			texto = temp;
+
+			buffer.close();
 
 		} catch (Exception e) {
 			System.err.println("No se encontro archivo");
 		}
 		return texto;
 	}
+
+	public String password() {
+		// TODO Auto-generated method stub
+		return password;
+	}
+
+
 }
