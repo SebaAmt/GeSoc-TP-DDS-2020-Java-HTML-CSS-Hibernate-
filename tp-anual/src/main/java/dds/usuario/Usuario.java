@@ -8,7 +8,10 @@ import java.util.List;
 import dds.exception.PasswordException;
 import dds.validaciones.MasDe8Caracteres;
 import dds.validaciones.NoConsecutivosORepetidos;
+import dds.validaciones.NoPuedeIncluirNombreUsuario;
 import dds.validaciones.Validacion;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 public abstract class Usuario {
 
@@ -24,12 +27,18 @@ public abstract class Usuario {
 		} catch (Exception e) {
 			throw new PasswordException(e.getMessage());
 		}
+		
+		this.password = encriptarPassword();
+	}
 
+	private String encriptarPassword() {
+		String textoEncriptadoConMD5 = DigestUtils.md5Hex(password + username);
+		return textoEncriptadoConMD5;
 	}
 
 	public void validarContrasenia(String username, String password) throws PasswordException {
 
-		List<Validacion> recomendaciones = Arrays.asList(new MasDe8Caracteres(), new NoConsecutivosORepetidos());
+		List<Validacion> recomendaciones = Arrays.asList(new MasDe8Caracteres(), new NoConsecutivosORepetidos(), new NoPuedeIncluirNombreUsuario());
 
 		try {
 			verificarConTopPeoresContrasenias(password);// Verifica mediante un archivo txt de 10k peores contrasenias
@@ -76,4 +85,11 @@ public abstract class Usuario {
 		}
 		return texto;
 	}
+
+	public String password() {
+		// TODO Auto-generated method stub
+		return password;
+	}
+
+
 }
