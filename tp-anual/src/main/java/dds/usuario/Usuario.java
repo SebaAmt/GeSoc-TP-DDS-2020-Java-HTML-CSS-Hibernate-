@@ -15,10 +15,14 @@ public abstract class Usuario {
 	private String username;
 	private String password;
 
-	public Usuario(String username, String password) {
-		super();
+	public Usuario(String username, String password) throws PasswordException {
+
 		this.username = username;
-		this.password = password;
+		validarContrasenia(password);
+		if (this.password == null) {
+			throw new PasswordException("Cambie la contrasenia");
+		}
+
 	}
 
 	public void validarContrasenia(String password) {
@@ -26,11 +30,13 @@ public abstract class Usuario {
 		List<Validacion> recomendaciones = Arrays.asList(new MasDe8Caracteres(), new NoConsecutivosORepetidos());
 
 		try {
-			verificarConTopPeoresContrasenias(password);// Verifica mediante un archivo txt de 10k peores contraseñas
+			verificarConTopPeoresContrasenias(password);// Verifica mediante un archivo txt de 10k peores contrasenias
 
 			for (Validacion recomendacion : recomendaciones) {// Valida todas las recomendaciones/validaciones
 				recomendacion.validar(password);
 			}
+
+			this.password = password;
 
 		} catch (PasswordException e) {
 			// TODO Auto-generated catch block
@@ -41,9 +47,9 @@ public abstract class Usuario {
 
 	private void verificarConTopPeoresContrasenias(String password) throws PasswordException {
 		String texto = leerTxt("src\\main\\resources\\10k-most-common.txt");
-		List<String> contraseñas = Arrays.asList(texto.split(","));
+		List<String> contrasenias = Arrays.asList(texto.split(","));
 
-		boolean isExist = contraseñas.stream().anyMatch(contraseña -> contraseña.equals(password));
+		boolean isExist = contrasenias.stream().anyMatch(contrasenia -> contrasenia.equals(password));
 		if (isExist) {
 			throw new PasswordException("La Password es debil");
 		}
