@@ -17,15 +17,17 @@ public abstract class Usuario {
 
 	public Usuario(String username, String password) throws PasswordException {
 
-		this.username = username;
-		validarContrasenia(password);
-		if (this.password == null) {
-			throw new PasswordException("Cambie la contrasenia");
+		try {
+
+			validarContrasenia(username, password);
+
+		} catch (Exception e) {
+			throw new PasswordException(e.getMessage());
 		}
 
 	}
 
-	public void validarContrasenia(String password) {
+	public void validarContrasenia(String username, String password) throws PasswordException {
 
 		List<Validacion> recomendaciones = Arrays.asList(new MasDe8Caracteres(), new NoConsecutivosORepetidos());
 
@@ -33,15 +35,15 @@ public abstract class Usuario {
 			verificarConTopPeoresContrasenias(password);// Verifica mediante un archivo txt de 10k peores contrasenias
 
 			for (Validacion recomendacion : recomendaciones) {// Valida todas las recomendaciones/validaciones
-				recomendacion.validar(password);
+				recomendacion.validar(username, password);
 			}
 
+			this.username = username;
 			this.password = password;
 
 		} catch (PasswordException e) {
 			// TODO Auto-generated catch block
-			e.getMessage();
-			e.printStackTrace();
+			throw new PasswordException(e.getMessage());
 		}
 	}
 
@@ -58,14 +60,16 @@ public abstract class Usuario {
 	private String leerTxt(String direccion) {
 		String texto = "";
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader(direccion));
+			BufferedReader buffer = new BufferedReader(new FileReader(direccion));
 			String bfRead;
 			String temp = "";
-			while ((bfRead = bf.readLine()) != null) {
+			while ((bfRead = buffer.readLine()) != null) {
 				temp = temp + bfRead + ",";
 			}
 
 			texto = temp;
+
+			buffer.close();
 
 		} catch (Exception e) {
 			System.err.println("No se encontro archivo");
