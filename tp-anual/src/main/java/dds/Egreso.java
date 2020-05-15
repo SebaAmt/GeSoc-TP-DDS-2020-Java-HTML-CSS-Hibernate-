@@ -1,6 +1,7 @@
 package dds;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +13,7 @@ public class Egreso {
 	private Proveedor proveedor;
 	private DocumentoComercial documentoComercial;
 	private MedioDePago medioDePago;
-	private List<Item> items;
+	private List<Item> items = new ArrayList<>();
 	
 	
 	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items) {
@@ -33,7 +34,7 @@ public class Egreso {
 	}
 	
 	public List<String> detalle() {
-		return items.stream().map(item->item.getDescripcion()).collect(Collectors.toList());
+		return items.stream().map(item->item.getDescripcion() +" "+ item.getValor()).collect(Collectors.toList());
 	}
 	
 	

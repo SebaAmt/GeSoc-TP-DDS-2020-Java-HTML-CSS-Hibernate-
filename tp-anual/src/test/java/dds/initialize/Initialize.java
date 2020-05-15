@@ -2,6 +2,7 @@ package dds.initialize;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import dds.DocumentoComercial;
@@ -26,8 +27,8 @@ public class Initialize {
 	public DocumentoComercial documento2;
 	public Cajero medioDePago1;
 	public DineroEnCuenta medioDePago2;
-	public List<Item> items1;
-	public List<Item> items2;
+	public List<Item> items1 = new ArrayList<>();
+	public List<Item> items2 = new ArrayList<>();
 	
 	
 	public void setDePrueba() {
