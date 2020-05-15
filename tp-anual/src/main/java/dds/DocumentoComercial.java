@@ -1,3 +1,4 @@
+package dds;
 public class DocumentoComercial {
 
 	private TipoDocumentoComercial tipoDocumentoComercial;

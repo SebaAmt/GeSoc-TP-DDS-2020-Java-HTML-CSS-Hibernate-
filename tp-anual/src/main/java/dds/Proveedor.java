@@ -1,3 +1,4 @@
+package dds;
 public class Proveedor {
 
 	private String nombre;

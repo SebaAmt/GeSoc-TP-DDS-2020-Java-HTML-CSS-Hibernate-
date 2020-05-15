@@ -1,3 +1,4 @@
+package dds;
 import java.util.*;
 
 public class EntidadJuridica {
