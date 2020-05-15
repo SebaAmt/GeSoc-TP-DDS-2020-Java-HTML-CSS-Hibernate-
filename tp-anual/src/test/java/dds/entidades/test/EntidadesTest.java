@@ -43,14 +43,12 @@ public class EntidadesTest {
     @Test
     public void CalcularEgresosEntidadJuridica(){
         entidadJuridica.nuevoEgreso(egreso1);
-        assertEquals(egreso1.valorTotal(), entidadJuridica.totalEgresos());
         entidadJuridica.nuevoEgreso(egreso2);
         assertEquals(egreso1.valorTotal().add(egreso2.valorTotal()), entidadJuridica.totalEgresos());
     }
 
     @Test public void CalcularEgresosEntidadBase(){
         entidadBase.nuevoEgreso(egreso1);
-        assertEquals(egreso1.valorTotal(), entidadBase.totalEgresos());
         entidadBase.nuevoEgreso(egreso2);
         assertEquals(egreso1.valorTotal().add(egreso2.valorTotal()), entidadBase.totalEgresos());
     }
