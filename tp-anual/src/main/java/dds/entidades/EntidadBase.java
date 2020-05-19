@@ -1,7 +1,6 @@
 package dds.entidades;
 
-import dds.Egreso;
-
+import dds.egreso.Egreso;
 import java.math.BigDecimal;
 import java.util.*;
 

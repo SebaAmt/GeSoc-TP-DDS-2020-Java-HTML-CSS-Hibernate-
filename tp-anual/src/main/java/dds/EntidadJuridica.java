@@ -1,4 +1,6 @@
 package dds;
+
+import dds.egreso.Egreso;
 import java.util.*;
 
 public class EntidadJuridica {
