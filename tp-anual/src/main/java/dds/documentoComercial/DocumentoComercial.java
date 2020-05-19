@@ -1,4 +1,4 @@
-package dds;
+package dds.documentoComercial;
 public class DocumentoComercial {
 
 	private TipoDocumentoComercial tipoDocumentoComercial;
@@ -6,8 +6,8 @@ public class DocumentoComercial {
 	
 	
 	public DocumentoComercial(TipoDocumentoComercial tipoDocumentoComercial, Integer identificadorDocumento) {
-		setTipoDocumentoComercial(tipoDocumentoComercial);
-		setIdentificadorDocumento(identificadorDocumento);
+		this.tipoDocumentoComercial = tipoDocumentoComercial;
+		this.identificadorDocumento = identificadorDocumento;
 	}
 	
 	
@@ -15,15 +15,7 @@ public class DocumentoComercial {
 		return tipoDocumentoComercial;
 	}
 	
-	public void setTipoDocumentoComercial(TipoDocumentoComercial tipoDocumentoComercial) {
-		this.tipoDocumentoComercial = tipoDocumentoComercial;
-	}
-	
 	public Integer getIdentificadorDocumento() {
 		return identificadorDocumento;
-	}
-	
-	public void setIdentificadorDocumento(Integer identificadorDocumento) {
-		this.identificadorDocumento = identificadorDocumento;
 	}
 }

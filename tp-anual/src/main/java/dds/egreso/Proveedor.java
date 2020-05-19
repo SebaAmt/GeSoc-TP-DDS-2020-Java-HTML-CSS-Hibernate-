@@ -1,4 +1,4 @@
-package dds;
+package dds.egreso;
 public class Proveedor {
 
 	private String nombre;

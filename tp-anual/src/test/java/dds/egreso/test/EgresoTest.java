@@ -1,14 +1,10 @@
 package dds.egreso.test;
 
 import dds.initialize.Initialize;
-
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.math.BigDecimal;
-
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class EgresoTest {
@@ -24,14 +20,8 @@ public class EgresoTest {
 	
 	@Test
 	public void valorTotalTest() {
-		BigDecimal total = prueba.item1.getValor().add(prueba.item2.getValor());
+		BigDecimal total = prueba.item1.valorTotal().add(prueba.item2.valorTotal());
 		assertEquals(prueba.egreso1.valorTotal(), total);
-	}
-	
-	@Test
-	public void descripcionTest() {
-		String detalleItem = prueba.item3.getDescripcion() +" "+ prueba.item3.getValor();
-		assertEquals(prueba.egreso2.detalle().get(0), detalleItem);
 	}
 	
 	@Test

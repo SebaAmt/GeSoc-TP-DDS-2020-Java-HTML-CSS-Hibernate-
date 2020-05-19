@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import dds.DocumentoComercial;
-import dds.Egreso;
-import dds.Item;
-import dds.Proveedor;
-import dds.TipoDocumentoComercial;
+import dds.documentoComercial.DocumentoComercial;
+import dds.documentoComercial.TipoDocumentoComercial;
+import dds.egreso.Egreso;
+import dds.egreso.Item;
+import dds.egreso.Proveedor;
 import dds.mediosDePago.Cajero;
 import dds.mediosDePago.DineroEnCuenta;
 
@@ -32,10 +32,10 @@ public class Initialize {
 	
 	
 	public void setDePrueba() {
-		item1 = new Item("Tela", new BigDecimal(150));
-		item2 = new Item("Cuero", new BigDecimal(200));
-		item3 = new Item("Luz", new BigDecimal(1000));
-		item4 = new Item("Agua", new BigDecimal(700));
+		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
+		item2 = new Item("Lamina de cuero", new BigDecimal(300), 4);
+		item3 = new Item("Botella de tintura", new BigDecimal(50), 1);
+		item4 = new Item("Jabon en polvo", new BigDecimal(500), 1);
 		
 		items1.add(item1);
 		items1.add(item2);
@@ -44,8 +44,8 @@ public class Initialize {
 		proveedor1 = new Proveedor("Telas SA", 30258741, "4568");
 		proveedor2 = new Proveedor("Edenor", 40987654, "8520");
 		
-		documento1 = new DocumentoComercial(TipoDocumentoComercial.Ticket, 0000001);
-		documento2 = new DocumentoComercial(TipoDocumentoComercial.Factura, 9999999);
+		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 0000001);
+		documento2 = new DocumentoComercial(TipoDocumentoComercial.ORDEN_DE_COMPRA, 9999999);
 	
 		medioDePago1 = new Cajero(159753456);
 		medioDePago1.setSaldo(new BigDecimal(3000));

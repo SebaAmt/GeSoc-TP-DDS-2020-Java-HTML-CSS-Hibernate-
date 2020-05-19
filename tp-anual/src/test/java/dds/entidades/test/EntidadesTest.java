@@ -1,6 +1,11 @@
 package dds.entidades.test;
 
 import dds.*;
+import dds.documentoComercial.DocumentoComercial;
+import dds.documentoComercial.TipoDocumentoComercial;
+import dds.egreso.Egreso;
+import dds.egreso.Item;
+import dds.egreso.Proveedor;
 import dds.entidades.EntidadBase;
 import dds.entidades.EntidadJuridica;
 import dds.mediosDePago.Efectivo;
@@ -28,14 +33,14 @@ public class EntidadesTest {
         entidadJuridica = new EntidadJuridica("Razon Social Test", "Entidad Juridica Test", "11111111111", "Direccion 888", "Codigo 123");
         entidadBase = new EntidadBase("Entidad Base Test", "Entidad base para probar");
         Proveedor proveedor = new Proveedor("Proveedor", 11111111, "Direccion 123");
-        DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.Factura, 1234);
+        DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new Efectivo(12345, TipoEfectivo.PAGOFACIL);
         List<Item> items1 = new ArrayList<Item>();
-        items1.add(new Item("Martillo", new BigDecimal(30)));
-        items1.add(new Item("Clavos", new BigDecimal(5)));
-        items1.add(new Item("Madera", new BigDecimal(100)));
+        items1.add(new Item("Martillo", new BigDecimal(30), 1));
+        items1.add(new Item("Clavos", new BigDecimal(5), 10));
+        items1.add(new Item("Madera", new BigDecimal(100), 5));
         List<Item> items2 = new ArrayList<Item>();
-        items2.add(new Item("Pegamento", new BigDecimal(50)));
+        items2.add(new Item("Pegamento", new BigDecimal(50), 2));
         egreso1 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items1);
         egreso2 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items2);
 }
