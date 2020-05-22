@@ -1,6 +1,19 @@
 package dds.mediosDePago;
 
-public interface MedioDePago {
+public class MedioDePago {
+	private TipoMedioDePago medio;
+	private String identificador;
 
-	int getIdentificador();
+	public MedioDePago(TipoMedioDePago medio, String identificador) {
+		this.medio = medio;
+		this.identificador = identificador;
+	}
+
+	public TipoMedioDePago getMedio() {
+		return this.medio;
+	}
+
+	public String getIdentificador() {
+		return this.identificador;
+	}
 }
