@@ -10,8 +10,8 @@ import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.Egreso;
 import dds.egreso.Item;
 import dds.egreso.Proveedor;
-import dds.mediosDePago.Cajero;
-import dds.mediosDePago.DineroEnCuenta;
+import dds.mediosDePago.MedioDePago;
+import dds.mediosDePago.TipoMedioDePago;
 
 public class Initialize {
 	
@@ -25,8 +25,8 @@ public class Initialize {
 	public Proveedor proveedor2;	
 	public DocumentoComercial documento1;
 	public DocumentoComercial documento2;
-	public Cajero medioDePago1;
-	public DineroEnCuenta medioDePago2;
+	public MedioDePago medioDePago1;
+	public MedioDePago medioDePago2;
 	public List<Item> items1 = new ArrayList<>();
 	public List<Item> items2 = new ArrayList<>();
 	
@@ -47,10 +47,9 @@ public class Initialize {
 		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 0000001);
 		documento2 = new DocumentoComercial(TipoDocumentoComercial.ORDEN_DE_COMPRA, 9999999);
 	
-		medioDePago1 = new Cajero(159753456);
-		medioDePago1.setSaldo(new BigDecimal(3000));
-		medioDePago2 = new DineroEnCuenta(456852159);
-		medioDePago2.setSaldo(new BigDecimal(100));
+		medioDePago1 = new MedioDePago(TipoMedioDePago.CAJERO, "159753456");
+		medioDePago2 = new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "456852159");
+		
 		
 		egreso1 = new Egreso(LocalDate.of(2020,5,15), proveedor1, documento2, medioDePago1, items1);
 		egreso2 = new Egreso(LocalDate.of(2020, 5, 15), proveedor2, documento1, medioDePago2, items2);

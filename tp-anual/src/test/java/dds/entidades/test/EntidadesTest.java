@@ -8,9 +8,9 @@ import dds.egreso.Item;
 import dds.egreso.Proveedor;
 import dds.entidades.EntidadBase;
 import dds.entidades.EntidadJuridica;
-import dds.mediosDePago.Efectivo;
 import dds.mediosDePago.MedioDePago;
-import dds.mediosDePago.TipoEfectivo;
+import dds.mediosDePago.TipoMedioDePago;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ public class EntidadesTest {
         entidadBase = new EntidadBase("Entidad Base Test", "Entidad base para probar");
         Proveedor proveedor = new Proveedor("Proveedor", 11111111, "Direccion 123");
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
-        MedioDePago efectivo = new Efectivo(12345, TipoEfectivo.PAGOFACIL);
+        MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
         List<Item> items1 = new ArrayList<Item>();
         items1.add(new Item("Martillo", new BigDecimal(30), 1));
         items1.add(new Item("Clavos", new BigDecimal(5), 10));
