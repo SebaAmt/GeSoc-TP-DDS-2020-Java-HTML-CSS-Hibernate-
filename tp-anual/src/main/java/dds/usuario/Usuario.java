@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import dds.exception.PasswordException;
-import dds.validaciones.MasDe8Caracteres;
-import dds.validaciones.NoConsecutivosORepetidos;
-import dds.validaciones.NoPuedeIncluirNombreUsuario;
+import dds.validaciones.ComprobarSiPoseeMasDe8Caracteres;
+import dds.validaciones.ComprobarSiPoseeCaracteresConsecutivosORepetidos;
+import dds.validaciones.ComprobarSiIncluyeNombreDeUsuario;
 import dds.validaciones.Validacion;
 import dds.validaciones.ValidarTopPeoresContrasenias;
 
@@ -37,8 +37,9 @@ public abstract class Usuario {
 
 	public void validarContrasenia(String username, String password) throws PasswordException {
 
-		List<Validacion> recomendaciones = Arrays.asList(new MasDe8Caracteres(), new NoConsecutivosORepetidos(),
-				new NoPuedeIncluirNombreUsuario(), new ValidarTopPeoresContrasenias());
+		List<Validacion> recomendaciones = Arrays.asList(new ComprobarSiPoseeMasDe8Caracteres(),
+				new ComprobarSiPoseeCaracteresConsecutivosORepetidos(), new ComprobarSiIncluyeNombreDeUsuario(),
+				new ValidarTopPeoresContrasenias());
 
 		try {
 
@@ -56,7 +57,6 @@ public abstract class Usuario {
 	}
 
 	public String password() {
-		// TODO Auto-generated method stub
 		return password;
 	}
 
