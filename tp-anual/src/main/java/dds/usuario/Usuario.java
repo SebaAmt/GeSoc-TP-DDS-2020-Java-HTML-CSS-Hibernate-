@@ -11,11 +11,13 @@ import dds.validaciones.ComprobarSiPoseeCaracteresConsecutivosORepetidos;
 import dds.validaciones.ComprobarSiIncluyeNombreDeUsuario;
 import dds.validaciones.Validacion;
 import dds.validaciones.ValidarTopPeoresContrasenias;
+import dds.usuario.TipoUsuario;
 
 public abstract class Usuario {
 
 	private String username;
 	private String password;
+	private TipoUsuario tipo;
 
 	public Usuario(String username, String password) throws PasswordException {
 
