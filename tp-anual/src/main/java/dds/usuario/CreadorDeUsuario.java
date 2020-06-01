@@ -14,7 +14,7 @@ import dds.validaciones.ValidarTopPeoresContrasenias;
 
 public class CreadorDeUsuario {
 
-	public void crearUsuario(String username, String password, TipoUsuario tipo) {
+	public Usuario crearUsuario(String username, String password, TipoUsuario tipo) {
 		
 		try {
 			validarContrasenia(username, password);
@@ -25,7 +25,7 @@ public class CreadorDeUsuario {
 
 		password = encriptarPassword(password);
 		
-		new Usuario(username,password,tipo);
+		return new Usuario(username,password,tipo);
 	}
 	
 	private String encriptarPassword(String password) {
