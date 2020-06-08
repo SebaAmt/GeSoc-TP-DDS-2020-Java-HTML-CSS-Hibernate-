@@ -9,7 +9,7 @@ public class ComprobarSiPoseeCaracteresConsecutivosORepetidos implements Validac
 	}
 
 	@Override
-	public void validar(String username, String password) throws PasswordException {
+	public void validar(String username, String password) {
 
 		for (int i = 0; i < password.length() - 1; i++) {
 			int valor1 = password.charAt(i);

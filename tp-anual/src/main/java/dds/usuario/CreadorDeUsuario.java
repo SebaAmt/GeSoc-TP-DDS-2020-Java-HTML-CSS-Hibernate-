@@ -33,7 +33,7 @@ public class CreadorDeUsuario {
 		return textoEncriptadoConMD5;
 	}
 
-	public void validarContrasenia(String username, String password) throws PasswordException {
+	public void validarContrasenia(String username, String password) {
 
 		List<Validacion> recomendaciones = Arrays.asList(new ComprobarSiPoseeMasDe8Caracteres(),
 				new ComprobarSiPoseeCaracteresConsecutivosORepetidos(), new ComprobarSiIncluyeNombreDeUsuario(),
@@ -46,7 +46,6 @@ public class CreadorDeUsuario {
 			}
 
 		} catch (PasswordException e) {
-
 			throw new PasswordException(e.getMessage());
 		}
 	}
