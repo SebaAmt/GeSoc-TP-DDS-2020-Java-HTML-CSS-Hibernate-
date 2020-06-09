@@ -20,7 +20,7 @@ public class UsuarioTest {
 	@Test
 	@DisplayName("Hay caracteres Repetidos")
 	void contraseniaInvalidaPorLetrasRepetidas() {
-		Exception exception = assertThrows(PasswordException.class, () -> dios.crearUsuario("Jesica", "aaaaaaaaaaa", estandar));
+		Exception exception = assertThrows(PasswordException.class, () -> dios.crearUsuario("Jesica", "vaamos1kpw", estandar));
 		assertEquals("Hay caracteres repetidos!", exception.getMessage());
 	}
 
@@ -34,14 +34,14 @@ public class UsuarioTest {
 	@Test
 	@DisplayName("No cumple el minimo de caracteres")
 	void contraseniaNoSuperaLos8Caracteres() {
-		Exception exception = assertThrows(PasswordException.class, () -> dios.crearUsuario("Mauro", "fulano",administrador));
+		Exception exception = assertThrows(PasswordException.class, () -> dios.crearUsuario("Mauro", "fulane",administrador));
 		assertEquals("Inutilizable: no cumple con el minimo de caracteres!!", exception.getMessage());
 	}
 
 	@Test
 	@DisplayName("Es contrasenia debil")
 	void exceptionTesting() {
-		Exception exception = assertThrows(PasswordException.class, () -> dios.crearUsuario("Mauro", "password", administrador));
+		Exception exception = assertThrows(PasswordException.class, () -> dios.crearUsuario("Mauro", "redskins", administrador)); // 'redskins' es una palabra tomada del archivo de las 10k contraseñas mas comunes
 		assertEquals("La Password es debil", exception.getMessage());
 	}
 

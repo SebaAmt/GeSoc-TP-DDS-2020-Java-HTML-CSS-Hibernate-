@@ -1,5 +1,6 @@
 package dds.usuario;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,7 +8,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import dds.exception.PasswordException;
 import dds.validaciones.ComprobarSiIncluyeNombreDeUsuario;
-import dds.validaciones.ComprobarSiPoseeCaracteresConsecutivosORepetidos;
+import dds.validaciones.ComprobarCaracteresConsecutivos;
+import dds.validaciones.ComprobarCaracteresRepetidos;
 import dds.validaciones.ComprobarSiPoseeMasDe8Caracteres;
 import dds.validaciones.Validacion;
 import dds.validaciones.ValidarTopPeoresContrasenias;
@@ -35,21 +37,16 @@ public class CreadorDeUsuario {
 
 	public void validarContrasenia(String username, String password) {
 
-		List<Validacion> recomendaciones = Arrays.asList(new ComprobarSiPoseeMasDe8Caracteres(),
-				new ComprobarSiPoseeCaracteresConsecutivosORepetidos(), new ComprobarSiIncluyeNombreDeUsuario(),
-				new ValidarTopPeoresContrasenias());
+		List<Validacion> recomendaciones = new ArrayList();
+		recomendaciones.add(new ComprobarCaracteresConsecutivos());
+		recomendaciones.add(new ComprobarCaracteresRepetidos());
+		recomendaciones.add(new ComprobarSiPoseeMasDe8Caracteres());
+		recomendaciones.add(new ComprobarSiIncluyeNombreDeUsuario());
+		recomendaciones.add(new ValidarTopPeoresContrasenias());
 
-		try {
-
-			for (Validacion recomendacion : recomendaciones) {// Valida todas las recomendaciones/validaciones
-				recomendacion.validar(username, password);
-			}
-
-		} catch (PasswordException e) {
-			throw new PasswordException(e.getMessage());
+		for (Validacion recomendacion : recomendaciones) {// Valida todas las recomendaciones/validaciones
+			recomendacion.validar(username, password);
 		}
 	}
-
-
 }
 

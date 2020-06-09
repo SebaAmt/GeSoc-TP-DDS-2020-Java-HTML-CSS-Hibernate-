@@ -2,13 +2,15 @@ package dds.validaciones;
 
 import dds.exception.PasswordException;
 
-public class ComprobarSiIncluyeNombreDeUsuario implements Validacion {
+public class ComprobarSiIncluyeNombreDeUsuario extends Validacion {
+
+	public ComprobarSiIncluyeNombreDeUsuario(){
+		super("No puede incluir el nombre de usuario en la contrasenia");
+	}
 
 	@Override
-	public void validar(String username, String password) {
-		if (password.contains(username)) {
-			throw new PasswordException("No puede incluir el nombre de usuario en la contrasenia");
-		}
+	public boolean condicion(String username, String password) {
+		return password.contains(username);
 	}
 
 }

@@ -2,7 +2,18 @@ package dds.validaciones;
 
 import dds.exception.PasswordException;
 
-public interface Validacion {
+public abstract class Validacion {
+	protected String mensaje;
 
-	public void validar(String username, String password);
+	protected Validacion(String mensaje){
+		this.mensaje = mensaje;
+	}
+
+
+	public void validar(String username, String password){
+		if(this.condicion(username, password))
+			throw new PasswordException(mensaje);
+	}
+
+	protected abstract boolean condicion(String username, String password);
 }

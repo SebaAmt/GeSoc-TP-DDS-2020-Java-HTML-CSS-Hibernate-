@@ -2,17 +2,14 @@ package dds.validaciones;
 
 import dds.exception.PasswordException;
 
-public class ComprobarSiPoseeMasDe8Caracteres implements Validacion {
+public class ComprobarSiPoseeMasDe8Caracteres extends Validacion {
 
-	public ComprobarSiPoseeMasDe8Caracteres() {
-
+	public ComprobarSiPoseeMasDe8Caracteres(){
+		super("Inutilizable: no cumple con el minimo de caracteres!!");
 	}
 
 	@Override
-	public void validar(String username, String password) {
-
-		if (password.length() < 8) { // Revisa la longitud minima de 8 caracteres del password
-			throw new PasswordException("Inutilizable: no cumple con el minimo de caracteres!!");
-		}
+	public boolean condicion(String username, String password) {
+		return password.length() < 8;
 	}
 }
