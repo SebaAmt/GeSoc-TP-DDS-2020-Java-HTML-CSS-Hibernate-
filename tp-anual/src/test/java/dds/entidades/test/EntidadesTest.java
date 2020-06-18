@@ -4,6 +4,7 @@ import dds.*;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.Egreso;
+import dds.egreso.EstadoEgreso;
 import dds.egreso.Item;
 import dds.egreso.Proveedor;
 import dds.entidades.EntidadBase;
@@ -41,9 +42,9 @@ public class EntidadesTest {
         items1.add(new Item("Madera", new BigDecimal(100), 5));
         List<Item> items2 = new ArrayList<Item>();
         items2.add(new Item("Pegamento", new BigDecimal(50), 2));
-        egreso1 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items1);
-        egreso2 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items2);
-}
+        egreso1 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items1, null, null, false, EstadoEgreso.ACEPTADO, null);
+        egreso2 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items2, null, null, false, EstadoEgreso.ACEPTADO, null);
+    }
 
     @Test
     public void CalcularEgresosEntidadJuridica(){
