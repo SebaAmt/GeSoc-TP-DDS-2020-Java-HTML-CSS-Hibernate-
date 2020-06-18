@@ -84,4 +84,12 @@ public class Egreso {
 	public CriterioSeleccionPresupuesto getCriterio() {
 		return criterio;
 	}
+	
+	@Override
+	public String toString() {
+		return "Egreso{" +
+				"revisor=" + revisor +
+				", fechaDeOperacion=" + fechaDeOperacion +
+				'}';
+	}
 }

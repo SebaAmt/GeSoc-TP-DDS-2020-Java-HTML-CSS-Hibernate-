@@ -21,6 +21,7 @@ public class Presupuesto {
     public Presupuesto(Proveedor proveedor, DocumentoComercial documentoComercial, List<Item> items) {
         this.proveedor = proveedor;
         this.documentoComercial = documentoComercial;
+        this.items = items;
     }
 
     public BigDecimal valorTotal() {
