@@ -11,12 +11,11 @@ public class Presupuesto {
 
     private Proveedor proveedor;
     private DocumentoComercial documentoComercial;
+    private List<Item> items = new ArrayList<>();
 
     public List<Item> getItems() {
         return items;
     }
-
-    private List<Item> items = new ArrayList<>();
 
     public Presupuesto(Proveedor proveedor, DocumentoComercial documentoComercial, List<Item> items) {
         this.proveedor = proveedor;
@@ -28,6 +27,7 @@ public class Presupuesto {
         return items.stream().map(item->item.valorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-
-
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
 }

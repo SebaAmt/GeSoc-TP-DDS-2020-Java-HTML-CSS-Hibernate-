@@ -97,19 +97,19 @@ public class UsuarioTest {
 	
 	@Test
 	@DisplayName("Obtiene mensaje rechazado si no cumple con la cantidad minima de presupuestos")
-	void EnviaUusuarioMensajeRechazadoMinimaPresupuesto() {
+	void EnviaUsuarioMensajeRechazadoMinimoPresupuestosCargados() {
 		Usuario jesica = dios.crearUsuario("Jesica", "fulan159", TipoUsuario.ESTANDAR);		
 		Egreso egreso = new Egreso(LocalDate.of(2020,5,15), prueba.proveedor1, prueba.documento2, prueba.medioDePago1, prueba.items2, jesica, presupuestosValor50, false, EstadoEgreso.PENDIENTE, null);
 
 		validadorDeEgreso = new ValidadorEgresos(Arrays.asList(egreso),validacionesDeEgreso);
 		validadorDeEgreso.validarEgresosPendientes();
 		
-		assertEquals("El Egreso Egreso{revisor=Usuario{username='Jesica', tipo=ESTANDAR}, fechaDeOperacion=2020-05-15} fue RECHAZADO: El egreso no cumple con la cantidad minima de presupuestos cargados",jesica.getBandejaDeMensajes().get(0));
+		assertEquals("El Egreso " + egreso + " fue RECHAZADO: El egreso no cumple con la cantidad minima de presupuestos cargados", jesica.getBandejaDeMensajes().get(0));
 	}
 	
 	@Test
-	@DisplayName("Obtiene mensaje de rechazo si El valor total del egreso no se corresponde con alguno de los presupuestos cargados")
-	void EnviaUusuarioMensajeRechazadoXValorTotal() {
+	@DisplayName("Obtiene mensaje de rechazo si el egreso no se corresponde con alguno de los presupuestos cargados (sin criterio)")
+	void EnviaUsuarioMensajeRechazadoPorValorTotal() {
 		Usuario jesica = dios.crearUsuario("Jesica", "fulan159", TipoUsuario.ESTANDAR);
 
 		Egreso egreso = new Egreso(LocalDate.of(2020,5,15), prueba.proveedor1, prueba.documento2, prueba.medioDePago1, prueba.items2, jesica, presupuestosValor600, false, EstadoEgreso.PENDIENTE, null);
@@ -117,7 +117,7 @@ public class UsuarioTest {
 		validadorDeEgreso = new ValidadorEgresos(Arrays.asList(egreso),validacionesDeEgreso);
 		validadorDeEgreso.validarEgresosPendientes();
 
-		assertEquals("El Egreso Egreso{revisor=Usuario{username='Jesica', tipo=ESTANDAR}, fechaDeOperacion=2020-05-15} fue RECHAZADO: El valor total del egreso no se corresponde con alguno de los presupuestos cargados para el",jesica.getBandejaDeMensajes().get(0));
+		assertEquals("El Egreso " + egreso + " fue RECHAZADO: El egreso no se corresponde con ninguno de los presupuestos cargados", jesica.getBandejaDeMensajes().get(0));
 	}
 
 }

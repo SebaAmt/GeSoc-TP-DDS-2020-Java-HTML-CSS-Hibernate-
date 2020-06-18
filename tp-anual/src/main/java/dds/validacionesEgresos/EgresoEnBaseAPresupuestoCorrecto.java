@@ -1,8 +1,10 @@
 package dds.validacionesEgresos;
 
 import dds.egreso.Egreso;
-import dds.exception.ValorEgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio;
-import dds.exception.ValorEgresoNoCorrespondeConPresupuestoCargado;
+import dds.egreso.Presupuesto;
+import dds.egreso.Proveedor;
+import dds.exception.EgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio;
+import dds.exception.EgresoNoCorrespondeConPresupuestoCargado;
 
 import java.math.BigDecimal;
 
@@ -18,13 +20,23 @@ public class EgresoEnBaseAPresupuestoCorrecto implements ValidacionEgreso{
 
     private void validarSinCriterio(Egreso egreso){
         BigDecimal valorTotalEgreso = egreso.valorTotal();
-        if(!egreso.getPresupuestos().stream().anyMatch(presupuesto -> presupuesto.valorTotal().equals(valorTotalEgreso)))
-            throw new ValorEgresoNoCorrespondeConPresupuestoCargado();
+        Proveedor proveedorEgreso = egreso.getProveedor();
+        if(!egreso.getPresupuestos().stream().anyMatch(presupuesto -> this.tienenMismoProveedor(egreso, presupuesto) && this.tienenMismoValorTotal(egreso,presupuesto)))
+            throw new EgresoNoCorrespondeConPresupuestoCargado();
     }
 
     private void validarConCriterio(Egreso egreso){
-        if(egreso.valorTotal().compareTo(egreso.getCriterio().seleccionarPresupuesto(egreso.getPresupuestos()).valorTotal()) != 0) // compareTo devuelve 0 cuando dos bigdecimal son iguales
-            throw new ValorEgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio();
+        Presupuesto presupuestoPorCriterio = egreso.getCriterio().seleccionarPresupuesto(egreso.getPresupuestos());
+        if(!this.tienenMismoProveedor(egreso, presupuestoPorCriterio) && this.tienenMismoValorTotal(egreso,presupuestoPorCriterio))
+            throw new EgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio();
+    }
+
+    private boolean tienenMismoValorTotal(Egreso egreso, Presupuesto presupuesto){
+        return egreso.valorTotal().compareTo(presupuesto.valorTotal()) == 0;
+    }
+
+    private boolean tienenMismoProveedor(Egreso egreso, Presupuesto presupuesto){
+        return egreso.getProveedor() == presupuesto.getProveedor();
     }
 
 }
