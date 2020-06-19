@@ -10,10 +10,11 @@ import com.sun.jersey.api.client.ClientResponse.Status;
 import com.sun.jersey.api.client.WebResource;
 
 import dds.exception.MeliApiException;
-import dds.pais.Moneda;
 import dds.pais.Pais;
 import dds.pais.Provincia;
 import dds.pais.Ciudad;
+import dds.pais.Barrio;
+import dds.pais.Moneda;
 
 public class MeLiApi {
 
@@ -61,6 +62,17 @@ public class MeLiApi {
         }
     }
     
+    public Barrio obtenerBarrio(String idNeighborhood) {
+        String path = COUNTRY_RESOURCE + "neighborhoods/" + idNeighborhood;
+        String jsonResponse = getResponse(path);
+        try {
+          return mapper.readValue(jsonResponse, new TypeReference<Barrio>() {});
+        } catch (Exception e) {
+          throw new MeliApiException("Ocurrio un error al mapear el json de respuesta de países. Descripcion del error: "
+              + e.getMessage());
+        }
+    }
+    
     public Moneda obtenerMoneda(String currencyID) {
     	String path = "currencies/" + currencyID;
       String jsonResponse = getResponse(path);
@@ -72,7 +84,6 @@ public class MeLiApi {
         }
     }
 
-    
     private String getResponse(String path) {
         WebResource resource = this.client.resource(API_GOOGLE);
         resource = resource.path(path);

@@ -36,11 +36,13 @@ public class ValidacionesTest {
     private Egreso egresoSinCantidadMinimaDePresupuestos;
     private ValidacionEgreso cantidadMinimaPresupuestos = new EgresoTieneCantidadMinimaDePresupuestos();
     private ValidacionEgreso relacionEgresoPresupuesto = new EgresoEnBaseAPresupuestoCorrecto();
+    private CreadorProveedor creadorProveedor;
 
     @BeforeEach
     public void init() {
-        Proveedor proveedor1 = new Proveedor("Manuel Belgrano", 25684751, "Direccion 123");
-        Proveedor proveedor2 = new Proveedor("Bartolome Mitre", 36157578, "Direccion 456");
+    	creadorProveedor = new CreadorProveedor();
+        Proveedor proveedor1 = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
+        Proveedor proveedor2 = creadorProveedor.crearProveedor("Edenor", 40987654, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkNBQjM4MDda", "Av Rivadavia", 4400, null, null,"8520");
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
 

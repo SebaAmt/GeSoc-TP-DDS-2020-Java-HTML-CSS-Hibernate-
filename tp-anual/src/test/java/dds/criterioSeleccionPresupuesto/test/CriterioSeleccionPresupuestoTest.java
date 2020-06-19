@@ -25,10 +25,12 @@ public class CriterioSeleccionPresupuestoTest {
     private Presupuesto presupuesto1;
     private Presupuesto presupuesto2;
     private Presupuesto presupuesto3;
+    private CreadorProveedor creadorProveedor;
 
     @BeforeEach
     public void init() {
-        Proveedor proveedor = new Proveedor("Proveedor", 11111111, "Direccion 123");
+    	creadorProveedor = new CreadorProveedor();
+        Proveedor proveedor = creadorProveedor.crearProveedor("Proveedor", 11111111, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
 

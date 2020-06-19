@@ -8,6 +8,7 @@ import java.util.List;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.CreadorEgreso;
+import dds.egreso.CreadorProveedor;
 import dds.egreso.CriterioPresupuestoMenorValor;
 import dds.egreso.CriterioSeleccionPresupuesto;
 import dds.egreso.Egreso;
@@ -57,6 +58,7 @@ public class Main {
 	public static CriterioSeleccionPresupuesto criterio1;
 	public static Usuario usuario1;
 	public static Usuario usuario2;
+	public static CreadorProveedor creadorProveedor;
 
 	public static void main(String[] args) {
 		initBatch();
@@ -75,6 +77,10 @@ public class Main {
 	
 	private static void initBatch() {
 		System.out.println("Inicializando datos de prueba.");
+		
+		creadorProveedor = new CreadorProveedor();
+		proveedor1 = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
+		proveedor2 = creadorProveedor.crearProveedor("Edenor", 40987654, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkNBQjM4MDda", "Av Rivadavia", 4400, null, null,"8520");
 
 		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
 		item2 = new Item("Lamina de cuero", new BigDecimal(300), 4);
@@ -101,9 +107,6 @@ public class Main {
 
 		usuario1 = new Usuario("Pablo", "pablok421", TipoUsuario.ESTANDAR);
 		usuario2 = new Usuario("Valeria42", "valeria565", TipoUsuario.ADMINISTRADOR);
-
-		proveedor1 = new Proveedor("Telas SA", 30258741, "4568");
-		proveedor2 = new Proveedor("Edenor", 40987654, "8520");
 
 		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 0000001);
 		documento2 = new DocumentoComercial(TipoDocumentoComercial.ORDEN_DE_COMPRA, 9999999);

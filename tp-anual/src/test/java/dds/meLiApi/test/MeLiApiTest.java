@@ -10,10 +10,12 @@ import com.sun.jersey.api.client.Client;
 
 import dds.exception.MeliApiException;
 import dds.meLiApi.MeLiApi;
-import dds.pais.Moneda;
 import dds.pais.Pais;
 import dds.pais.Provincia;
 import dds.pais.Ciudad;
+import dds.pais.Barrio;
+import dds.pais.Moneda;
+
 
 public class MeLiApiTest {
 
@@ -39,6 +41,14 @@ public class MeLiApiTest {
     Ciudad ciudad = meli.obtenerCiudad("TUxBQ0NBUGZlZG1sYQ");
     assertThat(ciudad.getId(), is("TUxBQ0NBUGZlZG1sYQ"));
     assertThat(ciudad.getName(), is("Capital Federal"));
+  }
+
+  @Test
+  public void obtenerBarrioTest() {
+    MeLiApi meli = new MeLiApi(Client.create());
+    Barrio ciudad = meli.obtenerBarrio("TUxBQkJFTDcyNTJa");
+    assertThat(ciudad.getId(), is("TUxBQkJFTDcyNTJa"));
+    assertThat(ciudad.getName(), is("Belgrano"));
   }
   
   @Test

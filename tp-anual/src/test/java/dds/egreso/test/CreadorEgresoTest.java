@@ -30,10 +30,12 @@ public class CreadorEgresoTest {
     private Presupuesto presupuesto1;
     private Presupuesto presupuesto2;
     private ValidadorEgresos validador;
-
+    private CreadorProveedor creadorProveedor;
+    
     @BeforeEach
     public void init() {
-        Proveedor proveedor = new Proveedor("Proveedor", 11111111, "Direccion 123");
+    	creadorProveedor = new CreadorProveedor();
+        Proveedor proveedor = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
         List<Item> items1 = new ArrayList<Item>();

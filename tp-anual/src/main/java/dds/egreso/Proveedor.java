@@ -1,35 +1,31 @@
 package dds.egreso;
+
+import dds.pais.DireccionPostal;
+
 public class Proveedor {
 
 	private String nombre;
 	private Integer dni;
-	private String direccionPostal;
+	private DireccionPostal direccionPostal;
 
 	
-	public Proveedor(String nombre, Integer dni, String direccionPostal) {
-		setNombre(nombre);
-		setDni(dni);
-		setDireccionPostal(direccionPostal);
+	public Proveedor(String nombre, Integer dni, DireccionPostal direccionPostal) {
+		this.nombre = nombre;
+		this.dni = dni;
+		this.direccionPostal = direccionPostal;
 	}
 	
 	
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	
 	public Integer getDni() {
 		return dni;
 	}
-	public void setDni(Integer dni) {
-		this.dni = dni;
-	}
-	public String getDireccionPostal() {
+	
+	public DireccionPostal getDireccionPostal() {
 		return direccionPostal;
-	}
-	public void setDireccionPostal(String direccionPostal) {
-		this.direccionPostal = direccionPostal;
 	}
 
 }
