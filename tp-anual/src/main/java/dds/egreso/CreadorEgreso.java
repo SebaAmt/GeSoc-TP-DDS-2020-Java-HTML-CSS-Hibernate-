@@ -13,18 +13,19 @@ import java.util.stream.Collectors;
 public class CreadorEgreso {
 
     private Usuario revisor;
-    private List<Presupuesto> presupuestos;
+    private List<Presupuesto> presupuestos = new ArrayList<>();
     private boolean requierePresupuestos;
     private LocalDate fechaDeOperacion;
     private Proveedor proveedor;
     private DocumentoComercial documentoComercial;
     private MedioDePago medioDePago;
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
     private ValidadorEgresos validadorEgresos;
     private EstadoEgreso estado;
     private CriterioSeleccionPresupuesto criterio;
 
-    public CreadorEgreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, ValidadorEgresos validadorEgresos) {
+    public CreadorEgreso(LocalDate fechaDeOperacion, Proveedor proveedor, 
+    		DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, ValidadorEgresos validadorEgresos) {
         this.fechaDeOperacion = Objects.requireNonNull(fechaDeOperacion, "Debe cargarse la fecha de operación");
         this.proveedor = Objects.requireNonNull(proveedor, "Debe cargarse un proveedor");
         this.documentoComercial = Objects.requireNonNull(documentoComercial, "Debe cargarse un documento comercial");
@@ -44,8 +45,9 @@ public class CreadorEgreso {
         Map<String, Integer> articulosPresupuesto = new HashMap<>();
         presupuesto.getItems().stream().forEach(item -> articulosPresupuesto.put(item.getDescripcion(), item.getCantidadUnidades()));
 
-        if(!articulosEgreso.equals(articulosPresupuesto))
+        if(!articulosEgreso.equals(articulosPresupuesto)) { 
             throw new PresupuestoNoTieneMismosItemsQueEgreso();
+        }
     }
 
     public void requierePresupuestos(){

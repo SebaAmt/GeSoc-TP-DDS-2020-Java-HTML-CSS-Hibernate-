@@ -76,6 +76,10 @@ public class Egreso {
 	public void setEstado(EstadoEgreso estado) {
 		this.estado = estado;
 	}
+	
+	public EstadoEgreso getEstado() {
+		return this.estado;
+	}
 
 	public Usuario getRevisor() {
 		return revisor;
