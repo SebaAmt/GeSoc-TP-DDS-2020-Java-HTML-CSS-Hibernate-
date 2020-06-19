@@ -59,7 +59,7 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>ar.edu.frba.dds.gesoc.Main</mainClass>
+							<mainClass>dds.batch</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
