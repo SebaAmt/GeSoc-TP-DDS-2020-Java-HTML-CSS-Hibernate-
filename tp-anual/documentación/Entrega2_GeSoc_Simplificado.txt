@@ -1,0 +1,195 @@
+@startuml
+' ***************************
+' CLASES - INTERFACES - ENUMS
+' ***************************
+
+class MedioDePago {
+  String identificador
+}
+
+enum TipoMedioDePago {
+  CAJERO, TARJETA_CREDITO, TARJETA_DEBITO, EFECTIVO, DINERO_EN_CUENTA
+}
+
+
+class DocumentoComercial {
+  TipoDocumentoComercial tipo
+  int identificadorDocumento
+}
+
+enum TipoDocumentoComercial {
+  TICKET, FACTURA, ...   
+}
+
+
+class Usuario {
+  String username
+  String password
+  BandejaDeMensajes bandeja;
+}
+
+enum TipoUsuario {
+  ESTANDAR, ADMINISTRADOR
+}
+
+class CreadorEgreso {
+
+    void agregarPresupuesto(Presupuesto presupuesto)
+    void requierePresupuestos()
+    void asignarCriterioSeleccionPresupuesto(CriterioSeleccionPresupuesto criterio)
+    void asignarUsuarioRevisor(Usuario revisor)
+    Egreso crearEgreso()
+
+}
+
+interface ValidacionEgreso {
+  void validar(Egreso egreso)
+}
+
+class EgresoEnBaseAPresupuestoCorrecto implements ValidacionEgreso {
+  void validar(Egreso egreso)
+}
+
+class EgresoTieneCantidadMinimaDePresupuestos implements ValidacionEgreso {
+  int cantidadMinimaPresupuestos = 3;
+  void validar(Egreso egreso)
+}
+
+class Egreso {
+  LocalDate fechaDeOperacion
+  boolean requierePresupuesto
+
+  Precio valorTotal()
+  void agregarItem(Item nuevoItem)
+  List<Item> detalle()
+}
+
+enum EstadoEgreso {
+    PENDIENTE, ACEPTADO, RECHAZADO
+}
+
+class Item {
+    String detalle
+	int cantidadUnidades
+	Precio precioUnitario
+}
+
+class Proveedor {
+  String nombre
+  int dni
+  DireccionPostal direccionPostal 
+}
+
+class DireccionPostal {
+    String calle
+    int altura
+    int piso
+    String departamento
+    String codigoPostal
+}
+
+
+
+class Presupuesto {
+
+}
+
+interface CriterioSeleccionPresupuesto {
+
+}
+
+class CriterioPresupuestoMenorValor implements CriterioSeleccionPresupuesto {
+
+}
+
+class MeLiAPI{
+ Pais obtenerPais (String idCountry) 
+ Provincia obtenerProvincia(String idState) 
+ Ciudad obtenerCiudad (String idCity) 
+ Barrio obtenerBarrio (String idNeighborhood) 
+ Moneda obtenerMoneda (String idCurrency)
+ String getResponses(String path)
+}
+
+
+class Pais {
+ String id
+ String name
+ Moneda moneda
+}
+
+class Provincia {
+ String id
+ String name
+}
+
+class Ciudad {
+ String id
+ String name
+}
+
+class Barrio {
+ String id
+ String name
+}
+
+class Moneda {
+ String id
+ String symbol
+ String description
+}
+
+class ValidadorEgresos {
+  void validarEgresosPendientes()
+}
+
+
+' ***************************
+' ******* RELACIONES ********
+' ***************************
+
+CreadorEgreso ..> Egreso
+CreadorEgreso --> ValidadorEgresos
+
+ValidadorEgresos -->"0..*" Egreso
+ValidadorEgresos -->"1..*" ValidacionEgreso
+
+Egreso -->"1..*" Item
+Egreso -->"0..1" DocumentoComercial
+Egreso --> MedioDePago
+Egreso --> Proveedor
+Egreso --> EstadoEgreso
+Egreso --> CriterioSeleccionPresupuesto
+Egreso --> Usuario
+Egreso -->"0..*" Presupuesto
+
+Presupuesto --> Item
+Presupuesto --> DocumentoComercial
+Presupuesto --> Proveedor
+
+DocumentoComercial --> TipoDocumentoComercial
+
+MedioDePago --> TipoMedioDePago
+
+MeLiAPI ..> Pais
+MeLiAPI ..> Provincia
+MeLiAPI ..> Ciudad
+MeLiAPI ..> Barrio
+MeLiAPI ..> Moneda
+
+Pais -->"1..*" Provincia
+Provincia -->"1..*" Ciudad
+Ciudad -->"1..*" Barrio
+
+Pais --> Moneda
+
+Proveedor --> DireccionPostal
+
+DireccionPostal --> Pais
+DireccionPostal --> Provincia
+DireccionPostal --> Ciudad
+DireccionPostal --> Barrio
+
+Usuario --> TipoUsuario
+
+@enduml
