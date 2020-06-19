@@ -8,6 +8,7 @@ import java.util.List;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.Egreso;
+import dds.egreso.EstadoEgreso;
 import dds.egreso.Item;
 import dds.egreso.Proveedor;
 import dds.mediosDePago.MedioDePago;
@@ -51,7 +52,7 @@ public class Initialize {
 		medioDePago2 = new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "456852159");
 		
 		
-		egreso1 = new Egreso(LocalDate.of(2020,5,15), proveedor1, documento2, medioDePago1, items1);
-		egreso2 = new Egreso(LocalDate.of(2020, 5, 15), proveedor2, documento1, medioDePago2, items2);
+		egreso1 = new Egreso(LocalDate.of(2020,5,15), proveedor1, documento2, medioDePago1, items1, null, null, false, EstadoEgreso.ACEPTADO, null);
+		egreso2 = new Egreso(LocalDate.of(2020, 5, 15), proveedor2, documento1, medioDePago2, items2, null, null, false, EstadoEgreso.ACEPTADO, null);
 	}
 }
