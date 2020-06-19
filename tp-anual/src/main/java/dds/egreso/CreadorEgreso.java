@@ -62,6 +62,7 @@ public class CreadorEgreso {
     public Egreso crearEgreso(){
         if(this.requierePresupuestos){
             Objects.requireNonNull(this.validadorEgresos, "Se requiere un validador de egresos");
+            Objects.requireNonNull(this.revisor, "Se requiere un revisor");
             Egreso nuevoEgreso = new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, this.revisor, this.presupuestos, true, EstadoEgreso.PENDIENTE, this.criterio);
             validadorEgresos.nuevoEgresoPendiente(nuevoEgreso);
             return nuevoEgreso;

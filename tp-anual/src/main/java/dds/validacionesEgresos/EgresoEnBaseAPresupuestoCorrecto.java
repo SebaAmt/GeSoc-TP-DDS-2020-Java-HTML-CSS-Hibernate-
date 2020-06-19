@@ -19,15 +19,13 @@ public class EgresoEnBaseAPresupuestoCorrecto implements ValidacionEgreso{
     }
 
     private void validarSinCriterio(Egreso egreso){
-        BigDecimal valorTotalEgreso = egreso.valorTotal();
-        Proveedor proveedorEgreso = egreso.getProveedor();
         if(!egreso.getPresupuestos().stream().anyMatch(presupuesto -> this.tienenMismoProveedor(egreso, presupuesto) && this.tienenMismoValorTotal(egreso,presupuesto)))
             throw new EgresoNoCorrespondeConPresupuestoCargado();
     }
 
     private void validarConCriterio(Egreso egreso){
         Presupuesto presupuestoPorCriterio = egreso.getCriterio().seleccionarPresupuesto(egreso.getPresupuestos());
-        if(!this.tienenMismoProveedor(egreso, presupuestoPorCriterio) && this.tienenMismoValorTotal(egreso,presupuestoPorCriterio))
+        if(!(this.tienenMismoProveedor(egreso, presupuestoPorCriterio) && this.tienenMismoValorTotal(egreso, presupuestoPorCriterio)))
             throw new EgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio();
     }
 
