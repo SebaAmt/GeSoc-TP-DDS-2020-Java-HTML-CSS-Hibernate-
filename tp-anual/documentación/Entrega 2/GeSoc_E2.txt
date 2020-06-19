@@ -21,6 +21,68 @@ enum TipoDocumentoComercial {
   TICKET, FACTURA, ...   
 }
 
+class Organizacion {
+
+}
+
+class EntidadBase {
+  String nombreFicticio
+  String descripcion
+}
+
+class EntidadJuridica {
+  String razonSocial 
+  String nombreFicticio 
+  String CUIT 
+  String direccionPostal 
+  String codigoInscripcionDefinitivaIGJ
+}
+
+enum CategoriaEntidadJuridica {
+  EMPRESA_MICRO, EMPRESA_PEQUENIA, EMPRESA_MEDIANA_TRAMO1, EMPRESA_MEDIANA_TRAMO2, OSC
+}
+
+class CreadorDeUsuario {
+  Usuario crearUsuario(String username, String password, TipoUsuario tipo)
+  String encriptarPassword(String password)
+}
+
+class ValidadorDeContrasenias {
+  void validarContrasenia(String username, String password)
+}
+
+abstract Validacion {
+  String mensaje
+
+  validar(String Username, String password)
+  abstract boolean condicion(String username, String password)
+}
+
+class MenosDe8Caracteres {
+  boolean condicion(String username, String password)
+}
+
+class CaracteresConsecutivos {
+  boolean condicion(String username, String password)
+}
+
+class CaracteresRepetidos {
+  boolean condicion(String username, String password)
+}
+
+class IncluyeNombreDeUsuario {
+  boolean condicion(String username, String password)
+}
+
+class EstaEnLas10KMasComunes {
+  boolean condicion(String username, String password)
+}
+
+class LectorArchivos {
+  String pathArchivo
+
+  List<String> devolverContenidoComoListaDeStrings()
+}
 
 class Usuario {
   String username
@@ -72,6 +134,10 @@ class Item {
     String detalle
 	int cantidadUnidades
 	Precio precioUnitario
+}
+
+class CreadorProveedor{
+  Proveedor crearProveedor(...)
 }
 
 class Proveedor {
@@ -144,6 +210,7 @@ class ValidadorEgresos {
 }
 
 
+
 ' ***************************
 ' ******* RELACIONES ********
 ' ***************************
@@ -183,6 +250,8 @@ Ciudad -->"1..*" Barrio
 
 Pais --> Moneda
 
+CreadorProveedor --> MeLiAPI
+CreadorProveedor ..> Proveedor
 Proveedor --> DireccionPostal
 
 DireccionPostal --> Pais
@@ -191,5 +260,25 @@ DireccionPostal --> Ciudad
 DireccionPostal --> Barrio
 
 Usuario --> TipoUsuario
+
+CreadorDeUsuario ..> Usuario
+CreadorDeUsuario --> ValidadorDeContrasenias
+
+ValidadorDeContrasenias --> Validacion
+Validacion <|-- MenosDe8Caracteres
+Validacion <|-- CaracteresRepetidos
+Validacion <|-- CaracteresConsecutivos
+Validacion <|-- EstaEnLas10KMasComunes
+Validacion <|-- IncluyeNombreDeUsuario
+EstaEnLas10KMasComunes --> LectorArchivos
+
+Organizacion -->"0..*" EntidadJuridica
+Organizacion -->"0..*" EntidadBase
+
+EntidadJuridica "1"-->"0..*" EntidadBase
+EntidadJuridica --> CategoriaEntidadJuridica
+EntidadJuridica -->"0..*" Egreso
+
+EntidadBase -->"0..*" Egreso
 
 @enduml
