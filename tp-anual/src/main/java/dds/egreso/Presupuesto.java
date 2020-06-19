@@ -13,7 +13,6 @@ public class Presupuesto {
     private Proveedor proveedor;
     private DocumentoComercial documentoComercial;
     private List<Item> items = new ArrayList<>();
-    private Moneda moneda;
 
     public List<Item> getItems() {
         return items;
@@ -23,7 +22,6 @@ public class Presupuesto {
         this.proveedor = proveedor;
         this.documentoComercial = documentoComercial;
         this.items = items;
-        this.moneda = proveedor.getDireccionPostal().getPais().getMoneda();
     }
 
     public BigDecimal valorTotal() {
@@ -35,6 +33,6 @@ public class Presupuesto {
     }
     
     public Moneda getMoneda() {
-    	return moneda;
+    	return getProveedor().getDireccionPostal().getPais().getMoneda();
     }
 }

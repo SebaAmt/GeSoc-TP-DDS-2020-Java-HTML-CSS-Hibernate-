@@ -74,15 +74,14 @@ public class CreadorEgreso {
     }
 
     public Egreso crearEgreso(){
-        Moneda moneda = proveedor.getDireccionPostal().getPais().getMoneda();
         if(this.requierePresupuestos){
             Objects.requireNonNull(this.validadorEgresos, "Se requiere un validador de egresos");
             Objects.requireNonNull(this.revisor, "Se requiere un revisor");
-            Egreso nuevoEgreso = new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, moneda, this.revisor, this.presupuestos, true, EstadoEgreso.PENDIENTE, this.criterio);
+            Egreso nuevoEgreso = new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, this.revisor, this.presupuestos, true, EstadoEgreso.PENDIENTE, this.criterio);
             validadorEgresos.nuevoEgresoPendiente(nuevoEgreso);
             return nuevoEgreso;
         }
-        return new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, moneda, this.revisor, this.presupuestos, false, EstadoEgreso.ACEPTADO, this.criterio);
+        return new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, this.revisor, this.presupuestos, false, EstadoEgreso.ACEPTADO, this.criterio);
     }
 
     public List<Presupuesto> getPresupuestos() {

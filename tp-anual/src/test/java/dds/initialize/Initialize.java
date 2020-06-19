@@ -38,8 +38,7 @@ public class Initialize {
 	public List<Item> items1 = new ArrayList<>();
 	public List<Item> items2 = new ArrayList<>();
 	public List<Presupuesto> presupuestos = new ArrayList<>();
-	public Moneda moneda1;
-	public Moneda moneda2;
+	
 	
 	public void setDePrueba() {
 		creadorProveedor = new CreadorProveedor();
@@ -54,8 +53,6 @@ public class Initialize {
 		
 		proveedor1 = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
 		proveedor2 = creadorProveedor.crearProveedor("Edenor", 40987654, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkNBQjM4MDda", "Av Rivadavia", 4400, null, null,"8520");
-		moneda1 = proveedor1.getDireccionPostal().getPais().getMoneda();
-		moneda2 = proveedor2.getDireccionPostal().getPais().getMoneda();
 		
 		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 0000001);
 		documento2 = new DocumentoComercial(TipoDocumentoComercial.ORDEN_DE_COMPRA, 9999999);
@@ -64,8 +61,8 @@ public class Initialize {
 		medioDePago2 = new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "456852159");
 		
 		
-		egreso1 = new Egreso(LocalDate.of(2020,5,15), proveedor1, documento2, medioDePago1, items1, moneda1, null, null, false, EstadoEgreso.ACEPTADO, null);
-		egreso2 = new Egreso(LocalDate.of(2020, 5, 15), proveedor2, documento1, medioDePago2, items2, moneda2, null, null, false, EstadoEgreso.ACEPTADO, null);
+		egreso1 = new Egreso(LocalDate.of(2020,5,15), proveedor1, documento2, medioDePago1, items1, null, null, false, EstadoEgreso.ACEPTADO, null);
+		egreso2 = new Egreso(LocalDate.of(2020, 5, 15), proveedor2, documento1, medioDePago2, items2, null, null, false, EstadoEgreso.ACEPTADO, null);
 		
 		presupuesto1 = new Presupuesto(proveedor1, documento1, items1);
 		presupuesto2 = new Presupuesto(proveedor2, documento1, items2);

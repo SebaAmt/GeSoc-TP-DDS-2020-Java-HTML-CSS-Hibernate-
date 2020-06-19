@@ -19,19 +19,17 @@ public class Egreso {
 	private DocumentoComercial documentoComercial;
 	private MedioDePago medioDePago;
 	private List<Item> items = new ArrayList<>();
-	private Moneda moneda;
 	private boolean requierePresupuestos;
 	private EstadoEgreso estado;
 	private CriterioSeleccionPresupuesto criterio;
 
 
-	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, Moneda moneda, Usuario revisor, List<Presupuesto> presupuestos, boolean requierePresupuestos, EstadoEgreso estado, CriterioSeleccionPresupuesto criterio) {
+	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, Usuario revisor, List<Presupuesto> presupuestos, boolean requierePresupuestos, EstadoEgreso estado, CriterioSeleccionPresupuesto criterio) {
 		this.fechaDeOperacion = fechaDeOperacion;
 		this.proveedor = proveedor;
 		this.documentoComercial = documentoComercial;
 		this.medioDePago = medioDePago;
 		this.items = items;
-		this.moneda = moneda;
 		this.revisor = revisor;
 		this.presupuestos = presupuestos;
 		this.requierePresupuestos = requierePresupuestos;
@@ -73,7 +71,7 @@ public class Egreso {
 	}
 	
 	public Moneda getMoneda() {
-		return moneda;
+		return getProveedor().getDireccionPostal().getPais().getMoneda();
 	}
 
 	public List<Presupuesto> getPresupuestos() {
