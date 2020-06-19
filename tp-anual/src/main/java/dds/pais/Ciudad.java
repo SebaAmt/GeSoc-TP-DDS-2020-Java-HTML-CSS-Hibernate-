@@ -1,7 +1,11 @@
 package dds.pais;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,6 +23,8 @@ public class Ciudad {
 	@NotNull(message = "Nombre no puede estar vacio")
 	private String name;
 	
+	@JsonIgnore
+	private List<Barrio> barrios = new ArrayList<>();
 	
 	@JsonCreator
 	public Ciudad(@JsonProperty("id") String id, @JsonProperty("name") String name) {
@@ -35,4 +41,7 @@ public class Ciudad {
 		return name;
 	}
 	
+	public List<Barrio> getBarrios() {
+		return barrios;
+	}
 }

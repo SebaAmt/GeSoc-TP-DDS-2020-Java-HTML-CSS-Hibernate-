@@ -9,6 +9,7 @@ import dds.exception.EgresoNoCumpleCantidadMinimaDePresupuestos;
 import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
+import dds.pais.Moneda;
 import dds.usuario.TipoUsuario;
 import dds.usuario.Usuario;
 import dds.validaciones.Validacion;
@@ -43,6 +44,7 @@ public class ValidacionesTest {
     	creadorProveedor = new CreadorProveedor();
         Proveedor proveedor1 = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
         Proveedor proveedor2 = creadorProveedor.crearProveedor("Edenor", 40987654, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkNBQjM4MDda", "Av Rivadavia", 4400, null, null,"8520");
+        Moneda moneda = proveedor1.getDireccionPostal().getPais().getMoneda();
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
 
@@ -75,14 +77,14 @@ public class ValidacionesTest {
         presupuestos.add(presupuesto2);
         presupuestos.add(presupuesto3);
 
-        egresoSinCriterioYDistintoProveedor = new Egreso(LocalDate.now(), proveedor2, factura, efectivo, items1, null, presupuestos, true, EstadoEgreso.PENDIENTE, null);
-        egresoSinCriterioYValorTotalDistinto = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items4, null, presupuestos, true, EstadoEgreso.PENDIENTE, null);
-        egresoConPresupuestoDistintoAlDevueltoPorCriterio = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items2, null, presupuestos, true, EstadoEgreso.PENDIENTE, new CriterioPresupuestoMenorValor());
+        egresoSinCriterioYDistintoProveedor = new Egreso(LocalDate.now(), proveedor2, factura, efectivo, items1, moneda, null, presupuestos, true, EstadoEgreso.PENDIENTE, null);
+        egresoSinCriterioYValorTotalDistinto = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items4, moneda, null, presupuestos, true, EstadoEgreso.PENDIENTE, null);
+        egresoConPresupuestoDistintoAlDevueltoPorCriterio = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items2, moneda, null, presupuestos, true, EstadoEgreso.PENDIENTE, new CriterioPresupuestoMenorValor());
 
         List<Presupuesto> presupuestosMenorMinimo = new ArrayList<>();
         presupuestosMenorMinimo.add(presupuesto1);
         presupuestosMenorMinimo.add(presupuesto3);
-        egresoSinCantidadMinimaDePresupuestos = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items2, null, presupuestosMenorMinimo, true, EstadoEgreso.PENDIENTE, new CriterioPresupuestoMenorValor());
+        egresoSinCantidadMinimaDePresupuestos = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items2, moneda, null, presupuestosMenorMinimo, true, EstadoEgreso.PENDIENTE, new CriterioPresupuestoMenorValor());
     }
 
     @Test

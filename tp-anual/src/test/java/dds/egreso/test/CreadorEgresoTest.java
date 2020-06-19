@@ -9,6 +9,7 @@ import dds.exception.PasswordException;
 import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
+import dds.pais.Moneda;
 import dds.usuario.TipoUsuario;
 import dds.usuario.Usuario;
 import dds.validacionesEgresos.ValidacionEgreso;
@@ -36,6 +37,7 @@ public class CreadorEgresoTest {
     public void init() {
     	creadorProveedor = new CreadorProveedor();
         Proveedor proveedor = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
+        Moneda moneda = proveedor.getDireccionPostal().getPais().getMoneda();
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
         List<Item> items1 = new ArrayList<Item>();

@@ -18,6 +18,7 @@ import dds.egreso.Presupuesto;
 import dds.egreso.Proveedor;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
+import dds.pais.Moneda;
 import dds.usuario.TipoUsuario;
 import dds.usuario.Usuario;
 import dds.validacionesEgresos.EgresoEnBaseAPresupuestoCorrecto;
@@ -82,6 +83,8 @@ public class Main {
 		proveedor1 = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
 		proveedor2 = creadorProveedor.crearProveedor("Edenor", 40987654, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkNBQjM4MDda", "Av Rivadavia", 4400, null, null,"8520");
 
+		Moneda moneda = proveedor1.getDireccionPostal().getPais().getMoneda();
+		
 		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
 		item2 = new Item("Lamina de cuero", new BigDecimal(300), 4);
 		item3 = new Item("Botella de tintura", new BigDecimal(50), 1);

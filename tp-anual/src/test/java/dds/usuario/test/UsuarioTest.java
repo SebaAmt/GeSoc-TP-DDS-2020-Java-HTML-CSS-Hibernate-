@@ -99,7 +99,7 @@ public class UsuarioTest {
 	@DisplayName("Obtiene mensaje rechazado si no cumple con la cantidad minima de presupuestos")
 	void EnviaUsuarioMensajeRechazadoMinimoPresupuestosCargados() {
 		Usuario jesica = dios.crearUsuario("Jesica", "fulan159", TipoUsuario.ESTANDAR);		
-		Egreso egreso = new Egreso(LocalDate.of(2020,5,15), prueba.proveedor1, prueba.documento2, prueba.medioDePago1, prueba.items2, jesica, presupuestosValor50, false, EstadoEgreso.PENDIENTE, null);
+		Egreso egreso = new Egreso(LocalDate.of(2020,5,15), prueba.proveedor1, prueba.documento2, prueba.medioDePago1, prueba.items2, prueba.moneda1, jesica, presupuestosValor50, false, EstadoEgreso.PENDIENTE, null);
 
 		validadorDeEgreso = new ValidadorEgresos(Arrays.asList(egreso),validacionesDeEgreso);
 		validadorDeEgreso.validarEgresosPendientes();
@@ -112,7 +112,7 @@ public class UsuarioTest {
 	void EnviaUsuarioMensajeRechazadoPorValorTotal() {
 		Usuario jesica = dios.crearUsuario("Jesica", "fulan159", TipoUsuario.ESTANDAR);
 
-		Egreso egreso = new Egreso(LocalDate.of(2020,5,15), prueba.proveedor1, prueba.documento2, prueba.medioDePago1, prueba.items2, jesica, presupuestosValor600, false, EstadoEgreso.PENDIENTE, null);
+		Egreso egreso = new Egreso(LocalDate.of(2020,5,15), prueba.proveedor1, prueba.documento2, prueba.medioDePago1, prueba.items2, prueba.moneda1, jesica, presupuestosValor600, false, EstadoEgreso.PENDIENTE, null);
 
 		validadorDeEgreso = new ValidadorEgresos(Arrays.asList(egreso),validacionesDeEgreso);
 		validadorDeEgreso.validarEgresosPendientes();

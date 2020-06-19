@@ -1,8 +1,10 @@
 package dds.egreso;
 
 import dds.documentoComercial.DocumentoComercial;
+import dds.exception.PresupuestoNoTieneMismaMoneda;
 import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
 import dds.mediosDePago.MedioDePago;
+import dds.pais.Moneda;
 import dds.usuario.Usuario;
 import dds.validacionesEgresos.ValidadorEgresos;
 
@@ -35,6 +37,7 @@ public class CreadorEgreso {
 
     public void agregarPresupuesto(Presupuesto presupuesto){
         tieneLosMismosItems(presupuesto);
+        tienenMismaMoneda(presupuesto);
         this.presupuestos.add(presupuesto);
     }
 
@@ -47,6 +50,15 @@ public class CreadorEgreso {
         if(!articulosEgreso.equals(articulosPresupuesto)) { 
             throw new PresupuestoNoTieneMismosItemsQueEgreso();
         }
+    }
+    
+    private void tienenMismaMoneda(Presupuesto presupuesto) {
+    	Moneda monedaProveedor = proveedor.getDireccionPostal().getPais().getMoneda();
+    	Moneda monedaPresupuesto = presupuesto.getMoneda();
+    	
+    	if(!monedaProveedor.equals(monedaPresupuesto)) {
+    		throw new PresupuestoNoTieneMismaMoneda();
+    	};
     }
 
     public void requierePresupuestos(){
@@ -62,14 +74,15 @@ public class CreadorEgreso {
     }
 
     public Egreso crearEgreso(){
+        Moneda moneda = proveedor.getDireccionPostal().getPais().getMoneda();
         if(this.requierePresupuestos){
             Objects.requireNonNull(this.validadorEgresos, "Se requiere un validador de egresos");
             Objects.requireNonNull(this.revisor, "Se requiere un revisor");
-            Egreso nuevoEgreso = new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, this.revisor, this.presupuestos, true, EstadoEgreso.PENDIENTE, this.criterio);
+            Egreso nuevoEgreso = new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, moneda, this.revisor, this.presupuestos, true, EstadoEgreso.PENDIENTE, this.criterio);
             validadorEgresos.nuevoEgresoPendiente(nuevoEgreso);
             return nuevoEgreso;
         }
-        return new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, this.revisor, this.presupuestos, false, EstadoEgreso.ACEPTADO, this.criterio);
+        return new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, moneda, this.revisor, this.presupuestos, false, EstadoEgreso.ACEPTADO, this.criterio);
     }
 
     public List<Presupuesto> getPresupuestos() {
