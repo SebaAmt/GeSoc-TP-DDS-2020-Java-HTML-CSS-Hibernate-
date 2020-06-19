@@ -7,15 +7,18 @@ import java.util.List;
 
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
+import dds.egreso.CriterioPresupuestoMenorValor;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 import dds.egreso.Item;
+import dds.egreso.Presupuesto;
 import dds.egreso.Proveedor;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
 
 public class Initialize {
-	
+	public Presupuesto presupuesto1;
+	public Presupuesto presupuesto2;
 	public Egreso egreso1;
 	public Egreso egreso2;
 	public Item item1;
@@ -28,8 +31,10 @@ public class Initialize {
 	public DocumentoComercial documento2;
 	public MedioDePago medioDePago1;
 	public MedioDePago medioDePago2;
+	public CriterioPresupuestoMenorValor criterioMenorValor;
 	public List<Item> items1 = new ArrayList<>();
 	public List<Item> items2 = new ArrayList<>();
+	public List<Presupuesto> presupuestos = new ArrayList<>();
 	
 	
 	public void setDePrueba() {
@@ -54,5 +59,12 @@ public class Initialize {
 		
 		egreso1 = new Egreso(LocalDate.of(2020,5,15), proveedor1, documento2, medioDePago1, items1, null, null, false, EstadoEgreso.ACEPTADO, null);
 		egreso2 = new Egreso(LocalDate.of(2020, 5, 15), proveedor2, documento1, medioDePago2, items2, null, null, false, EstadoEgreso.ACEPTADO, null);
+		
+		presupuesto1 = new Presupuesto(proveedor1, documento1, items1);
+		presupuesto2 = new Presupuesto(proveedor2, documento1, items2);
+		presupuestos.add(presupuesto1);
+		presupuestos.add(presupuesto2);
+		
+		criterioMenorValor = new CriterioPresupuestoMenorValor();
 	}
 }

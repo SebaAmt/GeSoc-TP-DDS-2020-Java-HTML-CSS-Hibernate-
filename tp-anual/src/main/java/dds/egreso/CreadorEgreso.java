@@ -23,7 +23,8 @@ public class CreadorEgreso {
     private ValidadorEgresos validadorEgresos;
     private CriterioSeleccionPresupuesto criterio;
 
-    public CreadorEgreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, ValidadorEgresos validadorEgresos) {
+    public CreadorEgreso(LocalDate fechaDeOperacion, Proveedor proveedor, 
+    		DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, ValidadorEgresos validadorEgresos) {
         this.fechaDeOperacion = Objects.requireNonNull(fechaDeOperacion, "Debe cargarse la fecha de operación");
         this.proveedor = Objects.requireNonNull(proveedor, "Debe cargarse un proveedor");
         this.documentoComercial = Objects.requireNonNull(documentoComercial, "Debe cargarse un documento comercial");
@@ -43,8 +44,9 @@ public class CreadorEgreso {
         Map<String, Integer> articulosPresupuesto = new HashMap<>();
         presupuesto.getItems().stream().forEach(item -> articulosPresupuesto.put(item.getDescripcion(), item.getCantidadUnidades()));
 
-        if(!articulosEgreso.equals(articulosPresupuesto))
+        if(!articulosEgreso.equals(articulosPresupuesto)) { 
             throw new PresupuestoNoTieneMismosItemsQueEgreso();
+        }
     }
 
     public void requierePresupuestos(){
