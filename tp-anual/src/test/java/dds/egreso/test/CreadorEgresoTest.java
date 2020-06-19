@@ -10,6 +10,7 @@ import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
 import dds.usuario.TipoUsuario;
+import dds.usuario.Usuario;
 import dds.validacionesEgresos.ValidacionEgreso;
 import dds.validacionesEgresos.ValidadorEgresos;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +49,7 @@ public class CreadorEgresoTest {
 
         validador = new ValidadorEgresos();
         creadorEgreso = new CreadorEgreso(LocalDate.now(), proveedor, factura, efectivo, items1, validador);
+        creadorEgreso.asignarUsuarioRevisor(new Usuario("manuelBelgrano", "belgranito123", TipoUsuario.ESTANDAR));
         presupuesto1 = new Presupuesto(proveedor, factura, items2);
         presupuesto2 = new Presupuesto(proveedor, factura, items3);
     }
