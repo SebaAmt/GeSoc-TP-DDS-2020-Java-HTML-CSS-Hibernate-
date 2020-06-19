@@ -3,17 +3,23 @@ package dds.validacionesEgresos;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ValidadorEgresos {
 
-	private List<Egreso> egresosPendientes;
-	private List<ValidacionEgreso> validaciones;
+    private List<Egreso> egresosPendientes = new ArrayList<>();
+    private List<ValidacionEgreso> validaciones = new ArrayList<>();
 
 	public ValidadorEgresos(List<Egreso> egresosPendientes, List<ValidacionEgreso> validaciones) {
 		this.egresosPendientes = egresosPendientes;
 		this.validaciones = validaciones;
 	}
+
+    public ValidadorEgresos(){
+
+    }
 
 	public void nuevoEgresoPendiente(Egreso egreso) {
 		this.egresosPendientes.add(egreso);
@@ -37,8 +43,13 @@ public class ValidadorEgresos {
 
 		}
 	}
+    
 
-	public List<Egreso> getEgresosPendientes() {
-		return this.egresosPendientes;
+    public List<Egreso> getEgresosPendientes() {
+        return egresosPendientes;
+    }
+
+    public List<ValidacionEgreso> getValidaciones() {
+        return validaciones;
 	}
 }

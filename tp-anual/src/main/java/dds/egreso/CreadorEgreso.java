@@ -21,7 +21,6 @@ public class CreadorEgreso {
     private MedioDePago medioDePago;
     private List<Item> items = new ArrayList<>();
     private ValidadorEgresos validadorEgresos;
-    private EstadoEgreso estado;
     private CriterioSeleccionPresupuesto criterio;
 
     public CreadorEgreso(LocalDate fechaDeOperacion, Proveedor proveedor, 
@@ -70,8 +69,9 @@ public class CreadorEgreso {
             return nuevoEgreso;
         }
         return new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, this.revisor, this.presupuestos, false, EstadoEgreso.ACEPTADO, this.criterio);
-
-
     }
 
+    public List<Presupuesto> getPresupuestos() {
+        return presupuestos;
+    }
 }

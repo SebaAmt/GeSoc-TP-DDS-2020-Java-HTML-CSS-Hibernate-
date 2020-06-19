@@ -12,7 +12,7 @@ public class Egreso {
 
 	private Usuario revisor;
 
-	private List<Presupuesto> presupuestos;
+	private List<Presupuesto> presupuestos = new ArrayList<>();
 	private LocalDate fechaDeOperacion;
 	private Proveedor proveedor;
 	private DocumentoComercial documentoComercial;
@@ -77,10 +77,6 @@ public class Egreso {
 		this.estado = estado;
 	}
 	
-	public EstadoEgreso getEstado() {
-		return this.estado;
-	}
-
 	public Usuario getRevisor() {
 		return revisor;
 	}
@@ -88,7 +84,11 @@ public class Egreso {
 	public CriterioSeleccionPresupuesto getCriterio() {
 		return criterio;
 	}
-	
+
+	public EstadoEgreso getEstado() {
+		return estado;
+	}
+
 	@Override
 	public String toString() {
 		return "Egreso{" +
