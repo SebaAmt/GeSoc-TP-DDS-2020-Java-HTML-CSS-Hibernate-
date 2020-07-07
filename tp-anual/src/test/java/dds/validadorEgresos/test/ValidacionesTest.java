@@ -16,7 +16,6 @@ import dds.validaciones.Validacion;
 import dds.validacionesEgresos.EgresoEnBaseAPresupuestoCorrecto;
 import dds.validacionesEgresos.EgresoTieneCantidadMinimaDePresupuestos;
 import dds.validacionesEgresos.ValidacionEgreso;
-import dds.validacionesEgresos.ValidadorEgresos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -6,7 +6,7 @@ import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
 import dds.mediosDePago.MedioDePago;
 import dds.pais.Moneda;
 import dds.usuario.Usuario;
-import dds.validacionesEgresos.ValidadorEgresos;
+//import dds.validacionesEgresos.ValidadorEgresos;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -22,17 +22,16 @@ public class CreadorEgreso {
     private DocumentoComercial documentoComercial;
     private MedioDePago medioDePago;
     private List<Item> items = new ArrayList<>();
-    private ValidadorEgresos validadorEgresos;
+//    private ValidadorEgresos validadorEgresos;
     private CriterioSeleccionPresupuesto criterio;
 
     public CreadorEgreso(LocalDate fechaDeOperacion, Proveedor proveedor, 
-    		DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, ValidadorEgresos validadorEgresos) {
+    		DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items) {
         this.fechaDeOperacion = Objects.requireNonNull(fechaDeOperacion, "Debe cargarse la fecha de operación");
         this.proveedor = Objects.requireNonNull(proveedor, "Debe cargarse un proveedor");
         this.documentoComercial = Objects.requireNonNull(documentoComercial, "Debe cargarse un documento comercial");
         this.medioDePago = Objects.requireNonNull(medioDePago, "Debe cargarse el medio de pago");
         this.items = Objects.requireNonNull(items, "Deben cargarse los items");
-        this.validadorEgresos = validadorEgresos;
     }
 
     public void agregarPresupuesto(Presupuesto presupuesto){
@@ -75,10 +74,10 @@ public class CreadorEgreso {
 
     public Egreso crearEgreso(){
         if(this.requierePresupuestos){
-            Objects.requireNonNull(this.validadorEgresos, "Se requiere un validador de egresos");
+//            Objects.requireNonNull(this.validadorEgresos, "Se requiere un validador de egresos");
             Objects.requireNonNull(this.revisor, "Se requiere un revisor");
             Egreso nuevoEgreso = new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, this.revisor, this.presupuestos, true, EstadoEgreso.PENDIENTE, this.criterio);
-            validadorEgresos.nuevoEgresoPendiente(nuevoEgreso);
+//            validadorEgresos.nuevoEgresoPendiente(nuevoEgreso);
             return nuevoEgreso;
         }
         return new Egreso(this.fechaDeOperacion, this.proveedor, this.documentoComercial, this.medioDePago, this.items, this.revisor, this.presupuestos, false, EstadoEgreso.ACEPTADO, this.criterio);
