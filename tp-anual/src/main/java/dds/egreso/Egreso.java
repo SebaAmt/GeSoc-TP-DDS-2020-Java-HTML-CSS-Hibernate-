@@ -15,8 +15,7 @@ import dds.usuario.Usuario;
 
 public class Egreso {
 
-	private Usuario revisor;
-
+	private List<Usuario> revisores;
 	private List<Presupuesto> presupuestos = new ArrayList<>();
 	private LocalDate fechaDeOperacion;
 	private Proveedor proveedor;
@@ -28,19 +27,18 @@ public class Egreso {
 	private CriterioSeleccionPresupuesto criterio;
 
 
-	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, Usuario revisor, List<Presupuesto> presupuestos, boolean requierePresupuestos, EstadoEgreso estado, CriterioSeleccionPresupuesto criterio) {
+	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, List<Usuario> revisores, List<Presupuesto> presupuestos, boolean requierePresupuestos, EstadoEgreso estado, CriterioSeleccionPresupuesto criterio) {
 		this.fechaDeOperacion = fechaDeOperacion;
 		this.proveedor = proveedor;
 		this.documentoComercial = documentoComercial;
 		this.medioDePago = medioDePago;
 		this.items = items;
-		this.revisor = revisor;
+		this.revisores = revisores;
 		this.presupuestos = presupuestos;
 		this.requierePresupuestos = requierePresupuestos;
 		this.estado = estado;
 		this.criterio = criterio;
 	}
-
 	
 	public BigDecimal valorTotal() {
 		return items.stream().map(item->item.valorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -88,10 +86,6 @@ public class Egreso {
 		this.estado = estado;
 	}
 	
-	public Usuario getRevisor() {
-		return revisor;
-	}
-
 	public CriterioSeleccionPresupuesto getCriterio() {
 		return criterio;
 	}
@@ -103,7 +97,7 @@ public class Egreso {
 	@Override
 	public String toString() {
 		return "Egreso{" +
-				"revisor=" + revisor +
+				"revisores=" + this.revisores +
 				", fechaDeOperacion=" + fechaDeOperacion +
 				'}';
 	}
@@ -125,5 +119,9 @@ public class Egreso {
 		if(!monedaProveedor.equals(monedaPresupuesto)) {
 			throw new PresupuestoNoTieneMismaMoneda();
 		};
+	}
+
+	public void informarARevisores(String mensaje){
+		this.revisores.forEach(revisor -> revisor.nuevoMensaje(mensaje));
 	}
 }

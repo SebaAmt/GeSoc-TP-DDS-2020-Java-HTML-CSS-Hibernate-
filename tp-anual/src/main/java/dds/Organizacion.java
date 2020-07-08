@@ -41,11 +41,10 @@ public class Organizacion {
             try {
                 this.validacionesEgresos.stream().forEach(validacion -> validacion.validar(egresoPendiente));
                 egresoPendiente.setEstado(EstadoEgreso.ACEPTADO);
-                egresoPendiente.getRevisor().nuevoMensaje("El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
+                egresoPendiente.informarARevisores("El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
             } catch (RuntimeException ex) {
                 egresoPendiente.setEstado(EstadoEgreso.RECHAZADO);
-                egresoPendiente.getRevisor()
-                        .nuevoMensaje("El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + ex.getMessage());
+                egresoPendiente.informarARevisores("El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + ex.getMessage());
             }
         }
     }
