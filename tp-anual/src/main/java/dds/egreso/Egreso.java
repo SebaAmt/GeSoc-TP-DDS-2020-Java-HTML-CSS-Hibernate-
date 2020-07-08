@@ -121,6 +121,10 @@ public class Egreso {
 		};
 	}
 
+	public void agregarRevisor(Usuario nuevoRevisor){
+		this.revisores.add(nuevoRevisor);
+	}
+	
 	public void informarARevisores(String mensaje){
 		this.revisores.forEach(revisor -> revisor.nuevoMensaje(mensaje));
 	}
