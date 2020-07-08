@@ -7,7 +7,7 @@ import java.util.List;
 
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
-import dds.egreso.CreadorEgreso;
+//import dds.egreso.CreadorEgreso;
 import dds.egreso.CreadorProveedor;
 import dds.egreso.CriterioPresupuestoMenorValor;
 import dds.egreso.CriterioSeleccionPresupuesto;

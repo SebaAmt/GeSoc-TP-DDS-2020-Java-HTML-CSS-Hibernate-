@@ -2,9 +2,13 @@ package dds.egreso;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dds.documentoComercial.DocumentoComercial;
+import dds.exception.PresupuestoNoTieneMismaMoneda;
+import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
 import dds.mediosDePago.MedioDePago;
 import dds.pais.Moneda;
 import dds.usuario.Usuario;
@@ -47,6 +51,8 @@ public class Egreso {
 	}
 		
 	public void agregarPresupuesto(Presupuesto presupuesto){
+		this.tieneLosMismosItems(presupuesto);
+		this.tienenMismaMoneda(presupuesto);
 		this.presupuestos.add(presupuesto);
 	}
 
@@ -100,5 +106,24 @@ public class Egreso {
 				"revisor=" + revisor +
 				", fechaDeOperacion=" + fechaDeOperacion +
 				'}';
+	}
+
+	private void tieneLosMismosItems(Presupuesto presupuesto){
+		Map<String, Integer> articulosEgreso = new HashMap<>();
+		this.items.stream().forEach(item -> articulosEgreso.put(item.getDescripcion(), item.getCantidadUnidades()));
+		Map<String, Integer> articulosPresupuesto = new HashMap<>();
+		presupuesto.getItems().stream().forEach(item -> articulosPresupuesto.put(item.getDescripcion(), item.getCantidadUnidades()));
+
+		if(!articulosEgreso.equals(articulosPresupuesto))
+			throw new PresupuestoNoTieneMismosItemsQueEgreso();
+	}
+
+	private void tienenMismaMoneda(Presupuesto presupuesto) {
+		Moneda monedaProveedor = proveedor.getDireccionPostal().getPais().getMoneda();
+		Moneda monedaPresupuesto = presupuesto.getMoneda();
+
+		if(!monedaProveedor.equals(monedaPresupuesto)) {
+			throw new PresupuestoNoTieneMismaMoneda();
+		};
 	}
 }

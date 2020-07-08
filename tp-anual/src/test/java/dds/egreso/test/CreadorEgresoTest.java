@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CreadorEgresoTest {
-    private CreadorEgreso creadorEgreso;
+//    private CreadorEgreso creadorEgreso;
     private Presupuesto presupuesto1;
     private Presupuesto presupuesto2;
 //    private ValidadorEgresos validador;
