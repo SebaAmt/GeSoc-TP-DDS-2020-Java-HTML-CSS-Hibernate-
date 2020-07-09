@@ -35,11 +35,15 @@ public class CreadorDePresupuestos {
         this.items.add(item);
     }
 
+    public void agregarItems(List<Item> items){
+        items.forEach(i -> this.items.add(i));
+    }
+
     public void agregarEgreso(Egreso egreso){
         this.egreso = egreso;
     }
 
-    public Presupuesto CrearPresupuesto(){
+    public Presupuesto crearPresupuesto(){
         Objects.requireNonNull(this.egreso, "El presupuesto debe pertenecer a un egreso");
         Objects.requireNonNull(this.documentoComercial, "El presupuesto debe tener un documento comercial");
         Objects.requireNonNull(this.proveedor, "El presupuesto debe tener un proveedor");

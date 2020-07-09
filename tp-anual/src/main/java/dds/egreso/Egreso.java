@@ -52,6 +52,8 @@ public class Egreso {
 		this.tieneLosMismosItems(presupuesto);
 		this.tienenMismaMoneda(presupuesto);
 		this.presupuestos.add(presupuesto);
+		if(this.requierePresupuestos)
+			this.estado = EstadoEgreso.PENDIENTE;
 	}
 
 	public LocalDate getFechaDeOperacion() {
@@ -124,8 +126,12 @@ public class Egreso {
 	public void agregarRevisor(Usuario nuevoRevisor){
 		this.revisores.add(nuevoRevisor);
 	}
-	
+
 	public void informarARevisores(String mensaje){
 		this.revisores.forEach(revisor -> revisor.nuevoMensaje(mensaje));
+	}
+
+	public boolean requierePresupuestos(){
+		return this.requierePresupuestos;
 	}
 }

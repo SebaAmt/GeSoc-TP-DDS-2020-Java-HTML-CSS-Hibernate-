@@ -40,7 +40,7 @@ public class EntidadJuridica {
     }
 
     public List<Egreso> egresosParaValidar(){
-        return this.egresos.stream().filter(egreso -> egreso.getEstado() == EstadoEgreso.PENDIENTE || egreso.getEstado() == EstadoEgreso.RECHAZADO).collect(Collectors.toList());
+        return this.egresos.stream().filter(egreso -> egreso.requierePresupuestos() && (egreso.getEstado() == EstadoEgreso.PENDIENTE || egreso.getEstado() == EstadoEgreso.RECHAZADO)).collect(Collectors.toList());
     }
 
 }
