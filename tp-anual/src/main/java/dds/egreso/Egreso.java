@@ -27,7 +27,7 @@ public class Egreso {
 	private CriterioSeleccionPresupuesto criterio;
 
 
-	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, List<Usuario> revisores, List<Presupuesto> presupuestos, boolean requierePresupuestos, EstadoEgreso estado, CriterioSeleccionPresupuesto criterio) {
+	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, List<Usuario> revisores, List<Presupuesto> presupuestos, boolean requierePresupuestos, CriterioSeleccionPresupuesto criterio) {
 		this.fechaDeOperacion = fechaDeOperacion;
 		this.proveedor = proveedor;
 		this.documentoComercial = documentoComercial;
@@ -36,7 +36,7 @@ public class Egreso {
 		this.revisores = revisores;
 		this.presupuestos = presupuestos;
 		this.requierePresupuestos = requierePresupuestos;
-		this.estado = estado;
+		this.estado = (requierePresupuestos) ? EstadoEgreso.PENDIENTE : EstadoEgreso.ACEPTADO;
 		this.criterio = criterio;
 	}
 	

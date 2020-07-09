@@ -46,8 +46,8 @@ public class EntidadesTest {
         items1.add(new Item("Madera", new BigDecimal(100), 5));
         List<Item> items2 = new ArrayList<Item>();
         items2.add(new Item("Pegamento", new BigDecimal(50), 2));
-        egreso1 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items1, null, null, false, EstadoEgreso.ACEPTADO, null);
-        egreso2 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items2,null, null, false, EstadoEgreso.ACEPTADO, null);
+        egreso1 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items1, null, null, false, null);
+        egreso2 = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items2,null, null, false, null);
     }
 
     @Test

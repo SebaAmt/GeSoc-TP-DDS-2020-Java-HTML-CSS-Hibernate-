@@ -47,7 +47,7 @@ public class CreadorDePresupuestosTest {
         items3.add(new Item("Clavos", new BigDecimal(8), 10));
         items3.add(new Item("Martillo", new BigDecimal(35), 1));
 
-        egreso = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items1, new ArrayList<>(), new ArrayList<>(), true, EstadoEgreso.PENDIENTE, null);
+        egreso = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items1, new ArrayList<>(), new ArrayList<>(), true, null);
         creadorPresupuesto = new CreadorDePresupuestos();
         creadorPresupuesto.agregarDocumentoComercial(factura);
         creadorPresupuesto.agregarEgreso(egreso);

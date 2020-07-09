@@ -1,4 +1,4 @@
-package dds;
+package dds.entidades;
 
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
@@ -33,11 +33,7 @@ public class Organizacion {
 
     public void validarEgresos() {
 
-        List<Egreso> egresosParaValidar = new ArrayList<>();
-        this.entidadesBase.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
-        this.entidadesJuridicas.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
-
-        for (Egreso egresoPendiente : egresosParaValidar) {
+        for (Egreso egresoPendiente : this.obtenerEgresosParaValidar()) {
             try {
                 this.validacionesEgresos.stream().forEach(validacion -> validacion.validar(egresoPendiente));
                 egresoPendiente.setEstado(EstadoEgreso.ACEPTADO);
@@ -47,6 +43,13 @@ public class Organizacion {
                 egresoPendiente.informarARevisores("El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + ex.getMessage());
             }
         }
+    }
+
+    public List<Egreso> obtenerEgresosParaValidar(){
+        List<Egreso> egresosParaValidar = new ArrayList<>();
+        this.entidadesBase.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
+        this.entidadesJuridicas.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
+        return egresosParaValidar;
     }
     
 }
