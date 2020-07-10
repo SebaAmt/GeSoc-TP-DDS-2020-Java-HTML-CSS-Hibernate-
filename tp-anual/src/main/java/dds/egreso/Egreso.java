@@ -134,4 +134,13 @@ public class Egreso {
 	public boolean requierePresupuestos(){
 		return this.requierePresupuestos;
 	}
+
+	public boolean tieneMismoValorTotal(Presupuesto presupuesto){
+		return this.valorTotal().compareTo(presupuesto.valorTotal()) == 0;
+	}
+
+	public boolean tieneMismoProveedor(Presupuesto presupuesto){
+		return this.getProveedor() == presupuesto.getProveedor();
+	}
+
 }

@@ -1,29 +1,7 @@
 package dds.batch;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import dds.documentoComercial.DocumentoComercial;
-import dds.documentoComercial.TipoDocumentoComercial;
 //import dds.egreso.CreadorEgreso;
-import dds.egreso.CreadorProveedor;
-import dds.egreso.CriterioPresupuestoMenorValor;
-import dds.egreso.CriterioSeleccionPresupuesto;
-import dds.egreso.Egreso;
-import dds.egreso.EstadoEgreso;
-import dds.egreso.Item;
-import dds.egreso.Presupuesto;
-import dds.egreso.Proveedor;
-import dds.mediosDePago.MedioDePago;
-import dds.mediosDePago.TipoMedioDePago;
-import dds.pais.Moneda;
-import dds.usuario.TipoUsuario;
-import dds.usuario.Usuario;
-import dds.validacionesEgresos.EgresoEnBaseAPresupuestoCorrecto;
-import dds.validacionesEgresos.EgresoTieneCantidadMinimaDePresupuestos;
-import dds.validacionesEgresos.ValidacionEgreso;
+
 //import dds.validacionesEgresos.ValidadorEgresos;
 
 public class Main {

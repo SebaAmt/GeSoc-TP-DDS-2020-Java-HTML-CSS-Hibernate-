@@ -6,21 +6,16 @@ import dds.egreso.*;
 import dds.exception.EgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio;
 import dds.exception.EgresoNoCorrespondeConPresupuestoCargado;
 import dds.exception.EgresoNoCumpleCantidadMinimaDePresupuestos;
-import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
-import dds.pais.Moneda;
-import dds.usuario.TipoUsuario;
-import dds.usuario.Usuario;
-import dds.validaciones.Validacion;
-import dds.validacionesEgresos.EgresoEnBaseAPresupuestoCorrecto;
+import dds.validacionesEgresos.EgresoCoincideConAlgunPresupuestoCargado;
+import dds.validacionesEgresos.EgresoCoincideConPresupuestoSeleccionadoPorCriterio;
 import dds.validacionesEgresos.EgresoTieneCantidadMinimaDePresupuestos;
 import dds.validacionesEgresos.ValidacionEgreso;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,7 +30,8 @@ public class ValidacionesTest {
     private Egreso egresoConPresupuestoDistintoAlDevueltoPorCriterio;
     private Egreso egresoSinCantidadMinimaDePresupuestos;
     private ValidacionEgreso cantidadMinimaPresupuestos = new EgresoTieneCantidadMinimaDePresupuestos();
-    private ValidacionEgreso relacionEgresoPresupuesto = new EgresoEnBaseAPresupuestoCorrecto();
+    private ValidacionEgreso relacionEgresoPresupuesto = new EgresoCoincideConAlgunPresupuestoCargado();
+    private ValidacionEgreso relacionEgresoPresupuestoSegunCriterio = new EgresoCoincideConPresupuestoSeleccionadoPorCriterio();
     private CreadorProveedor creadorProveedor;
 
     @BeforeEach
@@ -100,7 +96,7 @@ public class ValidacionesTest {
     @Test
     @DisplayName("Egreso con criterio y hecho en base a presupuesto distinto al seleccionado arroja error al ser validado")
     public void EgresoConCriterioSinPresupuestoCorrectoElegidoArrojaError() {
-        assertThrows(EgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio.class, () -> relacionEgresoPresupuesto.validar(egresoConPresupuestoDistintoAlDevueltoPorCriterio));
+        assertThrows(EgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio.class, () -> relacionEgresoPresupuestoSegunCriterio.validar(egresoConPresupuestoDistintoAlDevueltoPorCriterio));
     }
 
     @Test

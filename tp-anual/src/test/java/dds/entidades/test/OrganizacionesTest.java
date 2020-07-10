@@ -11,7 +11,8 @@ import dds.mediosDePago.TipoMedioDePago;
 import dds.pais.Moneda;
 import dds.usuario.TipoUsuario;
 import dds.usuario.Usuario;
-import dds.validacionesEgresos.EgresoEnBaseAPresupuestoCorrecto;
+import dds.validacionesEgresos.EgresoCoincideConAlgunPresupuestoCargado;
+import dds.validacionesEgresos.EgresoCoincideConPresupuestoSeleccionadoPorCriterio;
 import dds.validacionesEgresos.EgresoTieneCantidadMinimaDePresupuestos;
 import dds.validacionesEgresos.ValidacionEgreso;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +44,8 @@ public class OrganizacionesTest {
     private List<Item> itemsCorrectos3 = new ArrayList<>();
     private List<Item> itemsIncorrectos1 = new ArrayList<>();
     private ValidacionEgreso cantidadMinimaPresupuestos = new EgresoTieneCantidadMinimaDePresupuestos();
-    private ValidacionEgreso relacionEgresoPresupuesto = new EgresoEnBaseAPresupuestoCorrecto();
+    private ValidacionEgreso relacionEgresoPresupuesto = new EgresoCoincideConAlgunPresupuestoCargado();
+    private ValidacionEgreso relacionEgresoPresupuestoSegunCriterio = new EgresoCoincideConPresupuestoSeleccionadoPorCriterio();
     private Presupuesto presupuestoCorrecto1;
     private Presupuesto presupuestoCorrecto2;
     private Presupuesto presupuestoCorrecto3;
@@ -59,6 +61,7 @@ public class OrganizacionesTest {
 
         organizacion.agregarValidacionEgreso(cantidadMinimaPresupuestos);
         organizacion.agregarValidacionEgreso(relacionEgresoPresupuesto);
+        organizacion.agregarValidacionEgreso(relacionEgresoPresupuestoSegunCriterio);
 
         revisor1 = new Usuario("Pepe", "xtpz13l2", TipoUsuario.ESTANDAR);
         revisor2 = new Usuario("Juanita", "xwqponh302", TipoUsuario.ESTANDAR);
