@@ -3,7 +3,7 @@ package dds.egreso.test;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.*;
-import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
+import dds.exception.PresupuestoNoTieneMismosItemsQueEgresoException;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
 import dds.pais.Moneda;
@@ -58,7 +58,7 @@ public class CreadorDePresupuestosTest {
     @DisplayName("Se obtiene mensaje de error al crear presupuesto para un egreso que no tiene los mismos items")
     public void MensajeDeErrorPresupuestoConItemsDistintosAEgreso() {
         creadorPresupuesto.agregarItems(items2);
-        assertThrows(PresupuestoNoTieneMismosItemsQueEgreso.class, () -> creadorPresupuesto.crearPresupuesto());
+        assertThrows(PresupuestoNoTieneMismosItemsQueEgresoException.class, () -> creadorPresupuesto.crearPresupuesto());
     }
 
     @Test

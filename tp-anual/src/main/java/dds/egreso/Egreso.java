@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import dds.documentoComercial.DocumentoComercial;
-import dds.exception.PresupuestoNoTieneMismaMoneda;
-import dds.exception.PresupuestoNoTieneMismosItemsQueEgreso;
+import dds.exception.PresupuestoNoTieneMismaMonedaException;
+import dds.exception.PresupuestoNoTieneMismosItemsQueEgresoException;
 import dds.mediosDePago.MedioDePago;
 import dds.pais.Moneda;
 import dds.usuario.Usuario;
@@ -84,8 +84,10 @@ public class Egreso {
 		return presupuestos;
 	}
 
-	public void setEstado(EstadoEgreso estado) {
+	public void cambiarEstado(EstadoEgreso estado, String mensaje)
+	{
 		this.estado = estado;
+		this.informarARevisores(mensaje);
 	}
 	
 	public CriterioSeleccionPresupuesto getCriterio() {
@@ -111,7 +113,7 @@ public class Egreso {
 		presupuesto.getItems().stream().forEach(item -> articulosPresupuesto.put(item.getDescripcion(), item.getCantidadUnidades()));
 
 		if(!articulosEgreso.equals(articulosPresupuesto))
-			throw new PresupuestoNoTieneMismosItemsQueEgreso();
+			throw new PresupuestoNoTieneMismosItemsQueEgresoException();
 	}
 
 	private void tienenMismaMoneda(Presupuesto presupuesto) {
@@ -119,7 +121,7 @@ public class Egreso {
 		Moneda monedaPresupuesto = presupuesto.getMoneda();
 
 		if(!monedaProveedor.equals(monedaPresupuesto)) {
-			throw new PresupuestoNoTieneMismaMoneda();
+			throw new PresupuestoNoTieneMismaMonedaException();
 		};
 	}
 

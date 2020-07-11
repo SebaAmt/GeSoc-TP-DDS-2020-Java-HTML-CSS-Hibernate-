@@ -3,9 +3,7 @@ package dds.validadorEgresos.test;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.*;
-import dds.exception.EgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio;
-import dds.exception.EgresoNoCorrespondeConPresupuestoCargado;
-import dds.exception.EgresoNoCumpleCantidadMinimaDePresupuestos;
+import dds.exception.ValidacionEgresoFallidaException;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
 import dds.validacionesEgresos.EgresoCoincideConAlgunPresupuestoCargado;
@@ -84,25 +82,25 @@ public class ValidacionesTest {
     @Test
     @DisplayName("Egreso sin criterio y con proveedor distinto a los presupuestos cargados arroja error al ser validado")
     public void EgresoSinCriterioNiPresupuestoCorrectoArrojaErrorPorTotal() {
-        assertThrows(EgresoNoCorrespondeConPresupuestoCargado.class, () -> relacionEgresoPresupuesto.validar(egresoSinCriterioYDistintoProveedor));
+        assertThrows(ValidacionEgresoFallidaException.class, () -> relacionEgresoPresupuesto.validar(egresoSinCriterioYDistintoProveedor), "El egreso no se corresponde con ninguno de los presupuestos cargados");
     }
 
     @Test
     @DisplayName("Egreso sin criterio y con total distinto a los presupuestos cargados arroja error al ser validado")
     public void EgresoSinCriterioNiPresupuestoCorrectoArrojaErrorPorProveedor() {
-        assertThrows(EgresoNoCorrespondeConPresupuestoCargado.class, () -> relacionEgresoPresupuesto.validar(egresoSinCriterioYValorTotalDistinto));
+        assertThrows(ValidacionEgresoFallidaException.class, () -> relacionEgresoPresupuesto.validar(egresoSinCriterioYValorTotalDistinto), "El egreso no se corresponde con ninguno de los presupuestos cargados");
     }
 
     @Test
     @DisplayName("Egreso con criterio y hecho en base a presupuesto distinto al seleccionado arroja error al ser validado")
     public void EgresoConCriterioSinPresupuestoCorrectoElegidoArrojaError() {
-        assertThrows(EgresoNoCorrespondeAPresupuestoSeleccionadoPorCriterio.class, () -> relacionEgresoPresupuestoSegunCriterio.validar(egresoConPresupuestoDistintoAlDevueltoPorCriterio));
+        assertThrows(ValidacionEgresoFallidaException.class, () -> relacionEgresoPresupuestoSegunCriterio.validar(egresoConPresupuestoDistintoAlDevueltoPorCriterio), "El egreso no se corresponde con el presupuesto seleccionado por criterio");
     }
 
     @Test
     @DisplayName("Egreso con menos presupuestos cargados que el minimo definido arroja error al validarse")
     public void EgresoConMenosPresupuestosQueElMinimoArrojaError() {
-        assertThrows(EgresoNoCumpleCantidadMinimaDePresupuestos.class, () -> cantidadMinimaPresupuestos.validar(egresoSinCantidadMinimaDePresupuestos));
+        assertThrows(ValidacionEgresoFallidaException.class, () -> cantidadMinimaPresupuestos.validar(egresoSinCantidadMinimaDePresupuestos), "El egreso no cumple con la cantidad minima de presupuestos cargados");
     }
 
 }

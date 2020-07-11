@@ -2,8 +2,7 @@ package dds.entidades;
 
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
-import dds.entidades.EntidadBase;
-import dds.entidades.EntidadJuridica;
+import dds.exception.ValidacionEgresoFallidaException;
 import dds.validacionesEgresos.ValidacionEgreso;
 
 import java.util.ArrayList;
@@ -36,11 +35,11 @@ public class Organizacion {
         for (Egreso egresoPendiente : this.obtenerEgresosParaValidar()) {
             try {
                 this.validacionesEgresos.stream().forEach(validacion -> validacion.validar(egresoPendiente));
-                egresoPendiente.setEstado(EstadoEgreso.ACEPTADO);
-                egresoPendiente.informarARevisores("El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
+                egresoPendiente.cambiarEstado(EstadoEgreso.ACEPTADO, "El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
+            } catch (ValidacionEgresoFallidaException ex) {
+                egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + ex.getMessage());
             } catch (RuntimeException ex) {
-                egresoPendiente.setEstado(EstadoEgreso.RECHAZADO);
-                egresoPendiente.informarARevisores("El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + ex.getMessage());
+                egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: Error no controlado");
             }
         }
     }

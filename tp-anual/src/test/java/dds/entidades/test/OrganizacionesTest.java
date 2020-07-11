@@ -81,7 +81,6 @@ public class OrganizacionesTest {
 
         egresoPendiente = new Egreso(LocalDate.now(), proveedor, factura, efectivo, itemsCorrectos1, revisores, new ArrayList<>(), true,null);
         egresoRechazado = new Egreso(LocalDate.now(), proveedor, factura, efectivo, itemsCorrectos1, new ArrayList<>(), new ArrayList<>(), true, null);
-        egresoRechazado.setEstado(EstadoEgreso.RECHAZADO);
         egresoAceptado = new Egreso(LocalDate.now(), proveedor, factura, efectivo, itemsCorrectos1, new ArrayList<>(), new ArrayList<>(), false, null);
 
         presupuestoCorrecto1 = new Presupuesto(proveedor, factura, itemsCorrectos1);
@@ -119,6 +118,7 @@ public class OrganizacionesTest {
     @DisplayName("Se obtiene egreso para validar (RECHAZADO) de Entidad Jurídica")
     public void ObtenerEgresoRechazadoEntidadJuridica() {
         entidadJuridica.nuevoEgreso(egresoRechazado);
+        organizacion.validarEgresos();
         assertEquals(true, organizacion.obtenerEgresosParaValidar().contains(egresoRechazado));
     }
 
@@ -133,6 +133,7 @@ public class OrganizacionesTest {
     @DisplayName("Se obtiene egreso para validar (RECHAZADO) de Entidad Base")
     public void ObtenerEgresoRechazadoEntidadBase() {
         entidadBase.nuevoEgreso(egresoRechazado);
+        organizacion.validarEgresos();
         assertEquals(true, organizacion.obtenerEgresosParaValidar().contains(egresoRechazado));
     }
 
