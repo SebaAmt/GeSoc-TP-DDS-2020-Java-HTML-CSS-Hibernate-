@@ -240,4 +240,15 @@ public class OrganizacionesTest {
         assertEquals("El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: El egreso no se corresponde con el presupuesto seleccionado por criterio", revisor2.getBandejaDeMensajes().get(0));
     }
 
+    @Test
+    @DisplayName("Se envía mensaje a revisores por Egreso RECHAZADO con múltiples errores")
+    public void ValidarMensajeEgresoRechazadoConMultiplesErrores(){
+        egresoConCriterioMenorValor.agregarPresupuesto(presupuestoCorrecto2);
+        egresoConCriterioMenorValor.agregarPresupuesto(presupuestoCorrecto3);
+        entidadJuridica.nuevoEgreso(egresoConCriterioMenorValor);
+        organizacion.validarEgresos();
+        assertEquals("El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: El egreso no cumple con la cantidad minima de presupuestos cargados, El egreso no se corresponde con ninguno de los presupuestos cargados, El egreso no se corresponde con el presupuesto seleccionado por criterio", revisor1.getBandejaDeMensajes().get(0));
+        assertEquals("El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: El egreso no cumple con la cantidad minima de presupuestos cargados, El egreso no se corresponde con ninguno de los presupuestos cargados, El egreso no se corresponde con el presupuesto seleccionado por criterio", revisor2.getBandejaDeMensajes().get(0));
+    }
+
 }

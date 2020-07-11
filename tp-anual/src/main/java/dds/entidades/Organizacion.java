@@ -31,16 +31,25 @@ public class Organizacion {
     }
 
     public void validarEgresos() {
-
         for (Egreso egresoPendiente : this.obtenerEgresosParaValidar()) {
-            try {
-                this.validacionesEgresos.stream().forEach(validacion -> validacion.validar(egresoPendiente));
+            List<String> mensajesDeError = new ArrayList<>();
+            this.validacionesEgresos.stream().forEach(validacion -> {
+                try {
+                    validacion.validar(egresoPendiente);
+                } catch (ValidacionEgresoFallidaException ex) {
+                    mensajesDeError.add(ex.getMessage());
+                } catch (RuntimeException ex) {
+                    mensajesDeError.add("Error no controlado");
+                }
+            });
+
+            if(mensajesDeError.size() == 0){
                 egresoPendiente.cambiarEstado(EstadoEgreso.ACEPTADO, "El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
-            } catch (ValidacionEgresoFallidaException ex) {
-                egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + ex.getMessage());
-            } catch (RuntimeException ex) {
-                egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: Error no controlado");
+                return;
             }
+
+            egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + String.join(", ", mensajesDeError));
+
         }
     }
 
