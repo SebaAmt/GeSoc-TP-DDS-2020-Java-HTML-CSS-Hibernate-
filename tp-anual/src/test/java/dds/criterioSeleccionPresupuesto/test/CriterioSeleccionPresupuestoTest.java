@@ -2,10 +2,11 @@ package dds.criterioSeleccionPresupuesto.test;
 
 import dds.direccion.Direccion;
 import dds.documentoComercial.DocumentoComercial;
+
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.*;
-import dds.mediosDePago.MedioDePago;
-import dds.mediosDePago.TipoMedioDePago;
+
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class CriterioSeleccionPresupuestoTest {
     private List<Presupuesto> presupuestos = new ArrayList<>();
@@ -33,7 +34,7 @@ public class CriterioSeleccionPresupuestoTest {
     	direccion = null;
         Proveedor proveedor = new Proveedor("Proveedor", 11111111, direccion);
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
-        MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
+        
 
         List<Item> items1 = new ArrayList<Item>();
         items1.add(new Item("Martillo", new BigDecimal(5), 1));
