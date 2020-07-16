@@ -10,7 +10,6 @@ import dds.documentoComercial.DocumentoComercial;
 import dds.exception.PresupuestoNoTieneMismaMonedaException;
 import dds.exception.PresupuestoNoTieneMismosItemsQueEgresoException;
 import dds.mediosDePago.MedioDePago;
-import dds.pais.Moneda;
 import dds.usuario.Usuario;
 
 public class Egreso {
@@ -21,17 +20,19 @@ public class Egreso {
 	private Proveedor proveedor;
 	private DocumentoComercial documentoComercial;
 	private MedioDePago medioDePago;
+	private Moneda moneda;
 	private List<Item> items = new ArrayList<>();
 	private boolean requierePresupuestos;
 	private EstadoEgreso estado;
 	private CriterioSeleccionPresupuesto criterio;
 
 
-	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, List<Item> items, List<Usuario> revisores, List<Presupuesto> presupuestos, boolean requierePresupuestos, CriterioSeleccionPresupuesto criterio) {
+	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial, MedioDePago medioDePago, Moneda moneda, List<Item> items, List<Usuario> revisores, List<Presupuesto> presupuestos, boolean requierePresupuestos, CriterioSeleccionPresupuesto criterio) {
 		this.fechaDeOperacion = fechaDeOperacion;
 		this.proveedor = proveedor;
 		this.documentoComercial = documentoComercial;
 		this.medioDePago = medioDePago;
+		this.moneda = moneda;
 		this.items = items;
 		this.revisores = revisores;
 		this.presupuestos = presupuestos;
@@ -77,7 +78,7 @@ public class Egreso {
 	}
 	
 	public Moneda getMoneda() {
-		return getProveedor().getDireccionPostal().getPais().getMoneda();
+		return this.moneda;
 	}
 
 	public List<Presupuesto> getPresupuestos() {
@@ -117,10 +118,10 @@ public class Egreso {
 	}
 
 	private void tienenMismaMoneda(Presupuesto presupuesto) {
-		Moneda monedaProveedor = proveedor.getDireccionPostal().getPais().getMoneda();
+		Moneda monedaEgreso = this.getMoneda();
 		Moneda monedaPresupuesto = presupuesto.getMoneda();
 
-		if(!monedaProveedor.equals(monedaPresupuesto)) {
+		if(!monedaEgreso.equals(monedaPresupuesto)) {
 			throw new PresupuestoNoTieneMismaMonedaException();
 		};
 	}

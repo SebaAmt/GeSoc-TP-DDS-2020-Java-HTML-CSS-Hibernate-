@@ -1,18 +1,18 @@
 package dds.egreso;
 
-import dds.pais.DireccionPostal;
+import dds.direccion.Direccion;
 
 public class Proveedor {
 
 	private String nombre;
 	private Integer dni;
-	private DireccionPostal direccionPostal;
+	private Direccion direccion;
 
 	
-	public Proveedor(String nombre, Integer dni, DireccionPostal direccionPostal) {
+	public Proveedor(String nombre, Integer dni, Direccion direccion) {
 		this.nombre = nombre;
 		this.dni = dni;
-		this.direccionPostal = direccionPostal;
+		this.direccion = direccion;
 	}
 	
 	
@@ -24,8 +24,8 @@ public class Proveedor {
 		return dni;
 	}
 	
-	public DireccionPostal getDireccionPostal() {
-		return direccionPostal;
+	public Direccion getDireccion() {
+		return direccion;
 	}
 
 }

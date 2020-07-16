@@ -2,7 +2,6 @@ package dds.egreso;
 
 import dds.documentoComercial.DocumentoComercial;
 import dds.mediosDePago.MedioDePago;
-import dds.pais.Moneda;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,14 +12,16 @@ public class Presupuesto {
     private Proveedor proveedor;
     private DocumentoComercial documentoComercial;
     private List<Item> items = new ArrayList<>();
+    private Moneda moneda;
 
     public List<Item> getItems() {
         return items;
     }
 
-    public Presupuesto(Proveedor proveedor, DocumentoComercial documentoComercial, List<Item> items) {
+    public Presupuesto(Proveedor proveedor, DocumentoComercial documentoComercial, Moneda moneda, List<Item> items) {
         this.proveedor = proveedor;
         this.documentoComercial = documentoComercial;
+        this.moneda = moneda;
         this.items = items;
     }
 
@@ -33,6 +34,6 @@ public class Presupuesto {
     }
     
     public Moneda getMoneda() {
-    	return getProveedor().getDireccionPostal().getPais().getMoneda();
+    	return this.moneda;
     }
 }

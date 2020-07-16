@@ -1,5 +1,6 @@
 package dds.criterioSeleccionPresupuesto.test;
 
+import dds.direccion.Direccion;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.*;
@@ -21,12 +22,16 @@ public class CriterioSeleccionPresupuestoTest {
     private Presupuesto presupuesto1;
     private Presupuesto presupuesto2;
     private Presupuesto presupuesto3;
-    private CreadorProveedor creadorProveedor;
+    private Direccion direccion;
+    private CreadorMoneda creadorPesos;
+    private Moneda moneda;
 
     @BeforeEach
     public void init() {
-    	creadorProveedor = new CreadorProveedor();
-        Proveedor proveedor = creadorProveedor.crearProveedor("Proveedor", 11111111, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
+    	creadorPesos = new CreadorMoneda(CurrencyID.ARS);
+    	moneda = creadorPesos.getMoneda();
+    	direccion = null;
+        Proveedor proveedor = new Proveedor("Proveedor", 11111111, direccion);
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
 
@@ -45,9 +50,9 @@ public class CriterioSeleccionPresupuestoTest {
         items3.add(new Item("Clavos", new BigDecimal(20), 10));
         items3.add(new Item("Martillo", new BigDecimal(1), 1));
 
-        presupuesto1 = new Presupuesto(proveedor, factura, items1);
-        presupuesto2 = new Presupuesto(proveedor, factura, items2);
-        presupuesto3 = new Presupuesto(proveedor, factura, items3);
+        presupuesto1 = new Presupuesto(proveedor, factura, moneda, items1);
+        presupuesto2 = new Presupuesto(proveedor, factura, moneda, items2);
+        presupuesto3 = new Presupuesto(proveedor, factura, moneda, items3);
         this.presupuestos.add(presupuesto1);
         this.presupuestos.add(presupuesto2);
         this.presupuestos.add(presupuesto3);

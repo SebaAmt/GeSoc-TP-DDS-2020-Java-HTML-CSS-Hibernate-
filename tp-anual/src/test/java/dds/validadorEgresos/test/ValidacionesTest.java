@@ -30,13 +30,16 @@ public class ValidacionesTest {
     private ValidacionEgreso cantidadMinimaPresupuestos = new EgresoTieneCantidadMinimaDePresupuestos();
     private ValidacionEgreso relacionEgresoPresupuesto = new EgresoCoincideConAlgunPresupuestoCargado();
     private ValidacionEgreso relacionEgresoPresupuestoSegunCriterio = new EgresoCoincideConPresupuestoSeleccionadoPorCriterio();
-    private CreadorProveedor creadorProveedor;
+    private CreadorMoneda creadorPesos;
+    private Moneda moneda;
+    private Proveedor proveedor1, proveedor2;
 
     @BeforeEach
     public void init() {
-    	creadorProveedor = new CreadorProveedor();
-        Proveedor proveedor1 = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
-        Proveedor proveedor2 = creadorProveedor.crearProveedor("Edenor", 40987654, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkNBQjM4MDda", "Av Rivadavia", 4400, null, null,"8520");
+        proveedor1 = new Proveedor("Telas SA", 30258741, null);
+        proveedor2 = new Proveedor("Edenor", 40987654, null);
+        creadorPesos = new CreadorMoneda(CurrencyID.ARS);
+        moneda = creadorPesos.getMoneda();
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
 
@@ -60,23 +63,23 @@ public class ValidacionesTest {
         items4.add(new Item("Clavos", new BigDecimal(1), 10));
         items4.add(new Item("Martillo", new BigDecimal(12), 1));
 
-        Presupuesto presupuesto1 = new Presupuesto(proveedor1, factura, items1);
-        Presupuesto presupuesto2 = new Presupuesto(proveedor1, factura, items2);
-        Presupuesto presupuesto3 = new Presupuesto(proveedor1, factura, items3);
+        Presupuesto presupuesto1 = new Presupuesto(proveedor1, factura, moneda, items1);
+        Presupuesto presupuesto2 = new Presupuesto(proveedor1, factura, moneda, items2);
+        Presupuesto presupuesto3 = new Presupuesto(proveedor1, factura, moneda, items3);
 
         List<Presupuesto> presupuestos = new ArrayList<>();
         presupuestos.add(presupuesto1);
         presupuestos.add(presupuesto2);
         presupuestos.add(presupuesto3);
 
-        egresoSinCriterioYDistintoProveedor = new Egreso(LocalDate.now(), proveedor2, factura, efectivo, items1, null, presupuestos, true,null);
-        egresoSinCriterioYValorTotalDistinto = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items4, null, presupuestos, true, null);
-        egresoConPresupuestoDistintoAlDevueltoPorCriterio = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items2, null, presupuestos, true, new CriterioPresupuestoMenorValor());
+        egresoSinCriterioYDistintoProveedor = new Egreso(LocalDate.now(), proveedor2, factura, efectivo, moneda, items1, null, presupuestos, true,null);
+        egresoSinCriterioYValorTotalDistinto = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, moneda, items4, null, presupuestos, true, null);
+        egresoConPresupuestoDistintoAlDevueltoPorCriterio = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, moneda, items2, null, presupuestos, true, new CriterioPresupuestoMenorValor());
 
         List<Presupuesto> presupuestosMenorMinimo = new ArrayList<>();
         presupuestosMenorMinimo.add(presupuesto1);
         presupuestosMenorMinimo.add(presupuesto3);
-        egresoSinCantidadMinimaDePresupuestos = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, items2, null, presupuestosMenorMinimo, true, new CriterioPresupuestoMenorValor());
+        egresoSinCantidadMinimaDePresupuestos = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, moneda, items2, null, presupuestosMenorMinimo, true, new CriterioPresupuestoMenorValor());
     }
 
     @Test

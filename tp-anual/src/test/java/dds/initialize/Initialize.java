@@ -7,16 +7,16 @@ import java.util.List;
 
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
-import dds.egreso.CreadorProveedor;
+import dds.egreso.CreadorMoneda;
 import dds.egreso.CriterioPresupuestoMenorValor;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 import dds.egreso.Item;
+import dds.egreso.Moneda;
 import dds.egreso.Presupuesto;
 import dds.egreso.Proveedor;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
-import dds.pais.Moneda;
 
 public class Initialize {
 	public Presupuesto presupuesto1;
@@ -34,14 +34,13 @@ public class Initialize {
 	public MedioDePago medioDePago1;
 	public MedioDePago medioDePago2;
 	public CriterioPresupuestoMenorValor criterioMenorValor;
-	public CreadorProveedor creadorProveedor;
+	public CreadorMoneda creadorPeso;
 	public List<Item> items1 = new ArrayList<>();
 	public List<Item> items2 = new ArrayList<>();
 	public List<Presupuesto> presupuestos = new ArrayList<>();
 	
 	
 	public void setDePrueba() {
-		creadorProveedor = new CreadorProveedor();
 		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
 		item2 = new Item("Lamina de cuero", new BigDecimal(300), 4);
 		item3 = new Item("Botella de tintura", new BigDecimal(50), 1);

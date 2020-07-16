@@ -6,7 +6,7 @@ import dds.egreso.*;
 import dds.exception.PresupuestoNoTieneMismosItemsQueEgresoException;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
-import dds.pais.Moneda;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,20 +20,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CreadorDePresupuestosTest {
-    private Presupuesto presupuesto1;
-    private Presupuesto presupuesto2;
-    private CreadorProveedor creadorProveedor;
     private CreadorDePresupuestos creadorPresupuesto;
     private List<Item> items1 = new ArrayList<Item>();
     private List<Item> items2 = new ArrayList<Item>();
     private List<Item> items3 = new ArrayList<Item>();
     private Egreso egreso;
-
+    private Proveedor proveedor;
+    private CreadorMoneda creadorDolares;
+    private Moneda moneda;
+    
     @BeforeEach
     public void init() {
-        creadorProveedor = new CreadorProveedor();
-        Proveedor proveedor = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
-        Moneda moneda = proveedor.getDireccionPostal().getPais().getMoneda();
+    	proveedor = new Proveedor("Telas SA", 30258741, null);
+        creadorDolares = new CreadorMoneda(CurrencyID.USD);
+        moneda = creadorDolares.getMoneda();
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
 
@@ -47,11 +47,12 @@ public class CreadorDePresupuestosTest {
         items3.add(new Item("Clavos", new BigDecimal(8), 10));
         items3.add(new Item("Martillo", new BigDecimal(35), 1));
 
-        egreso = new Egreso(LocalDate.now(), proveedor, factura, efectivo, items1, new ArrayList<>(), new ArrayList<>(), true, null);
+        egreso = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, items1, new ArrayList<>(), new ArrayList<>(), true, null);
         creadorPresupuesto = new CreadorDePresupuestos();
         creadorPresupuesto.agregarDocumentoComercial(factura);
         creadorPresupuesto.agregarEgreso(egreso);
         creadorPresupuesto.agregarProveedor(proveedor);
+        creadorPresupuesto.agregarMoneda(moneda);
     }
 
     @Test

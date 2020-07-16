@@ -1,4 +1,4 @@
-package dds.pais;
+package dds.egreso;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "id", "symbol, description"})
 public class Moneda {
 
 	@NotNull(message = "Id no puede estar vacio")
@@ -81,4 +80,5 @@ public class Moneda {
 			return false;
 		return true;
 	}
+	
 }

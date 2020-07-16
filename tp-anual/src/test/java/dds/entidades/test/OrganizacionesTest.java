@@ -8,7 +8,6 @@ import dds.entidades.EntidadJuridica;
 import dds.entidades.Organizacion;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
-import dds.pais.Moneda;
 import dds.usuario.TipoUsuario;
 import dds.usuario.Usuario;
 import dds.validacionesEgresos.EgresoCoincideConAlgunPresupuestoCargado;
@@ -38,7 +37,6 @@ public class OrganizacionesTest {
     private Egreso egresoAceptado;
     private Egreso egresoNoCorrespondienteAPresupuestos;
     private Egreso egresoConCriterioMenorValor;
-    private Egreso egresoNoRequierePresupuesto;
     private List<Item> itemsCorrectos1 = new ArrayList<>();
     private List<Item> itemsCorrectos2 = new ArrayList<>();
     private List<Item> itemsCorrectos3 = new ArrayList<>();
@@ -49,7 +47,10 @@ public class OrganizacionesTest {
     private Presupuesto presupuestoCorrecto1;
     private Presupuesto presupuestoCorrecto2;
     private Presupuesto presupuestoCorrecto3;
-
+    private Proveedor proveedor;
+    private CreadorMoneda creadorPesos;
+    private Moneda moneda;
+    
     @BeforeEach
     public void init() {
 
@@ -69,9 +70,9 @@ public class OrganizacionesTest {
         revisores.add(revisor1);
         revisores.add(revisor2);
 
-        CreadorProveedor creadorProveedor = new CreadorProveedor();
-        Proveedor proveedor = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ", "TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
-        Moneda moneda = proveedor.getDireccionPostal().getPais().getMoneda();
+        proveedor = new Proveedor("Telas SA", 30258741, null);
+        creadorPesos = new CreadorMoneda(CurrencyID.ARS);
+        moneda = creadorPesos.getMoneda();
         DocumentoComercial factura = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
         MedioDePago efectivo = new MedioDePago(TipoMedioDePago.EFECTIVO, "PF12345");
 
@@ -79,31 +80,31 @@ public class OrganizacionesTest {
         itemsCorrectos1.add(new Item("Clavos", new BigDecimal(5), 10));
         itemsCorrectos1.add(new Item("Madera", new BigDecimal(100), 5));
 
-        egresoPendiente = new Egreso(LocalDate.now(), proveedor, factura, efectivo, itemsCorrectos1, revisores, new ArrayList<>(), true,null);
-        egresoRechazado = new Egreso(LocalDate.now(), proveedor, factura, efectivo, itemsCorrectos1, new ArrayList<>(), new ArrayList<>(), true, null);
-        egresoAceptado = new Egreso(LocalDate.now(), proveedor, factura, efectivo, itemsCorrectos1, new ArrayList<>(), new ArrayList<>(), false, null);
+        egresoPendiente = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, itemsCorrectos1, revisores, new ArrayList<>(), true,null);
+        egresoRechazado = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, itemsCorrectos1, new ArrayList<>(), new ArrayList<>(), true, null);
+        egresoAceptado = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, itemsCorrectos1, new ArrayList<>(), new ArrayList<>(), false, null);
 
-        presupuestoCorrecto1 = new Presupuesto(proveedor, factura, itemsCorrectos1);
+        presupuestoCorrecto1 = new Presupuesto(proveedor, factura, moneda, itemsCorrectos1);
 
         itemsCorrectos2.add(new Item("Madera", new BigDecimal(80), 5));
         itemsCorrectos2.add(new Item("Clavos", new BigDecimal(8), 10));
         itemsCorrectos2.add(new Item("Martillo", new BigDecimal(35), 1));
 
-        presupuestoCorrecto2 = new Presupuesto(proveedor, factura, itemsCorrectos2);
+        presupuestoCorrecto2 = new Presupuesto(proveedor, factura, moneda, itemsCorrectos2);
 
         itemsCorrectos3.add(new Item("Madera", new BigDecimal(1), 5));
         itemsCorrectos3.add(new Item("Clavos", new BigDecimal(1), 10));
         itemsCorrectos3.add(new Item("Martillo", new BigDecimal(1), 1));
 
-        presupuestoCorrecto3 = new Presupuesto(proveedor, factura, itemsCorrectos3);
+        presupuestoCorrecto3 = new Presupuesto(proveedor, factura, moneda, itemsCorrectos3);
 
         itemsIncorrectos1.add(new Item("Madera", new BigDecimal(54), 5));
         itemsIncorrectos1.add(new Item("Clavos", new BigDecimal(23), 10));
         itemsIncorrectos1.add(new Item("Martillo", new BigDecimal(33), 1));
 
-        egresoNoCorrespondienteAPresupuestos = new Egreso(LocalDate.now(), proveedor, factura, efectivo, itemsIncorrectos1, revisores, new ArrayList<>(), true,null);
+        egresoNoCorrespondienteAPresupuestos = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, itemsIncorrectos1, revisores, new ArrayList<>(), true,null);
 
-        egresoConCriterioMenorValor = new Egreso(LocalDate.now(), proveedor, factura, efectivo, itemsCorrectos1, revisores, new ArrayList<>(), true, new CriterioPresupuestoMenorValor());
+        egresoConCriterioMenorValor = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, itemsCorrectos1, revisores, new ArrayList<>(), true, new CriterioPresupuestoMenorValor());
     }
 
 
