@@ -1,23 +1,22 @@
 package dds.usuario.test;
 
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dds.validaciones.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import dds.exception.PasswordException;
-import dds.initialize.Initialize;
 import dds.usuario.CreadorDeUsuario;
 import dds.usuario.TipoUsuario;
 
+
 public class UsuarioTest {
 	private CreadorDeUsuario dios;
-	Initialize prueba = new Initialize();
-
+	
 	@BeforeEach
 	public void init() {
 		ValidadorDeContrasenias validador = new ValidadorDeContrasenias();
@@ -27,8 +26,7 @@ public class UsuarioTest {
 		validador.agregarValidacion(new ComprobarSiPoseeMasDe8Caracteres());
 		validador.agregarValidacion(new ValidarTopPeoresContrasenias());
 		dios = new CreadorDeUsuario(validador);
-		
-		prueba.setDePrueba();
+				
 	}
 
 	

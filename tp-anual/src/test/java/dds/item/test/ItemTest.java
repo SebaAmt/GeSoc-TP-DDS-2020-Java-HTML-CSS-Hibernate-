@@ -1,25 +1,27 @@
 package dds.item.test;
 
-import dds.initialize.Initialize;
+import dds.egreso.Item;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class ItemTest {
 
-	Initialize prueba = new Initialize();
-	
-
-	@BeforeEach
-	public void setDePrueba() {
-		prueba.setDePrueba();
-	}
-	
 	@Test
-	public void valorTotalTest( ) {
-		BigDecimal precio = prueba.item1.getPrecioUnitario().multiply(BigDecimal.valueOf(prueba.item1.getCantidadUnidades()));
-		assertEquals(prueba.item1.valorTotal(), precio);
+	public void comprobarValorTotalCorrecto() {
+
+		// Arrange
+
+		Item item1;
+		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
+
+		// Act
+
+		BigDecimal precioActual = item1.getPrecioUnitario().multiply(BigDecimal.valueOf(item1.getCantidadUnidades()));
+        BigDecimal precioEsperado = item1.valorTotal();
+        
+		// Assert
+
+		assertEquals(precioEsperado, precioActual);
 	}
 }
