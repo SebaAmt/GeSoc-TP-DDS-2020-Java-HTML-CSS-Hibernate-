@@ -40,7 +40,10 @@ public class EntidadJuridica {
     }
 
     public List<Egreso> egresosParaValidar(){
-        return this.egresos.stream().filter(egreso -> egreso.requierePresupuestos() && (egreso.getEstado() == EstadoEgreso.PENDIENTE || egreso.getEstado() == EstadoEgreso.RECHAZADO)).collect(Collectors.toList());
+        List<Egreso> egresosParaValidar = new ArrayList<>();
+        egresosParaValidar.addAll(this.egresos.stream().filter(egreso -> egreso.requierePresupuestos() && (egreso.getEstado() == EstadoEgreso.PENDIENTE || egreso.getEstado() == EstadoEgreso.RECHAZADO)).collect(Collectors.toList()));
+        this.entidadesBase.forEach(entidadBase -> egresosParaValidar.addAll(entidadBase.egresosParaValidar()));
+        return egresosParaValidar;
     }
 
 }

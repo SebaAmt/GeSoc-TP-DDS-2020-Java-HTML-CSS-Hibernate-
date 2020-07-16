@@ -45,10 +45,9 @@ public class Organizacion {
 
             if(mensajesDeError.size() == 0){
                 egresoPendiente.cambiarEstado(EstadoEgreso.ACEPTADO, "El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
-                return;
+            } else {
+                egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + String.join(", ", mensajesDeError));
             }
-
-            egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + String.join(", ", mensajesDeError));
 
         }
     }

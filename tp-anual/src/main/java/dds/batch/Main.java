@@ -42,8 +42,12 @@ public class Main {
 	public static Item item5;
 	public static Item item6;
 	public static Item item7;
+	public static Item item8;
+	public static Item item9;
+	public static Item item10;
 	public static Proveedor proveedor1;
 	public static Proveedor proveedor2;
+	public static Proveedor proveedor3;
 	public static DocumentoComercial documento1;
 	public static DocumentoComercial documento2;
 	public static MedioDePago medioDePago1;
@@ -71,6 +75,7 @@ public class Main {
 	public static Organizacion organizacion1;
 	public static Direccion direccion1;
 	public static Direccion direccion2;
+
 	
 
 	public static void main(String[] args) {
@@ -107,6 +112,7 @@ public class Main {
 		
 		proveedor1 = new Proveedor("Telas SA", 30258741, direccion1);
 		proveedor2 = new Proveedor("Edenor", 40987654, direccion2);
+		proveedor3 = new Proveedor("Edesur", 458712452, direccion1);
 
 		creadorPesos = new CreadorMoneda(CurrencyID.ARS);
 		peso = creadorPesos.getMoneda();
@@ -118,6 +124,9 @@ public class Main {
 		item5 = new Item("Rollo tela", new BigDecimal(200), 3);
 		item6 = new Item("Lamina de cuero", new BigDecimal(350), 4);
 		item7 = new Item("Botella de tintura", new BigDecimal(70), 1);
+		item8 = new Item("Rollo tela", new BigDecimal(220), 3);
+		item9 = new Item("Lamina de cuero", new BigDecimal(400), 4);
+		item10 = new Item("Botella de tintura", new BigDecimal(90), 1);
 
 		items1.add(item1);
 		items1.add(item2);
@@ -125,6 +134,9 @@ public class Main {
 		items2.add(item5);
 		items2.add(item6);
 		items2.add(item7);
+		items3.add(item8);
+		items3.add(item9);
+		items3.add(item10);
 
 		egresosPendientes1 = new ArrayList<>();
 		egresosPendientes2 = new ArrayList<>();
@@ -144,8 +156,8 @@ public class Main {
 		usuariosRevisores2.add(usuario2);
 		usuariosRevisores2.add(usuario3);
 
-		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 0000001);
-		documento2 = new DocumentoComercial(TipoDocumentoComercial.ORDEN_DE_COMPRA, 9999999);
+		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
+		documento2 = new DocumentoComercial(TipoDocumentoComercial.ORDEN_DE_COMPRA, 7890);
 
 		medioDePago1 = new MedioDePago(TipoMedioDePago.CAJERO, "159753456");
 		medioDePago2 = new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "456852159");
@@ -154,7 +166,7 @@ public class Main {
 
 		presupuesto1 = new Presupuesto(proveedor1, documento1, peso, items1);
 		presupuesto2 = new Presupuesto(proveedor2, documento2, peso, items2);
-		presupuesto3 = new Presupuesto(proveedor1, documento2, peso, items2);
+		presupuesto3 = new Presupuesto(proveedor3, documento2, peso, items3);
 
 		presupuestos1.add(presupuesto1);
 		presupuestos1.add(presupuesto2);
@@ -163,9 +175,9 @@ public class Main {
 		presupuestos2.add(presupuesto3);
 
 		egreso1 = new Egreso(LocalDate.of(2020, 9, 12), proveedor1, documento1, medioDePago1, peso, items2,
-				usuariosRevisores2, presupuestos2, true, criterio1);
+				usuariosRevisores2, presupuestos2, true, null);
 
-		egreso2 = new Egreso(LocalDate.of(2020, 7, 15), proveedor2, documento1, medioDePago2, peso, items2,
+		egreso2 = new Egreso(LocalDate.of(2020, 7, 15), proveedor2, documento2, medioDePago2, peso, items2,
 				usuariosRevisores1, presupuestos1, true, criterio1);
 
 		entidadBase1 = new EntidadBase("IT Hardware SA", "Entidad de prueba");
@@ -175,13 +187,10 @@ public class Main {
 
 		entidadBase1.nuevoEgreso(egreso1);
 		entidadBase2.nuevoEgreso(egreso2);
-		entidadJuridica1.nuevoEgreso(egreso1);
-		entidadJuridica1.nuevoEgreso(egreso2);
 		entidadJuridica1.agregarEntidadBase(entidadBase1);
 		entidadJuridica1.agregarEntidadBase(entidadBase2);
 
 		organizacion1 = new Organizacion("Pablo Giménez Enterprises");
-		organizacion1.agregarEntidadBase(entidadBase1);
 		organizacion1.agregarEntidadJuridica(entidadJuridica1);
 		organizacion1.agregarValidacionEgreso(new EgresoCoincideConPresupuestoSeleccionadoPorCriterio());
 		organizacion1.agregarValidacionEgreso(new EgresoTieneCantidadMinimaDePresupuestos());
@@ -191,9 +200,8 @@ public class Main {
 
 	private static void imprimirResultadoDeValidacion(List<Egreso> egresos) {
 		for (Egreso egreso : egresos) {
+			System.out.println("Egreso validado: " + egreso.toString() + " | Resultado -> Estado:" + " " + egreso.getEstado().toString());
 
-			System.out.println("Egreso validado:" + " " + "Fecha de egreso:" + " "
-					+ egreso.getFechaDeOperacion().toString() + " " + "Estado:" + " " + egreso.getEstado().toString());
 		}
 	}
 

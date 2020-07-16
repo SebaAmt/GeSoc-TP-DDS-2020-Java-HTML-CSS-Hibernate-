@@ -102,8 +102,9 @@ public class Egreso {
 	@Override
 	public String toString() {
 		return "Egreso{" +
-				"revisores=" + this.revisores +
-				", fechaDeOperacion=" + fechaDeOperacion +
+				"Documento Comercial= " + this.documentoComercial.getTipoDocumentoComercial() + " - Nro. " + this.documentoComercial.getIdentificadorDocumento() +
+
+				", Fecha de operacion=" + fechaDeOperacion +
 				'}';
 	}
 
