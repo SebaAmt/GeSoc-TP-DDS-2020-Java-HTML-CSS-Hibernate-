@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
-import dds.egreso.CreadorProveedor;
+import dds.egreso.CreadorMoneda;
+import dds.egreso.CurrencyID;
 import dds.egreso.Item;
+import dds.egreso.Moneda;
 import dds.egreso.Presupuesto;
 import dds.egreso.Proveedor;
 import java.math.BigDecimal;
@@ -28,17 +30,18 @@ public class PresupuestoTest {
 		final Item item2;
 		final DocumentoComercial documento1;
 		final List<Item> items1 = new ArrayList<>();
-		final CreadorProveedor creadorProveedor;
-
+		final CreadorMoneda creadorPesos;
+		final Moneda peso;
+		
 		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 0000001);
-		creadorProveedor = new CreadorProveedor();
-		proveedor1 = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ",
-				"TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
+		creadorPesos = new CreadorMoneda(CurrencyID.ARS);
+		peso = creadorPesos.getMoneda();
+		proveedor1 = new Proveedor("Telas SA", 30258741, null);
 		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
 		item2 = new Item("Lamina de cuero", new BigDecimal(300), 4);
 		items1.add(item1);
 		items1.add(item2);
-		presupuesto1 = new Presupuesto(proveedor1, documento1, items1);
+		presupuesto1 = new Presupuesto(proveedor1, documento1, peso, items1);
 
 		// Act
 

@@ -5,11 +5,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import dds.direccion.Direccion;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
-import dds.egreso.CreadorProveedor;
+import dds.egreso.CreadorMoneda;
 import dds.egreso.CriterioPresupuestoMenorValor;
 import dds.egreso.CriterioSeleccionPresupuesto;
+import dds.egreso.CurrencyID;
 import dds.egreso.Egreso;
 import dds.egreso.Item;
 import dds.egreso.Presupuesto;
@@ -19,7 +21,7 @@ import dds.entidades.EntidadJuridica;
 import dds.entidades.Organizacion;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
-import dds.pais.Moneda;
+import dds.egreso.Moneda;
 import dds.usuario.TipoUsuario;
 import dds.usuario.Usuario;
 import dds.validacionesEgresos.EgresoCoincideConPresupuestoSeleccionadoPorCriterio;
@@ -61,11 +63,15 @@ public class Main {
 	public static Usuario usuario1;
 	public static Usuario usuario2;
 	public static Usuario usuario3;
-	public static CreadorProveedor creadorProveedor;
+	public static CreadorMoneda creadorPesos;
+	public static Moneda peso;
 	public static EntidadBase entidadBase1;
 	public static EntidadBase entidadBase2;
 	public static EntidadJuridica entidadJuridica1;
 	public static Organizacion organizacion1;
+	public static Direccion direccion1;
+	public static Direccion direccion2;
+	
 
 	public static void main(String[] args) {
 
@@ -81,13 +87,29 @@ public class Main {
 	private static void initBatch() {
 		System.out.println("Inicializando datos de prueba...");
 
-		creadorProveedor = new CreadorProveedor();
-		proveedor1 = creadorProveedor.crearProveedor("Telas SA", 30258741, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ",
-				"TUxBQkJFTDcyNTJa", "Av. Cabildo", 2000, 9, "A", "1379");
-		proveedor2 = creadorProveedor.crearProveedor("Edenor", 40987654, "TUxBUENBUGw3M2E1", "TUxBQ0NBUGZlZG1sYQ",
-				"TUxBQkNBQjM4MDda", "Av Rivadavia", 4400, null, null, "8520");
+		direccion1 = new Direccion
+				.DireccionBuilder()
+				.calleBuild("Av. Cabildo")
+				.alturaBuild(190)
+				.pisoBuild(10)
+				.departamentoBuild("D")
+				.direccionPostalBuilder("1420")
+				.buildDireccion();
 
-		Moneda moneda = proveedor1.getDireccionPostal().getPais().getMoneda();
+		direccion2 = new Direccion
+				.DireccionBuilder()
+				.calleBuild("Av. Rivadavia")
+				.alturaBuild(4400)
+				.pisoBuild(null)
+				.departamentoBuild(null)
+				.direccionPostalBuilder("1406")
+				.buildDireccion();
+		
+		proveedor1 = new Proveedor("Telas SA", 30258741, direccion1);
+		proveedor2 = new Proveedor("Edenor", 40987654, direccion2);
+
+		creadorPesos = new CreadorMoneda(CurrencyID.ARS);
+		peso = creadorPesos.getMoneda();
 
 		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
 		item2 = new Item("Lamina de cuero", new BigDecimal(300), 4);
@@ -130,9 +152,9 @@ public class Main {
 
 		criterio1 = new CriterioPresupuestoMenorValor();
 
-		presupuesto1 = new Presupuesto(proveedor1, documento1, items1);
-		presupuesto2 = new Presupuesto(proveedor2, documento2, items2);
-		presupuesto3 = new Presupuesto(proveedor1, documento2, items2);
+		presupuesto1 = new Presupuesto(proveedor1, documento1, peso, items1);
+		presupuesto2 = new Presupuesto(proveedor2, documento2, peso, items2);
+		presupuesto3 = new Presupuesto(proveedor1, documento2, peso, items2);
 
 		presupuestos1.add(presupuesto1);
 		presupuestos1.add(presupuesto2);
@@ -140,10 +162,10 @@ public class Main {
 		presupuestos2.add(presupuesto2);
 		presupuestos2.add(presupuesto3);
 
-		egreso1 = new Egreso(LocalDate.of(2020, 9, 12), proveedor1, documento1, medioDePago1, items2,
+		egreso1 = new Egreso(LocalDate.of(2020, 9, 12), proveedor1, documento1, medioDePago1, peso, items2,
 				usuariosRevisores2, presupuestos2, true, criterio1);
 
-		egreso2 = new Egreso(LocalDate.of(2020, 7, 15), proveedor2, documento1, medioDePago2, items2,
+		egreso2 = new Egreso(LocalDate.of(2020, 7, 15), proveedor2, documento1, medioDePago2, peso, items2,
 				usuariosRevisores1, presupuestos1, true, criterio1);
 
 		entidadBase1 = new EntidadBase("IT Hardware SA", "Entidad de prueba");

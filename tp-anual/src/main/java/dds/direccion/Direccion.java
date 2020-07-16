@@ -10,14 +10,7 @@ public class Direccion {
 	private String departamento;
 	private DireccionPostal direccionPostal;
 
-	private Direccion(String calle, Integer altura, Integer piso, String departamento,
-			DireccionPostal direccionPostal) {
-		this.calle = calle;
-		this.altura = altura;
-		this.piso = piso;
-		this.departamento = departamento;
-		this.direccionPostal = direccionPostal;
-	}
+	private Direccion() {}
 
 	public String getCalle() {
 		return calle;
@@ -49,7 +42,7 @@ public class Direccion {
 		private Integer piso;
 		private String departamento;
 		private DireccionPostal direccionPostal;
-
+		
 		public DireccionBuilder calleBuild(String calle) {
 			this.calle = calle;
 			return this;
@@ -76,7 +69,13 @@ public class Direccion {
 		}
 		
 		public Direccion buildDireccion() {
-			return new Direccion(calle, altura, piso, departamento, direccionPostal);
+			Direccion direccion = new Direccion();
+			direccion.calle = this.calle;
+			direccion.altura = this.altura;
+			direccion.piso = this.piso;
+			direccion.departamento = this.departamento;
+			direccion.direccionPostal = this.direccionPostal;
+			return direccion;
 		}
 	}
 }
