@@ -76,4 +76,8 @@ public class Organizacion {
 		return egresosParaValidar;
 	}
 
+    @Override
+    public String toString() {
+        return "Organizacion: " + this.nombre;
+    }
 }

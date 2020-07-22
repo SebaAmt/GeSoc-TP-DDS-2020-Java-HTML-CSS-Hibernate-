@@ -27,6 +27,8 @@ import dds.usuario.Usuario;
 import dds.validacionesEgresos.EgresoCoincideConPresupuestoSeleccionadoPorCriterio;
 import dds.validacionesEgresos.EgresoTieneCantidadMinimaDePresupuestos;
 import dds.validacionesEgresos.ValidacionEgreso;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 
 public class Main {
 
@@ -44,7 +46,6 @@ public class Main {
 	public static Item item7;
 	public static Item item8;
 	public static Item item9;
-	public static Item item10;
 	public static Proveedor proveedor1;
 	public static Proveedor proveedor2;
 	public static Proveedor proveedor3;
@@ -78,14 +79,22 @@ public class Main {
 
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SchedulerException {
 
 		initBatch();
-		System.out.println("Validando egresos...");
-		List<Egreso> egresosAValidar = organizacion1.obtenerEgresosParaValidar();
-		organizacion1.validarEgresos();
-		imprimirResultadoDeValidacion(egresosAValidar);
-		System.out.println("La validación de egresos finalizó.");
+		System.out.println("-- Datos de prueba inicializados --");
+
+		List<Organizacion> organizaciones = new ArrayList<>();
+		organizaciones.add(organizacion1);
+
+		JobDetail validacionDeEgresos = JobBuilder.newJob(ValidacionEgresosJob.class).build();
+		validacionDeEgresos.getJobDataMap().put("organizaciones", organizaciones);
+
+		Trigger cada10Segundos = TriggerBuilder.newTrigger().withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(10).repeatForever()).build();
+
+		Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+		scheduler.start();
+		scheduler.scheduleJob(validacionDeEgresos, cada10Segundos);
 
 	}
 
@@ -120,23 +129,24 @@ public class Main {
 		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
 		item2 = new Item("Lamina de cuero", new BigDecimal(300), 4);
 		item3 = new Item("Botella de tintura", new BigDecimal(50), 1);
-		item4 = new Item("Jabon en polvo", new BigDecimal(500), 1);
-		item5 = new Item("Rollo tela", new BigDecimal(200), 3);
-		item6 = new Item("Lamina de cuero", new BigDecimal(350), 4);
-		item7 = new Item("Botella de tintura", new BigDecimal(70), 1);
-		item8 = new Item("Rollo tela", new BigDecimal(220), 3);
-		item9 = new Item("Lamina de cuero", new BigDecimal(400), 4);
-		item10 = new Item("Botella de tintura", new BigDecimal(90), 1);
+		item4 = new Item("Rollo tela", new BigDecimal(200), 3);
+		item5 = new Item("Lamina de cuero", new BigDecimal(350), 4);
+		item6 = new Item("Botella de tintura", new BigDecimal(70), 1);
+		item7 = new Item("Rollo tela", new BigDecimal(220), 3);
+		item8 = new Item("Lamina de cuero", new BigDecimal(400), 4);
+		item9 = new Item("Botella de tintura", new BigDecimal(90), 1);
 
 		items1.add(item1);
 		items1.add(item2);
 		items1.add(item3);
+
+		items2.add(item4);
 		items2.add(item5);
 		items2.add(item6);
-		items2.add(item7);
+
+		items3.add(item7);
 		items3.add(item8);
 		items3.add(item9);
-		items3.add(item10);
 
 		egresosPendientes1 = new ArrayList<>();
 		egresosPendientes2 = new ArrayList<>();
@@ -205,4 +215,22 @@ public class Main {
 		}
 	}
 
+	public static class ValidacionEgresosJob implements Job {
+
+		@Override
+		public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+			JobDataMap dataMap = jobExecutionContext.getMergedJobDataMap();
+			List<Organizacion> organizaciones = (ArrayList<Organizacion>)dataMap.get("organizaciones");
+			System.out.println(">> INICIO VALIDACIÓN DE EGRESOS <<");
+			organizaciones.stream().forEach(organizacion -> {
+				System.out.println(organizacion);
+				List<Egreso> egresosAValidar = organizacion.obtenerEgresosParaValidar();
+				organizacion.validarEgresos();
+				imprimirResultadoDeValidacion(egresosAValidar);
+			});
+			System.out.println(">> FIN VALIDACIÓN DE EGRESOS <<");
+		}
+	}
+
 }
+
