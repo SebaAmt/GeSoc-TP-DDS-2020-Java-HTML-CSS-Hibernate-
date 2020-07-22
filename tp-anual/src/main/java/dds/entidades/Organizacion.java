@@ -58,5 +58,9 @@ public class Organizacion {
         this.entidadesJuridicas.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
         return egresosParaValidar;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Organizacion: " + this.nombre;
+    }
 }
