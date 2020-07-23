@@ -15,8 +15,7 @@ import dds.usuario.Usuario;
 
 public class Egreso {
 
-	public List<String> etiquetasPermitidas;
-	private List<String> etiquetasAsignadas;
+	private List<String> etiquetasAsignadas = new ArrayList<>();
 	private List<Usuario> revisores;
 	private List<Presupuesto> presupuestos = new ArrayList<>();
 	private LocalDate fechaDeOperacion;
@@ -158,11 +157,8 @@ public class Egreso {
 	public void etiquetar(String etiqueta) {
 		if (this.estaEtiquetadoComo(etiqueta)) {
 			throw new RuntimeException("El egreso ya está etiquetado como: " + etiqueta.toUpperCase());
-		} else if (this.etiquetasPermitidas.contains(etiqueta.toUpperCase())) {
-			throw new RuntimeException("La etiqueta a asignar no está permitida.");
 		}
 		this.etiquetasAsignadas.add(etiqueta.toUpperCase());
-
 	}
 
 	public void desetiquetar(String etiqueta) {

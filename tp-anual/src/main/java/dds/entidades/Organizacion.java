@@ -19,24 +19,9 @@ public class Organizacion {
     private List<EntidadBase> entidadesBase = new ArrayList<>();
     private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
     private List<ValidacionEgreso> validacionesEgresos = new ArrayList<>();
-	public List<String> etiquetasDisponibles;
 
 	public Organizacion(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public void crearEtiqueta(String etiqueta) {
-		if (this.etiquetasDisponibles.contains(etiqueta.toUpperCase())) {
-			throw new RuntimeException("La etiqueta a agregar ya existe.");
-		}
-		etiquetasDisponibles.add(etiqueta.toUpperCase());
-	}
-
-	
-	public void eliminarEtiqueta(String etiqueta) {
-		if (this.etiquetasDisponibles.contains(etiqueta.toUpperCase())) {
-			etiquetasDisponibles.remove(etiqueta.toUpperCase());
-		}
 	}
 
 	public void agregarEntidadBase(EntidadBase nuevaEntidadBase) {
