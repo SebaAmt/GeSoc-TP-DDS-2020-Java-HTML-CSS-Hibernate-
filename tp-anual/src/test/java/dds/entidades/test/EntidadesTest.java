@@ -1,6 +1,6 @@
 package dds.entidades.test;
 
-import dds.*;
+
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.CreadorMoneda;
@@ -20,9 +20,12 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class EntidadesTest {
     private EntidadBase entidadBase;
@@ -65,5 +68,50 @@ public class EntidadesTest {
         entidadBase.nuevoEgreso(egreso2);
         assertEquals(egreso1.valorTotal().add(egreso2.valorTotal()), entidadBase.totalEgresos());
     }
+    
+    @Test public void GenerarReporteMensualEntidadJuridica() {
+    	egreso1.etiquetar("amoblamiento");
+    	egreso1.etiquetar("textil");
+    	egreso2.etiquetar("amoblamiento");
+    	entidadJuridica.nuevoEgreso(egreso1);
+    	entidadJuridica.agregarEntidadBase(entidadBase);
+    	entidadBase.nuevoEgreso(egreso2);
+    	HashMap<String, BigDecimal> reporteEsperado = new HashMap<>();
+    	HashMap<String, BigDecimal> reporteActual = entidadJuridica.generarReporteMensual();
+    	List<Egreso> egresosDeAmoblamiento; 
+    	List<Egreso> egresosTotales = new ArrayList<>();
+    	List<Egreso> egresosDeTextil;
+    	egresosTotales.addAll(entidadBase.egresos());
+    	egresosTotales.addAll(entidadJuridica.egresos());
+    	egresosDeAmoblamiento = egresosTotales.stream().filter(egreso -> egreso.estaEtiquetadoComo("amoblamiento")).collect(Collectors.toList());
+        egresosDeTextil = egresosTotales.stream().filter(egreso -> egreso.estaEtiquetadoComo("textil")).collect(Collectors.toList());
+        BigDecimal gastosDeAmoblamiento = egresosDeAmoblamiento.stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal gastosDeTextil = egresosDeTextil.stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
+    	reporteEsperado.put("AMOBLAMIENTO", gastosDeAmoblamiento);
+    	reporteEsperado.put("TEXTIL", gastosDeTextil);
+    	assertEquals(reporteEsperado, reporteActual);
+    }
+    
+    @Test public void GenerarReporteMensualEntidadBase() {
+    	egreso1.etiquetar("amoblamiento");
+    	egreso1.etiquetar("textil");
+    	egreso2.etiquetar("amoblamiento");
+       	entidadBase.nuevoEgreso(egreso2);
+    	entidadBase.nuevoEgreso(egreso1);
+    	HashMap<String, BigDecimal> reporteEsperado = new HashMap<>();
+    	HashMap<String, BigDecimal> reporteActual = entidadBase.generarReporteMensual();
+    	List<Egreso> egresosDeAmoblamiento; 
+    	List<Egreso> egresosTotales = new ArrayList<>();
+    	List<Egreso> egresosDeTextil;
+    	egresosTotales.addAll(entidadBase.egresos());
+    	egresosDeAmoblamiento = egresosTotales.stream().filter(egreso -> egreso.estaEtiquetadoComo("amoblamiento")).collect(Collectors.toList());
+        egresosDeTextil = egresosTotales.stream().filter(egreso -> egreso.estaEtiquetadoComo("textil")).collect(Collectors.toList());
+        BigDecimal gastosDeAmoblamiento = egresosDeAmoblamiento.stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal gastosDeTextil = egresosDeTextil.stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
+    	reporteEsperado.put("AMOBLAMIENTO", gastosDeAmoblamiento);
+    	reporteEsperado.put("TEXTIL", gastosDeTextil);
+    	assertEquals(reporteEsperado, reporteActual);
+    }
+    
 
 }
