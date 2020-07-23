@@ -26,12 +26,6 @@ public class MeLiApi {
         String jsonResponse = getResponse(path);
     	MeLiMapper <DireccionPostal>mapper = new MeLiMapper<DireccionPostal>();
     	return mapper.mappearGenerico(jsonResponse, new TypeReference<DireccionPostal>() {}, "direccion postal");
-        /*try {
-          return mapper.readValue(jsonResponse, new TypeReference<Pais>() {});
-        } catch (Exception e) {
-          throw new MeliApiException("Ocurrio un error al mapear el json de respuesta de países. Descripcion del error: "
-              + e.getMessage());
-        }*/
     }
     
     public static Moneda obtenerMoneda(String currencyId) {
@@ -39,12 +33,6 @@ public class MeLiApi {
     	String jsonResponse = getResponse(path);
     	MeLiMapper <Moneda>mapper = new MeLiMapper<Moneda>();
     	return mapper.mappearGenerico(jsonResponse, new TypeReference<Moneda>() {}, "moneda");
-    	/*try {
-        	return mapper.readValue(jsonResponse, new TypeReference<Moneda>() {});
-        } catch (Exception e) {
-        	throw new MeliApiException("Ocurrio un error al mapear el json de respuesta de monedas. Descripcion del error: "
-              + e.getMessage());        
-        }*/
     }
     	
     private static String getResponse(String path) {

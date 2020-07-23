@@ -3,33 +3,23 @@ package dds.entidades;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class EntidadBase {
-	private String nombreFicticio;
+public class EntidadBase extends Entidad{
 	private String descripcion;
-	private ArrayList<Egreso> egresos = new ArrayList<>();
 
 	public EntidadBase(String nombreFicticio, String descripcion){
-		this.nombreFicticio = nombreFicticio;
+		super(nombreFicticio);
 		this.descripcion = descripcion;
 	}
 
-	public void nuevoEgreso(Egreso egreso){
-        this.egresos.add(egreso);
-    }
-
-    public ArrayList<Egreso> egresos(){
-    	return egresos;
-    }
-
-	public BigDecimal totalEgresos(){
-		return egresos.stream().map(egreso -> egreso.valorTotal()).reduce(BigDecimal.ZERO, BigDecimal::add);
-	}
-
+	@Override
 	public List<Egreso> egresosParaValidar(){
 		return this.egresos.stream().filter(egreso -> egreso.requierePresupuestos() && (egreso.getEstado() == EstadoEgreso.PENDIENTE || egreso.getEstado() == EstadoEgreso.RECHAZADO)).collect(Collectors.toList());
+	}
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 }

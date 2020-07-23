@@ -1,5 +1,8 @@
 package dds.entidades;
 
+import dds.categoria.Categoria;
+import dds.categoria.TipoCategoria;
+import dds.comportamiento.Comportamiento;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 import dds.exception.ValidacionEgresoFallidaException;
@@ -7,9 +10,11 @@ import dds.validacionesEgresos.ValidacionEgreso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Organizacion {
     private String nombre;
+    private List<Categoria> categorias = new ArrayList<>();
     private List<EntidadBase> entidadesBase = new ArrayList<EntidadBase>();
     private List<EntidadJuridica> entidadesJuridicas = new ArrayList<EntidadJuridica>();
     private List<ValidacionEgreso> validacionesEgresos = new ArrayList<>();
@@ -58,5 +63,35 @@ public class Organizacion {
         this.entidadesJuridicas.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
         return egresosParaValidar;
     }
+    
+    public void crearCategoria(TipoCategoria tipoCategoria, List<Comportamiento> comportamientos) {
+    	if (!categorias.stream().anyMatch(c->c.getTipoCategoria().equals(tipoCategoria))) {
+    		this.categorias.add(new Categoria(tipoCategoria, comportamientos));
+    	}
+    }
+    
+    public void agregarComportamiento(TipoCategoria tipoCategoria, Comportamiento comportamiento) {
+    	this.getCategoria(tipoCategoria).agregarComportamiento(comportamiento);
+    }
+    
+    public void eliminarComportamiento(TipoCategoria tipoCategoria, Comportamiento comportamiento) {
+    	this.getCategoria(tipoCategoria).eliminarComportamiento(comportamiento);
+    }
+    
+    public void eliminarCategoria(TipoCategoria tipoCategoria) {
+    	this.categorias.remove(this.getCategoria(tipoCategoria));
+    }
+    
+    public Categoria getCategoria(TipoCategoria tipoCategoria) {
+    	return categorias.stream().filter(c->c.getTipoCategoria().equals(tipoCategoria)).collect(Collectors.toList()).get(0);
+    }
+    
+    public void asignarCategoria(TipoCategoria tipoCategoria, Entidad entidad) {
+    	entidad.setCategoria(this.getCategoria(tipoCategoria));
+    }
+    
+	public String getNombre() {
+		return nombre;
+	}
     
 }
