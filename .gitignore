@@ -3,6 +3,7 @@
 .project
 .settings/
 .metadata/
+
  
 # Intellij
 .idea/
@@ -24,3 +25,4 @@ target/
 *.zip
 *.tar.gz
 *.rar
+*.orig
