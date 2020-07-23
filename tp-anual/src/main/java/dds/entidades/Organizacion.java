@@ -13,55 +13,78 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Organizacion {
+
     private String nombre;
     private List<Categoria> categorias = new ArrayList<>();
-    private List<EntidadBase> entidadesBase = new ArrayList<EntidadBase>();
-    private List<EntidadJuridica> entidadesJuridicas = new ArrayList<EntidadJuridica>();
+    private List<EntidadBase> entidadesBase = new ArrayList<>();
+    private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
     private List<ValidacionEgreso> validacionesEgresos = new ArrayList<>();
+	public List<String> etiquetasDisponibles;
 
-    public Organizacion(String nombre) {
-        this.nombre = nombre;
-    }
+	public Organizacion(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void agregarEntidadBase(EntidadBase nuevaEntidadBase){
-        this.entidadesBase.add(nuevaEntidadBase);
-    }
+	public void crearEtiqueta(String etiqueta) {
+		if (this.etiquetasDisponibles.contains(etiqueta.toUpperCase())) {
+			throw new RuntimeException("La etiqueta a agregar ya existe.");
+		}
+		etiquetasDisponibles.add(etiqueta.toUpperCase());
+	}
 
-    public void agregarEntidadJuridica(EntidadJuridica nuevaEntidadJuridica){
-        this.entidadesJuridicas.add(nuevaEntidadJuridica);
-    }
+	
+	public void eliminarEtiqueta(String etiqueta) {
+		if (this.etiquetasDisponibles.contains(etiqueta.toUpperCase())) {
+			etiquetasDisponibles.remove(etiqueta.toUpperCase());
+		}
+	}
 
-    public void agregarValidacionEgreso(ValidacionEgreso nuevaValidacion){
-        this.validacionesEgresos.add(nuevaValidacion);
-    }
+	public void agregarEntidadBase(EntidadBase nuevaEntidadBase) {
+		this.entidadesBase.add(nuevaEntidadBase);
+	}
 
-    public void validarEgresos() {
-        for (Egreso egresoPendiente : this.obtenerEgresosParaValidar()) {
-            List<String> mensajesDeError = new ArrayList<>();
-            this.validacionesEgresos.stream().forEach(validacion -> {
-                try {
-                    validacion.validar(egresoPendiente);
-                } catch (ValidacionEgresoFallidaException ex) {
-                    mensajesDeError.add(ex.getMessage());
-                } catch (RuntimeException ex) {
-                    mensajesDeError.add("Error no controlado");
-                }
-            });
+	public void agregarEntidadJuridica(EntidadJuridica nuevaEntidadJuridica) {
+		this.entidadesJuridicas.add(nuevaEntidadJuridica);
+	}
 
-            if(mensajesDeError.size() == 0){
-                egresoPendiente.cambiarEstado(EstadoEgreso.ACEPTADO, "El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
-            } else {
-                egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString() + " fue RECHAZADO: " + String.join(", ", mensajesDeError));
-            }
+	public void agregarValidacionEgreso(ValidacionEgreso nuevaValidacion) {
+		this.validacionesEgresos.add(nuevaValidacion);
+	}
 
-        }
-    }
+	public void validarEgresos() {
+		for (Egreso egresoPendiente : this.obtenerEgresosParaValidar()) {
+			List<String> mensajesDeError = new ArrayList<>();
+			this.validacionesEgresos.stream().forEach(validacion -> {
+				try {
+					validacion.validar(egresoPendiente);
+				} catch (ValidacionEgresoFallidaException ex) {
+					mensajesDeError.add(ex.getMessage());
+				} catch (RuntimeException ex) {
+					mensajesDeError.add("Error no controlado");
+				}
+			});
 
-    public List<Egreso> obtenerEgresosParaValidar(){
-        List<Egreso> egresosParaValidar = new ArrayList<>();
-        this.entidadesBase.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
-        this.entidadesJuridicas.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
-        return egresosParaValidar;
+			if (mensajesDeError.size() == 0) {
+				egresoPendiente.cambiarEstado(EstadoEgreso.ACEPTADO,
+						"El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
+			} else {
+				egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString()
+						+ " fue RECHAZADO: " + String.join(", ", mensajesDeError));
+			}
+
+		}
+	}
+
+	public List<Egreso> obtenerEgresosParaValidar() {
+		List<Egreso> egresosParaValidar = new ArrayList<>();
+		this.entidadesBase.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
+		this.entidadesJuridicas.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
+		return egresosParaValidar;
+	}
+
+    @Override
+    public String toString() {
+        return "Organizacion: " + this.nombre;
     }
     
     public void crearCategoria(TipoCategoria tipoCategoria, List<Comportamiento> comportamientos) {
@@ -91,7 +114,6 @@ public class Organizacion {
     }
     
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
-    
 }
