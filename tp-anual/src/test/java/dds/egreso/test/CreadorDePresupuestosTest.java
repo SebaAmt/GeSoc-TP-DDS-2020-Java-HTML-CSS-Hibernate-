@@ -60,7 +60,8 @@ public class CreadorDePresupuestosTest {
     @DisplayName("Se obtiene mensaje de error al crear presupuesto para un egreso que no tiene los mismos items")
     public void MensajeDeErrorPresupuestoConItemsDistintosAEgreso() {
         creadorPresupuesto.agregarItems(items2);
-        assertThrows(PresupuestoNoTieneMismosItemsQueEgresoException.class, () -> creadorPresupuesto.crearPresupuesto());
+        Presupuesto nuevoPresupuesto = creadorPresupuesto.crearPresupuesto();
+        assertThrows(PresupuestoNoTieneMismosItemsQueEgresoException.class, () -> egreso.agregarPresupuesto(nuevoPresupuesto));
     }
 
     @Test
@@ -68,6 +69,7 @@ public class CreadorDePresupuestosTest {
     public void CrearPresupuestoConMismosItemsDistintoPrecio() {
         creadorPresupuesto.agregarItems(items3);
         Presupuesto nuevoPresupuesto = creadorPresupuesto.crearPresupuesto();
+        egreso.agregarPresupuesto(nuevoPresupuesto);
         assertEquals(egreso.getPresupuestos().contains(nuevoPresupuesto), true);
     }
 

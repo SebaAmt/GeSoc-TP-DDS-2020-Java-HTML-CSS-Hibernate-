@@ -19,8 +19,10 @@ public abstract class Entidad {
     
     
     public void nuevoEgreso(Egreso egreso){
-    	this.getCategoria().nuevoEgreso(this, egreso);
-        this.egresos.add(egreso);
+    	if(this.categoria != null)
+    	    this.categoria.nuevoEgreso(this, egreso);
+
+    	this.egresos.add(egreso);
     }
     
 	public BigDecimal totalEgresos(){
@@ -32,16 +34,9 @@ public abstract class Entidad {
     public List<Egreso> egresos(){
     	return egresos;
     }
-    
-    public String getNombreFicticio() {
-    	return this.nombreFicticio;
-    }
-    
+
     public void setCategoria(Categoria categoria) {
     	this.categoria = categoria;
     }
-    
-    public Categoria getCategoria() {
-    	return this.categoria;
-    }
+
 }

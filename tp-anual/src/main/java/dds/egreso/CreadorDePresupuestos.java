@@ -14,13 +14,6 @@ public class CreadorDePresupuestos {
 
     public CreadorDePresupuestos(){}
 
-    public CreadorDePresupuestos(Proveedor proveedor, DocumentoComercial documentoComercial, Moneda moneda, List<Item> items) {
-        this.proveedor = Objects.requireNonNull(proveedor, "Debe cargarse un proveedor");
-        this.documentoComercial = Objects.requireNonNull(documentoComercial, "Debe cargarse un documento comercial");
-        this.moneda = Objects.requireNonNull(moneda, "Debe cargarse un documento comercial");
-        this.items = Objects.requireNonNull(items, "Deben cargarse los items");
-    }
-
     public void agregarProveedor(Proveedor proveedor){
         this.proveedor = proveedor;
     }
@@ -52,7 +45,6 @@ public class CreadorDePresupuestos {
         Objects.requireNonNull(this.proveedor, "El presupuesto debe tener un proveedor");
         Objects.requireNonNull(this.items, "El presupuesto debe tener al menos un item");
         Presupuesto nuevoPresupuesto = new Presupuesto(this.proveedor, this.documentoComercial, this.moneda, this.items);
-        this.egreso.agregarPresupuesto(nuevoPresupuesto);
         return nuevoPresupuesto;
     }
 
