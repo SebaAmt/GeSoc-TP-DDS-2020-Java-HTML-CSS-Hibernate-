@@ -1,0 +1,94 @@
+@startuml
+
+class Organizacion {
+  validarEgresos()
+  crearCategoria(TipoCategoria tipoCategoria, List<Comportamiento> comportamientos)
+  agregarComportamiento(TipoCategoria tipoCategoria, Comportamiento comportamiento)
+  eliminarComportamiento(TipoCategoria tipoCategoria, Comportamiento comportamiento)
+  asignarCategoria(TipoCategoria tipoCategoria, Entidad entidad)
+}
+
+abstract class Entidad {
+  String nombreFicticio
+  Categoria categoria
+
+  nuevoEgreso(Egreso egreso)
+  BigDecimal totalEgresos()
+  abstract List<Egreso> egresosParavalidar()
+}
+
+class EntidadBase extends Entidad {
+  String descripcion
+
+  HashMap<String, BigDecimal> generarReporteMensual()
+}
+
+class EntidadJuridica extends Entidad {
+  String razonSocial
+  String CUIT
+  String direccionPostal
+  String codigoInscripcionDefinitivaIGJ
+
+  HashMap<String, BigDecimal> generarReporteMensual()
+}
+
+class Categoria {
+  TipoCategoria tipoCategoria
+
+  nuevoEgreso(Entidad entidad, Egreso egreso)
+  agregarEntidadBase(EntidadJuridica entidadJuridica)
+  puedeAgregarse(EntidadBase entidadBase)
+  agregarComportamiento(Comportamiento comportamiento)
+  eliminarComportamiento(Comportamiento comportamiento)
+}
+
+
+enum TipoCategoria {
+  EMPRESA_MICRO, EMPRESA_PEQUENIA, EMPRESA_MEDIANA_TRAMO1, EMPRESA_MEDIANA_TRAMO2, OSC, ONG
+}
+
+interface Comportamiento {
+    nuevoEgreso(Entidad entidad, Egreso egreso)
+    agregarEntidadBase(EntidadJuridica entidad)
+    puedeAgregarse(EntidadBase entidad)
+}
+
+class ComportamientoBloquearAgregarEntidadBase implements Comportamiento {
+   agregarEntidadBase(EntidadJuridica entidad)
+}
+
+class ComportamientoAgregarEntidadBase implements Comportamiento {
+  puedeAgregarse(EntidadBase entidad)
+}
+
+class ComportamientoMontoMaximo implements Comportamiento {
+  nuevoEgreso(Entidad entidad, Egreso egreso)
+}
+
+
+class Egreso {
+  LocalDate fechaDeOperacion
+  boolean requierePresupuesto
+  List<String> etiquetasAsignadas
+
+  Precio valorTotal()
+  void agregarItem(Item nuevoItem)
+  List<Item> detalle()
+  void etiquetar(String etiqueta)
+  void desetiquetar(String etiqueta)
+}
+
+
+Organizacion -->"0..*" EntidadJuridica
+Organizacion -->"0..*" EntidadBase
+Organizacion -->"0..*" Categoria
+
+Entidad -->"0..*" Egreso
+Entidad --> Categoria
+Categoria -->"0..1" Comportamiento
+Categoria --> TipoCategoria
+
+EntidadJuridica "1"-->"0..*" EntidadBase
+
+
+@enduml
