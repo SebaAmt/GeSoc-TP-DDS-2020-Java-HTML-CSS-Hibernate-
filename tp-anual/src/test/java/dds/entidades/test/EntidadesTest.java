@@ -3,7 +3,6 @@ package dds.entidades.test;
 import dds.categoria.Categoria;
 import dds.categoria.TipoCategoria;
 import dds.comportamiento.Comportamiento;
-import dds.comportamiento.ComportamientoDefault;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.CreadorMoneda;
@@ -38,20 +37,13 @@ public class EntidadesTest {
     private CreadorMoneda creadorPesos;
     private Proveedor proveedor;
     private Moneda moneda;
-    private Categoria categoria;
-    private Comportamiento comportamiento;
-    private List<Comportamiento> comportamientos = new ArrayList<>();
+    
     
     @BeforeEach
     public void init(){
-    	comportamiento = new ComportamientoDefault();
-        comportamientos.add(comportamiento);
-        categoria = new Categoria(TipoCategoria.EMPRESA_MICRO, comportamientos);
     	creadorPesos = new CreadorMoneda(CurrencyID.ARS);
         entidadJuridica = new EntidadJuridica("Razon Social Test", "Entidad Juridica Test", "11111111111", "Direccion 888", "Codigo 123");
-        entidadJuridica.setCategoria(categoria);
         entidadBase = new EntidadBase("Entidad Base Test", "Entidad base para probar");
-        entidadBase.setCategoria(categoria);
         proveedor = new Proveedor("Telas SA", 30258741, null);
         creadorPesos = new CreadorMoneda(CurrencyID.ARS);
         moneda = creadorPesos.getMoneda();

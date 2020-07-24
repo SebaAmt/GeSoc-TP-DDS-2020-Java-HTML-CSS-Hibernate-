@@ -9,5 +9,5 @@ public interface Comportamiento {
 	
 	public default void nuevoEgreso(Entidad entidad, Egreso egreso) {}
 	public default void agregarEntidadBase(EntidadJuridica entidad) {}
-	public default void bloquearEntidadBase(EntidadBase entidad) {}
+	public default void puedeAgregarse(EntidadBase entidad) {}
 }

@@ -25,6 +25,10 @@ public class EntidadJuridica extends Entidad{
     }
 
     public void agregarEntidadBase(EntidadBase entidadBase){
+    	if(this.getCategoria() != null) {
+    		this.getCategoria().agregarEntidadBase(this);
+    		entidadBase.getCategoria().puedeAgregarse(entidadBase);
+    	}
         this.entidadesBase.add(entidadBase);
     }
 
