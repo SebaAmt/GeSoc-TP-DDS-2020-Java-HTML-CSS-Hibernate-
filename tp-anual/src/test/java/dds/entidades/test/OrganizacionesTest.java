@@ -1,9 +1,5 @@
 package dds.entidades.test;
 
-import dds.categoria.Categoria;
-import dds.categoria.TipoCategoria;
-import dds.comportamiento.Comportamiento;
-import dds.comportamiento.ComportamientoDefault;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.*;
@@ -28,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OrganizacionesTest {
     private Organizacion organizacion;
@@ -54,21 +49,13 @@ public class OrganizacionesTest {
     private Proveedor proveedor;
     private CreadorMoneda creadorPesos;
     private Moneda moneda;
-    private Categoria categoria;
-    private Comportamiento comportamiento;
-    private List<Comportamiento> comportamientos = new ArrayList<>();
     
     @BeforeEach
     public void init() {
 
-    	comportamiento = new ComportamientoDefault();
-        comportamientos.add(comportamiento);
-        categoria = new Categoria(TipoCategoria.EMPRESA_MICRO, comportamientos);
-        organizacion = new Organizacion("Organizacion de prueba");
+    	organizacion = new Organizacion("Organizacion de prueba");
         entidadJuridica = new EntidadJuridica("Razon Social test", "Entidad Juridica test", "123456789", "Direccion 123", "123");
-        entidadJuridica.setCategoria(categoria);
         entidadBase = new EntidadBase("Entidad Base Test", "Una entidad para los test");
-        entidadBase.setCategoria(categoria);
         organizacion.agregarEntidadBase(entidadBase);
         organizacion.agregarEntidadJuridica(entidadJuridica);
 
