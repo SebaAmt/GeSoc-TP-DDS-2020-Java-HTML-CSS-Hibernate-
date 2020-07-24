@@ -13,12 +13,14 @@ import dds.exception.PasswordException;
 import dds.usuario.CreadorDeUsuario;
 import dds.usuario.TipoUsuario;
 
+import java.io.IOException;
+
 
 public class UsuarioTest {
 	private CreadorDeUsuario dios;
 	
 	@BeforeEach
-	public void init() {
+	public void init() throws IOException {
 		ValidadorDeContrasenias validador = new ValidadorDeContrasenias();
 		validador.agregarValidacion(new ComprobarCaracteresRepetidos());
 		validador.agregarValidacion(new ComprobarCaracteresConsecutivos());
@@ -26,7 +28,6 @@ public class UsuarioTest {
 		validador.agregarValidacion(new ComprobarSiPoseeMasDe8Caracteres());
 		validador.agregarValidacion(new ValidarTopPeoresContrasenias());
 		dios = new CreadorDeUsuario(validador);
-				
 	}
 
 	

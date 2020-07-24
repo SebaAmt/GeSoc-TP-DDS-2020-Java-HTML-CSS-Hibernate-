@@ -1,47 +1,34 @@
 package dds.helpers;
 
-import dds.exception.PasswordException;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.Buffer;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
 public class LectorArchivos {
 
-    private String pathArchivo;
-    private BufferedReader bufferReader;
+    private URL urlArchivo;
 
-    public LectorArchivos(String pathArchivo){
-        this.pathArchivo = pathArchivo;
-        try{
-            this.bufferReader = new BufferedReader(new FileReader(pathArchivo));
-        }
-        catch (FileNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        }
+    public LectorArchivos(URL urlArchivo){
+        this.urlArchivo = urlArchivo;
     }
 
-    public List<String> devolverContenidoComoListaDeStrings() {
+    public List<String> devolverContenidoComoListaDeStrings() throws IOException {
+        String contenidoArchivo = "";
 
-        String resultado = "";
         try{
-            String bfRead;
-            while ((bfRead = bufferReader.readLine()) != null) {
-                resultado = resultado + bfRead + ",";
-            }
-
-            bufferReader.close();
-
+            contenidoArchivo = Resources.toString(urlArchivo, Charsets.UTF_8);
+            contenidoArchivo = contenidoArchivo.replace("\n", ",");
+            contenidoArchivo = contenidoArchivo.replace("\r", "");
         }
         catch(IOException ex){
             System.err.println(ex.getMessage());
         }
 
-        return Arrays.asList(resultado.split(","));
+        return Arrays.asList(contenidoArchivo.split(","));
     }
 
 }
