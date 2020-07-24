@@ -27,7 +27,7 @@ public class EntidadBase extends Entidad{
 	
 	public HashMap<String, BigDecimal> generarReporteMensual(){
 		HashMap<String, BigDecimal> reporte = new HashMap<>();
-		List<String> etiquetasAOrdenar = this.egresos().stream().flatMap(egreso -> egreso.getEtiquetasAsignadas().stream().distinct()).collect(Collectors.toList());
+		List<String> etiquetasAOrdenar = this.egresos().stream().flatMap(egreso -> egreso.getEtiquetasAsignadas().stream()).distinct().collect(Collectors.toList());
 				
 		etiquetasAOrdenar.stream().forEach(etiqueta -> {
 			BigDecimal gasto = this.egresos().stream()

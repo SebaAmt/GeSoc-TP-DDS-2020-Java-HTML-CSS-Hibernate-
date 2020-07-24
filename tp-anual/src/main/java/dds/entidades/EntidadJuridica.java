@@ -61,7 +61,7 @@ public class EntidadJuridica extends Entidad{
 		List<Egreso> egresosDeEntidadesBase = this.entidadesBase.stream().flatMap(entidad -> entidad.egresos().stream()).collect(Collectors.toList());
 		List<Egreso> egresosAConsiderar = egresosDeEntidadesBase;
 		egresosAConsiderar.addAll(this.egresos());
-		List<String> etiquetasAOrdenar = egresosAConsiderar.stream().flatMap(egreso -> egreso.getEtiquetasAsignadas().stream().distinct()).collect(Collectors.toList());
+		List<String> etiquetasAOrdenar = egresosAConsiderar.stream().flatMap(egreso -> egreso.getEtiquetasAsignadas().stream()).distinct().collect(Collectors.toList());
 		
 		etiquetasAOrdenar.stream().forEach(etiqueta -> {
 			BigDecimal gasto = egresosAConsiderar.stream()
