@@ -65,7 +65,7 @@ public class OrganizacionesTest {
 
         revisor1 = new Usuario("Pepe", "xtpz13l2", TipoUsuario.ESTANDAR);
         revisor2 = new Usuario("Juanita", "xwqponh302", TipoUsuario.ESTANDAR);
-        List<Usuario> revisores = new ArrayList();
+        List<Usuario> revisores = new ArrayList<>();
         revisores.add(revisor1);
         revisores.add(revisor2);
 
