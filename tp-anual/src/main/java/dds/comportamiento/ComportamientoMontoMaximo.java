@@ -16,8 +16,8 @@ public class ComportamientoMontoMaximo implements Comportamiento {
 	
 	@Override
 	public void nuevoEgreso(Entidad entidad, Egreso egreso) {
-			if (entidad.totalEgresos().compareTo(montoMaximo) != 1 ) {
-				throw new ComportamientoException("La entidad ya ha superado el monto maximo de egresos a realizar.");
+			if (entidad.totalEgresos().compareTo(montoMaximo) == 1 ) {
+				throw new ComportamientoException("La entidad ya ha superado el monto maximo de egresos a realizar");
 			}
 	}
 

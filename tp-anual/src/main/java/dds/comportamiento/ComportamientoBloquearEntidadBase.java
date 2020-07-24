@@ -5,7 +5,7 @@ import dds.exception.ComportamientoException;
 
 public class ComportamientoBloquearEntidadBase implements Comportamiento {
 
-	public void bloquearEntidadBase(EntidadBase entidad) {
+	public void puedeAgregarse(EntidadBase entidad) {
 		throw new ComportamientoException("Esta entidad base no puede ser agregada");
 	}
 }

@@ -28,8 +28,8 @@ public class Categoria {
 		comportamientos.stream().forEach(c->c.agregarEntidadBase(entidad));
 	}
 
-	public void bloquearEntidadBase(EntidadBase entidad) {
-		comportamientos.stream().forEachOrdered(c->c.bloquearEntidadBase(entidad));
+	public void puedeAgregarse(EntidadBase entidad) {
+		comportamientos.stream().forEachOrdered(c->c.puedeAgregarse(entidad));
 	}
 	
 	public void agregarComportamiento(Comportamiento comportamiento) {

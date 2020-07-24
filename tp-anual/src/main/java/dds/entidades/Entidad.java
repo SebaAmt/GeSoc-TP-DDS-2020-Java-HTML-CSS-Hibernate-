@@ -39,4 +39,7 @@ public abstract class Entidad {
     	this.categoria = categoria;
     }
 
+    public Categoria getCategoria() {
+    	return this.categoria;
+    }
 }

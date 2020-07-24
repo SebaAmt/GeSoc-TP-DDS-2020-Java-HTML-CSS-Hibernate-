@@ -74,9 +74,9 @@ public class CategoriaTest {
     	comportamiento1 = new ComportamientoMontoMaximo(new BigDecimal(140));
     	comportamientos1.add(comportamiento1);
     	categoria1 = new Categoria(TipoCategoria.EMPRESA_PEQUENIA, comportamientos1);
-    	entidadJuridica.setCategoria(categoria1);
+    	entidadJuridica.setCategoria(categoria1);    	
     	Exception exception = assertThrows(ComportamientoException.class, () -> entidadJuridica.nuevoEgreso(egreso2));
-    	assertThat(exception.getMessage(), is("La entidad ya ha superado el monto maximo de egresos a realizar."));
+    	assertThat(exception.getMessage(), is("La entidad ya ha superado el monto maximo de egresos a realizar"));
     }
     
     @Test
