@@ -1,17 +1,8 @@
 package dds.validaciones;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-import dds.exception.PasswordException;
 import dds.helpers.LectorArchivos;
-
-import javax.annotation.Resource;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.io.Resources.getResource;
