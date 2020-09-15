@@ -73,9 +73,9 @@ public class Organizacion {
         return "Organizacion: " + this.nombre;
     }
     
-    public void crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglaNegocios) {
+    public void crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglasNegocio) {
     	if (!categorias.stream().anyMatch(c->c.getTipoCategoria().equals(tipoCategoria))) {
-    		this.categorias.add(new Categoria(tipoCategoria, reglaNegocios));
+    		this.categorias.add(new Categoria(tipoCategoria, reglasNegocio));
     	}
     }
     

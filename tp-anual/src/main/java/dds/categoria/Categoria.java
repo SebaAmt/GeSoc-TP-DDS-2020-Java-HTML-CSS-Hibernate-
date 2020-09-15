@@ -11,40 +11,40 @@ import dds.entidades.EntidadJuridica;
 public class Categoria {
 
 	private TipoCategoria tipoCategoria;
-	private List<ReglaNegocio> reglaNegocios = new ArrayList<>();
+	private List<ReglaNegocio> reglasNegocio = new ArrayList<>();
 	
 	
-	public Categoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglaNegocios) {
+	public Categoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglasNegocio) {
 		this.tipoCategoria = tipoCategoria;
-		this.reglaNegocios = reglaNegocios;
+		this.reglasNegocio = reglasNegocio;
 	}
 	
 	
 	public void nuevoEgreso(Entidad entidad, Egreso egreso) {
-		reglaNegocios.stream().forEach(c->c.nuevoEgreso(entidad, egreso));
+		reglasNegocio.stream().forEach(c->c.nuevoEgreso(entidad, egreso));
 	}
 
 	public void agregarEntidadBase(EntidadJuridica entidad) {
-		reglaNegocios.stream().forEach(c->c.agregarEntidadBase(entidad));
+		reglasNegocio.stream().forEach(c->c.agregarEntidadBase(entidad));
 	}
 
 	public void puedeAgregarse(EntidadBase entidad) {
-		reglaNegocios.stream().forEachOrdered(c->c.puedeAgregarse(entidad));
+		reglasNegocio.stream().forEachOrdered(c->c.puedeAgregarse(entidad));
 	}
 	
 	public void agregarReglaNegocio(ReglaNegocio reglaNegocio) {
-		this.reglaNegocios.add(reglaNegocio);
+		this.reglasNegocio.add(reglaNegocio);
 	}
 	
 	public void eliminarReglaNegocio(ReglaNegocio reglaNegocio) {
-		this.reglaNegocios.remove(reglaNegocio);
+		this.reglasNegocio.remove(reglaNegocio);
 	}
 	
 	public TipoCategoria getTipoCategoria() {
 		return tipoCategoria;
 	}
 
-	public List<ReglaNegocio> getReglaNegocios() {
-		return reglaNegocios;
+	public List<ReglaNegocio> getReglasNegocio() {
+		return reglasNegocio;
 	}
 }

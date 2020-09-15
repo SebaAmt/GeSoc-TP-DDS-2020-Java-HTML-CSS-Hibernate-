@@ -23,7 +23,7 @@ enum TipoDocumentoComercial {
 
 class Organizacion {
   validarEgresos()
-  crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglaNegocios)
+  crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglasNegocio)
   agregarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio)
   eliminarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio)
   asignarCategoria(TipoCategoria tipoCategoria, Entidad entidad)
