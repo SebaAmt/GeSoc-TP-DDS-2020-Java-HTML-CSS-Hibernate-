@@ -9,14 +9,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import dds.reglaNegocio.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import dds.categoria.Categoria;
 import dds.categoria.TipoCategoria;
-import dds.comportamiento.Comportamiento;
-import dds.comportamiento.ComportamientoBloquearAgregarEntidadBase;
-import dds.comportamiento.ComportamientoBloquearEntidadBase;
-import dds.comportamiento.ComportamientoMontoMaximo;
+import dds.reglaNegocio.ReglaNegocio;
+import dds.reglaNegocio.ReglaNegocioBloquearAgregarEntidadBase;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.CreadorMoneda;
@@ -27,7 +26,7 @@ import dds.egreso.Moneda;
 import dds.egreso.Proveedor;
 import dds.entidades.EntidadBase;
 import dds.entidades.EntidadJuridica;
-import dds.exception.ComportamientoException;
+import dds.exception.ReglaNegocioException;
 import dds.mediosDePago.MedioDePago;
 import dds.mediosDePago.TipoMedioDePago;
 
@@ -42,10 +41,10 @@ public class CategoriaTest {
     private Moneda moneda;
     private Categoria categoria1;
     private Categoria categoria2;
-    private Comportamiento comportamiento1;
-    private Comportamiento comportamiento2;
-    private List<Comportamiento> comportamientos1 = new ArrayList<>();
-    private List<Comportamiento> comportamientos2 = new ArrayList<>();
+    private ReglaNegocio reglaNegocio1;
+    private ReglaNegocio reglaNegocio2;
+    private List<ReglaNegocio> reglasNegocio1 = new ArrayList<>();
+    private List<ReglaNegocio> reglasNegocio2 = new ArrayList<>();
     
     @BeforeEach
     public void init(){
@@ -71,39 +70,39 @@ public class CategoriaTest {
     
     @Test
     public void superaMontoMaximoTest() {
-    	comportamiento1 = new ComportamientoMontoMaximo(new BigDecimal(140));
-    	comportamientos1.add(comportamiento1);
-    	categoria1 = new Categoria(TipoCategoria.EMPRESA_PEQUENIA, comportamientos1);
+    	reglaNegocio1 = new ReglaNegocioMontoMaximo(new BigDecimal(140));
+    	reglasNegocio1.add(reglaNegocio1);
+    	categoria1 = new Categoria(TipoCategoria.EMPRESA_PEQUENIA, reglasNegocio1);
     	entidadJuridica.setCategoria(categoria1);    	
-    	Exception exception = assertThrows(ComportamientoException.class, () -> entidadJuridica.nuevoEgreso(egreso2));
+    	Exception exception = assertThrows(ReglaNegocioException.class, () -> entidadJuridica.nuevoEgreso(egreso2));
     	assertThat(exception.getMessage(), is("La entidad ya ha superado el monto maximo de egresos a realizar"));
     }
     
     @Test
     public void bloquearAgregarEntidadesBase() {
-    	comportamiento1 = new ComportamientoBloquearAgregarEntidadBase();
-    	comportamiento2 = new ComportamientoMontoMaximo(new BigDecimal(40));
-    	comportamientos1.add(comportamiento1);
-    	comportamientos2.add(comportamiento2);
-    	categoria1 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO1, comportamientos1);
-    	categoria2 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO2, comportamientos2);
+    	reglaNegocio1 = new ReglaNegocioBloquearAgregarEntidadBase();
+    	reglaNegocio2 = new ReglaNegocioMontoMaximo(new BigDecimal(40));
+    	reglasNegocio1.add(reglaNegocio1);
+    	reglasNegocio2.add(reglaNegocio2);
+    	categoria1 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO1, reglasNegocio1);
+    	categoria2 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO2, reglasNegocio2);
     	entidadJuridica.setCategoria(categoria1);
     	entidadBase.setCategoria(categoria2);
-    	Exception exception = assertThrows(ComportamientoException.class, () -> entidadJuridica.agregarEntidadBase(entidadBase));
+    	Exception exception = assertThrows(ReglaNegocioException.class, () -> entidadJuridica.agregarEntidadBase(entidadBase));
     	assertThat(exception.getMessage(), is("No se pueden agregar entidades base"));
     }
     
     @Test
     public void entidadBaseNoSePuedeAgregar() {
-    	comportamiento1 = new ComportamientoBloquearEntidadBase();
-    	comportamiento2 = new ComportamientoMontoMaximo(new BigDecimal(40));
-    	comportamientos1.add(comportamiento1);
-    	comportamientos2.add(comportamiento2);
-    	categoria1 = new Categoria(TipoCategoria.ONG, comportamientos1);
-    	categoria2 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO2, comportamientos2);
+    	reglaNegocio1 = new ReglaNegocioBloquearEntidadBase();
+    	reglaNegocio2 = new ReglaNegocioMontoMaximo(new BigDecimal(40));
+    	reglasNegocio1.add(reglaNegocio1);
+    	reglasNegocio2.add(reglaNegocio2);
+    	categoria1 = new Categoria(TipoCategoria.ONG, reglasNegocio1);
+    	categoria2 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO2, reglasNegocio2);
     	entidadBase.setCategoria(categoria1);
     	entidadJuridica.setCategoria(categoria2);    	
-    	Exception exception = assertThrows(ComportamientoException.class, () -> entidadJuridica.agregarEntidadBase(entidadBase));
+    	Exception exception = assertThrows(ReglaNegocioException.class, () -> entidadJuridica.agregarEntidadBase(entidadBase));
     	assertThat(exception.getMessage(), is("Esta entidad base no puede ser agregada"));
     }
 }

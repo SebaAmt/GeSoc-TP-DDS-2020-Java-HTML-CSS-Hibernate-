@@ -1,8 +1,5 @@
 package dds.entidades.test;
 
-import dds.categoria.Categoria;
-import dds.categoria.TipoCategoria;
-import dds.comportamiento.Comportamiento;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.CreadorMoneda;

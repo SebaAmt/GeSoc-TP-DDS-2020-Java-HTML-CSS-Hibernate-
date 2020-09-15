@@ -23,9 +23,9 @@ enum TipoDocumentoComercial {
 
 class Organizacion {
   validarEgresos()
-  crearCategoria(TipoCategoria tipoCategoria, List<Comportamiento> comportamientos)
-  agregarComportamiento(TipoCategoria tipoCategoria, Comportamiento comportamiento)
-  eliminarComportamiento(TipoCategoria tipoCategoria, Comportamiento comportamiento)
+  crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglaNegocios)
+  agregarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio)
+  eliminarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio)
   asignarCategoria(TipoCategoria tipoCategoria, Entidad entidad)
 }
 
@@ -59,8 +59,8 @@ class Categoria {
   nuevoEgreso(Entidad entidad, Egreso egreso)
   agregarEntidadBase(EntidadJuridica entidadJuridica)
   puedeAgregarse(EntidadBase entidadBase)
-  agregarComportamiento(Comportamiento comportamiento)
-  eliminarComportamiento(Comportamiento comportamiento)
+  agregarReglaNegocio(ReglaNegocio reglaNegocio)
+  eliminarReglaNegocio(ReglaNegocio reglaNegocio)
 }
 
 
@@ -68,21 +68,21 @@ enum TipoCategoria {
   EMPRESA_MICRO, EMPRESA_PEQUENIA, EMPRESA_MEDIANA_TRAMO1, EMPRESA_MEDIANA_TRAMO2, OSC, ONG
 }
 
-interface Comportamiento {
+interface ReglaNegocio {
     nuevoEgreso(Entidad entidad, Egreso egreso)
     agregarEntidadBase(EntidadJuridica entidad)
     puedeAgregarse(EntidadBase entidad)
 }
 
-class ComportamientoBloquearAgregarEntidadBase implements Comportamiento {
+class ReglaNegocioBloquearAgregarEntidadBase implements ReglaNegocio {
    agregarEntidadBase(EntidadJuridica entidad)
 }
 
-class ComportamientoAgregarEntidadBase implements Comportamiento {
+class ReglaNegocioAgregarEntidadBase implements ReglaNegocio {
   puedeAgregarse(EntidadBase entidad)
 }
 
-class ComportamientoMontoMaximo implements Comportamiento {
+class ReglaNegocioMontoMaximo implements ReglaNegocio {
   nuevoEgreso(Entidad entidad, Egreso egreso)
 }
 
@@ -331,7 +331,7 @@ Organizacion -->"0..*" Categoria
 
 Entidad -->"0..*" Egreso
 Entidad --> Categoria
-Categoria -->"0..1" Comportamiento
+Categoria -->"0..1" ReglaNegocio
 Categoria --> TipoCategoria
 
 EntidadJuridica "1"-->"0..*" EntidadBase

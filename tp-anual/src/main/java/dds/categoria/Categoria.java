@@ -2,7 +2,7 @@ package dds.categoria;
 
 import java.util.ArrayList;
 import java.util.List;
-import dds.comportamiento.Comportamiento;
+import dds.reglaNegocio.ReglaNegocio;
 import dds.egreso.Egreso;
 import dds.entidades.Entidad;
 import dds.entidades.EntidadBase;
@@ -11,40 +11,40 @@ import dds.entidades.EntidadJuridica;
 public class Categoria {
 
 	private TipoCategoria tipoCategoria;
-	private List<Comportamiento> comportamientos = new ArrayList<>();
+	private List<ReglaNegocio> reglaNegocios = new ArrayList<>();
 	
 	
-	public Categoria(TipoCategoria tipoCategoria, List<Comportamiento> comportamientos) {
+	public Categoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglaNegocios) {
 		this.tipoCategoria = tipoCategoria;
-		this.comportamientos = comportamientos;
+		this.reglaNegocios = reglaNegocios;
 	}
 	
 	
 	public void nuevoEgreso(Entidad entidad, Egreso egreso) {
-		comportamientos.stream().forEach(c->c.nuevoEgreso(entidad, egreso));
+		reglaNegocios.stream().forEach(c->c.nuevoEgreso(entidad, egreso));
 	}
 
 	public void agregarEntidadBase(EntidadJuridica entidad) {
-		comportamientos.stream().forEach(c->c.agregarEntidadBase(entidad));
+		reglaNegocios.stream().forEach(c->c.agregarEntidadBase(entidad));
 	}
 
 	public void puedeAgregarse(EntidadBase entidad) {
-		comportamientos.stream().forEachOrdered(c->c.puedeAgregarse(entidad));
+		reglaNegocios.stream().forEachOrdered(c->c.puedeAgregarse(entidad));
 	}
 	
-	public void agregarComportamiento(Comportamiento comportamiento) {
-		this.comportamientos.add(comportamiento);
+	public void agregarReglaNegocio(ReglaNegocio reglaNegocio) {
+		this.reglaNegocios.add(reglaNegocio);
 	}
 	
-	public void eliminarComportamiento(Comportamiento comportamiento) {
-		this.comportamientos.remove(comportamiento);		
+	public void eliminarReglaNegocio(ReglaNegocio reglaNegocio) {
+		this.reglaNegocios.remove(reglaNegocio);
 	}
 	
 	public TipoCategoria getTipoCategoria() {
 		return tipoCategoria;
 	}
 
-	public List<Comportamiento> getComportamientos() {
-		return comportamientos;
+	public List<ReglaNegocio> getReglaNegocios() {
+		return reglaNegocios;
 	}
 }

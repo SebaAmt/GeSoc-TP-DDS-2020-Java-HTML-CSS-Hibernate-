@@ -1,23 +1,23 @@
-package dds.comportamiento;
+package dds.reglaNegocio;
 
 import java.math.BigDecimal;
 
 import dds.egreso.Egreso;
 import dds.entidades.Entidad;
-import dds.exception.ComportamientoException;
+import dds.exception.ReglaNegocioException;
 
-public class ComportamientoMontoMaximo implements Comportamiento {
+public class ReglaNegocioMontoMaximo implements ReglaNegocio {
 
 	private BigDecimal montoMaximo;
 	
-	public ComportamientoMontoMaximo(BigDecimal montoMaximo) {
+	public ReglaNegocioMontoMaximo(BigDecimal montoMaximo) {
 		this.montoMaximo = montoMaximo;
 	}
 	
 	@Override
 	public void nuevoEgreso(Entidad entidad, Egreso egreso) {
 			if (entidad.totalEgresos().compareTo(montoMaximo) == 1 ) {
-				throw new ComportamientoException("La entidad ya ha superado el monto maximo de egresos a realizar");
+				throw new ReglaNegocioException("La entidad ya ha superado el monto maximo de egresos a realizar");
 			}
 	}
 

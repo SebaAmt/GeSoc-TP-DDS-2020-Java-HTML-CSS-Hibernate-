@@ -2,7 +2,7 @@ package dds.entidades;
 
 import dds.categoria.Categoria;
 import dds.categoria.TipoCategoria;
-import dds.comportamiento.Comportamiento;
+import dds.reglaNegocio.ReglaNegocio;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 import dds.exception.ValidacionEgresoFallidaException;
@@ -73,18 +73,18 @@ public class Organizacion {
         return "Organizacion: " + this.nombre;
     }
     
-    public void crearCategoria(TipoCategoria tipoCategoria, List<Comportamiento> comportamientos) {
+    public void crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglaNegocios) {
     	if (!categorias.stream().anyMatch(c->c.getTipoCategoria().equals(tipoCategoria))) {
-    		this.categorias.add(new Categoria(tipoCategoria, comportamientos));
+    		this.categorias.add(new Categoria(tipoCategoria, reglaNegocios));
     	}
     }
     
-    public void agregarComportamiento(TipoCategoria tipoCategoria, Comportamiento comportamiento) {
-    	this.getCategoria(tipoCategoria).agregarComportamiento(comportamiento);
+    public void agregarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio) {
+    	this.getCategoria(tipoCategoria).agregarReglaNegocio(reglaNegocio);
     }
     
-    public void eliminarComportamiento(TipoCategoria tipoCategoria, Comportamiento comportamiento) {
-    	this.getCategoria(tipoCategoria).eliminarComportamiento(comportamiento);
+    public void eliminarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio) {
+    	this.getCategoria(tipoCategoria).eliminarReglaNegocio(reglaNegocio);
     }
     
     public void eliminarCategoria(TipoCategoria tipoCategoria) {
