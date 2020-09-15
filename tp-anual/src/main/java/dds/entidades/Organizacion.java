@@ -19,6 +19,7 @@ public class Organizacion {
     private List<EntidadBase> entidadesBase = new ArrayList<>();
     private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
     private List<ValidacionEgreso> validacionesEgresos = new ArrayList<>();
+    private List<String> etiquetasDisponibles = new ArrayList<>();
 
 	public Organizacion(String nombre) {
 		this.nombre = nombre;
@@ -101,4 +102,17 @@ public class Organizacion {
 	public String getNombre() {
 		return this.nombre;
 	}
+
+	public List<String> getEtiquetasDisponibles() {
+		return etiquetasDisponibles;
+	}
+
+	public void nuevaEtiqueta(String nuevaEtiqueta){
+		this.etiquetasDisponibles.add(nuevaEtiqueta);
+	}
+
+	public void eliminarEtiqueta(String etiquetaAEliminar){
+		this.etiquetasDisponibles.removeIf(etiqueta -> etiqueta.equals(etiquetaAEliminar));
+	}
+
 }
