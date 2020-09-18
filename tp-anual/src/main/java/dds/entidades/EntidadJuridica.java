@@ -1,5 +1,6 @@
 package dds.entidades;
 
+import dds.categoria.TipoCategoria;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 
@@ -14,6 +15,7 @@ public class EntidadJuridica extends Entidad{
     private String cuit;
     private String direccionPostal;
     private String codigoInscripcionIGJ;
+    private TipoCategoria tipoCategoria;
     List<EntidadBase> entidadesBase = new ArrayList<EntidadBase>();
 
     public EntidadJuridica(String razonSocial, String nombreFicticio, String cuit, String direccionPostal, String codigoInscripcionIGJ) {
@@ -54,6 +56,10 @@ public class EntidadJuridica extends Entidad{
 
 	public String getCodigoInscripcionIGJ() {
 		return codigoInscripcionIGJ;
+	}
+	
+	public TipoCategoria getTipoCategoria() {
+		return this.tipoCategoria;
 	}
 
     public HashMap<String, BigDecimal> generarReporteMensual(){

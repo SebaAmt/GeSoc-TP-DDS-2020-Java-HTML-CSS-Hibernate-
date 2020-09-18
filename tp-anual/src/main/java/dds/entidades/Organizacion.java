@@ -1,7 +1,6 @@
 package dds.entidades;
 
 import dds.categoria.Categoria;
-import dds.categoria.TipoCategoria;
 import dds.reglaNegocio.ReglaNegocio;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
@@ -73,30 +72,30 @@ public class Organizacion {
         return "Organizacion: " + this.nombre;
     }
     
-    public void crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglasNegocio) {
-    	if (!categorias.stream().anyMatch(c->c.getTipoCategoria().equals(tipoCategoria))) {
-    		this.categorias.add(new Categoria(tipoCategoria, reglasNegocio));
+    public void crearCategoria(String nombreCategoria, List<ReglaNegocio> reglasNegocio) {
+    	if (!categorias.stream().anyMatch(c->c.getNombreCategoria().equals(nombreCategoria))) {
+    		this.categorias.add(new Categoria(nombreCategoria, reglasNegocio));
     	}
     }
     
-    public void agregarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio) {
-    	this.getCategoria(tipoCategoria).agregarReglaNegocio(reglaNegocio);
+    public void agregarReglaNegocio(String nombreCategoria, ReglaNegocio reglaNegocio) {
+    	this.getCategoria(nombreCategoria).agregarReglaNegocio(reglaNegocio);
     }
     
-    public void eliminarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio) {
-    	this.getCategoria(tipoCategoria).eliminarReglaNegocio(reglaNegocio);
+    public void eliminarReglaNegocio(String nombreCategoria, ReglaNegocio reglaNegocio) {
+    	this.getCategoria(nombreCategoria).eliminarReglaNegocio(reglaNegocio);
     }
     
-    public void eliminarCategoria(TipoCategoria tipoCategoria) {
-    	this.categorias.remove(this.getCategoria(tipoCategoria));
+    public void eliminarCategoria(String nombreCategoria) {
+    	this.categorias.remove(this.getCategoria(nombreCategoria));
     }
     
-    public Categoria getCategoria(TipoCategoria tipoCategoria) {
-    	return categorias.stream().filter(c->c.getTipoCategoria().equals(tipoCategoria)).collect(Collectors.toList()).get(0);
+    public Categoria getCategoria(String nombreCategoria) {
+    	return categorias.stream().filter(c->c.getNombreCategoria().equals(nombreCategoria)).collect(Collectors.toList()).get(0);
     }
     
-    public void asignarCategoria(TipoCategoria tipoCategoria, Entidad entidad) {
-    	entidad.setCategoria(this.getCategoria(tipoCategoria));
+    public void asignarCategoria(String nombreCategoria, Entidad entidad) {
+    	entidad.setCategoria(this.getCategoria(nombreCategoria));
     }
     
 	public String getNombre() {

@@ -42,4 +42,8 @@ public abstract class Entidad {
     public Categoria getCategoria() {
     	return this.categoria;
     }
+    
+    public String getNombreFicticio() {
+    	return this.nombreFicticio;
+    }
 }

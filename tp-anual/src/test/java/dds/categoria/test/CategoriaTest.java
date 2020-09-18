@@ -72,7 +72,7 @@ public class CategoriaTest {
     public void superaMontoMaximoTest() {
     	reglaNegocio1 = new ReglaNegocioMontoMaximo(new BigDecimal(140));
     	reglasNegocio1.add(reglaNegocio1);
-    	categoria1 = new Categoria(TipoCategoria.EMPRESA_PEQUENIA, reglasNegocio1);
+    	categoria1 = new Categoria("Empresa Pequeña", reglasNegocio1);
     	entidadJuridica.setCategoria(categoria1);    	
     	Exception exception = assertThrows(ReglaNegocioException.class, () -> entidadJuridica.nuevoEgreso(egreso2));
     	assertThat(exception.getMessage(), is("La entidad ya ha superado el monto maximo de egresos a realizar"));
@@ -84,8 +84,8 @@ public class CategoriaTest {
     	reglaNegocio2 = new ReglaNegocioMontoMaximo(new BigDecimal(40));
     	reglasNegocio1.add(reglaNegocio1);
     	reglasNegocio2.add(reglaNegocio2);
-    	categoria1 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO1, reglasNegocio1);
-    	categoria2 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO2, reglasNegocio2);
+    	categoria1 = new Categoria("Empresa Mediana Tramo1", reglasNegocio1);
+    	categoria2 = new Categoria("Empresa Mediana Tramo2", reglasNegocio2);
     	entidadJuridica.setCategoria(categoria1);
     	entidadBase.setCategoria(categoria2);
     	Exception exception = assertThrows(ReglaNegocioException.class, () -> entidadJuridica.agregarEntidadBase(entidadBase));
@@ -98,8 +98,8 @@ public class CategoriaTest {
     	reglaNegocio2 = new ReglaNegocioMontoMaximo(new BigDecimal(40));
     	reglasNegocio1.add(reglaNegocio1);
     	reglasNegocio2.add(reglaNegocio2);
-    	categoria1 = new Categoria(TipoCategoria.ONG, reglasNegocio1);
-    	categoria2 = new Categoria(TipoCategoria.EMPRESA_MEDIANA_TRAMO2, reglasNegocio2);
+    	categoria1 = new Categoria("ONG", reglasNegocio1);
+    	categoria2 = new Categoria("Empresa Mediana Tramo2", reglasNegocio2);
     	entidadBase.setCategoria(categoria1);
     	entidadJuridica.setCategoria(categoria2);    	
     	Exception exception = assertThrows(ReglaNegocioException.class, () -> entidadJuridica.agregarEntidadBase(entidadBase));

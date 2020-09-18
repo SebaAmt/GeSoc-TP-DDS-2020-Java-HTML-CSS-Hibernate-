@@ -1,4 +1,4 @@
-package dds.categoria;
+ package dds.categoria;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +10,12 @@ import dds.entidades.EntidadJuridica;
 
 public class Categoria {
 
-	private TipoCategoria tipoCategoria;
+	private String nombreCategoria;
 	private List<ReglaNegocio> reglasNegocio = new ArrayList<>();
 	
 	
-	public Categoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglasNegocio) {
-		this.tipoCategoria = tipoCategoria;
+	public Categoria(String nombreCategoria, List<ReglaNegocio> reglasNegocio) {
+		this.nombreCategoria = nombreCategoria;
 		this.reglasNegocio = reglasNegocio;
 	}
 	
@@ -40,8 +40,8 @@ public class Categoria {
 		this.reglasNegocio.remove(reglaNegocio);
 	}
 	
-	public TipoCategoria getTipoCategoria() {
-		return tipoCategoria;
+	public String getNombreCategoria() {
+		return nombreCategoria;
 	}
 
 	public List<ReglaNegocio> getReglasNegocio() {
