@@ -5,11 +5,18 @@ import java.util.Arrays;
 import java.util.List;
 import dds.usuario.TipoUsuario;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
 
+	@Id
 	private String username;
 	private String password;
+	@Enumerated
 	private TipoUsuario tipo;
+	@ElementCollection
 	private List<String> bandejaDeMensajes = new ArrayList<>();
 
 	public Usuario(String username, String password, TipoUsuario tipo) {
