@@ -1,18 +1,23 @@
 package dds.egreso;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
+@Entity
+@Table(name = "monedas")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Moneda {
 
+	@Id
 	@NotNull(message = "Id no puede estar vacio")
 	private String id;
 
@@ -30,6 +35,8 @@ public class Moneda {
 		this.description = description;
 	}
 
+	public Moneda() {
+	}
 	
 	public String getId() {
 		return id;

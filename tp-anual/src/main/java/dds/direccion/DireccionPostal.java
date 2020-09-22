@@ -1,13 +1,29 @@
 package dds.direccion;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+@Entity
+@Table(name = "direcciones_postales")
 public class DireccionPostal {
 
+	@Id
+	@GeneratedValue
+	private Long id;
 	private String codigoPostal;
+	@AttributeOverride(column = @Column(name = "pais"), name = "name")
 	private Pais pais;
+	@AttributeOverride(column = @Column(name = "provincia"), name = "name")
 	private Provincia provincia;
+	@AttributeOverride(column = @Column(name = "ciudad"), name = "name")
 	private Ciudad ciudad;
 
 	@JsonCreator
@@ -21,6 +37,9 @@ public class DireccionPostal {
 		this.ciudad = ciudad;
 	}
 
+	public DireccionPostal() {
+	}
+	
 	public String getCodigoPostal() {
 		return codigoPostal;
 	}

@@ -19,6 +19,10 @@ public class Usuario {
 	@ElementCollection
 	private List<String> bandejaDeMensajes = new ArrayList<>();
 
+	public Usuario() {
+		
+	}
+	
 	public Usuario(String username, String password, TipoUsuario tipo) {
 		this.username = username;
 		this.password = password;

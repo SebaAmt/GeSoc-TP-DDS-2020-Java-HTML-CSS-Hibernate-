@@ -1,17 +1,24 @@
 package dds.direccion;
 
+import javax.persistence.Embeddable;
+import javax.persistence.ManyToOne;
+
 import dds.meLiApi.MeLiApi;
 
+
+@Embeddable
 public class Direccion {
 
 	private String calle;
 	private Integer altura;
 	private Integer piso;
 	private String departamento;
+	@ManyToOne
 	private DireccionPostal direccionPostal;
 
-	private Direccion() {}
-
+	public Direccion() {
+	}
+	
 	public String getCalle() {
 		return calle;
 	}
