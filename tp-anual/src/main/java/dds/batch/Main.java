@@ -1,6 +1,7 @@
 package dds.batch;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,6 @@ import dds.direccion.Direccion;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.CreadorMoneda;
-import dds.egreso.CriterioPresupuestoMenorValor;
 import dds.egreso.CriterioSeleccionPresupuesto;
 import dds.egreso.CurrencyID;
 import dds.egreso.Egreso;
@@ -172,7 +172,7 @@ public class Main {
 		medioDePago1 = new MedioDePago(TipoMedioDePago.CAJERO, "159753456");
 		medioDePago2 = new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "456852159");
 
-		criterio1 = new CriterioPresupuestoMenorValor();
+		criterio1 = CriterioSeleccionPresupuesto.MENOR_VALOR;
 
 		presupuesto1 = new Presupuesto(proveedor1, documento1, peso, items1);
 		presupuesto2 = new Presupuesto(proveedor2, documento2, peso, items2);

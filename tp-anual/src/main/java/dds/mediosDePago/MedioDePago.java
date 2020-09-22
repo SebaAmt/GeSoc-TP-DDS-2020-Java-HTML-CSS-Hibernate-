@@ -1,6 +1,24 @@
 package dds.mediosDePago;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "Medios_de_Pago")
 public class MedioDePago {
+	
+	@Id
+	@GeneratedValue (strategy = GenerationType.SEQUENCE)
+	private Long id;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column (name = "tipoMedioDePago_id")
 	private TipoMedioDePago medio;
 	private String identificador;
 

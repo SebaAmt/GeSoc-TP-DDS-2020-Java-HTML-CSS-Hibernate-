@@ -2,6 +2,7 @@ package dds.presupuesto.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import dds.documentoComercial.DocumentoComercial;
 import dds.documentoComercial.TipoDocumentoComercial;
 import dds.egreso.CreadorMoneda;
-import dds.egreso.CriterioPresupuestoMenorValor;
+import dds.egreso.CriterioSeleccionPresupuesto;
 import dds.egreso.CurrencyID;
 import dds.egreso.Item;
 import dds.egreso.Moneda;
@@ -36,11 +37,10 @@ class CriterioPresupuestoMenorValorTest {
 		final List<Item> items1 = new ArrayList<>();
 		final List<Item> items2 = new ArrayList<>();
 		final List<Presupuesto> presupuestos = new ArrayList<>();
-		final CriterioPresupuestoMenorValor criterioMenorValor;
 		final CreadorMoneda creadorPesos;
 		final Moneda peso;
 
-		criterioMenorValor = new CriterioPresupuestoMenorValor();
+		CriterioSeleccionPresupuesto criterioMenorValor = CriterioSeleccionPresupuesto.MENOR_VALOR;
 		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 0000001);
 		creadorPesos = new CreadorMoneda(CurrencyID.ARS);
 		peso = creadorPesos.getMoneda();

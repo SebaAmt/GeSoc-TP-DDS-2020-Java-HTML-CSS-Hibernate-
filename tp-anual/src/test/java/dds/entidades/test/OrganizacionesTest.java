@@ -103,7 +103,7 @@ public class OrganizacionesTest {
 
         egresoNoCorrespondienteAPresupuestos = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, itemsIncorrectos1, revisores, new ArrayList<>(), true,null);
 
-        egresoConCriterioMenorValor = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, itemsCorrectos1, revisores, new ArrayList<>(), true, new CriterioPresupuestoMenorValor());
+        egresoConCriterioMenorValor = new Egreso(LocalDate.now(), proveedor, factura, efectivo, moneda, itemsCorrectos1, revisores, new ArrayList<>(), true, CriterioSeleccionPresupuesto.MENOR_VALOR);
     }
 
 

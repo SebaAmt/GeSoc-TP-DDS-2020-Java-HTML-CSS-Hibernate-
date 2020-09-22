@@ -17,7 +17,9 @@
         <class>dds.validacionesEgresos.EgresoCoincideConAlgunPresupuestoCargado</class>
         <class>dds.validacionesEgresos.EgresoCoincideConPresupuestoSeleccionadoPorCriterio</class>
         <class>dds.validacionesEgresos.EgresoTieneCantidadMinimaDePresupuestos</class>
-
+        <class>dds.categoria.Categoria</class>
+        <class>dds.reglaNegocio.ReglaNegocio</class>
+        <class>dds.mediosDePago.MedioDePago</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>

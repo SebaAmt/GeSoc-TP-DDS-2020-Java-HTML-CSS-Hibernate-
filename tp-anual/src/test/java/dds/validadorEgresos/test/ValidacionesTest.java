@@ -74,12 +74,12 @@ public class ValidacionesTest {
 
         egresoSinCriterioYDistintoProveedor = new Egreso(LocalDate.now(), proveedor2, factura, efectivo, moneda, items1, null, presupuestos, true,null);
         egresoSinCriterioYValorTotalDistinto = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, moneda, items4, null, presupuestos, true, null);
-        egresoConPresupuestoDistintoAlDevueltoPorCriterio = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, moneda, items2, null, presupuestos, true, new CriterioPresupuestoMenorValor());
+        egresoConPresupuestoDistintoAlDevueltoPorCriterio = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, moneda, items2, null, presupuestos, true, CriterioSeleccionPresupuesto.MENOR_VALOR);
 
         List<Presupuesto> presupuestosMenorMinimo = new ArrayList<>();
         presupuestosMenorMinimo.add(presupuesto1);
         presupuestosMenorMinimo.add(presupuesto3);
-        egresoSinCantidadMinimaDePresupuestos = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, moneda, items2, null, presupuestosMenorMinimo, true, new CriterioPresupuestoMenorValor());
+        egresoSinCantidadMinimaDePresupuestos = new Egreso(LocalDate.now(), proveedor1, factura, efectivo, moneda, items2, null, presupuestosMenorMinimo, true, CriterioSeleccionPresupuesto.MENOR_VALOR);
     }
 
     @Test
