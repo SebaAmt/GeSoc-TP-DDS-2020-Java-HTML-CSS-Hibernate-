@@ -20,7 +20,7 @@ public class Organizacion {
 	@GeneratedValue
 	private Long id;
     private String nombre;
-    @Transient//ManyToMany
+    @ManyToMany
     private List<Categoria> categorias = new ArrayList<>();
 	@OneToMany
 	@JoinColumn(name = "organizacion_id")

@@ -18,7 +18,7 @@ public abstract class Entidad {
     @GeneratedValue
     private Long id;
     private String nombreFicticio;
-    @Transient//ManyToOne
+    @ManyToOne
     private Categoria categoria;
     @Transient
     //    @OneToMany
