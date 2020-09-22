@@ -21,6 +21,7 @@
         <class>dds.categoria.Categoria</class>
         <class>dds.reglaNegocio.ReglaNegocio</class>
         <class>dds.mediosDePago.MedioDePago</class>
+        <class>dds.egreso.Egreso</class>
 
 
         <properties>

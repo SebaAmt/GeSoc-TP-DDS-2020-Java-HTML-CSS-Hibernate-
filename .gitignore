@@ -26,3 +26,6 @@ target/
 *.tar.gz
 *.rar
 *.orig
+
+#MySql
+*.sql

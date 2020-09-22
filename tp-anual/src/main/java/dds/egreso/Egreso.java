@@ -7,25 +7,51 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import dds.documentoComercial.DocumentoComercial;
 import dds.exception.PresupuestoNoTieneMismaMonedaException;
 import dds.exception.PresupuestoNoTieneMismosItemsQueEgresoException;
 import dds.mediosDePago.MedioDePago;
 import dds.usuario.Usuario;
-
+@Entity
+@Table (name = "egresos")
 public class Egreso {
-
+	@Id
+	@GeneratedValue
+	private Long egreso_id;
+	
+    @ElementCollection
 	private List<String> etiquetasAsignadas = new ArrayList<>();
-	private List<Usuario> revisores;
+    @ManyToMany
+    private List<Usuario> revisores;
+    @OneToMany
+    @JoinColumn(name = "egreso_id")
 	private List<Presupuesto> presupuestos = new ArrayList<>();
 	private LocalDate fechaDeOperacion;
+	@OneToOne
 	private Proveedor proveedor;
+	@OneToOne
 	private DocumentoComercial documentoComercial;
+	@OneToOne
 	private MedioDePago medioDePago;
+	@OneToOne
 	private Moneda moneda;
+	@ManyToMany
 	private List<Item> items = new ArrayList<>();
 	private boolean requierePresupuestos;
+	@Enumerated
 	private EstadoEgreso estado;
+	@Enumerated
 	private CriterioSeleccionPresupuesto criterio;
 
 	public Egreso(LocalDate fechaDeOperacion, Proveedor proveedor, DocumentoComercial documentoComercial,
