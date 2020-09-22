@@ -4,7 +4,12 @@ import dds.egreso.Egreso;
 import dds.egreso.Presupuesto;
 import dds.exception.ValidacionEgresoFallidaException;
 
-public class EgresoCoincideConPresupuestoSeleccionadoPorCriterio implements ValidacionEgreso{
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("segunCriterio")
+public class EgresoCoincideConPresupuestoSeleccionadoPorCriterio extends ValidacionEgreso{
     @Override
     public void validar(Egreso egreso) {
         if(egreso.getCriterio() == null)

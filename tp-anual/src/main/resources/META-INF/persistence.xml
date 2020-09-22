@@ -8,7 +8,16 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 <!--        <class>groupId.artifactId.nombreClase</class>-->
-        <class>tp-anual.tp-anual.dds.usuario.Usuario</class>
+        <class>dds.usuario.Usuario</class>
+        <class>dds.entidades.Entidad</class>
+        <class>dds.entidades.EntidadBase</class>
+        <class>dds.entidades.EntidadJuridica</class>
+        <class>dds.entidades.Organizacion</class>
+        <class>dds.validacionesEgresos.ValidacionEgreso</class>
+        <class>dds.validacionesEgresos.EgresoCoincideConAlgunPresupuestoCargado</class>
+        <class>dds.validacionesEgresos.EgresoCoincideConPresupuestoSeleccionadoPorCriterio</class>
+        <class>dds.validacionesEgresos.EgresoTieneCantidadMinimaDePresupuestos</class>
+
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>

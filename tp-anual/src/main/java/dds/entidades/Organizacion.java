@@ -7,17 +7,30 @@ import dds.egreso.EstadoEgreso;
 import dds.exception.ValidacionEgresoFallidaException;
 import dds.validacionesEgresos.ValidacionEgreso;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Entity
+@Table(name = "organizaciones")
 public class Organizacion {
 
+	@Id
+	@GeneratedValue
+	private Long id;
     private String nombre;
+    @Transient//ManyToMany
     private List<Categoria> categorias = new ArrayList<>();
+	@OneToMany
+	@JoinColumn(name = "organizacion_id")
     private List<EntidadBase> entidadesBase = new ArrayList<>();
+	@OneToMany
+	@JoinColumn(name = "organizacion_id")
     private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
+    @ManyToMany
     private List<ValidacionEgreso> validacionesEgresos = new ArrayList<>();
+	@ElementCollection
     private List<String> etiquetasDisponibles = new ArrayList<>();
 
 	public Organizacion(String nombre) {

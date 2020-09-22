@@ -3,10 +3,16 @@ package dds.entidades;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Entity
+@Table(name = "entidades_base")
 public class EntidadBase extends Entidad{
 	private String descripcion;
 

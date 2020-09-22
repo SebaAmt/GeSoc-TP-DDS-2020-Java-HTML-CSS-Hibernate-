@@ -7,10 +7,22 @@ import java.util.List;
 import dds.categoria.Categoria;
 import dds.egreso.Egreso;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "entidades")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Entidad {
 
+    @Id
+    @GeneratedValue
+    private Long id;
     private String nombreFicticio;
+    @Transient//ManyToOne
     private Categoria categoria;
+    @Transient
+    //    @OneToMany
+    //    @JoinColumn(name = "entidad_id")
     List<Egreso> egresos = new ArrayList<Egreso>();
     
     public Entidad(String nombreFicticio) {
