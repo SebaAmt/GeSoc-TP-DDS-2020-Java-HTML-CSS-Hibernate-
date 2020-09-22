@@ -62,7 +62,7 @@ public class CriterioSeleccionPresupuestoTest {
     @Test
     @DisplayName("Criterio Presupuesto Menor Valor: se selecciona de la lista el presupuesto de menor valor total")
     public void PresupuestoSeleccionadoEsElDeMenorValor() {
-        CriterioSeleccionPresupuesto menorValor = new CriterioPresupuestoMenorValor();
+        CriterioSeleccionPresupuesto menorValor = CriterioSeleccionPresupuesto.MENOR_VALOR;
         assertEquals(menorValor.seleccionarPresupuesto(this.presupuestos), presupuesto1);
     }
 

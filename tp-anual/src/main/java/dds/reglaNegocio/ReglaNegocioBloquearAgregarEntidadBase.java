@@ -1,9 +1,15 @@
 package dds.reglaNegocio;
 
+import javax.persistence.DiscriminatorValue;
+
+
+
 import dds.entidades.EntidadJuridica;
 import dds.exception.ReglaNegocioException;
 
-public class ReglaNegocioBloquearAgregarEntidadBase implements ReglaNegocio {
+
+@DiscriminatorValue("A")
+public class ReglaNegocioBloquearAgregarEntidadBase extends ReglaNegocio {
 
 	
 	@Override

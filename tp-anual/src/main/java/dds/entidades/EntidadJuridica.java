@@ -4,18 +4,23 @@ import dds.categoria.TipoCategoria;
 import dds.egreso.Egreso;
 import dds.egreso.EstadoEgreso;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+@Entity
+@Table(name = "entidades_juridicas")
 public class EntidadJuridica extends Entidad{
 
     private String razonSocial;
     private String cuit;
     private String direccionPostal;
     private String codigoInscripcionIGJ;
+    @Enumerated
     private TipoCategoria tipoCategoria;
+    @OneToMany
+	@JoinColumn(name = "entidad_juridica_id")
     List<EntidadBase> entidadesBase = new ArrayList<EntidadBase>();
 
     public EntidadJuridica(String razonSocial, String nombreFicticio, String cuit, String direccionPostal, String codigoInscripcionIGJ) {
@@ -26,6 +31,9 @@ public class EntidadJuridica extends Entidad{
         this.codigoInscripcionIGJ = codigoInscripcionIGJ;
     }
 
+    public EntidadJuridica() {
+    }
+    
     public void agregarEntidadBase(EntidadBase entidadBase){
     	if(this.getCategoria() != null) {
     		this.getCategoria().agregarEntidadBase(this);

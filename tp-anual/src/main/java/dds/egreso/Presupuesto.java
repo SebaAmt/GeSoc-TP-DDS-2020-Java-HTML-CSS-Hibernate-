@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,6 +27,7 @@ public class Presupuesto {
 	@OneToOne
     private DocumentoComercial documentoComercial;
     @OneToMany
+    @JoinColumn(name = "presupuesto_id")
     private List<Item> items = new ArrayList<>();
     @OneToOne
     private Moneda moneda;

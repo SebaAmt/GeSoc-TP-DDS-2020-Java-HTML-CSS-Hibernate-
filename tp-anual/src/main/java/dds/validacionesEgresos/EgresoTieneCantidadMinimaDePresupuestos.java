@@ -3,7 +3,12 @@ package dds.validacionesEgresos;
 import dds.egreso.Egreso;
 import dds.exception.ValidacionEgresoFallidaException;
 
-public class EgresoTieneCantidadMinimaDePresupuestos implements ValidacionEgreso {
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("cantidadMinima")
+public class EgresoTieneCantidadMinimaDePresupuestos extends ValidacionEgreso {
     private int cantidadMinimaPresupuestos = 3;
 
     @Override
