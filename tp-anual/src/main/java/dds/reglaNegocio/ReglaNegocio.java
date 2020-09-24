@@ -15,7 +15,7 @@ import dds.entidades.EntidadBase;
 import dds.entidades.EntidadJuridica;
 
 @Entity 
-@Table (name = "Reglas")
+@Table (name = "reglas_negocio")
 @Inheritance (strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo_regla")
 public abstract class ReglaNegocio {
