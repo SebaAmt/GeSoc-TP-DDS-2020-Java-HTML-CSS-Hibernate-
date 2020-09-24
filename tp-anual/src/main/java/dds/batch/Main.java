@@ -24,8 +24,6 @@ import dds.mediosDePago.TipoMedioDePago;
 import dds.egreso.Moneda;
 import dds.usuario.TipoUsuario;
 import dds.usuario.Usuario;
-import dds.validacionesEgresos.EgresoCoincideConPresupuestoSeleccionadoPorCriterio;
-import dds.validacionesEgresos.EgresoTieneCantidadMinimaDePresupuestos;
 import dds.validacionesEgresos.ValidacionEgreso;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
@@ -152,9 +150,9 @@ public class Main {
 		egresosPendientes2 = new ArrayList<>();
 		validaciones1 = new ArrayList<>();
 		validaciones2 = new ArrayList<>();
-		validaciones1.add(new EgresoTieneCantidadMinimaDePresupuestos());
-		validaciones1.add(new EgresoCoincideConPresupuestoSeleccionadoPorCriterio());
-		validaciones2.add(new EgresoTieneCantidadMinimaDePresupuestos());
+		validaciones1.add(ValidacionEgreso.CANTIDAD_MINIMA);
+		validaciones1.add(ValidacionEgreso.COINCIDE_CON_CRITERIO);
+		validaciones2.add(ValidacionEgreso.COINCIDE_CON_PRESUPUESTO_CARGADO);
 
 		usuario1 = new Usuario("Pablo", "pablok421", TipoUsuario.ESTANDAR);
 		usuario2 = new Usuario("Valeria42", "valeria565", TipoUsuario.ADMINISTRADOR);
@@ -202,8 +200,8 @@ public class Main {
 
 		organizacion1 = new Organizacion("Pablo Giménez Enterprises");
 		organizacion1.agregarEntidadJuridica(entidadJuridica1);
-		organizacion1.agregarValidacionEgreso(new EgresoCoincideConPresupuestoSeleccionadoPorCriterio());
-		organizacion1.agregarValidacionEgreso(new EgresoTieneCantidadMinimaDePresupuestos());
+		organizacion1.agregarValidacionEgreso(ValidacionEgreso.COINCIDE_CON_CRITERIO);
+		organizacion1.agregarValidacionEgreso(ValidacionEgreso.CANTIDAD_MINIMA);
 
 		System.out.println("Datos de prueba inicializados.");
 	}
