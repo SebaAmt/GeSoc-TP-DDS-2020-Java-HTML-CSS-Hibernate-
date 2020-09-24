@@ -7,18 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import dds.documentoComercial.DocumentoComercial;
 import dds.exception.PresupuestoNoTieneMismaMonedaException;
@@ -41,13 +30,14 @@ public class Egreso {
     @JoinColumn(name = "egreso_id")
 	private List<Presupuesto> presupuestos = new ArrayList<>();
 	private LocalDate fechaDeOperacion;
-	@OneToOne
+	@ManyToOne
 	private Proveedor proveedor;
 	@OneToOne
+	@JoinColumn(name = "documentoComercial_id", referencedColumnName = "id", unique = true, nullable=false)
 	private DocumentoComercial documentoComercial;
 	@ManyToOne
 	private MedioDePago medioDePago;
-	@OneToOne
+	@ManyToOne
 	private Moneda moneda;
     @OneToMany
     @JoinColumn(name = "egreso_id")

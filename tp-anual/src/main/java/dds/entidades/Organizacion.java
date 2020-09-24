@@ -28,7 +28,7 @@ public class Organizacion {
 	@OneToMany
 	@JoinColumn(name = "organizacion_id")
     private List<EntidadJuridica> entidadesJuridicas = new ArrayList<>();
-    @ManyToMany
+    @ElementCollection
     private List<ValidacionEgreso> validacionesEgresos = new ArrayList<>();
 	@ElementCollection
     private List<String> etiquetasDisponibles = new ArrayList<>();

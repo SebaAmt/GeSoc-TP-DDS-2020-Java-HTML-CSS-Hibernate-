@@ -6,13 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -22,14 +16,15 @@ public class Presupuesto {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@OneToOne
+	@ManyToOne
     private Proveedor proveedor;
-	@OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "documentoComercial_id", referencedColumnName = "id")
     private DocumentoComercial documentoComercial;
     @OneToMany
     @JoinColumn(name = "presupuesto_id")
     private List<Item> items = new ArrayList<>();
-    @OneToOne
+    @ManyToOne
     private Moneda moneda;
 
     public List<Item> getItems() {
