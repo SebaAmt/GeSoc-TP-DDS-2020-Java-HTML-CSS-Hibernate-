@@ -19,6 +19,7 @@
         <class>dds.reglaNegocio.ReglaNegocio</class>
         <class>dds.mediosDePago.MedioDePago</class>
         <class>dds.egreso.Egreso</class>
+        <class>dds.documentoComercial.DocumentoComercial</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
@@ -38,7 +39,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="use_sql_comments" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
 
     </persistence-unit>
