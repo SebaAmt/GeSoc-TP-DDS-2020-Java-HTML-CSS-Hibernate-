@@ -1,11 +1,8 @@
 package dds.usuario;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import dds.usuario.TipoUsuario;
-
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")

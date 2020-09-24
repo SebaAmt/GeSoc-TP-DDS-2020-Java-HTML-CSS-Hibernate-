@@ -10,16 +10,21 @@
         <class>dds.usuario.Usuario</class>
         <class>dds.egreso.Item</class>
         <class>dds.egreso.Moneda</class>
+        <class>dds.egreso.Presupuesto</class>
+        <class>dds.egreso.Proveedor</class>
+        <class>dds.egreso.Egreso</class>
         <class>dds.entidades.Entidad</class>
         <class>dds.entidades.EntidadBase</class>
         <class>dds.entidades.EntidadJuridica</class>
         <class>dds.entidades.Organizacion</class>
-        <class>dds.validacionesEgresos.ValidacionEgreso</class>
         <class>dds.categoria.Categoria</class>
         <class>dds.reglaNegocio.ReglaNegocio</class>
+        <class>dds.reglaNegocio.ReglaNegocioBloquearAgregarEntidadBase</class>
+        <class>dds.reglaNegocio.ReglaNegocioBloquearEntidadBase</class>
+        <class>dds.reglaNegocio.ReglaNegocioMontoMaximo</class>
         <class>dds.mediosDePago.MedioDePago</class>
-        <class>dds.egreso.Egreso</class>
         <class>dds.documentoComercial.DocumentoComercial</class>
+        <class>dds.direccion.DireccionPostal</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>

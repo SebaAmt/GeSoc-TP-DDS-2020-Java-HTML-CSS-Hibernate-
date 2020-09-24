@@ -3,11 +3,13 @@ package dds.reglaNegocio;
 import java.math.BigDecimal;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 import dds.egreso.Egreso;
 import dds.entidades.Entidad;
 import dds.exception.ReglaNegocioException;
 
+@Entity
 @DiscriminatorValue("C")
 public class ReglaNegocioMontoMaximo extends ReglaNegocio {
 
