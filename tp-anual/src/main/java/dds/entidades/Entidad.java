@@ -20,9 +20,8 @@ public abstract class Entidad {
     private String nombreFicticio;
     @ManyToOne
     private Categoria categoria;
-    @Transient
-    //    @OneToMany
-    //    @JoinColumn(name = "entidad_id")
+    @OneToMany
+    @JoinColumn(name = "entidad_id")
     List<Egreso> egresos = new ArrayList<Egreso>();
     
     public Entidad(String nombreFicticio) {
