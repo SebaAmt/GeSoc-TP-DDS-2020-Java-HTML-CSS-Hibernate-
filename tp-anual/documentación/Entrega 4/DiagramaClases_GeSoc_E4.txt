@@ -23,10 +23,10 @@ enum TipoDocumentoComercial {
 
 class Organizacion {
   validarEgresos()
-  crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglasNegocio)
-  agregarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio)
-  eliminarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio)
-  asignarCategoria(TipoCategoria tipoCategoria, Entidad entidad)
+  crearCategoria(String nombreCategoria, List<ReglaNegocio> reglasNegocio)
+  agregarReglaNegocio(String nombreCategoria, ReglaNegocio reglaNegocio)
+  eliminarReglaNegocio(String nombreCategoria, ReglaNegocio reglaNegocio)
+  asignarCategoria(String nombreCategoria, Entidad entidad)
 }
 
 abstract class Entidad {
@@ -68,21 +68,21 @@ enum TipoCategoria {
   EMPRESA_MICRO, EMPRESA_PEQUENIA, EMPRESA_MEDIANA_TRAMO1, EMPRESA_MEDIANA_TRAMO2, OSC, ONG
 }
 
-interface ReglaNegocio {
+abstract class ReglaNegocio {
     nuevoEgreso(Entidad entidad, Egreso egreso)
     agregarEntidadBase(EntidadJuridica entidad)
     puedeAgregarse(EntidadBase entidad)
 }
 
-class ReglaNegocioBloquearAgregarEntidadBase implements ReglaNegocio {
+class ReglaNegocioBloquearAgregarEntidadBase extends ReglaNegocio {
    agregarEntidadBase(EntidadJuridica entidad)
 }
 
-class ReglaNegocioAgregarEntidadBase implements ReglaNegocio {
+class ReglaNegocioAgregarEntidadBase extends ReglaNegocio {
   puedeAgregarse(EntidadBase entidad)
 }
 
-class ReglaNegocioMontoMaximo implements ReglaNegocio {
+class ReglaNegocioMontoMaximo extends ReglaNegocio {
   nuevoEgreso(Entidad entidad, Egreso egreso)
 }
 
@@ -138,21 +138,9 @@ enum TipoUsuario {
   ESTANDAR, ADMINISTRADOR
 }
 
-interface ValidacionEgreso {
-  void validar(Egreso egreso)
-}
-
-class EgresoCoincideConAlgunPresupuestoCargado implements ValidacionEgreso {
-  void validar(Egreso egreso)
-}
-
-class EgresoCoincideConPresupuestoSeleccionadoPorCriterio implements ValidacionEgreso {
-  void validar(Egreso egreso)
-}
-
-class EgresoTieneCantidadMinimaDePresupuestos implements ValidacionEgreso {
-  int cantidadMinimaPresupuestos = 3;
-  void validar(Egreso egreso)
+enum ValidacionEgreso {
+  CANTIDAD_MINIMA, COINCIDE_CON_CRITERIO, COINCIDE_CON_PRESUPUESTO_CARGADO
+  abstract void validar(Egreso egreso)
 }
 
 class Egreso {
@@ -227,12 +215,10 @@ class Presupuesto {
 
 }
 
-interface CriterioSeleccionPresupuesto {
+enum CriterioSeleccionPresupuesto {
+  MENOR_VALOR
 
-}
-
-class CriterioPresupuestoMenorValor implements CriterioSeleccionPresupuesto {
-
+  abstract Presupuesto seleccionarPresupuesto(List<Presupuesto> presupuestos)
 }
 
 class MeLiAPI{
