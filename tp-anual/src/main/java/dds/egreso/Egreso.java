@@ -64,6 +64,9 @@ public class Egreso {
 		this.criterio = criterio;
 	}
 
+	public Egreso() {
+	}
+	
 	public List<String> getEtiquetasAsignadas() {
 		return this.etiquetasAsignadas;
 	}

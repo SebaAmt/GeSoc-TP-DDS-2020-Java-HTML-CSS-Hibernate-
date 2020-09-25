@@ -19,6 +19,9 @@ public class ReglaNegocioMontoMaximo extends ReglaNegocio {
 		this.montoMaximo = montoMaximo;
 	}
 	
+	public ReglaNegocioMontoMaximo() {
+	}
+	
 	@Override
 	public void nuevoEgreso(Entidad entidad, Egreso egreso) {
 			if (entidad.totalEgresos().compareTo(montoMaximo) == 1 ) {
