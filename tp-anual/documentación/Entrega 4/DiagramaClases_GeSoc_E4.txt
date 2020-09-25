@@ -1,0 +1,339 @@
+@startuml
+' ***************************
+' CLASES - INTERFACES - ENUMS
+' ***************************
+
+class MedioDePago {
+  String identificador
+}
+
+enum TipoMedioDePago {
+  CAJERO, TARJETA_CREDITO, TARJETA_DEBITO, EFECTIVO, DINERO_EN_CUENTA
+}
+
+
+class DocumentoComercial {
+  TipoDocumentoComercial tipo
+  int identificadorDocumento
+}
+
+enum TipoDocumentoComercial {
+  TICKET, FACTURA, ...
+}
+
+class Organizacion {
+  validarEgresos()
+  crearCategoria(TipoCategoria tipoCategoria, List<ReglaNegocio> reglasNegocio)
+  agregarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio)
+  eliminarReglaNegocio(TipoCategoria tipoCategoria, ReglaNegocio reglaNegocio)
+  asignarCategoria(TipoCategoria tipoCategoria, Entidad entidad)
+}
+
+abstract class Entidad {
+  String nombreFicticio
+  Categoria categoria
+
+  nuevoEgreso(Egreso egreso)
+  BigDecimal totalEgresos()
+  abstract List<Egreso> egresosParavalidar()
+}
+
+class EntidadBase extends Entidad {
+  String descripcion
+
+  HashMap<String, BigDecimal> generarReporteMensual()
+}
+
+class EntidadJuridica extends Entidad {
+  String razonSocial
+  String CUIT
+  String direccionPostal
+  String codigoInscripcionDefinitivaIGJ
+
+  HashMap<String, BigDecimal> generarReporteMensual()
+}
+
+class Categoria {
+  TipoCategoria tipoCategoria
+
+  nuevoEgreso(Entidad entidad, Egreso egreso)
+  agregarEntidadBase(EntidadJuridica entidadJuridica)
+  puedeAgregarse(EntidadBase entidadBase)
+  agregarReglaNegocio(ReglaNegocio reglaNegocio)
+  eliminarReglaNegocio(ReglaNegocio reglaNegocio)
+}
+
+
+enum TipoCategoria {
+  EMPRESA_MICRO, EMPRESA_PEQUENIA, EMPRESA_MEDIANA_TRAMO1, EMPRESA_MEDIANA_TRAMO2, OSC, ONG
+}
+
+interface ReglaNegocio {
+    nuevoEgreso(Entidad entidad, Egreso egreso)
+    agregarEntidadBase(EntidadJuridica entidad)
+    puedeAgregarse(EntidadBase entidad)
+}
+
+class ReglaNegocioBloquearAgregarEntidadBase implements ReglaNegocio {
+   agregarEntidadBase(EntidadJuridica entidad)
+}
+
+class ReglaNegocioAgregarEntidadBase implements ReglaNegocio {
+  puedeAgregarse(EntidadBase entidad)
+}
+
+class ReglaNegocioMontoMaximo implements ReglaNegocio {
+  nuevoEgreso(Entidad entidad, Egreso egreso)
+}
+
+class CreadorDeUsuario {
+  Usuario crearUsuario(String username, String password, TipoUsuario tipo)
+  String encriptarPassword(String password)
+}
+
+class ValidadorDeContrasenias {
+  void validarContrasenia(String username, String password)
+}
+
+abstract Validacion {
+  String mensaje
+
+  validar(String Username, String password)
+  abstract boolean condicion(String username, String password)
+}
+
+class ComprobarSiPoseeMasDe8Caracteres {
+  boolean condicion(String username, String password)
+}
+
+class ComprobarCaracteresConsecutivos {
+  boolean condicion(String username, String password)
+}
+
+class ComprobarCaracteresRepetidos {
+  boolean condicion(String username, String password)
+}
+
+class ComprobarSiIncluyeNombreDeUsuario {
+  boolean condicion(String username, String password)
+}
+
+class ValidarTopPeoresContrasenias {
+  boolean condicion(String username, String password)
+}
+
+class LectorArchivos {
+  String pathArchivo
+
+  List<String> devolverContenidoComoListaDeStrings()
+}
+
+class Usuario {
+  String username
+  String password
+  BandejaDeMensajes bandeja;
+}
+
+enum TipoUsuario {
+  ESTANDAR, ADMINISTRADOR
+}
+
+interface ValidacionEgreso {
+  void validar(Egreso egreso)
+}
+
+class EgresoCoincideConAlgunPresupuestoCargado implements ValidacionEgreso {
+  void validar(Egreso egreso)
+}
+
+class EgresoCoincideConPresupuestoSeleccionadoPorCriterio implements ValidacionEgreso {
+  void validar(Egreso egreso)
+}
+
+class EgresoTieneCantidadMinimaDePresupuestos implements ValidacionEgreso {
+  int cantidadMinimaPresupuestos = 3;
+  void validar(Egreso egreso)
+}
+
+class Egreso {
+  LocalDate fechaDeOperacion
+  boolean requierePresupuesto
+  List<String> etiquetasAsignadas
+
+  Precio valorTotal()
+  void agregarItem(Item nuevoItem)
+  List<Item> detalle()
+  void etiquetar(String etiqueta)
+  void desetiquetar(String etiqueta)
+}
+
+enum EstadoEgreso {
+    PENDIENTE, ACEPTADO, RECHAZADO
+}
+
+class Item {
+    String detalle
+	int cantidadUnidades
+	Precio precioUnitario
+}
+
+class Proveedor {
+  String nombre
+  int dni
+  Direccion direccion
+}
+
+class Direccion {
+    String calle
+    int altura
+    int piso
+    String departamento
+    DireccionPostal direccionPostal
+}
+
+class DireccionBuilder {
+    String calle
+    int altura
+    int piso
+    String departamento
+    DireccionPostal direccionPostal
+
+    DireccionBuilder calleBuild(String calle)
+    DireccionBuilder alturaBuild(int altura)
+    DireccionBuilder pisoBuild(int piso)
+    DireccionBuilder departamentoBuild(String departamento)
+    DireccionBuilder direccionPostalBuild(DireccionPostal direccionPostal)
+    Direccion buildDireccion()
+}
+
+class DireccionPostal {
+    Pais pais
+    Provincia provincia
+    Ciudad ciudad
+    String codigoPostal
+}
+
+class CreadorDePresupuestos {
+  void agregarProveedor(Proveedor proveedor)
+  void agregarDocumentoComercial(DocumentoComercial documento)
+  void agregarItem(Item item)
+  void agregarItems(List<Item> items)
+  void agregarEgreso(Egreso egreso)
+  void agregarMoneda(Moneda moneda)
+  Presupuesto crearPresupuesto()
+}
+
+class Presupuesto {
+
+}
+
+interface CriterioSeleccionPresupuesto {
+
+}
+
+class CriterioPresupuestoMenorValor implements CriterioSeleccionPresupuesto {
+
+}
+
+class MeLiAPI{
+ DireccionPostal obteneDireccionPostal (String countryId, String zipCode)
+ Moneda obtenerMoneda (String currencyId)
+ String getResponses(String path)
+}
+
+
+class Pais {
+ String id
+ String name
+ Moneda moneda
+}
+
+class Provincia {
+ String id
+ String name
+}
+
+class Ciudad {
+ String id
+ String name
+}
+
+class Moneda {
+ String id
+ String symbol
+ String description
+}
+
+class CreadorMoneda{
+ CurrencyID currencyId
+ Moneda getMoneda(CurrencyID currencyId)
+}
+
+enum CurrencyID{
+   ARS, USD, EUR
+}
+
+
+' ***************************
+' ******* RELACIONES ********
+' ***************************
+
+Egreso -->"1..*" Item
+Egreso -->"0..1" DocumentoComercial
+Egreso --> MedioDePago
+Egreso --> Proveedor
+Egreso --> EstadoEgreso
+Egreso --> CriterioSeleccionPresupuesto
+Egreso -->"0..*" Usuario
+Egreso -->"0..*" Presupuesto
+
+CreadorDePresupuestos ..> Presupuesto
+Presupuesto --> Item
+Presupuesto --> DocumentoComercial
+Presupuesto --> Proveedor
+
+DocumentoComercial --> TipoDocumentoComercial
+
+MedioDePago --> TipoMedioDePago
+
+CreadorMoneda --> CurrencyID
+CreadorMoneda ..> Moneda
+CreadorMoneda --> MeLiAPI
+Egreso --> Moneda
+Presupuesto --> Moneda
+
+Proveedor --> Direccion
+
+DireccionBuilder ..> Direccion
+DireccionBuilder --> MeLiAPI
+Direccion --> DireccionPostal
+DireccionPostal --> Pais
+DireccionPostal --> Provincia
+DireccionPostal --> Ciudad
+
+Usuario --> TipoUsuario
+
+CreadorDeUsuario ..> Usuario
+CreadorDeUsuario --> ValidadorDeContrasenias
+
+ValidadorDeContrasenias --> Validacion
+Validacion <|-- ComprobarSiPoseeMasDe8Caracteres
+Validacion <|-- ComprobarCaracteresRepetidos
+Validacion <|-- ComprobarCaracteresConsecutivos
+Validacion <|-- ValidarTopPeoresContrasenias
+Validacion <|-- ComprobarSiIncluyeNombreDeUsuario
+ValidarTopPeoresContrasenias --> LectorArchivos
+
+Organizacion -->"0..*" EntidadJuridica
+Organizacion -->"0..*" EntidadBase
+Organizacion -->"0..*" ValidacionEgreso
+Organizacion -->"0..*" Categoria
+
+Entidad -->"0..*" Egreso
+Entidad --> Categoria
+Categoria -->"0..1" ReglaNegocio
+
+EntidadJuridica "1"-->"0..*" EntidadBase
+EntidadJuridica --> TipoCategoria
+
+@enduml
