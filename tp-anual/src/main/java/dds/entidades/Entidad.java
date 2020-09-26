@@ -1,6 +1,7 @@
 package dds.entidades;
 
 import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import dds.egreso.Egreso;
 
 import javax.persistence.*;
 
+//TODO: Hacer Single_Table???
 @Entity
 @Table(name = "entidades")
 @Inheritance(strategy = InheritanceType.JOINED)

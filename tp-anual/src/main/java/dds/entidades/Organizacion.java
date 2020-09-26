@@ -76,7 +76,7 @@ public class Organizacion {
 
 		}
 	}
-
+	//TODO: Concatenar listas de entidades en el método obtenerEgresosParaValidar.
 	public List<Egreso> obtenerEgresosParaValidar() {
 		List<Egreso> egresosParaValidar = new ArrayList<>();
 		this.entidadesBase.stream().forEach(entidad -> egresosParaValidar.addAll(entidad.egresosParaValidar()));
