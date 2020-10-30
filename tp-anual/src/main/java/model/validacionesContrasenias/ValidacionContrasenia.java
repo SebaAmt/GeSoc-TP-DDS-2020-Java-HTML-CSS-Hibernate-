@@ -1,11 +1,11 @@
-package model.validaciones;
+package model.validacionesContrasenias;
 
 import model.exception.PasswordException;
 
-public abstract class Validacion {
+public abstract class ValidacionContrasenia {
 	protected String mensaje;
 
-	protected Validacion(String mensaje){
+	protected ValidacionContrasenia(String mensaje){
 		this.mensaje = mensaje;
 	}
 

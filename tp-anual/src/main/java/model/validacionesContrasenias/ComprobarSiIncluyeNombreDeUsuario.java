@@ -1,6 +1,6 @@
-package model.validaciones;
+package model.validacionesContrasenias;
 
-public class ComprobarSiIncluyeNombreDeUsuario extends Validacion {
+public class ComprobarSiIncluyeNombreDeUsuario extends ValidacionContrasenia {
 
 	public ComprobarSiIncluyeNombreDeUsuario(){
 		super("No puede incluir el nombre de usuario en la contrasenia");

@@ -1,6 +1,6 @@
-package model.validaciones;
+package model.validacionesContrasenias;
 
-public class ComprobarSiPoseeMasDe8Caracteres extends Validacion {
+public class ComprobarSiPoseeMasDe8Caracteres extends ValidacionContrasenia {
 
 	public ComprobarSiPoseeMasDe8Caracteres(){
 		super("Inutilizable: no cumple con el minimo de caracteres!!");

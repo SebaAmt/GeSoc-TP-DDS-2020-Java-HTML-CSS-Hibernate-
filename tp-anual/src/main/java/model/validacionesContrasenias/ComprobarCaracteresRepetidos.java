@@ -1,6 +1,6 @@
-package model.validaciones;
+package model.validacionesContrasenias;
 
-public class ComprobarCaracteresRepetidos extends Validacion {
+public class ComprobarCaracteresRepetidos extends ValidacionContrasenia {
 
     public ComprobarCaracteresRepetidos(){
         super("Hay caracteres repetidos!");

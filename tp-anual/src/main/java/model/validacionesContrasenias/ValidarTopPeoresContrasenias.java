@@ -1,4 +1,4 @@
-package model.validaciones;
+package model.validacionesContrasenias;
 
 import model.helpers.LectorArchivos;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import static com.google.common.io.Resources.getResource;
 
-public class ValidarTopPeoresContrasenias extends Validacion {
+public class ValidarTopPeoresContrasenias extends ValidacionContrasenia {
 
     private List<String> contrasenias;
 

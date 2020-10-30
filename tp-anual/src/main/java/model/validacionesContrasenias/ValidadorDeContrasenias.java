@@ -1,13 +1,13 @@
-package model.validaciones;
+package model.validacionesContrasenias;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ValidadorDeContrasenias {
-    private List<Validacion> validaciones = new ArrayList<>();
+    private List<ValidacionContrasenia> validaciones = new ArrayList<>();
 
-    public void agregarValidacion(Validacion validacion){
-        this.validaciones.add(validacion);
+    public void agregarValidacion(ValidacionContrasenia validacionContrasenia){
+        this.validaciones.add(validacionContrasenia);
     }
 
     public void validarContrasenia(String username, String password){

@@ -1,6 +1,6 @@
-package model.validaciones;
+package model.validacionesContrasenias;
 
-public class ComprobarCaracteresConsecutivos extends Validacion {
+public class ComprobarCaracteresConsecutivos extends ValidacionContrasenia {
 
 	public ComprobarCaracteresConsecutivos(){
 		super("Hay caracteres Consecutivos!");

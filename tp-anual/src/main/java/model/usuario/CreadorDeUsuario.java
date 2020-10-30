@@ -1,6 +1,6 @@
 package model.usuario;
 
-import model.validaciones.*;
+import model.validacionesContrasenias.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class CreadorDeUsuario {
