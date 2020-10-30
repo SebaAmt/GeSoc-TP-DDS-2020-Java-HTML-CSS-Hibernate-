@@ -5,13 +5,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import model.reglaNegocio.ReglaNegocio;
 import model.egreso.Egreso;
@@ -29,20 +23,20 @@ public class Categoria {
     
 	@Column(name = "nombre")
 	private String nombreCategoria;
-	
-	@ManyToMany
-	@JoinTable (name = "regla_categoria")
+
+	@OneToMany
+	@JoinColumn(name = "categoria_id")
 	private List<ReglaNegocio> reglasNegocio = new ArrayList<>();
-	
-	
+
+
 	public Categoria(String nombreCategoria, List<ReglaNegocio> reglasNegocio) {
 		this.nombreCategoria = nombreCategoria;
 		this.reglasNegocio = reglasNegocio;
 	}
-	
+
 	public Categoria() {
 	}
-	
+
 	public void nuevoEgreso(Entidad entidad, Egreso egreso) {
 		reglasNegocio.stream().forEach(c->c.nuevoEgreso(entidad, egreso));
 	}
