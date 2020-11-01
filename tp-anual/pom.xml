@@ -19,6 +19,7 @@
 	</properties>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
@@ -39,10 +40,10 @@
 		</dependency>
 
 		<dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.8</version>
-        </dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.8</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
@@ -57,12 +58,25 @@
 		</dependency>
 
 		<dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-junit</artifactId>
-            <version>2.0.0.0</version>
-            <scope>test</scope>
-        </dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-junit</artifactId>
+			<version>2.0.0.0</version>
+			<scope>test</scope>
+		</dependency>
+        
+        <!-- spark & handlebars -->
+        <dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-core</artifactId>
+			<version>2.9.3</version>
+		</dependency>
 
+		<dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-template-handlebars</artifactId>
+			<version>2.7.1</version>
+		</dependency>
+        
 		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -71,27 +85,27 @@
 		</dependency>
 
 		<!-- JPA Persistence Dependencies -->
-    	<dependency>
-      		<groupId>org.uqbar-project</groupId>
-	  		<artifactId>jpa-java8-extras</artifactId>
-	  		<version>1.0-alpha-1</version>
+		<dependency>
+			<groupId>org.uqbar-project</groupId>
+			<artifactId>jpa-java8-extras</artifactId>
+			<version>1.0-alpha-1</version>
 		</dependency>
 
 		<!-- drivers jdbc -->
-    	<!-- mysql -->
-    	<dependency>
-      		<groupId>mysql</groupId>
-      		<artifactId>mysql-connector-java</artifactId>
-      		<version>8.0.21</version>
-    	</dependency>
-            
-    	<!-- hsqldb -->
-    	<dependency>
-      		<groupId>org.hsqldb</groupId>
-      		<artifactId>hsqldb</artifactId>
-      		<version>2.4.0</version>
-      		<scope>test</scope>
-    	</dependency>
+		<!-- mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.21</version>
+		</dependency>
+
+		<!-- hsqldb -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.4.0</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
