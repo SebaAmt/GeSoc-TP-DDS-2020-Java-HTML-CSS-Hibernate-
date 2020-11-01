@@ -7,24 +7,24 @@
 
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>dds.usuario.Usuario</class>
-        <class>dds.egreso.Item</class>
-        <class>dds.egreso.Moneda</class>
-        <class>dds.egreso.Presupuesto</class>
-        <class>dds.egreso.Proveedor</class>
-        <class>dds.egreso.Egreso</class>
-        <class>dds.entidades.Entidad</class>
-        <class>dds.entidades.EntidadBase</class>
-        <class>dds.entidades.EntidadJuridica</class>
-        <class>dds.entidades.Organizacion</class>
-        <class>dds.categoria.Categoria</class>
-        <class>dds.reglaNegocio.ReglaNegocio</class>
-        <class>dds.reglaNegocio.ReglaNegocioBloquearAgregarEntidadBase</class>
-        <class>dds.reglaNegocio.ReglaNegocioBloquearEntidadBase</class>
-        <class>dds.reglaNegocio.ReglaNegocioMontoMaximo</class>
-        <class>dds.mediosDePago.MedioDePago</class>
-        <class>dds.documentoComercial.DocumentoComercial</class>
-        <class>dds.direccion.DireccionPostal</class>
+        <class>model.usuario.Usuario</class>
+        <class>model.egreso.Item</class>
+        <class>model.egreso.Moneda</class>
+        <class>model.egreso.Presupuesto</class>
+        <class>model.egreso.Proveedor</class>
+        <class>model.egreso.Egreso</class>
+        <class>model.entidades.Entidad</class>
+        <class>model.entidades.EntidadBase</class>
+        <class>model.entidades.EntidadJuridica</class>
+        <class>model.entidades.Organizacion</class>
+        <class>model.categoria.Categoria</class>
+        <class>model.reglaNegocio.ReglaNegocio</class>
+        <class>model.reglaNegocio.ReglaNegocioBloquearAgregarEntidadBase</class>
+        <class>model.reglaNegocio.ReglaNegocioBloquearEntidadBase</class>
+        <class>model.reglaNegocio.ReglaNegocioMontoMaximo</class>
+        <class>model.mediosDePago.MedioDePago</class>
+        <class>model.documentoComercial.DocumentoComercial</class>
+        <class>model.direccion.DireccionPostal</class>
 
         <properties>
             <property name="hibernate.archive.autodetection" value="class"/>
