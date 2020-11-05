@@ -1,5 +1,7 @@
 package model.usuario;
 
+import model.entidades.Organizacion;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,8 @@ public class Usuario {
 	private TipoUsuario tipo;
 	@ElementCollection
 	private List<String> bandejaDeMensajes = new ArrayList<>();
+	@ManyToOne
+	private Organizacion organizacion;
 
 	public Usuario() {
 		
@@ -65,7 +69,11 @@ public class Usuario {
 	public void setBandejaDeMensajes(List<String> bandejaDeMensajes) {
 		this.bandejaDeMensajes = bandejaDeMensajes;
 	}
-	
+
+	public void asignarOrganizacion(Organizacion organizacion){
+		this.organizacion = organizacion;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario{" +
