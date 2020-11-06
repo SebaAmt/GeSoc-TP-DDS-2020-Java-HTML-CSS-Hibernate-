@@ -5,7 +5,6 @@ import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
 import model.usuario.Usuario;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import repositorios.RepositorioEntidades;
 import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
 import spark.Request;
@@ -28,15 +27,17 @@ public class OrganizacionesController implements WithGlobalEntityManager {
 
     public ModelAndView getDetalleOrganizacion(Request request, Response response){
         String id = request.params(":id");
-        SessionHelper.validarLogueado(request, response);
-        Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
-
         try{
             Organizacion organizacion = RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(id));
-            if(organizacion == null)
-                response.status(400);
-            List<EntidadBase> entidadesBase = RepositorioEntidades.instancia.obtenerEntidadesBaseDeOrganizacion(Long.parseLong(id));
-            List<EntidadJuridica> entidadesJuridicas = RepositorioEntidades.instancia.obtenerEntidadesJuridicasDeOrganizacion(Long.parseLong(id));
+            if(organizacion == null){
+                response.redirect("/error", 404); // not found
+            }
+
+            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(id));
+            Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
+
+            List<EntidadBase> entidadesBase = RepositorioOrganizaciones.instancia.obtenerEntidadesBaseDeOrganizacion(Long.parseLong(id));
+            List<EntidadJuridica> entidadesJuridicas = RepositorioOrganizaciones.instancia.obtenerEntidadesJuridicasDeOrganizacion(Long.parseLong(id));
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("organizacion", organizacion);

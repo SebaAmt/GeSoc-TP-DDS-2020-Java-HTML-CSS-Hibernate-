@@ -3,6 +3,7 @@ package model.entidades;
 import model.egreso.Egreso;
 import model.egreso.EstadoEgreso;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
@@ -10,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "entidades_base")
+@DiscriminatorValue("B")
 public class EntidadBase extends Entidad{
 	private String descripcion;
 

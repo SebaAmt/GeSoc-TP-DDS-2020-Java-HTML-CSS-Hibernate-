@@ -33,7 +33,7 @@ public class SessionHelper {
             return;
 
         if(!usuarioLogueado.getOrganizacion().getId().equals(organizacionId))
-            response.status(403); //forbidden
+            response.redirect("/error", 403); //forbidden
 
     }
 }

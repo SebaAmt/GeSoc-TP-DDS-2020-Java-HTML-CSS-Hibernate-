@@ -1,5 +1,7 @@
 package repositorios;
 
+import model.entidades.EntidadBase;
+import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
 import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
@@ -29,6 +31,18 @@ public class RepositorioOrganizaciones implements WithGlobalEntityManager {
         List<Organizacion> result = new ArrayList<Organizacion>();
         result.add(entityManager().find(Organizacion.class, usuario.getOrganizacion().getId()));
         return result;
+    }
+
+    public List<EntidadBase> obtenerEntidadesBaseDeOrganizacion(Long organizacionId){
+        return entityManager()
+                .createQuery("from Entidad where tipo_entidad = 'B' and organizacion_id = :orgId").setParameter("orgId", organizacionId)
+                .getResultList();
+    }
+
+    public List<EntidadJuridica> obtenerEntidadesJuridicasDeOrganizacion(Long organizacionId){
+        return entityManager()
+                .createQuery("from Entidad where tipo_entidad = 'J' and organizacion_id = :orgId").setParameter("orgId", organizacionId)
+                .getResultList();
     }
 
 }

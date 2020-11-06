@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "entidades_juridicas")
+@DiscriminatorValue("J")
 public class EntidadJuridica extends Entidad{
 
     private String razonSocial;

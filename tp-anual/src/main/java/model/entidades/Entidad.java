@@ -10,10 +10,10 @@ import model.egreso.Egreso;
 
 import javax.persistence.*;
 
-//TODO: Hacer Single_Table???
 @Entity
 @Table(name = "entidades")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipo_entidad")
 public abstract class Entidad {
 
     @Id

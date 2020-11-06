@@ -25,7 +25,7 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
 
     public void run() {
         withTransaction(() -> {
-            Usuario usuarioPrueba = new Usuario("user1", "c893bad68927b457dbed39460e6afd62", TipoUsuario.ESTANDAR); //password: prueba
+            Usuario usuarioPrueba = new Usuario("user1", "7815696ecbf1c96e6894b779456d330e", TipoUsuario.ESTANDAR); //password: asd
             Organizacion valve = new Organizacion("Valve");
             EntidadJuridica blackMesa = new EntidadJuridica("Black Mesa SRL", "Black Mesa", "123456789", "Direccion 123", "123");
             EntidadBase aperture = new EntidadBase("Aperture Laboratories", "Hacemos portales");
@@ -37,7 +37,21 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             persist(aperture);
             persist(valve);
             persist(usuarioPrueba);
-            persist(new Usuario("admin", "c893bad68927b457dbed39460e6afd62", TipoUsuario.ADMINISTRADOR)); //password: prueba
+
+            Usuario usuarioPrueba2 = new Usuario("user2", "7815696ecbf1c96e6894b779456d330e", TipoUsuario.ESTANDAR); //password: asd
+            Organizacion lucasArts = new Organizacion("Lucas Arts");
+            EntidadJuridica monkeyIsland = new EntidadJuridica("Monkey Island SRL", "Monkey Island", "784521365", "Melee 123", "887");
+            EntidadBase maniacMansion = new EntidadBase("Maniac Mansion SA", "Una descripción loca");
+            lucasArts.agregarEntidadBase(maniacMansion);
+            lucasArts.agregarEntidadJuridica(monkeyIsland);
+            usuarioPrueba2.asignarOrganizacion(lucasArts);
+
+            persist(monkeyIsland);
+            persist(maniacMansion);
+            persist(lucasArts);
+            persist(usuarioPrueba2);
+
+            persist(new Usuario("admin", "7815696ecbf1c96e6894b779456d330e", TipoUsuario.ADMINISTRADOR)); //password: asd
         });
     }
 

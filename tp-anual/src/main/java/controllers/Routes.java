@@ -28,9 +28,8 @@ public class Routes {
         Spark.get("/", (request, response) -> homeController.getHome(request, response), engine);
 
         //Organizaciones
-        Spark.get("/organizaciones", (request, response) -> organizacionesController.getOrganizaciones(request, response), engine);
+        //Spark.get("/organizaciones", (request, response) -> organizacionesController.getOrganizaciones(request, response), engine);
         Spark.get("/organizaciones/:id", (request, response) -> organizacionesController.getDetalleOrganizacion(request, response), engine);
-
     }
 
 
