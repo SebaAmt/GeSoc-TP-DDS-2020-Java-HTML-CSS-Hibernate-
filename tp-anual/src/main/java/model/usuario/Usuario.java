@@ -70,6 +70,10 @@ public class Usuario {
 		this.bandejaDeMensajes = bandejaDeMensajes;
 	}
 
+	public Organizacion getOrganizacion(){
+		return this.organizacion;
+	}
+
 	public void asignarOrganizacion(Organizacion organizacion){
 		this.organizacion = organizacion;
 	}

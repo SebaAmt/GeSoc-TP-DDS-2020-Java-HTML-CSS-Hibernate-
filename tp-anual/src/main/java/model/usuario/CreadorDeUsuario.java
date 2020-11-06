@@ -19,7 +19,7 @@ public class CreadorDeUsuario {
 		return new Usuario(username,password,tipo);
 	}
 	
-	private String encriptarPassword(String password) {
+	public String encriptarPassword(String password) {
 		String textoEncriptadoConMD5 = DigestUtils.md5Hex(password);
 		return textoEncriptadoConMD5;
 	}

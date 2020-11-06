@@ -131,4 +131,8 @@ public class Organizacion {
 		this.etiquetasDisponibles.removeIf(etiqueta -> etiqueta.equals(etiquetaAEliminar));
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 }
