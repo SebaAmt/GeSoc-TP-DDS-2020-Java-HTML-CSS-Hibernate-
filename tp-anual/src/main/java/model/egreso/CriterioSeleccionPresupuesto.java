@@ -11,7 +11,6 @@ public enum CriterioSeleccionPresupuesto {
 		public Presupuesto seleccionarPresupuesto(List<Presupuesto> presupuestos) {
 			return Collections.min(presupuestos, Comparator.comparing(presupuesto -> presupuesto.valorTotal()));
 		}
-
 	};
 	
 	 public abstract Presupuesto seleccionarPresupuesto(List<Presupuesto> presupuestos);

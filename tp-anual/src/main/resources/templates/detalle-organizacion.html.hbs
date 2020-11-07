@@ -3,13 +3,13 @@
 <h3>Entidades Base</h3>
 <ul>
     {{#each entidadesBase}}
-    <li>{{this.nombreFicticio}}</li>
+    <li><a href="{{organizacion.id}}/entidades/{{this.id}}">{{this.nombreFicticio}}</a></li>
     {{/each}}
  </ul>
 <h3>Entidades Jurídicas</h3>
 <ul>
     {{#each entidadesJuridicas}}
-        <li>{{this.nombreFicticio}}</li>
+        <li><a href="{{organizacion.id}}/entidades/{{this.id}}">{{this.nombreFicticio}}</a></li>
     {{/each}}
 </ul>
 <h3>Categorías</h3>
