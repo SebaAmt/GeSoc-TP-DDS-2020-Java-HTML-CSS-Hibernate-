@@ -1,15 +1,18 @@
 package controllers;
 
+import model.categoria.Categoria;
 import model.entidades.EntidadBase;
 import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
 import model.usuario.Usuario;
+import model.validacionesEgresos.ValidacionEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,13 +39,8 @@ public class OrganizacionesController implements WithGlobalEntityManager {
             SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(id));
             Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
 
-            List<EntidadBase> entidadesBase = RepositorioOrganizaciones.instancia.obtenerEntidadesBaseDeOrganizacion(Long.parseLong(id));
-            List<EntidadJuridica> entidadesJuridicas = RepositorioOrganizaciones.instancia.obtenerEntidadesJuridicasDeOrganizacion(Long.parseLong(id));
-
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("organizacion", organizacion);
-            modelo.put("entidadesBase", entidadesBase);
-            modelo.put("entidadesJuridicas", entidadesJuridicas);
 
             return new ModelAndView(modelo, "detalle-organizacion.html.hbs");
         }

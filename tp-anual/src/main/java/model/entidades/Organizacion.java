@@ -135,4 +135,20 @@ public class Organizacion {
 		return id;
 	}
 
+	public List<EntidadBase> getEntidadesBase() {
+		return entidadesBase;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public List<EntidadJuridica> getEntidadesJuridicas() {
+		return entidadesJuridicas;
+	}
+
+	public List<ValidacionEgreso> getValidacionesEgresos() {
+		return validacionesEgresos;
+	}
+
 }

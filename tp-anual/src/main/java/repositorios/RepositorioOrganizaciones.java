@@ -1,10 +1,13 @@
 package repositorios;
 
+import model.categoria.Categoria;
+import model.entidades.Entidad;
 import model.entidades.EntidadBase;
 import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
 import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
+import model.validacionesEgresos.ValidacionEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import java.util.ArrayList;
@@ -32,17 +35,4 @@ public class RepositorioOrganizaciones implements WithGlobalEntityManager {
         result.add(entityManager().find(Organizacion.class, usuario.getOrganizacion().getId()));
         return result;
     }
-
-    public List<EntidadBase> obtenerEntidadesBaseDeOrganizacion(Long organizacionId){
-        return entityManager()
-                .createQuery("from Entidad where tipo_entidad = 'B' and organizacion_id = :orgId").setParameter("orgId", organizacionId)
-                .getResultList();
-    }
-
-    public List<EntidadJuridica> obtenerEntidadesJuridicasDeOrganizacion(Long organizacionId){
-        return entityManager()
-                .createQuery("from Entidad where tipo_entidad = 'J' and organizacion_id = :orgId").setParameter("orgId", organizacionId)
-                .getResultList();
-    }
-
 }

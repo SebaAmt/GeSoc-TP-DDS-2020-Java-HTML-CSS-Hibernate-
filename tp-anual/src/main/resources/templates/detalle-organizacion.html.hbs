@@ -1,18 +1,32 @@
 {{#organizacion}}
-    <h1>{{nombre}}</h1>
-{{/organizacion}}
-
+<h1>{{nombre}}</h1>
 <h3>Entidades Base</h3>
-    <ul>
-        {{#entidadesBase}}
-            <li>{{nombreFicticio}}</a></li>
-        {{/entidadesBase}}
-    </ul>
-
+<ul>
+    {{#each entidadesBase}}
+    <li>{{this.nombreFicticio}}</li>
+    {{/each}}
+ </ul>
 <h3>Entidades Jurídicas</h3>
-    <ul>
-    {{#entidadesJuridicas}}
-        <li>{{nombreFicticio}}</a></li>
-    {{/entidadesJuridicas}}
-    </ul>
+<ul>
+    {{#each entidadesJuridicas}}
+        <li>{{this.nombreFicticio}}</li>
+    {{/each}}
+</ul>
+<h3>Categorías</h3>
+<ul>
+    {{#each categorias}}
+        <li>{{this.nombreCategoria}}</li>
+    {{/each}}
+</ul>
+<h3>Validaciones para egresos</h3>
+<ul>
+    {{#each validacionesEgresos}}
+        <li>{{this}}</li>
+    {{/each}}
+</ul>
+<h3>Etiquetas disponibles</h3>
+    {{#each etiquetasDisponibles}}
+        <li>{{this}}</li>
+    {{/each}}
+{{/organizacion}}
 

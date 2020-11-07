@@ -7,6 +7,7 @@ import model.usuario.CreadorDeUsuario;
 import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
 import model.validacionesContrasenias.ValidadorDeContrasenias;
+import model.validacionesEgresos.ValidacionEgreso;
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
@@ -33,6 +34,13 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             valve.agregarEntidadJuridica(blackMesa);
             usuarioPrueba.asignarOrganizacion(valve);
 
+            valve.nuevaEtiqueta("Etiqueta Valve 1");
+            valve.nuevaEtiqueta("Etiqueta Valve 2");
+            valve.nuevaEtiqueta("Etiqueta Valve 3");
+
+            valve.agregarValidacionEgreso(ValidacionEgreso.COINCIDE_CON_CRITERIO);
+            valve.agregarValidacionEgreso(ValidacionEgreso.COINCIDE_CON_PRESUPUESTO_CARGADO);
+
             persist(blackMesa);
             persist(aperture);
             persist(valve);
@@ -45,6 +53,12 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             lucasArts.agregarEntidadBase(maniacMansion);
             lucasArts.agregarEntidadJuridica(monkeyIsland);
             usuarioPrueba2.asignarOrganizacion(lucasArts);
+
+            lucasArts.nuevaEtiqueta("Etiqueta LucasArts 101");
+            lucasArts.nuevaEtiqueta("Etiqueta LucasArts 102");
+            lucasArts.nuevaEtiqueta("Etiqueta LucasArts 103");
+
+            lucasArts.agregarValidacionEgreso(ValidacionEgreso.CANTIDAD_MINIMA);
 
             persist(monkeyIsland);
             persist(maniacMansion);

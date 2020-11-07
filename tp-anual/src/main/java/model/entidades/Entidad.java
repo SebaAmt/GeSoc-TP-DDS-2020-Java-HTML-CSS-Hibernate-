@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "entidades")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="tipo_entidad")
+@org.hibernate.annotations.DiscriminatorOptions(force=true) // con esto no rompe al recuperar organizaciones de la bd
 public abstract class Entidad {
 
     @Id
