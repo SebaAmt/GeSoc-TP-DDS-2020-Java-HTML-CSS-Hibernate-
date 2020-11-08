@@ -24,6 +24,7 @@ public class Routes {
         EntidadesController entidadesController = new EntidadesController();
         EgresosController egresosController = new EgresosController();
         ItemsController itemsController = new ItemsController();
+        PresupuestosController presupuestosController = new PresupuestosController();
 
         //Login
         Spark.get("/login", (request, response) -> usuariosController.getFormularioLogin(request, response), engine);
@@ -47,6 +48,11 @@ public class Routes {
         //Items
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/items/nuevo", (request,response) -> itemsController.getFormCreacionItem(request, response), engine);
         Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/items", (request,response) -> itemsController.crearItem(request, response));
+
+        //Presupuestos
+        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/presupuestos/nuevo", (request,response) -> presupuestosController.getFormCreacionPresupuesto(request, response), engine);
+        //Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/presupuestos", (request,response) -> presupuestosController.crearPresupuesto(request, response));
+
 
         // FORO
         after((request, response) -> {

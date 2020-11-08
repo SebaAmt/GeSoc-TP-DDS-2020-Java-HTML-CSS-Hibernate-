@@ -1,0 +1,36 @@
+<h1>Nuevo Presupuesto</h1>
+<form class="nuevo-egreso" action="/organizaciones/{{idOrganizacion}}/entidades/{{idEntidad}}/egresos/{{idEgreso}}/presupuestos" method="POST">
+    <div class="campo">
+        <span class="nombre-campo">Proveedores:</span>
+        <select name="proveedor">
+            {{#each proveedores}}
+                <option value="{{this.id}}">{{this.nombre}}</option>
+            {{/each}}
+        </select>
+        <div>
+            <span class="nombre-campo">Documento Comercial</span><br>
+            <span class="nombre-campo">Tipo:</span>
+            <select name="tipo-doc-comercial">
+                {{#each tiposDocumentoComercial}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+            <span class="nombre-campo">Número:</span><input type="number" name="numeroDocComercial">
+        </div>
+        <span class="nombre-campo">Moneda:</span>
+        <select name="moneda">
+            {{#monedaEgreso}}
+                <option selected="true" disabled="disabled" value="{{this.id}}">{{this.description}}</option>
+            {{/monedaEgreso}}
+        </select><br>
+        <span class="nombre-campo">Ítems:</span>
+        <ul>
+            {{#itemsEgreso}}
+            <li>
+                <span>Descripción: </span>{{this.descripcion}} - <span>Cantidad de unidades: </span>{{this.cantidadUnidades}} - <span>Precio unitario: </span><input type="number" name="precioItems">
+            </li>
+            {{/itemsEgreso}}
+        </ul>
+    </div>
+    <input type="submit" value="Crear Presupuesto">
+</form>
