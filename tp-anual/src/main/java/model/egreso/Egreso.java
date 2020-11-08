@@ -17,6 +17,7 @@ import model.usuario.Usuario;
 @Entity
 @Table (name = "egresos")
 public class Egreso {
+
 	@Id
 	@GeneratedValue
 	private Long egreso_id;
@@ -66,7 +67,11 @@ public class Egreso {
 
 	public Egreso() {
 	}
-	
+
+	public Long getEgreso_id() {
+		return egreso_id;
+	}
+
 	public List<String> getEtiquetasAsignadas() {
 		return this.etiquetasAsignadas;
 	}

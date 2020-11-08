@@ -1,8 +1,12 @@
 package controllers;
 
+import model.egreso.Moneda;
 import model.entidades.EntidadBase;
 import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
+import model.meLiApi.MeLiApi;
+import model.mediosDePago.MedioDePago;
+import model.mediosDePago.TipoMedioDePago;
 import model.usuario.CreadorDeUsuario;
 import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
@@ -66,6 +70,18 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             persist(usuarioPrueba2);
 
             persist(new Usuario("admin", "7815696ecbf1c96e6894b779456d330e", TipoUsuario.ADMINISTRADOR)); //password: asd
+
+            persist(MeLiApi.obtenerMoneda("ARS"));
+            persist(MeLiApi.obtenerMoneda("BRL"));
+            persist(MeLiApi.obtenerMoneda("EUR"));
+            persist(MeLiApi.obtenerMoneda("USD"));
+
+            persist(new MedioDePago(TipoMedioDePago.TARJETA_CREDITO, "VISA"));
+            persist(new MedioDePago(TipoMedioDePago.TARJETA_CREDITO, "MASTERCARD"));
+            persist(new MedioDePago(TipoMedioDePago.TARJETA_DEBITO, "VISA"));
+            persist(new MedioDePago(TipoMedioDePago.TARJETA_DEBITO, "MASTERCARD"));
+            persist(new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "MERCADOPAGO"));
+
         });
     }
 

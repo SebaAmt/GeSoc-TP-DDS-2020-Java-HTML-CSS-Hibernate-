@@ -1,9 +1,12 @@
 package controllers;
 
 import controllers.HomeController;
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
+
+import static spark.Spark.after;
 
 public class Routes {
 
@@ -37,6 +40,13 @@ public class Routes {
 
         //Egresos
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/nuevo", egresosController::getFormCreacionEgreso, engine);
+        Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos", (request, response) -> egresosController.crearEgreso(request, response));
+
+        // FORO
+        after((request, response) -> {
+            PerThreadEntityManagers.getEntityManager();
+            PerThreadEntityManagers.closeEntityManager();
+        });
     }
 
 
