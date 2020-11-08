@@ -22,8 +22,7 @@ public class Egreso {
 	@Id
 	@GeneratedValue
 	private Long egreso_id;
-	
-    @ElementCollection
+	@ElementCollection
 	private List<String> etiquetasAsignadas = new ArrayList<>();
     @ManyToMany
     @JoinTable (name = "revisores_egreso")
@@ -67,6 +66,14 @@ public class Egreso {
 	}
 
 	public Egreso() {
+	}
+
+	public List<Usuario> getRevisores() {
+		return revisores;
+	}
+
+	public boolean isRequierePresupuestos() {
+		return requierePresupuestos;
 	}
 
 	public Long getEgreso_id() {
