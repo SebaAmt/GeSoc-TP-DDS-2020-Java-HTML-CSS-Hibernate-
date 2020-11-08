@@ -14,6 +14,7 @@ import model.exception.PresupuestoNoTieneMismaMonedaException;
 import model.exception.PresupuestoNoTieneMismosItemsQueEgresoException;
 import model.mediosDePago.MedioDePago;
 import model.usuario.Usuario;
+
 @Entity
 @Table (name = "egresos")
 public class Egreso {

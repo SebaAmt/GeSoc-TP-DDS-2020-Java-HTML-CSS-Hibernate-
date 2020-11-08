@@ -41,6 +41,7 @@ public class Routes {
         //Egresos
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/nuevo", egresosController::getFormCreacionEgreso, engine);
         Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos", (request, response) -> egresosController.crearEgreso(request, response));
+        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso", (request, response) -> egresosController.getDetalleEgreso(request, response), engine);
 
         // FORO
         after((request, response) -> {

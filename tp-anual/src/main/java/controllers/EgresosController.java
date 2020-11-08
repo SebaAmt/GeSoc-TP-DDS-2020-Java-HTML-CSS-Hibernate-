@@ -4,16 +4,12 @@ import model.documentoComercial.DocumentoComercial;
 import model.documentoComercial.TipoDocumentoComercial;
 import model.egreso.*;
 import model.entidades.Entidad;
-import model.entidades.Organizacion;
 import model.mediosDePago.MedioDePago;
-import model.mediosDePago.TipoMedioDePago;
 import model.usuario.Usuario;
-import org.joda.time.DateTime;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import repositorios.*;
 import spark.ModelAndView;
-import spark.QueryParamsMap;
 import spark.Request;
 import spark.Response;
 
@@ -76,7 +72,24 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             entidad.nuevoEgreso(nuevoEgreso);
         });
 
-        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad"));
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/egresos/" + nuevoEgreso.getEgreso_id());
         return null;
+    }
+
+    public ModelAndView getDetalleEgreso(Request request, Response response){
+        String idOrg = request.params(":idOrg");
+        String idEgreso = request.params(":idEgreso");
+        try{
+            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(idOrg));
+
+            Map<String, Object> modelo = new HashMap<>();
+            modelo.put("egreso", RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(idEgreso)));
+
+            return new ModelAndView(modelo, "detalle-egreso.html.hbs");
+        }
+        catch(Exception ex){
+            response.status(400);
+            return null;
+        }
     }
 }
