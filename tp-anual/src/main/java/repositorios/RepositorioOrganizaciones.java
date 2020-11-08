@@ -35,4 +35,9 @@ public class RepositorioOrganizaciones implements WithGlobalEntityManager {
         result.add(entityManager().find(Organizacion.class, usuario.getOrganizacion().getId()));
         return result;
     }
+
+    public List<String> obtenerEtiquetasDeOrganizacion(Long organizacionId){
+        Organizacion org = entityManager().find(Organizacion.class, organizacionId);
+        return org.getEtiquetasDisponibles();
+    }
 }

@@ -1,0 +1,30 @@
+<h1>Nuevo Egreso</h1>
+<form class="nuevo-egreso" action="/organizaciones/{{idOrganizacion}}/entidades/{{idEntidad}}/egresos" method="POST">
+    <div class="campo">
+        <span class="nombre-campo">Fecha de operación:</span><input type="date" name="fechaOp">
+        <div>
+            <span>Documento Comercial</span>
+            <span class="nombre-campo">Tipo:</span>
+                <select name="tipo-doc-comercial">
+                    {{#each tiposDocumentoComercial}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            <span class="nombre-campo">Número:</span><input type="number" name="numeroDocComercial">
+        </div>
+        <span class="nombre-campo">Medio de pago:</span>
+        <select name="medioDePago">
+            {{#each mediosDePago}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+        <div>
+            <span class="nombre-campo">Etiquetas:</span>
+            {{#each etiquetasDisponibles}}
+                {{this}}<input type="checkbox" value="{{this}}">&nbsp;&nbsp;&nbsp;
+            {{/each}}
+        </div>
+        ¿Requiere presupuestos?<input type="checkbox" value="presupuestosVOF">
+    </div>
+    <input type="submit" value="Crear Egreso">
+</form>
