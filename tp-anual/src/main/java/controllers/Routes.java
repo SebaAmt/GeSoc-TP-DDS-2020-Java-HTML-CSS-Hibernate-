@@ -51,7 +51,7 @@ public class Routes {
 
         //Presupuestos
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/presupuestos/nuevo", (request,response) -> presupuestosController.getFormCreacionPresupuesto(request, response), engine);
-        //Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/presupuestos", (request,response) -> presupuestosController.crearPresupuesto(request, response));
+        Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/presupuestos", (request,response) -> presupuestosController.crearPresupuesto(request, response));
 
 
         // FORO

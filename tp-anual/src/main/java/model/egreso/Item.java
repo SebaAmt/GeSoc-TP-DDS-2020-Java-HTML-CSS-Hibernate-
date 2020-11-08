@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 @Entity
 @Table(name = "items")
 public class Item {
-
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -27,7 +26,10 @@ public class Item {
 		this.precioUnitario = precioUnitario;
 		this.cantidadUnidades = cantidadUnidades;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
 	
 	public BigDecimal valorTotal() {
 		return precioUnitario.multiply(BigDecimal.valueOf(cantidadUnidades));
