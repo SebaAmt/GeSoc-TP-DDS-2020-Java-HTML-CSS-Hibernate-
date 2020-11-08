@@ -23,6 +23,7 @@ public class Routes {
         OrganizacionesController organizacionesController = new OrganizacionesController();
         EntidadesController entidadesController = new EntidadesController();
         EgresosController egresosController = new EgresosController();
+        ItemsController itemsController = new ItemsController();
 
         //Login
         Spark.get("/login", (request, response) -> usuariosController.getFormularioLogin(request, response), engine);
@@ -42,6 +43,10 @@ public class Routes {
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/nuevo", egresosController::getFormCreacionEgreso, engine);
         Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos", (request, response) -> egresosController.crearEgreso(request, response));
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso", (request, response) -> egresosController.getDetalleEgreso(request, response), engine);
+
+        //Items
+        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/items/nuevo", (request,response) -> itemsController.getFormCreacionItem(request, response), engine);
+        Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/items", (request,response) -> itemsController.crearItem(request, response));
 
         // FORO
         after((request, response) -> {

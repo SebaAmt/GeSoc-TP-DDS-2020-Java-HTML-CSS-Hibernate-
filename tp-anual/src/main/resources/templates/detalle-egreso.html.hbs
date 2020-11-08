@@ -1,15 +1,15 @@
 {{#egreso}}
-    <h1>Egreso {{this.egreso_id}}</h1>
-    <span>Fecha de operación: {{this.fechaDeOperacion}}</span><br>
-    <span>Proveedor: {{this.proveedor}}</span><br>
-    <span>Documento comercial: {{this.documentoComercial}}</span><br>
-    <span>Moneda: {{this.moneda}}</span><br>
-    <span>Requiere presupuestos: {{this.requierePresupuestos}}</span><br>
-    <span>Estado: {{this.estado}}</span><br>
-    <span>Criterio selección presupuesto: {{this.criterio}}</span><br>
-    <span>Revisores: {{this.revisores}}</span><br>
-    <span>Ítems: {{this.items}}</span><br>
-    <span>Etiquetas asignadas: {{this.etiquetas}}</span><br>
-    <span>Presupuestos: {{this.presupuestos}}</span>
-    <a>Agregar item</a>
+    <h1>Egreso {{egreso_id}}</h1>
+    <span>Fecha de operación: {{fechaDeOperacion}}</span><br>
+    <span>Proveedor: {{proveedor}}</span><br>
+    <span>Documento comercial: {{documentoComercial}}</span><br>
+    <span>Moneda: {{moneda}}</span><br>
+    <span>Requiere presupuestos: {{requierePresupuestos}}</span><br>
+    <span>Estado: {{estado}}</span><br>
+    <span>Criterio selección presupuesto: {{criterio}}</span><br>
+    <span>Revisores: {{revisores}}</span><br>
+    <span>Ítems: {{items}}</span><br>
+    <span>Etiquetas asignadas: {{etiquetas}}</span><br>
+    <span>Presupuestos: {{presupuestos}}</span><br>
+    <a href="{{egreso_id}}/items/nuevo">Agregar item</a>
 {{/egreso}}
