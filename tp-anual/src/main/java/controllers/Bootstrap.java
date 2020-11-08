@@ -1,6 +1,9 @@
 package controllers;
 
+import model.direccion.Direccion;
+import model.direccion.DireccionPostal;
 import model.egreso.Moneda;
+import model.egreso.Proveedor;
 import model.entidades.EntidadBase;
 import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
@@ -81,6 +84,29 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             persist(new MedioDePago(TipoMedioDePago.TARJETA_DEBITO, "VISA"));
             persist(new MedioDePago(TipoMedioDePago.TARJETA_DEBITO, "MASTERCARD"));
             persist(new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "MERCADOPAGO"));
+
+
+            Direccion direccionBelgrano = new Direccion
+                    .DireccionBuilder()
+                    .calleBuild("Calle Falsa")
+                    .alturaBuild(123)
+                    .pisoBuild(1)
+                    .departamentoBuild("A")
+                    .direccionPostalBuilder("1407")
+                    .buildDireccion();
+
+            persist(direccionBelgrano.getDireccionPostal());
+            persist(new Proveedor("Manuel Belgrano", 36157574, direccionBelgrano));
+
+            Direccion direccionSanMartin = new Direccion
+                    .DireccionBuilder()
+                    .calleBuild("Florida")
+                    .alturaBuild(555)
+                    .direccionPostalBuilder("6300")
+                    .buildDireccion();
+
+            persist(direccionSanMartin.getDireccionPostal());
+            persist(new Proveedor("José de San Martín", 33578415, direccionSanMartin));
 
         });
     }

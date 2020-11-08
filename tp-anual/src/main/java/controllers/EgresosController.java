@@ -37,6 +37,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             modelo.put("tiposDocumentoComercial", TipoDocumentoComercial.values());
             modelo.put("criteriosSeleccionPresupuesto", CriterioSeleccionPresupuesto.values());
             modelo.put("monedas", RepositorioMonedas.instancia.obtenerMonedas());
+            modelo.put("proveedores", RepositorioProveedores.instancia.obtenerProveedores());
 
             return new ModelAndView(modelo, "form-creacion-egreso.html.hbs");
         }
@@ -48,6 +49,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
 
     public Void crearEgreso(Request request, Response response){
         LocalDate fechaOperacion = LocalDate.parse(request.queryParams("fechaOperacion"));
+        Proveedor proveedor = RepositorioProveedores.instancia.getProveedorPorId(Long.parseLong(request.queryParams("proveedor")));
         int numeroDocComercial = Integer.parseInt(request.queryParams("numeroDocComercial"));
         DocumentoComercial documentoComercial = new DocumentoComercial(TipoDocumentoComercial.valueOf(request.queryParams("tipo-doc-comercial")), numeroDocComercial);
         MedioDePago medioDePago = RepositorioMediosDePago.instancia.obtenerMedioDePagoPorId(Long.parseLong(request.queryParams("medioDePago")));
@@ -61,7 +63,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
         if(request.queryParams("criterioSeleccionPresupuesto") != null)
              criterio = CriterioSeleccionPresupuesto.valueOf(request.queryParams("criterioSeleccionPresupuesto"));
 
-        Egreso nuevoEgreso = new Egreso(fechaOperacion, null, documentoComercial, medioDePago, moneda, new ArrayList<Item>(), revisores, new ArrayList<Presupuesto>(), requierePresupuestos, criterio);
+        Egreso nuevoEgreso = new Egreso(fechaOperacion, proveedor, documentoComercial, medioDePago, moneda, new ArrayList<Item>(), revisores, new ArrayList<Presupuesto>(), requierePresupuestos, criterio);
         if(etiquetas != null)
             Arrays.stream(etiquetas).forEach(e -> nuevoEgreso.etiquetar(e));
 
