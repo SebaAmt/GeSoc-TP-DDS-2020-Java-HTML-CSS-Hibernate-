@@ -1,14 +1,26 @@
 package controllers;
 
+import model.categoria.Categoria;
+import model.direccion.Direccion;
+import model.direccion.DireccionPostal;
+import model.egreso.Moneda;
+import model.egreso.Proveedor;
 import model.entidades.EntidadBase;
 import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
+import model.meLiApi.MeLiApi;
+import model.mediosDePago.MedioDePago;
+import model.mediosDePago.TipoMedioDePago;
+import model.reglaNegocio.ReglaNegocio;
+import model.reglaNegocio.ReglaNegocioBloquearAgregarEntidadBase;
+import model.reglaNegocio.ReglaNegocioMontoMaximo;
 import model.usuario.CreadorDeUsuario;
 import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
 import model.validacionesContrasenias.ValidadorDeContrasenias;
 import model.validacionesEgresos.ValidacionEgreso;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +61,23 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             valve.agregarValidacionEgreso(ValidacionEgreso.COINCIDE_CON_CRITERIO);
             valve.agregarValidacionEgreso(ValidacionEgreso.COINCIDE_CON_PRESUPUESTO_CARGADO);
 
+            
+            List<ReglaNegocio> reglas = new ArrayList<>();
+            ReglaNegocio bloquearAgregarEntidadBase = new ReglaNegocioBloquearAgregarEntidadBase();
+            ReglaNegocio montoMaximo = new ReglaNegocioMontoMaximo(new BigDecimal(40));
+            
+            persist(bloquearAgregarEntidadBase);
+            persist(montoMaximo);
+            
+        	reglas.add(bloquearAgregarEntidadBase);
+        	reglas.add(montoMaximo);
+        	Categoria categoria = new Categoria("Empresa Mediana Tramo1", reglas); 
+            
+        	persist(categoria);
+        	
+        	valve.agregarCategoria(categoria);
+            
+        	
             persist(blackMesa);
             persist(aperture);
             persist(valve);
@@ -74,7 +103,44 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             persist(usuarioPrueba2);
 
             persist(new Usuario("admin", "7815696ecbf1c96e6894b779456d330e", TipoUsuario.ADMINISTRADOR)); //password: asd
+
+            persist(MeLiApi.obtenerMoneda("ARS"));
+            persist(MeLiApi.obtenerMoneda("BRL"));
+            persist(MeLiApi.obtenerMoneda("EUR"));
+            persist(MeLiApi.obtenerMoneda("USD"));
+
+            persist(new MedioDePago(TipoMedioDePago.TARJETA_CREDITO, "VISA"));
+            persist(new MedioDePago(TipoMedioDePago.TARJETA_CREDITO, "MASTERCARD"));
+            persist(new MedioDePago(TipoMedioDePago.TARJETA_DEBITO, "VISA"));
+            persist(new MedioDePago(TipoMedioDePago.TARJETA_DEBITO, "MASTERCARD"));
+            persist(new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "MERCADOPAGO"));
+
+
+            Direccion direccionBelgrano = new Direccion
+                    .DireccionBuilder()
+                    .calleBuild("Calle Falsa")
+                    .alturaBuild(123)
+                    .pisoBuild(1)
+                    .departamentoBuild("A")
+                    .direccionPostalBuilder("1407")
+                    .buildDireccion();
+
+            persist(direccionBelgrano.getDireccionPostal());
+            persist(new Proveedor("Manuel Belgrano", 36157574, direccionBelgrano));
+
+            Direccion direccionSanMartin = new Direccion
+                    .DireccionBuilder()
+                    .calleBuild("Florida")
+                    .alturaBuild(555)
+                    .direccionPostalBuilder("6300")
+                    .buildDireccion();
+
+            persist(direccionSanMartin.getDireccionPostal());
+            persist(new Proveedor("José de San Martín", 33578415, direccionSanMartin));       	
+            
         });
+        
+        System.out.println("Fin carga");
     }
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "Medios_de_Pago")
 public class MedioDePago {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -27,6 +27,10 @@ public class MedioDePago {
 	}
 	
 	public MedioDePago() {
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public TipoMedioDePago getMedio() {

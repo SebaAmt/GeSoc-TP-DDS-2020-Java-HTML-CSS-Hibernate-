@@ -1,0 +1,55 @@
+<h1>Nuevo Egreso</h1>
+<form class="nuevo-egreso" action="/organizaciones/{{idOrganizacion}}/entidades/{{idEntidad}}/egresos" method="POST">
+    <div class="campo">
+        <span class="nombre-campo">Fecha de operación:</span><input type="date" name="fechaOperacion" value="2020-01-01"><br>
+        <span class="nombre-campo">Proveedores:</span>
+        <select name="proveedor">
+            {{#each proveedores}}
+                <option value="{{this.id}}">{{this.nombre}}</option>
+            {{/each}}
+        </select>
+        <div>
+            <span class="nombre-campo">Documento Comercial</span>
+            <span class="nombre-campo">Tipo:</span>
+                <select name="tipo-doc-comercial">
+                    {{#each tiposDocumentoComercial}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+                </select>
+            <span class="nombre-campo">Número:</span><input type="number" name="numeroDocComercial">
+        </div>
+        <div>
+            <span class="nombre-campo">Medio de pago:</span>
+            <select name="medioDePago">
+                {{#each mediosDePago}}
+                    <option value="{{this.id}}">{{this.identificador}} - {{this.medio}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <span class="nombre-campo">Moneda:</span>
+        <select name="moneda">
+            {{#each monedas}}
+                <option value="{{this.id}}">{{this.description}}</option>
+            {{/each}}
+        </select>
+        <div>
+            <span class="nombre-campo">Etiquetas:</span><br>
+            {{#each etiquetasDisponibles}}
+                <input type="checkbox" name="etiquetas" value="{{this}}" id={{this}}>
+                <label for="{{this}}">{{this}}</label><br>
+            {{/each}}
+        </div>
+        <input type="checkbox" name="revisorCheck" id="revisor">
+        <label for="revisor">Quiero ser revisor de este egreso</label><br>
+        <input type="checkbox" name="presupuestoCheck" id="presupuestos">
+        <label for ="presupuestos">Requiere presupuestos</label><br>
+        <span class="nombre-campo">Criterio de selección de presupuesto:</span>
+        <select name="criterioSeleccionPresupuesto">
+            {{#each criteriosSeleccionPresupuesto}}
+                <option selected disabled hidden style='display: none' value=''></option>
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <input type="submit" value="Crear Egreso">
+</form>

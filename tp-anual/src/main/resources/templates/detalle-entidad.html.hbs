@@ -1,0 +1,26 @@
+{{#entidad}}
+<h1>{{nombreFicticio}}</h1>
+{{#if descripcion not null}}
+    <span>Descripción: {{descripcion}}</span></br>
+{{/if}}
+<span>Categoria: {{categoria}}</span></br>
+{{#if razonSocial not null}}
+    <span>Razón social: {{razonSocial}}</span></br>
+{{/if}}
+{{#if cuit not null}}
+    <span>CUIT: {{cuit}}</span></br>
+{{/if}}
+{{#if direccionPostal not null}}
+    <span>Dirección Postal: {{direccionPostal}}</span></br>
+{{/if}}
+{{#if codigoInscripcionIGJ not null}}
+    <span>Código inscripción IGJ: {{codigoInscripcionIGJ}}</span></br>
+{{/if}}
+<span>Egresos:</span></br>
+<ul>
+    {{#each egresos}}
+        <li><a href="{{entidad.id}}/egresos/{{this.egreso_id}}">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</a></li>
+    {{/each}}
+</ul>
+<a href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
+{{/entidad}}

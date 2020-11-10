@@ -62,4 +62,12 @@ public abstract class Entidad {
     public String getNombreFicticio() {
     	return this.nombreFicticio;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public List<Egreso> getEgresos() {
+        return egresos;
+    }
 }

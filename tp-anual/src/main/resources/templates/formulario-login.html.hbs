@@ -1,12 +1,22 @@
-<section class="fondo-gris">
-    <h2>Iniciar Sesión</h2>
-    <form class="login" action="/login" method="POST">
-        <div class="campo">
-            <span class="nombre-campo">Nombre de usuario:</span><input type="text" name="username" placeholder="Ingrese nombre de usuario">
-        </div>
-        <div class="campo">
-            <span class="nombre-campo">Contraseña:</span><input type="password" name="password" placeholder="Ingrese contraseña">
-        </div>
-        <input type="submit" value="Iniciar Sesión">
-    </form>
-</section>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+
+<body class="login-body">
+    <section class="login-box">
+        <h2 class="login-title">Inicio de sesión</h2><br>
+        <form class="login-form" action="/login" method="POST">
+            <div class="campo">
+                <input type="text" name="username" placeholder="Usuario">
+            </div>
+            <div class="campo">
+                <input type="password" name="password" placeholder="******">
+            </div>
+            <input type="submit" class="submit-button" value="Iniciar Sesión">
+        </form>
+    </section>
+</body>
+
+</html>

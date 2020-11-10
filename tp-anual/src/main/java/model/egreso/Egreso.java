@@ -14,14 +14,15 @@ import model.exception.PresupuestoNoTieneMismaMonedaException;
 import model.exception.PresupuestoNoTieneMismosItemsQueEgresoException;
 import model.mediosDePago.MedioDePago;
 import model.usuario.Usuario;
+
 @Entity
 @Table (name = "egresos")
 public class Egreso {
+
 	@Id
 	@GeneratedValue
 	private Long egreso_id;
-	
-    @ElementCollection
+	@ElementCollection
 	private List<String> etiquetasAsignadas = new ArrayList<>();
     @ManyToMany
     @JoinTable (name = "revisores_egreso")
@@ -66,7 +67,19 @@ public class Egreso {
 
 	public Egreso() {
 	}
-	
+
+	public List<Usuario> getRevisores() {
+		return revisores;
+	}
+
+	public boolean isRequierePresupuestos() {
+		return requierePresupuestos;
+	}
+
+	public Long getEgreso_id() {
+		return egreso_id;
+	}
+
 	public List<String> getEtiquetasAsignadas() {
 		return this.etiquetasAsignadas;
 	}

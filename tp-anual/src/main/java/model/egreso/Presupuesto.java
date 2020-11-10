@@ -56,4 +56,8 @@ public class Presupuesto {
     public Moneda getMoneda() {
     	return this.moneda;
     }
+
+    public void agregarItem(Item item){
+        this.items.add(item);
+    }
 }

@@ -1,0 +1,18 @@
+<h1>Nueva Entidad Juridica</h1>
+<form class="nueva-entidad-juridica" action="/organizaciones/{{idOrganizacion}}/entidades/nueva/juridica" method="POST">
+    <div class="campo">
+        <span class="nombre-campo">Nombre:</span><input type="text" name="nombre" value="Ingrese nombre de la entidad"><br>
+        <span class="nombre-campo">Categorias:</span>
+        <select name="categorias">
+            {{#each categorias}}
+                <option value="{{this.id}}">{{this.nombreCategoria}}</option>
+            {{/each}}
+        </select><br>
+        
+    	<span class="nombre-campo">Razon Social:</span><input type="text" name="razonSocial" value="Ingrese la razon social"><br>
+        <span class="nombre-campo">Cuit:</span><input type="text" name="cuit" value="Ingrese el numero cuit"><br>
+        <span class="nombre-campo">Codigo Postal:</span><input type="text" name="codigoPostal" value="Ingrese el codigo postal"><br>
+        <span class="nombre-campo">Codigo Inscripcion IGJ:</span><input type="text" name="codigoInscripcionIGJ" value="Ingrese el codigo de inscripcion IGJ"><br>
+        
+    <input type="submit" value="Crear Entidad">
+</form>
