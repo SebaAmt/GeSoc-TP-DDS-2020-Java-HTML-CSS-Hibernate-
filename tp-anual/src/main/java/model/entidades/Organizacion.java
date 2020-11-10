@@ -95,6 +95,10 @@ public class Organizacion {
     	}
     }
     
+    public void agregarCategoria(Categoria categoria) {
+    	this.getCategorias().add(categoria);
+    }
+    
     public void agregarReglaNegocio(String nombreCategoria, ReglaNegocio reglaNegocio) {
     	this.getCategoria(nombreCategoria).agregarReglaNegocio(reglaNegocio);
     }

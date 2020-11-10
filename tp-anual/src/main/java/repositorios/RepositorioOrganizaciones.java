@@ -1,13 +1,9 @@
 package repositorios;
 
 import model.categoria.Categoria;
-import model.entidades.Entidad;
-import model.entidades.EntidadBase;
-import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
 import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
-import model.validacionesEgresos.ValidacionEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import java.util.ArrayList;
@@ -39,5 +35,10 @@ public class RepositorioOrganizaciones implements WithGlobalEntityManager {
     public List<String> obtenerEtiquetasDeOrganizacion(Long organizacionId){
         Organizacion org = entityManager().find(Organizacion.class, organizacionId);
         return org.getEtiquetasDisponibles();
+    }
+    
+    public List<Categoria> obtenerCategoriasDeOrganizacion(Long organizacionId){
+        Organizacion org = entityManager().find(Organizacion.class, organizacionId);
+        return org.getCategorias();
     }
 }

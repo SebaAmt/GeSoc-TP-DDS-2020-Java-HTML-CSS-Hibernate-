@@ -36,8 +36,9 @@ public class Routes {
         //Organizaciones
         //Spark.get("/organizaciones", (request, response) -> organizacionesController.getOrganizaciones(request, response), engine);
         Spark.get("/organizaciones/:id", (request, response) -> organizacionesController.getDetalleOrganizacion(request, response), engine);
-
+        
         //Entidades
+        Spark.get("/organizaciones/:idOrg/entidades/nueva/juridica", (request, response) -> entidadesController.getFormCreacionEntidadJuridica(request, response), engine);
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadesController.getDetalleEntidad(request, response), engine);
 
         //Egresos

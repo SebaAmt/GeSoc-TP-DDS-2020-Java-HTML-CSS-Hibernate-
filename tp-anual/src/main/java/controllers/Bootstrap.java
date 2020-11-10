@@ -1,5 +1,6 @@
 package controllers;
 
+import model.categoria.Categoria;
 import model.direccion.Direccion;
 import model.direccion.DireccionPostal;
 import model.egreso.Moneda;
@@ -10,11 +11,19 @@ import model.entidades.Organizacion;
 import model.meLiApi.MeLiApi;
 import model.mediosDePago.MedioDePago;
 import model.mediosDePago.TipoMedioDePago;
+import model.reglaNegocio.ReglaNegocio;
+import model.reglaNegocio.ReglaNegocioBloquearAgregarEntidadBase;
+import model.reglaNegocio.ReglaNegocioMontoMaximo;
 import model.usuario.CreadorDeUsuario;
 import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
 import model.validacionesContrasenias.ValidadorDeContrasenias;
 import model.validacionesEgresos.ValidacionEgreso;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
@@ -48,6 +57,23 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             valve.agregarValidacionEgreso(ValidacionEgreso.COINCIDE_CON_CRITERIO);
             valve.agregarValidacionEgreso(ValidacionEgreso.COINCIDE_CON_PRESUPUESTO_CARGADO);
 
+            
+            List<ReglaNegocio> reglas = new ArrayList<>();
+            ReglaNegocio bloquearAgregarEntidadBase = new ReglaNegocioBloquearAgregarEntidadBase();
+            ReglaNegocio montoMaximo = new ReglaNegocioMontoMaximo(new BigDecimal(40));
+            
+            persist(bloquearAgregarEntidadBase);
+            persist(montoMaximo);
+            
+        	reglas.add(bloquearAgregarEntidadBase);
+        	reglas.add(montoMaximo);
+        	Categoria categoria = new Categoria("Empresa Mediana Tramo1", reglas); 
+            
+        	persist(categoria);
+        	
+        	valve.agregarCategoria(categoria);
+            
+        	
             persist(blackMesa);
             persist(aperture);
             persist(valve);
@@ -106,9 +132,11 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
                     .buildDireccion();
 
             persist(direccionSanMartin.getDireccionPostal());
-            persist(new Proveedor("José de San Martín", 33578415, direccionSanMartin));
-
+            persist(new Proveedor("José de San Martín", 33578415, direccionSanMartin));       	
+            
         });
+        
+        System.out.println("Fin carga");
     }
 
 }
