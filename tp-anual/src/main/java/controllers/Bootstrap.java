@@ -8,6 +8,10 @@ import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
 import model.validacionesContrasenias.ValidadorDeContrasenias;
 import model.validacionesEgresos.ValidacionEgreso;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.uqbarproject.jpa.java8.extras.EntityManagerOps;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
@@ -30,9 +34,13 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
             Organizacion valve = new Organizacion("Valve");
             EntidadJuridica blackMesa = new EntidadJuridica("Black Mesa SRL", "Black Mesa", "123456789", "Direccion 123", "123");
             EntidadBase aperture = new EntidadBase("Aperture Laboratories", "Hacemos portales");
+            List<String> mensajesDePrueba = new ArrayList<>();
             valve.agregarEntidadBase(aperture);
             valve.agregarEntidadJuridica(blackMesa);
+            mensajesDePrueba.add("El Egreso 1 no fue aprobado");
+            mensajesDePrueba.add("El Egreso 3 fue aprobado con éxito");
             usuarioPrueba.asignarOrganizacion(valve);
+            usuarioPrueba.setBandejaDeMensajes(mensajesDePrueba);
 
             valve.nuevaEtiqueta("Etiqueta Valve 1");
             valve.nuevaEtiqueta("Etiqueta Valve 2");

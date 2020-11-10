@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.mysql.cj.xdevapi.CreateIndexParams;
 import model.usuario.CreadorDeUsuario;
 import model.usuario.Usuario;
@@ -30,4 +33,12 @@ public class UsuariosController {
         return null;
     }
 
+    public ModelAndView getMensajes(Request request, Response response){
+        SessionHelper.validarLogueado(request, response);
+        Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
+        Map<String, Object> modelo = new HashMap<>();
+        modelo.put("mensaje", usuarioLogueado.getBandejaDeMensajes());
+
+        return new ModelAndView(modelo, "mensajes.html.hbs");
+    }
 }
