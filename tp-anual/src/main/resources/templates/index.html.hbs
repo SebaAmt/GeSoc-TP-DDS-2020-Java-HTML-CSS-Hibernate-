@@ -11,10 +11,10 @@
             ultrices enim, vitae semper diam leo ac nisi.
         </p>
 
-        <table>
-            <tr>
-                <th>Organización</th>
-            </tr>
+        <table class="tabla-organizaciones">
+<!--            <tr>-->
+<!--                <th>Organización</th>-->
+<!--            </tr>-->
 <!--            <tr>-->
 <!--                <form>-->
 <!--                    <th>-->
@@ -25,7 +25,7 @@
 <!--            </tr>-->
             {{#organizaciones}}
             <tr>
-                <td>{{nombre}}</td>
+                <td class="primer-columna">{{nombre}}</td>
                 <td><a href="organizaciones/{{id}}"><i class="small material-icons">description</i>Ver detalle</a></td>
                 <td><a href="/"><i class="small material-icons">edit</i>Modificar</a></td>
                 <td><a href="/"><i class="small material-icons">delete</i>Borrar</a></td>

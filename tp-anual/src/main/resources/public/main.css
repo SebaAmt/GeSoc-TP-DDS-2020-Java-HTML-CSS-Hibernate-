@@ -40,16 +40,24 @@ i {
     right: 0.1em;
 }
 
-table {
+.tabla-organizaciones {
+    display: flex;
+    justify-content: center;
 }
 
-tr {
+th {
+    padding-bottom: 0.5em;
 }
 
 td {
     text-align: center;
     border-right: 2px solid;
     padding: 1em;
+}
+
+.primer-columna{
+    padding: 1em 2.5em;
+    font-weight: bold;
 }
 
 input[type=text], input[type=password] {
