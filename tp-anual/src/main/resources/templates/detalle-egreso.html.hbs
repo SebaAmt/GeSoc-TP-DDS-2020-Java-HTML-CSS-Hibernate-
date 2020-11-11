@@ -2,6 +2,7 @@
 <div class="detalle">
     {{#egreso}}
         <h1>Egreso {{egreso_id}}</h1>
+        <hr>
         <div class="seccion-texto-detalle">
             <div class="elemento-detalle">
                 <span class="span-detalle">Fecha de operación</span><p class="valor-detalle">{{fechaDeOperacion}}</p>
@@ -26,12 +27,13 @@
                 <p class="valor-detalle">{{documentoComercial.tipoDocumentoComercial}} {{documentoComercial.identificadorDocumento}}</p>
             </div>
         </div>
-        <h4 class="span-detalle">Revisores</h4><br>
+        <hr>
+        <h4 class="span-detalle">Revisores</h4>
         <table>
         {{#each revisores}}
             <tr>
                 <td>{{username}}</td>
-                <td><a href="/" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a></td>
+                <td class="celda-botones"><a href="/" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a></td>
             </tr>
             {{/each}}
         </table>
