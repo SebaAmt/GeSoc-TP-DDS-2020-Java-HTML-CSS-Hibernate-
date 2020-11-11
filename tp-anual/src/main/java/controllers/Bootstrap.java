@@ -72,9 +72,12 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
         	reglas.add(bloquearAgregarEntidadBase);
         	reglas.add(montoMaximo);
         	Categoria categoria = new Categoria("Empresa Mediana Tramo1", reglas); 
-            
-        	persist(categoria);
+        	Categoria categoria2 = new Categoria("Empresa Pequeña Tramo1", reglas);
+            Categoria categoria3 = new Categoria("Empresa Grande Tramo1", reglas);
         	
+            persist(categoria);
+        	persist(categoria2);
+        	persist(categoria3);
         	valve.agregarCategoria(categoria);
             
         	

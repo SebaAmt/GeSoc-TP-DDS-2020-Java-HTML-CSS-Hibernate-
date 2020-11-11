@@ -3,15 +3,18 @@
 {{#if descripcion}}
     <span>Descripción: {{descripcion}}</span></br>
 {{/if}}
-<div>
+    <div>
 <form method="post">
-<label for="nuevaCategoria">Categoria: {{categoria}} </label>
+<label for="nuevaCategoriaAsignada">Categoria: {{categoria}} </label>
 
-    <input type="text" name="nuevaCategoria" id="nuevaCategoria"></input>
-    <input type="submit" value="Modificar"></input>
+ <select name="nuevaCategoriaAsignada" id="nuevaCategoriaAsignada">
+            {{#each categorias}}
+                <option value="{{this}}">{{this.nombreCategoria}}</option>
+            {{/each}}
+        </select>
+        <input type="submit" value="Modificar"></input>
     </form>
     </div>
-    
 {{#if razonSocial}}
     <span>Razón social: {{razonSocial}}</span></br>
 {{/if}}

@@ -41,9 +41,8 @@ public class Routes {
         Spark.get("/mensajes", (request, response) -> usuariosController.getMensajes(request, response), engine);
         //Entidades
         Spark.get("/organizaciones/:idOrg/entidades/nueva/juridica", (request, response) -> entidadesController.getFormCreacionEntidadJuridica(request, response), engine);
-
-        
-                        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadesController.getDetalleEntidad(request, response), engine);
+        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadesController.getDetalleEntidad(request, response), engine);
+        Spark.post("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) ->entidadesController.modificarCategoria(request, response));
 
         //Egresos
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/nuevo", egresosController::getFormCreacionEgreso, engine);
