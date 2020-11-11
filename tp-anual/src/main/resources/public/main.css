@@ -10,6 +10,8 @@ nav {
     background:#779DE0;
     margin: 0 auto;
     width: 100%;
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/London_from_a_hot_air_balloon.jpg/1280px-London_from_a_hot_air_balloon.jpg);
+    background-position: center;
 }
 
 nav a {
