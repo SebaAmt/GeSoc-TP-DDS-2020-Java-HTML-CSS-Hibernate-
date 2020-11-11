@@ -1,9 +1,20 @@
-{{#mensaje}}
-<h1>{{nombre}}</h1>
-<h3>Tus Mensajes</h3>
-<ul>
-    {{#each usuario}}
-    <ol>{{this.bandejaDeMensajes}}</ol>
-    {{/each}}
-{{/mensaje}}
+{{> layout.html.hbs }}
+{{#block "mensajes"}}
+<h1>Tus Mensajes</h1>
 
+{{#if bandejaVacia}}
+<p>No hay mensajes</p>
+
+{{else}}
+
+ <ol>
+    {{#each mensajes}}
+   <li>
+
+    {{this}}
+       
+   </li>
+   {{/each}}
+ </ol>
+{{/if}}
+{{/block}}
