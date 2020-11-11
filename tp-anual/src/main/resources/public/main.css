@@ -83,3 +83,8 @@ input[type=text], input[type=password] {
 .login-title {
     margin-top: 1em;
 }
+
+footer{
+	position: absolute;
+	bottom: 0;
+}
