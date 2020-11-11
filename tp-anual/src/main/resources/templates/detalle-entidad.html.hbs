@@ -1,6 +1,6 @@
 {{#entidad}}
 <h1>{{nombreFicticio}}</h1>
-{{#if descripcion not null}}
+{{#if descripcion}}
     <span>Descripción: {{descripcion}}</span></br>
 {{/if}}
 <div>
@@ -11,17 +11,17 @@
     <input type="submit" value="Modificar"></input>
     </form>
     </div>
-   
-{{#if razonSocial not null}}
+    
+{{#if razonSocial}}
     <span>Razón social: {{razonSocial}}</span></br>
 {{/if}}
-{{#if cuit not null}}
+{{#if cuit}}
     <span>CUIT: {{cuit}}</span></br>
 {{/if}}
-{{#if direccionPostal not null}}
+{{#if direccionPostal}}
     <span>Dirección Postal: {{direccionPostal}}</span></br>
 {{/if}}
-{{#if codigoInscripcionIGJ not null}}
+{{#if codigoInscripcionIGJ}}
     <span>Código inscripción IGJ: {{codigoInscripcionIGJ}}</span></br>
 {{/if}}
 <span>Egresos:</span></br>

@@ -1,16 +1,19 @@
-{{#egreso}}
-    <h1>Egreso {{egreso_id}}</h1>
-    <span>Fecha de operación: {{fechaDeOperacion}}</span><br>
-    <span>Proveedor: {{proveedor}}</span><br>
-    <span>Documento comercial: {{documentoComercial}}</span><br>
-    <span>Moneda: {{moneda}}</span><br>
-    <span>Requiere presupuestos: {{requierePresupuestos}}</span><br>
-    <span>Estado: {{estado}}</span><br>
-    <span>Criterio selección presupuesto: {{criterio}}</span><br>
-    <span>Revisores: {{revisores}}</span><br>
-    <span>Ítems: {{items}}</span><br>
-    <span>Etiquetas asignadas: {{etiquetas}}</span><br>
-    <span>Presupuestos: {{presupuestos}}</span><br>
-    <a href="{{egreso_id}}/items/nuevo">Agregar item</a>
-    <a href="{{egreso_id}}/presupuestos/nuevo">Agregar presupuesto</a>
-{{/egreso}}
+{{# partial "contenido" }}
+    {{#egreso}}
+        <h1>Egreso {{egreso_id}}</h1>
+        <span>Fecha de operación: {{fechaDeOperacion}}</span><br>
+        <span>Proveedor: {{proveedor}}</span><br>
+        <span>Documento comercial: {{documentoComercial}}</span><br>
+        <span>Moneda: {{moneda}}</span><br>
+        <span>Requiere presupuestos: {{requierePresupuestos}}</span><br>
+        <span>Estado: {{estado}}</span><br>
+        <span>Criterio selección presupuesto: {{criterio}}</span><br>
+        <span>Revisores: {{revisores}}</span><br>
+        <span>Ítems: {{items}}</span><br>
+        <span>Etiquetas asignadas: {{etiquetas}}</span><br>
+        <span>Presupuestos: {{presupuestos}}</span><br>
+        <a href="{{egreso_id}}/items/nuevo">Agregar item</a>
+        <a href="{{egreso_id}}/presupuestos/nuevo">Agregar presupuesto</a>
+    {{/egreso}}
+{{/partial}}
+{{> layout.html.hbs }}

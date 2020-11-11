@@ -18,6 +18,13 @@ nav a {
     padding: 0.5em 1em 1em 1em;
 }
 
+nav span {
+    color: white;
+    padding: 0.8em;
+    margin-left: auto;
+    font-size: 1.1em;
+}
+
 nav a:hover{
     background: #6B8DC9;
     font-weight: bold;
@@ -31,6 +38,26 @@ i {
     position: relative;
     top: 0.2em;
     right: 0.1em;
+}
+
+.tabla-organizaciones {
+    display: flex;
+    justify-content: center;
+}
+
+th {
+    padding-bottom: 0.5em;
+}
+
+td {
+    text-align: center;
+    border-right: 2px solid;
+    padding: 1em;
+}
+
+.primer-columna{
+    padding: 1em 2.5em;
+    font-weight: bold;
 }
 
 input[type=text], input[type=password] {
