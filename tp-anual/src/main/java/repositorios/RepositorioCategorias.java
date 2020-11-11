@@ -20,15 +20,6 @@ public class RepositorioCategorias implements WithGlobalEntityManager {
     public Categoria getCategoriaPorId(Long categoriaId){
         return entityManager().find(Categoria.class, categoriaId);
     }
-    
-    public List<Categoria> getCategorias(){
-    	entityManager().getTransaction().begin();
-    	List<Categoria> listaDeCategoriasSinRepetir = new ArrayList<>();
-    	listaDeCategoriasSinRepetir = entityManager().createQuery("from Categoria",
-    		    Categoria.class)
-    			.getResultList().stream().collect(Collectors.toSet())
-    			.stream().collect(Collectors.toList());
-    	return listaDeCategoriasSinRepetir;
-   }
+   
 }
 

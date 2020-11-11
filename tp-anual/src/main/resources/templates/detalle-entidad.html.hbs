@@ -1,20 +1,22 @@
+{{#partial "contenido"}}
 {{#entidad}}
 <h1>{{nombreFicticio}}</h1>
 {{#if descripcion}}
     <span>Descripción: {{descripcion}}</span></br>
 {{/if}}
     <div>
-<form method="post">
-<label for="nuevaCategoriaAsignada">Categoria: {{categoria}} </label>
+<form method="put">
+<label for="nuevaCategoriaAsignada">Categoria: {{categoria.nombreCategoria}} </label>
 
  <select name="nuevaCategoriaAsignada" id="nuevaCategoriaAsignada">
             {{#each categorias}}
-                <option value="{{this}}">{{this.nombreCategoria}}</option>
+                <option value="{{this.id}}">{{this.nombreCategoria}}</option>
             {{/each}}
         </select>
         <input type="submit" value="Modificar"></input>
     </form>
     </div>
+    
 {{#if razonSocial}}
     <span>Razón social: {{razonSocial}}</span></br>
 {{/if}}
@@ -35,3 +37,6 @@
 </ul>
 <a href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
 {{/entidad}}
+{{/partial}}
+
+{{> layout.html.hbs }}

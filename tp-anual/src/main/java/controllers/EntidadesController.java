@@ -71,8 +71,8 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("entidad", entidad);
-            modelo.put("categorias", RepositorioCategorias.instancia.getCategorias());
-
+            modelo.put("categorias", RepositorioOrganizaciones.instancia.obtenerCategoriasDeOrganizacion(Long.parseLong(idOrg)));
+           
             return new ModelAndView(modelo, "detalle-entidad.html.hbs");
         }
         catch (Exception ex){
@@ -111,11 +111,12 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
     public ModelAndView modificarCategoria(Request request, Response response) {
     	String idEntidad = request.queryParams(":idEntidad");
     	Entidad entidad = RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad));
+    	Long idCategoriaAAsignar = Long.parseLong(request.queryParams("nuevaCategoriaAsignada"));
+    	entidad.setCategoria(RepositorioCategorias.instancia.getCategoriaPorId(idCategoriaAAsignar));
     	//String nombreCategoria = 
     	//List<reglaDeNegocio> reglas = 
-    	//Categoria categoria = new Categoria();    	
-    	//entidad.setCategoria(request.queryParams("nuevaCategoriaAsignada"));
-    	//entidad.setCategoria();
+    	//Categoria categoria = new Categoria();    
+    	    	    	
              
     	response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad"));
             
