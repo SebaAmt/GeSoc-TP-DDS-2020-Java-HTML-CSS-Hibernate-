@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "presupuestos")
 public class Presupuesto {
 
-	@Id
+    @Id
 	@GeneratedValue
 	private Long id;
 	@ManyToOne
@@ -59,5 +59,9 @@ public class Presupuesto {
 
     public void agregarItem(Item item){
         this.items.add(item);
+    }
+
+    public Long getId() {
+        return id;
     }
 }

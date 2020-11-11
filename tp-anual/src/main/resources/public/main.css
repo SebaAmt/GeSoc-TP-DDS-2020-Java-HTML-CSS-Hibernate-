@@ -97,6 +97,12 @@ input[type=text], input[type=password] {
 
 table {
    text-align: center;
+   border-spacing: 0;
+}
+
+th {
+    padding-bottom: 0.8em;
+    text-transform: uppercase;
 }
 
 td {
@@ -108,21 +114,38 @@ tr:nth-child(odd) {background: #FFF}
 
 .celda-botones {
     text-align: left;
-    padding: 0;
+    padding: 0.5em;
+    background: white;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
 }
 
 .btn-modificar{
-    background: orange;
+    background: #FF8C00;
     padding: 0.4em;
     text-align: center;
     border-radius: 1em;
     color: white;
     text-decoration: none;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 .btn-borrar{
-    background: red;
+    background: #DC143C;
     padding: 0.4em;
+    text-align: center;
+    border-radius: 1em;
+    color: white;
+    text-decoration: none;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+.btn-agregar{
+    background: #007bff;
+    padding: 0.5em;
+    margin: 1em;
     text-align: center;
     border-radius: 1em;
     color: white;
