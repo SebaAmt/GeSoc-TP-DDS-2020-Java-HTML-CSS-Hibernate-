@@ -1,4 +1,5 @@
-{{> layout.html.hbs }}
+
+{{#partial "contenido"}}
 {{#block "mensajes"}}
 <h1>Tus Mensajes</h1>
 
@@ -18,3 +19,5 @@
  </ol>
 {{/if}}
 {{/block}}
+{{/partial}}
+{{> layout.html.hbs }}
