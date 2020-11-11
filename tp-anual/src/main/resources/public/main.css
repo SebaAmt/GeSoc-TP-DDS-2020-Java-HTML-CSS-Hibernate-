@@ -40,25 +40,6 @@ i {
     right: 0.1em;
 }
 
-.tabla-organizaciones {
-    display: flex;
-    justify-content: center;
-}
-
-th {
-    padding-bottom: 0.5em;
-}
-
-td {
-    text-align: center;
-    border-right: 2px solid;
-    padding: 1em;
-}
-
-.primer-columna{
-    padding: 1em 2.5em;
-    font-weight: bold;
-}
 
 input[type=text], input[type=password] {
     background:#ecf0f1;
@@ -82,6 +63,67 @@ input[type=text], input[type=password] {
     margin-top: 1.5em;
     font-weight: bold;
  }
+
+.detalle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3em;
+}
+
+.seccion-texto-detalle{
+    display: flex;
+    flex-flow: column;
+}
+
+.elemento-detalle{
+    display: flex;
+    align-items: center;
+}
+
+.span-detalle {
+    color: #ADADAD;
+    font-weight: bold;
+}
+
+.valor-detalle{
+    font-weight: bold;
+    color: black;
+    padding: 0 0.3em;
+    margin: 0.3em;
+}
+
+table {
+   width: 100%;
+   text-align: center;
+}
+
+td {
+    padding: 1em;
+}
+
+.celda-botones {
+    text-align: left;
+}
+
+.btn-modificar{
+    background: orange;
+    padding: 0.4em;
+    text-align: center;
+    border-radius: 1em;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-borrar{
+    background: red;
+    padding: 0.4em;
+    text-align: center;
+    border-radius: 1em;
+    color: white;
+    text-decoration: none;
+}
+
 
 /* Login */
 .login-body {
@@ -112,6 +154,5 @@ input[type=text], input[type=password] {
 }
 
 footer{
-	position: absolute;
-	bottom: 0;
+
 }
