@@ -94,16 +94,19 @@ input[type=text], input[type=password] {
 }
 
 table {
-   width: 100%;
    text-align: center;
 }
 
 td {
-    padding: 1em;
+    padding: 3em;
 }
+
+tr:nth-child(even) {background: #EDEDED}
+tr:nth-child(odd) {background: #FFF}
 
 .celda-botones {
     text-align: left;
+    padding: 0;
 }
 
 .btn-modificar{
@@ -124,6 +127,9 @@ td {
     text-decoration: none;
 }
 
+hr{
+    width: 50%;
+}
 
 /* Login */
 .login-body {
