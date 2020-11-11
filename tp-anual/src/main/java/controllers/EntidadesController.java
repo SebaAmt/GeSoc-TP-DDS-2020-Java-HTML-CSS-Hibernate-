@@ -1,20 +1,38 @@
 package controllers;
 
 import model.categoria.Categoria;
+import model.documentoComercial.DocumentoComercial;
+import model.documentoComercial.TipoDocumentoComercial;
+import model.egreso.CriterioSeleccionPresupuesto;
+import model.egreso.Egreso;
+import model.egreso.Item;
+import model.egreso.Moneda;
+import model.egreso.Presupuesto;
+import model.egreso.Proveedor;
 import model.entidades.Entidad;
 import model.entidades.EntidadBase;
+import model.mediosDePago.MedioDePago;
+import model.usuario.Usuario;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import repositorios.RepositorioCategorias;
+import repositorios.RepositorioEgresos;
 import repositorios.RepositorioEntidades;
+import repositorios.RepositorioMediosDePago;
+import repositorios.RepositorioMonedas;
 import repositorios.RepositorioOrganizaciones;
+import repositorios.RepositorioProveedores;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EntidadesController implements WithGlobalEntityManager, TransactionalOps {
@@ -88,4 +106,15 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
     	
     	return null;
     }
+    
+    public Void modificarCategoria(Request request, Response response) {
+    	String idEntidad = request.queryParams(":idEntidad");
+    	Entidad entidad = RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad));
+    	response.body().
+    	entidad.setCategoria(categoria);
+             
+    	response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad"));
+            
+            return null;
+           }
 }
