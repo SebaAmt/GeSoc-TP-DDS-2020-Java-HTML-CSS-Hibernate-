@@ -18,6 +18,13 @@ nav a {
     padding: 0.5em 1em 1em 1em;
 }
 
+nav span {
+    color: white;
+    padding: 0.8em;
+    margin-left: auto;
+    font-size: 1.1em;
+}
+
 nav a:hover{
     background: #6B8DC9;
     font-weight: bold;
@@ -31,6 +38,18 @@ i {
     position: relative;
     top: 0.2em;
     right: 0.1em;
+}
+
+table {
+}
+
+tr {
+}
+
+td {
+    text-align: center;
+    border-right: 2px solid;
+    padding: 1em;
 }
 
 input[type=text], input[type=password] {
