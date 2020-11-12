@@ -73,7 +73,7 @@ public class PresupuestosController implements WithGlobalEntityManager, Transact
             egreso.agregarPresupuesto(nuevoPresupuesto);
         });
 
-        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/egresos/" + request.params(":idEgreso"));
+        response.redirect("../" + request.params(":idEgreso"));
         return null;
     }
 
