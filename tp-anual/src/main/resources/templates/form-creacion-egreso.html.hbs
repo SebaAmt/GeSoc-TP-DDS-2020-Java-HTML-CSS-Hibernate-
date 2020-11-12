@@ -1,3 +1,5 @@
+
+{{#partial "contenido"}}
 <h1>Nuevo Egreso</h1>
 <form class="nuevo-egreso" action="../egresos" method="POST">
     <div class="campo">
@@ -50,6 +52,11 @@
                 <option value="{{this}}">{{this}}</option>
             {{/each}}
         </select>
+    </div>       
+    <div>
+    <input class="page-button" type="submit" value="Crear Egreso"></input>
     </div>
-    <input type="submit" value="Crear Egreso">
 </form>
+
+{{/partial}}
+{{> layout.html.hbs }}
