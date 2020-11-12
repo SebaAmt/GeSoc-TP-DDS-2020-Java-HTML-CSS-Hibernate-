@@ -2,8 +2,6 @@ package controllers;
 
 import model.categoria.Categoria;
 import model.direccion.Direccion;
-import model.direccion.DireccionPostal;
-import model.egreso.Moneda;
 import model.egreso.Proveedor;
 import model.entidades.EntidadBase;
 import model.entidades.EntidadJuridica;
@@ -14,10 +12,8 @@ import model.mediosDePago.TipoMedioDePago;
 import model.reglaNegocio.ReglaNegocio;
 import model.reglaNegocio.ReglaNegocioBloquearAgregarEntidadBase;
 import model.reglaNegocio.ReglaNegocioMontoMaximo;
-import model.usuario.CreadorDeUsuario;
 import model.usuario.TipoUsuario;
 import model.usuario.Usuario;
-import model.validacionesContrasenias.ValidadorDeContrasenias;
 import model.validacionesEgresos.ValidacionEgreso;
 
 import java.math.BigDecimal;

@@ -1,0 +1,12 @@
+{{#entidad}}
+<h1>{{nombreFicticio}}</h1>
+<span>Descripción: {{descripcion}}</span></br>
+<span>Categoria: {{categoria}}</span></br>
+<span>Egresos:</span></br>
+<ul>
+    {{#each egresos}}
+        <li><a href="{{entidad.id}}/egresos/{{this.egreso_id}}">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</a></li>
+    {{/each}}
+</ul>
+<a href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
+{{/entidad}}

@@ -2,7 +2,6 @@ package controllers;
 
 import controllers.HomeController;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
-import spark.ModelAndView;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -40,15 +39,17 @@ public class Routes {
         //Mensajes
         Spark.get("/mensajes", (request, response) -> usuariosController.getMensajes(request, response), engine);
         //Entidades
-        Spark.get("/organizaciones/:idOrg/entidades/nueva/juridica", (request, response) -> entidadesController.getFormCreacionEntidadJuridica(request, response), engine);
-
-        
-                        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad", (request, response) -> entidadesController.getDetalleEntidad(request, response), engine);
+        Spark.get("/organizaciones/:idOrg/entidades/base/nueva", (request, response) -> entidadesController.getFormCreacionEntidadBase(request, response), engine);
+        Spark.post("/organizaciones/:idOrg/entidades/base/nueva", (request, response) -> entidadesController.createEntidadBase(request, response), engine);
+        Spark.get("/organizaciones/:idOrg/entidades/base/:idEntidad", (request, response) -> entidadesController.getDetalleEntidadBase(request, response), engine);
+        Spark.get("/organizaciones/:idOrg/entidades/juridica/nueva", (request, response) -> entidadesController.getFormCreacionEntidadJuridica(request, response), engine);
+        Spark.post("/organizaciones/:idOrg/entidades/juridica/nueva", (request, response) -> entidadesController.createEntidadJuridica(request, response), engine);
+        Spark.get("/organizaciones/:idOrg/entidades/juridica/:idEntidad", (request, response) -> entidadesController.getDetalleEntidadJuridica(request, response), engine);
 
         //Egresos
-        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/nuevo", egresosController::getFormCreacionEgreso, engine);
-        Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos", (request, response) -> egresosController.crearEgreso(request, response));
-        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso", (request, response) -> egresosController.getDetalleEgreso(request, response), engine);
+        Spark.get("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/nuevo", egresosController::getFormCreacionEgreso, engine);
+        Spark.post("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/nuevo", (request, response) -> egresosController.crearEgreso(request, response));
+        Spark.get("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/:idEgreso", (request, response) -> egresosController.getDetalleEgreso(request, response), engine);
 
         //Items
         Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/items/nuevo", (request,response) -> itemsController.getFormCreacionItem(request, response), engine);

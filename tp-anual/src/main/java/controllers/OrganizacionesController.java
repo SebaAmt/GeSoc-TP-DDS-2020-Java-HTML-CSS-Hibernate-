@@ -1,20 +1,15 @@
 package controllers;
 
-import model.categoria.Categoria;
-import model.entidades.EntidadBase;
-import model.entidades.EntidadJuridica;
+
 import model.entidades.Organizacion;
 import model.usuario.Usuario;
-import model.validacionesEgresos.ValidacionEgreso;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class OrganizacionesController implements WithGlobalEntityManager {

@@ -1,15 +1,34 @@
 {{#organizacion}}
 <h1>{{nombre}}</h1>
-<h3>Entidades Base</h3>
+
+<table>
+	<tr>
+		<td><h3>Entidades Base</h3><td/>
+		<td><form action="{{organizacion.id}}/entidades/base/nueva" method="GET">
+			<input type="submit" value="Crear Entidad Base"/>
+		</form><td/>
+	<tr/>
+</table>
+
+
 <ul>
     {{#each entidadesBase}}
-    <li><a href="{{organizacion.id}}/entidades/{{this.id}}">{{this.nombreFicticio}}</a></li>
+    <li><a href="{{organizacion.id}}/entidades/base/{{this.id}}">{{this.nombreFicticio}}</a></li>
     {{/each}}
  </ul>
-<h3>Entidades Jurídicas</h3>
+ 
+<table>
+	<tr>
+		<td><h3>Entidades Jurídicas</h3><td/>
+		<td><form action="{{organizacion.id}}/entidades/juridica/nueva" method="GET">
+			<input type="submit" value="Crear Entidad Juridica"/>
+		</form><td/>
+	<tr/>
+</table>
+
 <ul>
     {{#each entidadesJuridicas}}
-        <li><a href="{{organizacion.id}}/entidades/{{this.id}}">{{this.nombreFicticio}}</a></li>
+        <li><a href="{{organizacion.id}}/entidades/juridica/{{this.id}}">{{this.nombreFicticio}}</a></li>
     {{/each}}
 </ul>
 <h3>Categorías</h3>
