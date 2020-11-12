@@ -41,4 +41,11 @@ public class UsuariosController {
         modelo.put("bandejaVacia",usuarioLogueado.getBandejaDeMensajes().isEmpty());
         return new ModelAndView(modelo, "mensajes.html.hbs");
     }
+
+    public Void cerrarSesion(Request request, Response response){
+        request.session().invalidate();
+        response.removeCookie("JSESSIONID");
+        response.redirect("/login");
+        return null;
+    }
 }

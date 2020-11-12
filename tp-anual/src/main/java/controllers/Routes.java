@@ -28,6 +28,7 @@ public class Routes {
         //Login
         Spark.get("/login", (request, response) -> usuariosController.getFormularioLogin(request, response), engine);
         Spark.post("/login", (request, response) -> usuariosController.iniciarSesion(request, response));
+        Spark.get("/cerrarSesion", (request, response) -> usuariosController.cerrarSesion(request, response));
 
         //Home
         Spark.get("/", (request, response) -> homeController.getHome(request, response), engine);
