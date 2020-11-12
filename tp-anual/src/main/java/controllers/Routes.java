@@ -54,12 +54,12 @@ public class Routes {
         Spark.get("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/:idEgreso", (request, response) -> egresosController.getDetalleEgreso(request, response), engine);
 
         //Items
-        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/items/nuevo", (request,response) -> itemsController.getFormCreacionItem(request, response), engine);
-        Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/items", (request,response) -> itemsController.crearItem(request, response));
+        Spark.get("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/:idEgreso/items/nuevo", (request,response) -> itemsController.getFormCreacionItem(request, response), engine);
+        Spark.post("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/:idEgreso/items", (request,response) -> itemsController.crearItem(request, response));
 
         //Presupuestos
-        Spark.get("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/presupuestos/nuevo", (request,response) -> presupuestosController.getFormCreacionPresupuesto(request, response), engine);
-        Spark.post("/organizaciones/:idOrg/entidades/:idEntidad/egresos/:idEgreso/presupuestos", (request,response) -> presupuestosController.crearPresupuesto(request, response));
+        Spark.get("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/:idEgreso/presupuestos/nuevo", (request,response) -> presupuestosController.getFormCreacionPresupuesto(request, response), engine);
+        Spark.post("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/:idEgreso/presupuestos", (request,response) -> presupuestosController.crearPresupuesto(request, response));
 
 
         // FORO
