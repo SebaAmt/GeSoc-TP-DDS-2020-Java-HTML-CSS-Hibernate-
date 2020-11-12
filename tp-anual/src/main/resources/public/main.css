@@ -210,8 +210,9 @@ hr{
 
 footer{
     position: relative;
-    bottom: 0;
     top: 180px;
+    text-align: center;
+    background-color: DEDDE4;
 }
 
 /* Form Alta */
