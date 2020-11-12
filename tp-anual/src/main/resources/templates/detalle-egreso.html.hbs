@@ -20,7 +20,7 @@
                 <span class="span-detalle">Requiere presupuestos</span><p class="valor-detalle">{{#if requierePresupuestos}}SÍ{{else}}NO{{/if}}</p>
             </div>
             <div class="elemento-detalle">
-                <span class="span-detalle">Criterio selección presupuesto</span><p class="valor-detalle">{{criterio}}</p>
+                <span class="span-detalle">Criterio selección presupuesto</span><p class="valor-detalle">{{#if criterio}}{{criterio}}{{else}}Sin criterio{{/if}}</p>
             </div>
             <div class="elemento-detalle">
                 <span class="span-detalle">Documento Comercial</span>
@@ -33,10 +33,11 @@
         {{#each revisores}}
             <tr>
                 <td>{{username}}</td>
-                <td class="celda-botones"><a href="/" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a></td>
+                <td class="celda-botones"><a href="#" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a></td>
             </tr>
             {{/each}}
         </table>
+        <a class="btn-agregar" href="#">Agregarme como revisor</a>
         <hr>
         <h4 class="span-detalle">Items</h4><br>
         <table>
@@ -51,20 +52,41 @@
                 <td>{{precioUnitario}}</td>
                 <td>{{cantidadUnidades}}</td>
                 <td class="celda-botones">
-                    <a href="/" class="btn-modificar"><i class="small material-icons">edit</i>Modificar</a>
-                    <a href="/" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a>
+                    <a href="#" class="btn-modificar"><i class="small material-icons">edit</i>Modificar</a>
+                    <a href="#" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a>
                 </td>
-
             </tr>
             {{/each}}
         </table>
+        <a class="btn-agregar" href="{{egreso_id}}/items/nuevo">Agregar item</a>
         <hr>
-        <h4 class="span-detalle">Etiquetas asignadas: {{etiquetas}}</h4><br>
+        <h4 class="span-detalle">Etiquetas asignadas</h4>
+            {{#each etiquetasAsignadas}}
+                <div class="div-etiqueta">
+                    <i class="small material-icons">local_offer</i><span class="etiqueta">{{this}}</span>
+                </div>
+            {{/each}}
         <hr>
-        <h4 class="span-detalle">Presupuestos: {{presupuestos}}</h4><br>
+        <h4 class="span-detalle">Presupuestos</h4><br>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Proveedor</th>
+            </tr>
+            {{#each presupuestos}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{proveedor.nombre}}</td>
+                    <td class="celda-botones">
+                        <a href="#" class="btn-detalle" ><i class="small material-icons">description</i>Ver detalle</a>
+                        <a href="#" class="btn-modificar"><i class="small material-icons">edit</i>Modificar</a>
+                        <a href="#" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+        <a class="btn-agregar" href="{{egreso_id}}/presupuestos/nuevo">Agregar presupuesto</a>
         <hr>
-        <a href="{{egreso_id}}/items/nuevo">Agregar item</a>
-        <a href="{{egreso_id}}/presupuestos/nuevo">Agregar presupuesto</a>
     {{/egreso}}
 </div>
 {{/partial}}
