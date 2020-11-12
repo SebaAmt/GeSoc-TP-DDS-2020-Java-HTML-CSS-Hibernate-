@@ -43,18 +43,6 @@ i {
     right: 0.1em;
 }
 
-
-input[type=text], input[type=password] {
-    background:#ecf0f1;
-    border: #ccc 0.1em solid;
-    border-bottom: #ccc 0.3em solid;
-    padding: 8px;
-    width:250px;
-    color:#AAAAAA;
-    margin-top:10px;
-    font-size: 0.8em;
- }
-
 .submit-button {
     background: #2ecc71;
     width: -webkit-fill-available;
@@ -205,6 +193,17 @@ hr{
     border: #2980b9 4px solid;
 }
 
+.login-body input[type=text], .login-body input[type=password] {
+    background:#ecf0f1;
+    border: #ccc 0.1em solid;
+    border-bottom: #ccc 0.3em solid;
+    padding: 8px;
+    width:250px;
+    color:#AAAAAA;
+    margin-top:10px;
+    font-size: 0.8em;
+}
+
 .login-title {
     margin-top: 1em;
 }
@@ -213,4 +212,24 @@ footer{
     position: relative;
     bottom: 0;
     top: 180px;
+}
+
+/* Form Alta */
+.div-form-alta{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    margin: 1em;
+}
+
+.form-alta label {
+
+}
+
+.form-alta input[type=text], .form-alta input[type=number] {
+    margin: 0.3em;
+    border-radius: 5px;
+    margin-bottom: 0.8em;
+    padding: 0.3em;
+    width: 100%;
 }
