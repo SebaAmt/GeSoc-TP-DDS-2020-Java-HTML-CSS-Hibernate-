@@ -121,6 +121,17 @@ tr:nth-child(odd) {background: #FFF}
     border-left: 1px solid gray;
 }
 
+.btn-detalle{
+    background: #99BFCC;
+    padding: 0.4em;
+    text-align: center;
+    border-radius: 1em;
+    color: white;
+    text-decoration: none;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
 .btn-modificar{
     background: #FF8C00;
     padding: 0.4em;
@@ -155,6 +166,16 @@ tr:nth-child(odd) {background: #FFF}
 
 hr{
     width: 50%;
+}
+
+.div-etiqueta{
+    display: flex;
+    margin: 0.4em;
+}
+
+.etiqueta{
+    padding: 0.3em;
+    font-style: italic;
 }
 
 /* Login */
