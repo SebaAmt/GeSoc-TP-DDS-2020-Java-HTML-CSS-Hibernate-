@@ -1,25 +1,69 @@
-{{#entidad}}
-<h1>{{nombreFicticio}}</h1>
-<div>
-<form action="/organizaciones/{{idOrganizacion}}/entidades/juridica/{{this.id}}" method="POST">
-	<label for="nuevaCategoriaAsignada">Categoria: {{categoria.nombreCategoria}} </label>
- 	<select name="nuevaCategoriaAsignada">
-    	{{#each categorias}}
-	        <option value="{{this.id}}">{{this.nombreCategoria}}</option>
-        {{/each}}
-	</select>
-    <input type="submit" value="Modificar"></input>
-    </form>
+{{# partial "contenido" }}
+<div class="detalle">
+	{{#entidad}}
+	<h1>{{nombreFicticio}}</h1>
+	<div class="seccion-texto-detalle">
+		<div class="elemento-detalle">
+			<form
+				action="/organizaciones/{{idOrganizacion}}/entidades/juridica/{{this.id}}"
+				method="POST">
+				<span class="span-detalle" for="nuevaCategoriaAsignada">Categoria: </span><p class="valor-detalle">{{categoria.nombreCategoria}}</p><p>
+				<select name="nuevaCategoriaAsignada">
+					{{#each categorias}}
+					<option value="{{this.id}}">{{this.nombreCategoria}}</option>
+					{{/each}}
+				</select>
+				<input class="btn-modificar" type="submit" value="Modificar"></input>
+			</form>
+		</div>
+	</div>
+	<div class="seccion-texto-detalle">
+		<div class="elemento-detalle">
+			<span class="span-detalle">Razón social: </span><p class="valor-detalle">{{razonSocial}}</p>
+			<p>
+		</div>
+		<div class="elemento-detalle">
+			<span class="span-detalle">CUIT: </span><p class="valor-detalle">{{cuit}}</p>
+			<p>
+		</div>
+		<div class="elemento-detalle">
+			<span class="span-detalle">Dirección Postal: </span><p class="valor-detalle">{{direccionPostal}}</p>
+			<p>
+		</div>
+		<div class="elemento-detalle">
+			<span class="span-detalle">Código inscripción IGJ: </span><p class="valor-detalle">{{codigoInscripcionIGJ}}</p>
+		</div>
+		<div class="elemento-detalle">
+			<span class="span-detalle">Egresos:</span>
+		</div>
+	</div>
+	>
+
+	<h4 class="span-detalle">Egresos</h4>
+	<p>
+		<table>
+			{{#each egresos}}
+			<tr>
+				<td>
+					<a href="{{entidad.id}}/egresos/{{this.egreso_id}}">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</a>
+				</td>
+				<td class="celda-botones">
+					<a href="#" class="btn-modificar">
+						<i class="small material-icons">edit</i>
+						Modificar
+					</a>
+					<a href="#" class="btn-borrar">
+						<i class="small material-icons">delete</i>
+						Borrar
+					</a>
+				</td>
+			</tr>
+			{{/each}}
+		</table>
+		<p>
+		<a class="btn-agregar" href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
+		<hr>
+		{{/entidad}}
 </div>
-<span>Razón social: {{razonSocial}}</span></br>
-<span>CUIT: {{cuit}}</span></br>
-<span>Dirección Postal: {{direccionPostal}}</span></br>
-<span>Código inscripción IGJ: {{codigoInscripcionIGJ}}</span></br>
-<span>Egresos:</span></br>
-<ul>
-    {{#each egresos}}
-        <li><a href="{{entidad.id}}/egresos/{{this.egreso_id}}">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</a></li>
-    {{/each}}
-</ul>
-<a href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
-{{/entidad}}
+{{/partial}}
+{{> layout.html.hbs }}
