@@ -20,6 +20,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
 
     public ModelAndView getFormCreacionEgreso(Request request, Response response){
         String idOrg = request.params(":idOrg");
+        String tipoEntidad = request.params(":tipoEntidad");
         String idEntidad = request.params(":idEntidad");
         try{
             Entidad entidad = RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad));
@@ -30,6 +31,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(idOrg));
 
             Map<String, Object> modelo = new HashMap<>();
+            modelo.put("tipoEntidad", tipoEntidad);
             modelo.put("idEntidad", Long.parseLong(idEntidad));
             modelo.put("idOrganizacion", Long.parseLong(idOrg));
             modelo.put("mediosDePago", RepositorioMediosDePago.instancia.obtenerMediosDePago());
@@ -74,7 +76,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             entidad.nuevoEgreso(nuevoEgreso);
         });
 
-        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/egresos/" + nuevoEgreso.getEgreso_id());
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":tipoEntidad") + "/" + request.params(":idEntidad") + "/egresos/" + nuevoEgreso.getEgreso_id());
         return null;
     }
 

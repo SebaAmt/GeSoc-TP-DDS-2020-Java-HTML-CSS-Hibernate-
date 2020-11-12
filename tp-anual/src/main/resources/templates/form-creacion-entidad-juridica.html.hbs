@@ -1,18 +1,36 @@
 <h1>Nueva Entidad Juridica</h1>
-<form class="nueva-entidad-juridica" action="/organizaciones/{{idOrganizacion}}/entidades/nueva/juridica" method="POST">
+<form class="nueva-entidad-juridica" action="/organizaciones/{{idOrganizacion}}/entidades/juridica/nueva" method="POST">
     <div class="campo">
-        <span class="nombre-campo">Nombre:</span><input type="text" name="nombre" value="Ingrese nombre de la entidad"><br>
-        <span class="nombre-campo">Categorias:</span>
-        <select name="categorias">
-            {{#each categorias}}
-                <option value="{{this.id}}">{{this.nombreCategoria}}</option>
-            {{/each}}
-        </select><br>
-        
-    	<span class="nombre-campo">Razon Social:</span><input type="text" name="razonSocial" value="Ingrese la razon social"><br>
-        <span class="nombre-campo">Cuit:</span><input type="text" name="cuit" value="Ingrese el numero cuit"><br>
-        <span class="nombre-campo">Codigo Postal:</span><input type="text" name="codigoPostal" value="Ingrese el codigo postal"><br>
-        <span class="nombre-campo">Codigo Inscripcion IGJ:</span><input type="text" name="codigoInscripcionIGJ" value="Ingrese el codigo de inscripcion IGJ"><br>
-        
+        <table>
+        	<tr>
+        		<td><span class="nombre-campo">Nombre:</span></td>
+                <td><input type="text" name="nombre" placeholder="Ingrese nombre de la entidad"></td>
+            </tr>
+        	<tr>
+        		<td><span class="nombre-campo">Categorias:</span></td>
+            	<td><select name="categorias">
+            		{{#each categorias}}
+               		<option value="{{this.id}}">{{this.nombreCategoria}}</option>
+                		{{/each}}
+                    	</select>
+            	</td>
+        	</tr>
+        	<tr>
+        		<td><span class="nombre-campo">Razon Social:</span></td>
+                <td><input type="text" name="razonSocial" placeholder="Ingrese la razon social"></td>
+            </tr>
+            <tr>
+        		<td><span class="nombre-campo">Cuit:</span></td>
+                <td><input type="text" name="cuit" placeholder="Ingrese el numero cuit"></td>
+            </tr>
+            <tr>
+        		<td><span class="nombre-campo">Codigo Postal:</span></td>
+                <td><input type="text" name="codigoPostal" placeholder="Ingrese el codigo postal"></td>
+            </tr>
+            <tr>
+        		<td><span class="nombre-campo">Codigo Inscripcion IGJ:</span></td>
+                <td><input type="text" name="codigoInscripcionIGJ" placeholder="Ingrese el codigo de inscripcion IGJ"></td>
+            </tr>
+    	</table>
     <input type="submit" value="Crear Entidad">
 </form>

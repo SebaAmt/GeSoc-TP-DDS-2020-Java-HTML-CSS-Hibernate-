@@ -1,0 +1,25 @@
+{{#entidad}}
+<h1>{{nombreFicticio}}</h1>
+<div>
+<form action="/organizaciones/{{idOrganizacion}}/entidades/juridica/{{this.id}}" method="POST">
+	<label for="nuevaCategoriaAsignada">Categoria: {{categoria.nombreCategoria}} </label>
+ 	<select name="nuevaCategoriaAsignada">
+    	{{#each categorias}}
+	        <option value="{{this.id}}">{{this.nombreCategoria}}</option>
+        {{/each}}
+	</select>
+    <input type="submit" value="Modificar"></input>
+    </form>
+</div>
+<span>Razón social: {{razonSocial}}</span></br>
+<span>CUIT: {{cuit}}</span></br>
+<span>Dirección Postal: {{direccionPostal}}</span></br>
+<span>Código inscripción IGJ: {{codigoInscripcionIGJ}}</span></br>
+<span>Egresos:</span></br>
+<ul>
+    {{#each egresos}}
+        <li><a href="{{entidad.id}}/egresos/{{this.egreso_id}}">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</a></li>
+    {{/each}}
+</ul>
+<a href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
+{{/entidad}}
