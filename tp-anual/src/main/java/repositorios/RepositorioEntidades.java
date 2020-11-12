@@ -13,7 +13,7 @@ public class RepositorioEntidades implements WithGlobalEntityManager {
     public void agregarEntidadBase(EntidadBase entidad){
         entityManager().persist(entidad);
     }
-    
+
     public Entidad obtenerEntidadPorId(Long entidadId){
         return entityManager().find(Entidad.class, entidadId);
     }

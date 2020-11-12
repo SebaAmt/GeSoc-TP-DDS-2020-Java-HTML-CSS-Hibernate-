@@ -5,10 +5,10 @@
     <span>Descripción: {{descripcion}}</span></br>
 {{/if}}
     <div>
-<form method="put">
+<form method="post" action="/organizaciones/{{idOrganizacion}}/entidades/{{this.id}}">
 <label for="nuevaCategoriaAsignada">Categoria: {{categoria.nombreCategoria}} </label>
 
- <select name="nuevaCategoriaAsignada" id="nuevaCategoriaAsignada">
+ <select name="nuevaCategoriaAsignada">
             {{#each categorias}}
                 <option value="{{this.id}}">{{this.nombreCategoria}}</option>
             {{/each}}

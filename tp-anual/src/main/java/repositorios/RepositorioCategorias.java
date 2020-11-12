@@ -19,7 +19,6 @@ public class RepositorioCategorias implements WithGlobalEntityManager {
     
     public Categoria getCategoriaPorId(Long categoriaId){
         return entityManager().find(Categoria.class, categoriaId);
-    }
-   
+    } 
 }
 
