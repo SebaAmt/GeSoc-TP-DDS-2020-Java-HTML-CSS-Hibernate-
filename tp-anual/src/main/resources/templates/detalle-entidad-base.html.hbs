@@ -4,22 +4,23 @@
 	<h1>{{nombreFicticio}}</h1>
 	<div class="seccion-texto-detalle">
 		<div class="elemento-detalle">
-			<span>Descripción: {{descripcion}}</span>
-		</p>
+			<span class="span-detalle">Descripción: </span>
+			<p class="valor-detalle">{{descripcion}}</p>
+			<p>
 		</div>
-	</div>
-	<div class="seccion-texto-detalle">
 		<div class="elemento-detalle">
 			<form
 				action="/organizaciones/{{idOrganizacion}}/entidades/base/{{this.id}}"
 				method="POST">
-				<label for="nuevaCategoriaAsignada">Categoria: {{categoria.nombreCategoria}} </label>
-				<select name="nuevaCategoriaAsignada">
-					{{#each categorias}}
-					<option value="{{this.id}}">{{this.nombreCategoria}}</option>
-					{{/each}}
-				</select>
-				<input class="btn-modificar" type="submit" value="Modificar"></input>
+				<label class="span-detalle" for="nuevaCategoriaAsignada">Categoria: </label>
+				<p class="valor-detalle">{{categoria.nombreCategoria}}</p>
+				<p>
+					<select name="nuevaCategoriaAsignada">
+						{{#each categorias}}
+						<option value="{{this.id}}">{{this.nombreCategoria}}</option>
+						{{/each}}
+					</select>
+					<input class="btn-modificar" type="submit" value="Modificar"></input>
 			</form>
 		</div>
 	</div>
@@ -45,9 +46,9 @@
 			{{/each}}
 		</table>
 		<p>
-		<a class="btn-agregar" href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
-		<hr>
-		{{/entidad}}
+			<a class="btn-agregar" href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
+			<hr>
+				{{/entidad}}
 </div>
 {{/partial}}
 {{> layout.html.hbs }}
