@@ -1,10 +1,6 @@
-{{# partial "titulo" }}
-    <title>GeSoc - DDS</title>
-{{/partial}}
-
-
 {{# partial "contenido" }}
     <section>
+        <h1>GeSoc - DDS</h1>
         <h2>Sobre nuestro sitio</h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta neque sed nisi rutrum, eu ultricies lacus
@@ -15,12 +11,18 @@
             ultrices enim, vitae semper diam leo ac nisi.
         </p>
 
-        <ul>
+        <table>
             {{#organizaciones}}
-                <li><a href="/organizaciones/{{id}}">{{nombre}}</a></li>
+            <tr>
+                <td class="primer-columna">{{nombre}}</td>
+                <td class="celda-botones">
+                    <a class="btn-detalle" href="organizaciones/{{id}}"><i class="small material-icons">description</i>Ver detalle</a>
+                    <a href="#" class="btn-modificar"><i class="small material-icons">edit</i>Modificar</a>
+                    <a href="#" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a>
+                </td>
+            </tr>
             {{/organizaciones}}
-        </ul>
-
+        </table>
     </section>
 {{/partial}}
 

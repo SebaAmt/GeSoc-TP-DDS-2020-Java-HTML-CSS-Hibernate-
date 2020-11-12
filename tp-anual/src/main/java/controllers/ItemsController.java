@@ -57,7 +57,8 @@ public class ItemsController implements WithGlobalEntityManager, TransactionalOp
             egreso.agregarItem(nuevoItem);
         });
 
-        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/egresos/" + request.params(":idEgreso"));
+        //response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/egresos/" + request.params(":idEgreso"));
+        response.redirect("../" + request.params(":idEgreso"));
         return null;
     }
 }

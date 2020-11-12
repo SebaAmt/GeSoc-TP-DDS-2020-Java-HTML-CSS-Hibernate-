@@ -1,7 +1,17 @@
 {{#entidad}}
 <h1>{{nombreFicticio}}</h1>
 <span>Descripción: {{descripcion}}</span></br>
-<span>Categoria: {{categoria}}</span></br>
+<div>
+<form action="/organizaciones/{{idOrganizacion}}/entidades/base/{{this.id}}" method="POST">
+	<label for="nuevaCategoriaAsignada">Categoria: {{categoria.nombreCategoria}} </label>
+ 	<select name="nuevaCategoriaAsignada">
+    	{{#each categorias}}
+	        <option value="{{this.id}}">{{this.nombreCategoria}}</option>
+        {{/each}}
+	</select>
+    <input type="submit" value="Modificar"></input>
+    </form>
+</div>
 <span>Egresos:</span></br>
 <ul>
     {{#each egresos}}

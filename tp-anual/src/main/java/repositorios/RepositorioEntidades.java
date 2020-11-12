@@ -19,7 +19,7 @@ public class RepositorioEntidades implements WithGlobalEntityManager {
     public void agregarEntidad(EntidadJuridica entidad){
         entityManager().persist(entidad);
     }
-    
+
     public Entidad obtenerEntidadPorId(Long entidadId){
         return entityManager().find(Entidad.class, entidadId);
     }

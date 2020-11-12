@@ -64,4 +64,8 @@ public class Categoria {
 	public List<ReglaNegocio> getReglasNegocio() {
 		return reglasNegocio;
 	}
+	
+	public Long getId() {
+		return this.categoria_id;
+	}
 }

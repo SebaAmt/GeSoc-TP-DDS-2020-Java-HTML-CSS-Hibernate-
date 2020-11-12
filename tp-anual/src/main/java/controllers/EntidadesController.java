@@ -46,7 +46,6 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         }
     }
 	
-	
     public ModelAndView createEntidadBase(Request request, Response response){
       	String nombre = request.queryParams("nombre");
       	String descripcion = request.queryParams("descripcion");
@@ -111,7 +110,9 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("entidad", entidad);
-
+            modelo.put("categorias", RepositorioOrganizaciones.instancia.obtenerCategoriasDeOrganizacion(Long.parseLong(idOrg)));
+            modelo.put("idOrganizacion",Long.parseLong(idOrg));
+            
             return new ModelAndView(modelo, form);
         }
         catch (Exception ex){
@@ -119,4 +120,19 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
             return null;
         }
     }    
+    
+    public Void modificarCategoria(Request request, Response response) {
+        String idOrg = request.params(":idOrg");
+        String tipoEntidad = request.params("tipoEntidad");
+        String idEntidad = request.params(":idEntidad");
+        Entidad entidad = RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad));
+
+        withTransaction(() -> {
+        	Long idCategoriaAAsignar = Long.parseLong(request.queryParams("nuevaCategoriaAsignada"));
+        	entidad.setCategoria(RepositorioCategorias.instancia.getCategoriaPorId(idCategoriaAAsignar));
+        });
+
+    	response.redirect("/organizaciones/" + idOrg + "/entidades/" + tipoEntidad + "/" + idEntidad);
+        return null;
+    }
 }

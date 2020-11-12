@@ -1,19 +1,32 @@
+{{#partial "contenido"}}
 {{#entidad}}
 <h1>{{nombreFicticio}}</h1>
-{{#if descripcion not null}}
+{{#if descripcion}}
     <span>Descripción: {{descripcion}}</span></br>
 {{/if}}
-<span>Categoria: {{categoria}}</span></br>
-{{#if razonSocial not null}}
+    <div>
+<form method="post" action="/organizaciones/{{idOrganizacion}}/entidades/{{this.id}}">
+<label for="nuevaCategoriaAsignada">Categoria: {{categoria.nombreCategoria}} </label>
+
+ <select name="nuevaCategoriaAsignada">
+            {{#each categorias}}
+                <option value="{{this.id}}">{{this.nombreCategoria}}</option>
+            {{/each}}
+        </select>
+        <input type="submit" value="Modificar"></input>
+    </form>
+    </div>
+    
+{{#if razonSocial}}
     <span>Razón social: {{razonSocial}}</span></br>
 {{/if}}
-{{#if cuit not null}}
+{{#if cuit}}
     <span>CUIT: {{cuit}}</span></br>
 {{/if}}
-{{#if direccionPostal not null}}
+{{#if direccionPostal}}
     <span>Dirección Postal: {{direccionPostal}}</span></br>
 {{/if}}
-{{#if codigoInscripcionIGJ not null}}
+{{#if codigoInscripcionIGJ}}
     <span>Código inscripción IGJ: {{codigoInscripcionIGJ}}</span></br>
 {{/if}}
 <span>Egresos:</span></br>
@@ -24,3 +37,6 @@
 </ul>
 <a href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
 {{/entidad}}
+{{/partial}}
+
+{{> layout.html.hbs }}

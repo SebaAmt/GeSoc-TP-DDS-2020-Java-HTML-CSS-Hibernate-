@@ -1,16 +1,93 @@
-{{#egreso}}
-    <h1>Egreso {{egreso_id}}</h1>
-    <span>Fecha de operación: {{fechaDeOperacion}}</span><br>
-    <span>Proveedor: {{proveedor}}</span><br>
-    <span>Documento comercial: {{documentoComercial}}</span><br>
-    <span>Moneda: {{moneda}}</span><br>
-    <span>Requiere presupuestos: {{requierePresupuestos}}</span><br>
-    <span>Estado: {{estado}}</span><br>
-    <span>Criterio selección presupuesto: {{criterio}}</span><br>
-    <span>Revisores: {{revisores}}</span><br>
-    <span>Ítems: {{items}}</span><br>
-    <span>Etiquetas asignadas: {{etiquetas}}</span><br>
-    <span>Presupuestos: {{presupuestos}}</span><br>
-    <a href="{{egreso_id}}/items/nuevo">Agregar item</a>
-    <a href="{{egreso_id}}/presupuestos/nuevo">Agregar presupuesto</a>
-{{/egreso}}
+{{# partial "contenido" }}
+<div class="detalle">
+    {{#egreso}}
+        <h1>Egreso {{egreso_id}}</h1>
+        <hr>
+        <div class="seccion-texto-detalle">
+            <div class="elemento-detalle">
+                <span class="span-detalle">Fecha de operación</span><p class="valor-detalle">{{fechaDeOperacion}}</p>
+            </div>
+            <div class="elemento-detalle">
+                <span class="span-detalle">Estado</span><p class="valor-detalle">{{estado}}</p>
+            </div>
+            <div class="elemento-detalle">
+                <span class="span-detalle">Proveedor</span><p class="valor-detalle">{{proveedor.nombre}}</p>
+            </div>
+            <div class="elemento-detalle">
+                <span class="span-detalle">Moneda</span><p class="valor-detalle">{{moneda.description}}</p>
+            </div>
+            <div class="elemento-detalle">
+                <span class="span-detalle">Requiere presupuestos</span><p class="valor-detalle">{{#if requierePresupuestos}}SÍ{{else}}NO{{/if}}</p>
+            </div>
+            <div class="elemento-detalle">
+                <span class="span-detalle">Criterio selección presupuesto</span><p class="valor-detalle">{{#if criterio}}{{criterio}}{{else}}Sin criterio{{/if}}</p>
+            </div>
+            <div class="elemento-detalle">
+                <span class="span-detalle">Documento Comercial</span>
+                <p class="valor-detalle">{{documentoComercial.tipoDocumentoComercial}} {{documentoComercial.identificadorDocumento}}</p>
+            </div>
+        </div>
+        <hr>
+        <h4 class="span-detalle">Revisores</h4>
+        <table>
+        {{#each revisores}}
+            <tr>
+                <td>{{username}}</td>
+                <td class="celda-botones"><a href="#" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a></td>
+            </tr>
+            {{/each}}
+        </table>
+        <a class="btn-agregar" href="#">Agregarme como revisor</a>
+        <hr>
+        <h4 class="span-detalle">Items</h4><br>
+        <table>
+            <tr>
+                <th>Descripción</th>
+                <th>Precio unitario</th>
+                <th>Cantidad</th>
+            </tr>
+            {{#each items}}
+            <tr>
+                <td>{{descripcion}}</td>
+                <td>{{precioUnitario}}</td>
+                <td>{{cantidadUnidades}}</td>
+                <td class="celda-botones">
+                    <a href="#" class="btn-modificar"><i class="small material-icons">edit</i>Modificar</a>
+                    <a href="#" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+        <a class="btn-agregar" href="{{egreso_id}}/items/nuevo">Agregar item</a>
+        <hr>
+        <h4 class="span-detalle">Etiquetas asignadas</h4>
+            {{#each etiquetasAsignadas}}
+                <div class="div-etiqueta">
+                    <i class="small material-icons">local_offer</i><span class="etiqueta">{{this}}</span>
+                </div>
+            {{/each}}
+        <hr>
+        <h4 class="span-detalle">Presupuestos</h4><br>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Proveedor</th>
+            </tr>
+            {{#each presupuestos}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{proveedor.nombre}}</td>
+                    <td class="celda-botones">
+                        <a href="#" class="btn-detalle" ><i class="small material-icons">description</i>Ver detalle</a>
+                        <a href="#" class="btn-modificar"><i class="small material-icons">edit</i>Modificar</a>
+                        <a href="#" class="btn-borrar"><i class="small material-icons">delete</i>Borrar</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+        <a class="btn-agregar" href="{{egreso_id}}/presupuestos/nuevo">Agregar presupuesto</a>
+        <hr>
+    {{/egreso}}
+</div>
+{{/partial}}
+{{> layout.html.hbs }}

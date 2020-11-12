@@ -39,13 +39,15 @@ public class Routes {
         //Mensajes
         Spark.get("/mensajes", (request, response) -> usuariosController.getMensajes(request, response), engine);
         //Entidades
+
         Spark.get("/organizaciones/:idOrg/entidades/base/nueva", (request, response) -> entidadesController.getFormCreacionEntidadBase(request, response), engine);
         Spark.post("/organizaciones/:idOrg/entidades/base/nueva", (request, response) -> entidadesController.createEntidadBase(request, response), engine);
         Spark.get("/organizaciones/:idOrg/entidades/base/:idEntidad", (request, response) -> entidadesController.getDetalleEntidadBase(request, response), engine);
         Spark.get("/organizaciones/:idOrg/entidades/juridica/nueva", (request, response) -> entidadesController.getFormCreacionEntidadJuridica(request, response), engine);
         Spark.post("/organizaciones/:idOrg/entidades/juridica/nueva", (request, response) -> entidadesController.createEntidadJuridica(request, response), engine);
         Spark.get("/organizaciones/:idOrg/entidades/juridica/:idEntidad", (request, response) -> entidadesController.getDetalleEntidadJuridica(request, response), engine);
-
+        Spark.post("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad", (request, response) ->entidadesController.modificarCategoria(request, response));
+        
         //Egresos
         Spark.get("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/nuevo", egresosController::getFormCreacionEgreso, engine);
         Spark.post("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad/egresos/nuevo", (request, response) -> egresosController.crearEgreso(request, response));
@@ -66,6 +68,4 @@ public class Routes {
             PerThreadEntityManagers.closeEntityManager();
         });
     }
-
-
 }

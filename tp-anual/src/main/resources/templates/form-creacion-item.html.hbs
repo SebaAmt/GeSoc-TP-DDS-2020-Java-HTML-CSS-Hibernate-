@@ -1,7 +1,15 @@
-<h1>Nuevo Ítem</h1>
-<form class="nuevo-item" action="/organizaciones/{{idOrganizacion}}/entidades/{{idEntidad}}/egresos/{{idEgreso}}/items" method="POST">
-    <span class="nombre-campo">Descripción:</span><input type="text" name="descripcion"><br>
-    <span class="nombre-campo">Precio unitario:</span><input type="number" name="precioUnitario"><br>
-    <span class="nombre-campo">Cantidad de unidades:</span><input type="number" name="cantidad"><br>
-    <input type="submit" value="Crear Item">
-</form>
+{{# partial "contenido" }}
+    <div class="div-form-alta">
+        <h1>Nuevo Ítem</h1>
+        <form class="form-alta" action="../items" method="POST">
+            <label for="desc">Descripción</label>
+            <input type="text" id="desc" name="descripcion"><br>
+            <label for="precioUnit">Precio unitario</label>
+            <input type="number" id="precioUnit" name="precioUnitario"><br>
+            <label for="cantUnidades">Cantidad de unidades</label>
+            <input type="number" id="cantUnidades" name="cantidad"><br>
+            <input type="submit" class="submit-button" value="Crear Item">
+        </form>
+    </div>
+{{/partial}}
+{{> layout.html.hbs }}
