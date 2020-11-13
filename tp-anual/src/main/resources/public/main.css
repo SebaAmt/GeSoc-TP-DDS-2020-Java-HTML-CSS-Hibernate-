@@ -29,8 +29,9 @@ nav span {
 }
 
 nav a:hover{
-    background: #6B8DC9;
+    background: none;
     font-weight: bold;
+    color: #BBE5ED;
 }
 
 .nav-derecha{
