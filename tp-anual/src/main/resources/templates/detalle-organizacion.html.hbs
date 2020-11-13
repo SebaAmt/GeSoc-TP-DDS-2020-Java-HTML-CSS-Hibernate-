@@ -5,19 +5,24 @@
 <hr>
 
 <h2 class="span-detalle">Entidades</h2>
-	<form action="/organizaciones/{{this.id}}"
-		method="POST">
+	<form action="/organizaciones/{{this.id}}/entidades"
+		method="GET">
 		<span class="span-detalle" for="categoria">Seleccione una categoría </span>
 		
 		<p class="valor-detalle">
-		<select name="categoria">
+		<select name="filtro">
 			{{#each categorias}}
 				<option value="{{this.id}}">{{this.nombreCategoria}}</option>
 			{{/each}}
 		</select>
-		<input class="btn-modificar" type="submit" value="Filtrar"></input>
-		</form>
+		<input class="btn-modificar" type="submit" value="    Filtrar    "></input>
 		</p>
+	</form>
+	<form action="/organizaciones/{{this.id}}"
+		method="GET">
+		<input class="btn-borrar"  type="submit" value="Remover  Filtro"></input>
+	</form>
+{{/organizacion}}
 		
 <table class="center" style="text-align:justify;">
 	<tr>
@@ -46,8 +51,7 @@
 	</tr>
 </table>
 
-
-
+{{#organizacion}}
 <hr>
 <h3 class="span-detalle">Categorías</h3>
 <ul>
