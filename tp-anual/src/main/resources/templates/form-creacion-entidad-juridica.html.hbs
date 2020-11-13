@@ -1,36 +1,38 @@
-<h1>Nueva Entidad Juridica</h1>
-<form class="nueva-entidad-juridica" action="/organizaciones/{{idOrganizacion}}/entidades/juridica/nueva" method="POST">
-    <div class="campo">
-        <table>
-        	<tr>
-        		<td><span class="nombre-campo">Nombre:</span></td>
-                <td><input type="text" name="nombre" placeholder="Ingrese nombre de la entidad"></td>
-            </tr>
-        	<tr>
-        		<td><span class="nombre-campo">Categorias:</span></td>
-            	<td><select name="categorias">
-            		{{#each categorias}}
-               		<option value="{{this.id}}">{{this.nombreCategoria}}</option>
-                		{{/each}}
-                    	</select>
-            	</td>
-        	</tr>
-        	<tr>
-        		<td><span class="nombre-campo">Razon Social:</span></td>
-                <td><input type="text" name="razonSocial" placeholder="Ingrese la razon social"></td>
-            </tr>
-            <tr>
-        		<td><span class="nombre-campo">Cuit:</span></td>
-                <td><input type="text" name="cuit" placeholder="Ingrese el numero cuit"></td>
-            </tr>
-            <tr>
-        		<td><span class="nombre-campo">Codigo Postal:</span></td>
-                <td><input type="text" name="codigoPostal" placeholder="Ingrese el codigo postal"></td>
-            </tr>
-            <tr>
-        		<td><span class="nombre-campo">Codigo Inscripcion IGJ:</span></td>
-                <td><input type="text" name="codigoInscripcionIGJ" placeholder="Ingrese el codigo de inscripcion IGJ"></td>
-            </tr>
-    	</table>
-    <input type="submit" value="Crear Entidad">
-</form>
+{{# partial "contenido" }}
+<div class="div-form-alta">
+	<form class="form-alta"
+		action="/organizaciones/{{idOrganizacion}}/entidades/juridica/nueva"
+		method="POST">
+		<h1>Nueva Entidad Juridica</h1>
+		<label for="nombre">Nombre</label>
+		<input type="text" id="nombre" name="nombre"
+			placeholder="Ingrese nombre de la entidad">
+			<br>
+		<label for="categorias">Categorias</label>
+		<select id="categorias" name="categoria">
+			{{#each categorias}}
+				<option value="{{this.id}}">{{this.nombreCategoria}}</option>
+			{{/each}}
+		</select>
+		<br>
+		<label for="razonSocial">Razon Social</label>
+		<input type="text" id="razonSocial" name="razonSocial"
+			placeholder="Ingrese la razon social">
+			<br>
+		<label for="cuit">Cuit:</label>
+		<input type="text" id="cuit" name="cuit"
+			placeholder="Ingrese el numero cuit">
+			<br>
+		<label for="codigoPostal">Codigo Postal</label>
+		<input type="text" id="codigoPostal" name="codigoPostal"
+			placeholder="Ingrese el codigo postal">
+			<br>
+		<label for="codigoInscripcionIGJ">Codigo Inscripcion IGJ</label>
+		<input type="text" id="codigoInscripcionIGJ" name="codigoInscripcionIGJ"
+			placeholder="Ingrese el codigo de inscripcion IGJ">
+			<br>
+		<input type="submit" class="submit-button" value="Crear Entidad">
+	</form>
+</div>
+{{/partial}}
+{{> layout.html.hbs }}

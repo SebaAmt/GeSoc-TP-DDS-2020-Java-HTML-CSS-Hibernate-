@@ -77,9 +77,8 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 		
     	withTransaction(() ->{
         	if(request.queryParams("categoria") != null) {
-        		Categoria categoria = RepositorioCategorias.instancia.getCategoriaPorId(Long.parseLong(request.queryParams("categoria")));
-        		RepositorioCategorias.instancia.agregarCategoria(categoria);
-        		nuevaEntidad.setCategoria(categoria);
+        		Long categoria = Long.parseLong(request.queryParams("categoria"));
+        		nuevaEntidad.setCategoria(RepositorioCategorias.instancia.getCategoriaPorId(categoria));
             }
         	RepositorioEntidades.instancia.agregarEntidad(nuevaEntidad);        	
         	Organizacion organizacion = RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(request.params(":idOrg")));
@@ -128,7 +127,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
         Entidad entidad = RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad));
 
         withTransaction(() -> {
-        	Long idCategoriaAAsignar = Long.parseLong(request.queryParams("nuevaCategoriaAsignada"));
+        	Long idCategoriaAAsignar = Long.parseLong(request.queryParams("categoria"));
         	entidad.setCategoria(RepositorioCategorias.instancia.getCategoriaPorId(idCategoriaAAsignar));
         });
 

@@ -1,26 +1,26 @@
-<h1>Nueva Entidad Basica</h1>
-<form class="nueva-entidad-juridica" action="/organizaciones/{{idOrganizacion}}/entidades/base/nueva" method="POST">
-    <div class="campo">
-        <table>
-        	<tr>
-        		<td><span class="nombre-campo">Nombre:</span></td>
-                <td><input type="text" name="nombre" placeholder="Ingrese nombre de la entidad"></td>
-            </tr>
-        	<tr>
-        		<td><span class="nombre-campo">Categorias:</span></td>
-            	<td><select name="categorias">
-            		{{#each categorias}}
-               		<option value="{{this.id}}">{{this.nombreCategoria}}</option>
-                		{{/each}}
-                    	</select>
-            	</td>
-        	</tr>
-        	<tr>
-        		<td><span class="nombre-campo">Descripcion:</span></td>
-			</tr>
-			<tr>
-                <td><textarea rows=5 cols=30 name="descripcion" placeholder="Ingrese la descripcion de la entidad base"></textarea></td>
-            </tr>
-    	</table>
-    <input type="submit" value="Crear Entidad">
-</form>
+{{# partial "contenido" }}
+<div class="div-form-alta">
+	<form class="form-alta"
+		action="/organizaciones/{{idOrganizacion}}/entidades/base/nueva"
+		method="POST">
+		<h1>Nueva Entidad Basica</h1>
+		<label for="nombre">Nombre</label>
+		<input type="text" id="nombre" name="nombre"
+			placeholder="Ingrese nombre de la entidad">
+			<br>
+		<label for="categorias">Categorias</label>
+		<select id="categorias" name="categoria">
+			{{#each categorias}}
+				<option value="{{this.id}}">{{this.nombreCategoria}}</option>
+			{{/each}}
+		</select>
+		<br>
+		<label for="descripcion">Descripcion</label><br>
+		<textarea rows=5 cols=30 name="descripcion"
+			placeholder="Ingrese la descripcion de la entidad base"></textarea>
+			<br>
+		<input type="submit" class="submit-button" value="Crear Entidad">
+	</form>
+</div>
+{{/partial}}
+{{> layout.html.hbs }}
