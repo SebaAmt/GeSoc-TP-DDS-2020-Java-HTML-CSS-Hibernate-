@@ -1,6 +1,7 @@
 
 {{#partial "contenido"}}
 {{#block "mensajes"}}
+<section class="detalle">
 <h1>Tus Mensajes</h1>
 
 {{#if bandejaVacia}}
@@ -18,6 +19,7 @@
    {{/each}}
  </ol>
 {{/if}}
+</section>
 {{/block}}
 {{/partial}}
 {{> layout.html.hbs }}
