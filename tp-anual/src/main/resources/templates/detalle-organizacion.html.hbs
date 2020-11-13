@@ -6,17 +6,17 @@
 
 <h2 class="span-detalle">Entidades</h2>
 	<section style="display:inline-block;">
-	<form action="/organizaciones/{{this.id}}/entidades"
+	<form action="/organizaciones/{{this.id}}"
 		method="GET" style="display:inline-block;">
-		<span class="span-detalle" for="categoria" >Seleccione una categoría </span>
-		
-		
+		<span class="span-detalle" for="categoria" >Seleccione una categoría</span>
+
 		<select name="filtro" >
 			{{#each categorias}}
 				<option value="{{this.id}}">{{this.nombreCategoria}}</option>
 			{{/each}}
 		</select>
-		<input class="btn-modificar" type="submit" value="    Filtrar    " ></input></form>
+		<input class="btn-modificar" type="submit" value="    Filtrar    " ></input>
+    </form>
 	<form action="/organizaciones/{{this.id}}"
 		method="GET" style="display:inline-block;">
 		 <input class="btn-borrar"  type="submit" value="Remover  Filtro" style="margin-left:0"></input>
