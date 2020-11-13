@@ -114,6 +114,13 @@ i {
     color: black;
     padding: 0 0.3em;
     margin: 0.3em;
+}
+
+form .valor-detalle{
+    font-weight: bold;
+    color: black;
+    padding: 0 0.3em;
+    margin: 0.3em;
     display: contents;
 }
 
