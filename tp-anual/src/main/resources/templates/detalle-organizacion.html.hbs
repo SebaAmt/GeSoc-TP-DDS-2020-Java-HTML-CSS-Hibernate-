@@ -24,32 +24,59 @@
 		</section>
 {{/organizacion}}
 		
-<table class="center" style="text-align:justify;">
-	<tr>
-		<td><h3 class="span-detalle">Entidades Base</h3></td>	
-		<td><h3 class="span-detalle">Entidades Jurídicas</h3></td>		
-	<tr/>
-	<tr>
-		<td><ul>
+
+		<h3 class="span-detalle">Entidades Base 
+			<form action="{{organizacion.id}}/entidades/base/nueva" method="GET" style="display:inline-block;">
+				<input class="btn-agregar" type="submit" value="Crear Entidad Base"/>
+			</form>
+		</h3>
+	
+		<table>		
     		{{#each entidadesBase}}
-    			<li><a class="elemento-detalle" href="{{organizacion.id}}/entidades/base/{{this.id}}">{{this.nombreFicticio}}</a></li>
+    		<tr>
+    			<td class="primer-columna"><a class="elemento-detalle">{{this.nombreFicticio}}</a></td>
+    			<td class="celda-botones">
+					<a class="btn-detalle" href="{{organizacion.id}}/entidades/base/{{this.id}}">
+						<i class="small material-icons">description</i>Ver detalle</a>
+					<a href="#" class="btn-modificar">
+						<i class="small material-icons">edit</i>
+						Modificar
+					</a>
+					<a href="#" class="btn-borrar">
+						<i class="small material-icons">delete</i>
+						Borrar
+					</a>
+				</td>
+			</tr>
     		{{/each}}
- 		</ul></td>
- 		<td><ul>
+ 		</table>
+ 		
+ 		<h3 class="span-detalle">Entidades Jurídicas
+ 			<form action="{{organizacion.id}}/entidades/juridica/nueva" method="GET" style="display:inline-block;">
+				<input class="btn-agregar" type="submit" value="Crear Entidad Juridica"/>
+			</form>
+ 		</h3>
+ 		<table> 
     		{{#each entidadesJuridicas}}
-        		<li><a href="{{organizacion.id}}/entidades/juridica/{{this.id}}">{{this.nombreFicticio}}</a></li>
-    		{{/each}}
-		</ul></td>
-	</tr>
-	<tr>
-		<td><form action="{{organizacion.id}}/entidades/base/nueva" method="GET">
-			<input class="btn-agregar" type="submit" value="Crear Entidad Base"/>
-		</form></td>
-		<td><form action="{{organizacion.id}}/entidades/juridica/nueva" method="GET">
-			<input class="btn-agregar" type="submit" value="Crear Entidad Juridica"/>
-		</form></td>
-	</tr>
-</table>
+    		<tr>
+        		<td class="primer-columna"><a>{{this.nombreFicticio}}</a></td>
+        		<td class="celda-botones">
+					<a class="btn-detalle" href="{{organizacion.id}}/entidades/juridica/{{this.id}}">
+						<i class="small material-icons">description</i>Ver detalle</a>
+					<a href="#" class="btn-modificar">
+						<i class="small material-icons">edit</i>
+						Modificar
+					</a>
+					<a href="#" class="btn-borrar">
+						<i class="small material-icons">delete</i>
+						Borrar
+					</a>
+				</td>
+			</tr>
+			{{/each}}
+		</table>
+	
+
 
 {{#organizacion}}
 <hr>
