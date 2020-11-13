@@ -76,6 +76,9 @@ public class Bootstrap implements WithGlobalEntityManager, EntityManagerOps, Tra
         	persist(categoria3);
         	valve.agregarCategoria(categoria);
             valve.agregarCategoria(categoria2);
+            valve.agregarCategoria(categoria3);
+
+            aperture.setCategoria(categoria);
             blackMesa.setCategoria(categoria3);
         	
             persist(blackMesa);
