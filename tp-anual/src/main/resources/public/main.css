@@ -120,6 +120,13 @@ table {
    border-spacing: 0;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center tr:nth-child(even) {background: #FFFFFF}
+
 th {
     padding-bottom: 0.8em;
     text-transform: uppercase;

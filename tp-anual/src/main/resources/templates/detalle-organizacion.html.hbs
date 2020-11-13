@@ -1,53 +1,76 @@
 {{#partial "contenido"}}
+<div class="detalle">
 {{#organizacion}}
 <h1>{{nombre}}</h1>
+<hr>
 
-<table>
+<h2 class="span-detalle">Entidades</h2>
+	<form action="/organizaciones/{{this.id}}"
+		method="POST">
+		<span class="span-detalle" for="categoria">Seleccione una categoria </span>
+		<p class="valor-detalle">{{categoria.nombreCategoria}}</p>
+		<p>
+		<select name="categoria">
+			{{#each categorias}}
+				<option value="{{this.id}}">{{this.nombreCategoria}}</option>
+			{{/each}}
+		</select>
+		<input class="btn-modificar" type="submit" value="Filtrar"></input>
+		</form>
+		
+		
+<table class="center">
 	<tr>
-		<td><h3>Entidades Base</h3><td/>
+		<td><h3 class="span-detalle">Entidades Base</h3></td>	
+		<td><h3 class="span-detalle">Entidades Jurídicas</h3></td>		
+	<tr/>
+	<tr>
+		<td><ul>
+    		{{#each entidadesBase}}
+    			<li><a class="elemento-detalle" href="{{organizacion.id}}/entidades/base/{{this.id}}">{{this.nombreFicticio}}</a></li>
+    		{{/each}}
+ 		</ul></td>
+ 		<td><ul>
+    		{{#each entidadesJuridicas}}
+        		<li><a href="{{organizacion.id}}/entidades/juridica/{{this.id}}">{{this.nombreFicticio}}</a></li>
+    		{{/each}}
+		</ul></td>
+	</tr>
+	<tr>
 		<td><form action="{{organizacion.id}}/entidades/base/nueva" method="GET">
-			<input type="submit" value="Crear Entidad Base"/>
-		</form><td/>
-	<tr/>
-</table>
-
-
-<ul>
-    {{#each entidadesBase}}
-    <li><a href="{{organizacion.id}}/entidades/base/{{this.id}}">{{this.nombreFicticio}}</a></li>
-    {{/each}}
- </ul>
- 
-<table>
-	<tr>
-		<td><h3>Entidades Jurídicas</h3><td/>
+			<input class="btn-agregar" type="submit" value="Crear Entidad Base"/>
+		</form></td>
 		<td><form action="{{organizacion.id}}/entidades/juridica/nueva" method="GET">
-			<input type="submit" value="Crear Entidad Juridica"/>
-		</form><td/>
-	<tr/>
+			<input class="btn-agregar" type="submit" value="Crear Entidad Juridica"/>
+		</form></td>
+	</tr>
 </table>
 
-<ul>
-    {{#each entidadesJuridicas}}
-        <li><a href="{{organizacion.id}}/entidades/juridica/{{this.id}}">{{this.nombreFicticio}}</a></li>
-    {{/each}}
-</ul>
-<h3>Categorías</h3>
+
+
+<hr>
+<h3 class="span-detalle">Categorías</h3>
 <ul>
     {{#each categorias}}
-        <li>{{this.nombreCategoria}}</li>
+        <li class="valor-detalle">{{this.nombreCategoria}}</li>
     {{/each}}
 </ul>
-<h3>Validaciones para egresos</h3>
+<hr>
+<h3 class="span-detalle">Validaciones para egresos</h3>
 <ul>
     {{#each validacionesEgresos}}
-        <li>{{this}}</li>
+        <li class="valor-detalle">{{this}}</li>
     {{/each}}
 </ul>
-<h3>Etiquetas disponibles</h3>
-    {{#each etiquetasDisponibles}}
-        <li>{{this}}</li>
-    {{/each}}
+<hr>
+<h3 class="span-detalle">Etiquetas disponibles</h3>
+    <ul>
+    	{{#each etiquetasDisponibles}}
+        	<li class="valor-detalle">{{this}}</li>
+    	{{/each}}
+    </ul>
+    <hr>
 {{/organizacion}}
+</div>
 {{/partial}}
 {{> layout.html.hbs }}
