@@ -48,10 +48,10 @@
 		<table>
 			{{#each egresos}}
 			<tr>
-				<td>
-					<a href="{{entidad.id}}/egresos/{{this.egreso_id}}">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</a>
-				</td>
+				<td class="primer-columna">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</td>
 				<td class="celda-botones">
+					<a class="btn-detalle" href="{{entidad.id}}/egresos/{{this.egreso_id}}">
+						<i class="small material-icons">description</i>Ver detalle</a>				
 					<a href="#" class="btn-modificar">
 						<i class="small material-icons">edit</i>
 						Modificar

@@ -1,6 +1,8 @@
 package controllers;
 
 
+import model.entidades.EntidadBase;
+import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
 import model.usuario.Usuario;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -25,6 +27,7 @@ public class OrganizacionesController implements WithGlobalEntityManager {
 
     public ModelAndView getDetalleOrganizacion(Request request, Response response){
         String id = request.params(":id");
+        
         try{
             Organizacion organizacion = RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(id));
             if(organizacion == null){
@@ -36,7 +39,7 @@ public class OrganizacionesController implements WithGlobalEntityManager {
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("organizacion", organizacion);
-
+            
             return new ModelAndView(modelo, "detalle-organizacion.html.hbs");
         }
         catch (Exception ex){
