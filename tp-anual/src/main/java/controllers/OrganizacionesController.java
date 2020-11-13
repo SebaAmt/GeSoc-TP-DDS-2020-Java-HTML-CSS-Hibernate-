@@ -32,16 +32,26 @@ public class OrganizacionesController implements WithGlobalEntityManager {
 
     public ModelAndView getDetalleOrganizacion(Request request, Response response){
         String id = request.params(":id");
-        
         try{
             Organizacion organizacion = RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(id));
-            List<EntidadBase> entidadesBase = organizacion.getEntidadesBase();
-            List<EntidadJuridica> entidadesJuridicas = organizacion.getEntidadesJuridicas();
+
             if(organizacion == null){
                 response.redirect("/error", 404); // not found
             }
             SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(id));
             Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
+
+            List<EntidadBase> entidadesBase;
+            List<EntidadJuridica> entidadesJuridicas;
+
+            if(request.queryParams("filtro") != null){
+                Categoria categoria = RepositorioCategorias.instancia.getCategoriaPorId(Long.parseLong(request.queryParams("filtro")));
+                entidadesBase = organizacion.getEntidadesBase().stream().filter(e->e.getCategoria().equals(categoria)).collect(Collectors.toList());
+                entidadesJuridicas = organizacion.getEntidadesJuridicas().stream().filter(e->e.getCategoria().equals(categoria)).collect(Collectors.toList());
+            } else {
+                entidadesBase = organizacion.getEntidadesBase();
+                entidadesJuridicas = organizacion.getEntidadesJuridicas();
+            }
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("organizacion", organizacion);
@@ -55,29 +65,5 @@ public class OrganizacionesController implements WithGlobalEntityManager {
             return null;
         }
     }
-    
-    public ModelAndView getOrganizacionConEntidadesFiltradas(Request request, Response response) {
-    	Long organizacionId = Long.parseLong(request.params(":id"));
-    	Long categoriaId = Long.parseLong(request.queryParams("filtro"));
-    	
-    	Organizacion organizacion = RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(organizacionId);
-    	Categoria categoria = RepositorioCategorias.instancia.getCategoriaPorId(categoriaId);
-    	
-    	List<EntidadBase> entidadesBase =
-    			categoriaId != null ?
-    					organizacion.getEntidadesBase().stream().filter(e->e.getCategoria().equals(categoria)).collect(Collectors.toList()) :
-    					organizacion.getEntidadesBase();
-    	List<EntidadJuridica> entidadesJuridicas =
-    			categoriaId != null ?
-    					organizacion.getEntidadesJuridicas().stream().filter(e->e.getCategoria().equals(categoria)).collect(Collectors.toList()) :
-    					organizacion.getEntidadesJuridicas();
-    	
-        Map<String, Object> modelo = new HashMap<>();
-        modelo.put("organizacion", organizacion);    	
-        modelo.put("entidadesBase", entidadesBase);
-        modelo.put("entidadesJuridicas", entidadesJuridicas);
-    	
-        return new ModelAndView(modelo, "detalle-organizacion.html.hbs");
-    }
-    
+
 }
