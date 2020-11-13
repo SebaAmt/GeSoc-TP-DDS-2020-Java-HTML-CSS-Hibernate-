@@ -1,9 +1,10 @@
 {{# partial "contenido" }}
+<section class="detalle">
 <div class="div-form-alta">
 	<form class="form-alta"
 		action="/organizaciones/{{idOrganizacion}}/entidades/juridica/nueva"
 		method="POST">
-		<h1>Nueva Entidad Juridica</h1>
+		<h1>Nueva Entidad Jurídica</h1>
 		<label for="nombre">Nombre</label>
 		<input type="text" id="nombre" name="nombre"
 			placeholder="Ingrese nombre de la entidad">
@@ -15,24 +16,25 @@
 			{{/each}}
 		</select>
 		<br>
-		<label for="razonSocial">Razon Social</label>
+		<label for="razonSocial">Razón Social</label>
 		<input type="text" id="razonSocial" name="razonSocial"
-			placeholder="Ingrese la razon social">
+			placeholder="Ingrese la razón social">
 			<br>
 		<label for="cuit">Cuit:</label>
 		<input type="text" id="cuit" name="cuit"
-			placeholder="Ingrese el numero cuit">
+			placeholder="Ingrese el número cuit">
 			<br>
-		<label for="codigoPostal">Codigo Postal</label>
+		<label for="codigoPostal">Código Postal</label>
 		<input type="text" id="codigoPostal" name="codigoPostal"
-			placeholder="Ingrese el codigo postal">
+			placeholder="Ingrese el código postal">
 			<br>
-		<label for="codigoInscripcionIGJ">Codigo Inscripcion IGJ</label>
+		<label for="codigoInscripcionIGJ">Código Inscripción IGJ</label>
 		<input type="text" id="codigoInscripcionIGJ" name="codigoInscripcionIGJ"
-			placeholder="Ingrese el codigo de inscripcion IGJ">
+			placeholder="Ingrese el código de inscripción IGJ">
 			<br>
 		<input type="submit" class="submit-button" value="Crear Entidad">
 	</form>
 </div>
+</section>
 {{/partial}}
 {{> layout.html.hbs }}

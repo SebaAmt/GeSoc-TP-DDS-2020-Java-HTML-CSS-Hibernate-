@@ -7,9 +7,9 @@
 <h2 class="span-detalle">Entidades</h2>
 	<form action="/organizaciones/{{this.id}}"
 		method="POST">
-		<span class="span-detalle" for="categoria">Seleccione una categoria </span>
-		<p class="valor-detalle">{{categoria.nombreCategoria}}</p>
-		<p>
+		<span class="span-detalle" for="categoria">Seleccione una categoría </span>
+		
+		<p class="valor-detalle">
 		<select name="categoria">
 			{{#each categorias}}
 				<option value="{{this.id}}">{{this.nombreCategoria}}</option>
@@ -17,9 +17,9 @@
 		</select>
 		<input class="btn-modificar" type="submit" value="Filtrar"></input>
 		</form>
+		</p>
 		
-		
-<table class="center">
+<table class="center" style="text-align:justify;">
 	<tr>
 		<td><h3 class="span-detalle">Entidades Base</h3></td>	
 		<td><h3 class="span-detalle">Entidades Jurídicas</h3></td>		

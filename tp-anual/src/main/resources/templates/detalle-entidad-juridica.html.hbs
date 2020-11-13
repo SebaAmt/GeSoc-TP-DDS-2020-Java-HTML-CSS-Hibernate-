@@ -8,15 +8,15 @@
 			<form
 				action="/organizaciones/{{idOrganizacion}}/entidades/juridica/{{this.id}}"
 				method="POST">
-				<span class="span-detalle" for="categoria">Categoria: </span>
-				<p class="valor-detalle">{{categoria.nombreCategoria}}</p>
-				<p>
+				<span class="span-detalle" for="categoria">Categoría:</span><p class="valor-detalle">{{categoria.nombreCategoria}}</p>
+				<p class="valor-detalle">
 					<select name="categoria">
 						{{#each categorias}}
 						<option value="{{this.id}}">{{this.nombreCategoria}}</option>
 						{{/each}}
 					</select>
 					<input class="btn-modificar" type="submit" value="Modificar"></input>
+					</p>
 			</form>
 		</div>
 		<div class="elemento-detalle">
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	<hr>
-	<h4 class="span-detalle">Egresos</h4>
+	<h4 class="span-detalle">Egresos<a class="btn-nuevo-egreso" href="{{entidad.id}}/egresos/nuevo">Nuevo</a></h4>
 	<p>
 		<table>
 			{{#each egresos}}
@@ -65,8 +65,7 @@
 			{{/each}}
 		</table>
 		<p>
-		<a class="btn-agregar" href="{{entidad.id}}/egresos/nuevo">Agregar egreso</a>
-		<hr>	
+		 <hr>	
 {{/entidad}}
 </div>
 {{/partial}}

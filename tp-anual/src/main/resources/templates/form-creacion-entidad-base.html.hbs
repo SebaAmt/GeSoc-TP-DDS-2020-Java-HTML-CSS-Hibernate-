@@ -1,9 +1,10 @@
 {{# partial "contenido" }}
+<section class="detalle">
 <div class="div-form-alta">
 	<form class="form-alta"
 		action="/organizaciones/{{idOrganizacion}}/entidades/base/nueva"
 		method="POST">
-		<h1>Nueva Entidad Basica</h1>
+		<h1>Nueva Entidad Básica</h1>
 		<label for="nombre">Nombre</label>
 		<input type="text" id="nombre" name="nombre"
 			placeholder="Ingrese nombre de la entidad">
@@ -22,5 +23,6 @@
 		<input type="submit" class="submit-button" value="Crear Entidad">
 	</form>
 </div>
+</section>
 {{/partial}}
 {{> layout.html.hbs }}

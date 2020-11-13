@@ -113,6 +113,7 @@ i {
     color: black;
     padding: 0 0.3em;
     margin: 0.3em;
+    display: contents;
 }
 
 table {
@@ -171,11 +172,32 @@ tr:nth-child(odd) {background: #FFF}
     text-decoration: none;
     margin-left: 0.5em;
     margin-right: 0.5em;
+    cursor: pointer;
 }
+
 
 .btn-modificar:hover{
     background: #CC7000;
 }
+
+.btn-nuevo-egreso{
+    background: #007bff;
+    padding: 0.4em;
+    padding-top: 0.1em;
+    padding-bottom: 0.2em;
+    text-align: center;
+    border-radius: 1em;
+    color: white;
+    text-decoration: none;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    font-weight: normal;
+}
+
+.btn-nuevo-egreso:hover{
+    background: #0069D9;
+}
+
 
 .btn-borrar{
     background: #DC143C;
