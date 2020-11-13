@@ -5,15 +5,15 @@
 <h1>Tus Mensajes</h1>
 
 {{#if bandejaVacia}}
-<p>No hay mensajes</p>
+<p class="msg-box" style="background-color:#ffd680">No hay mensajes</p>
 
 {{else}}
 
  <ol>
     {{#each mensajes}}
-   <li>
+   <li class="msg-box" style="margin-top:10">
 
-    {{this}}
+    <div >{{this}}</div>
        
    </li>
    {{/each}}
