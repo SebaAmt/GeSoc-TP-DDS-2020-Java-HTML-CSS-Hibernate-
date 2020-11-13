@@ -68,8 +68,8 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
     public ModelAndView createEntidadJuridica(Request request, Response response){
     	String nombre = request.queryParams("nombre");
-    	String razonSocial = request.queryParams("nombre");
-    	String cuit = request.queryParams("nombre");
+    	String razonSocial = request.queryParams("razonSocial");
+    	String cuit = request.queryParams("cuit");
     	String codigoPostal = request.queryParams("codigoPostal");
     	String codigoInscripcionIGJ = request.queryParams("codigoInscripcionIGJ");
 		
