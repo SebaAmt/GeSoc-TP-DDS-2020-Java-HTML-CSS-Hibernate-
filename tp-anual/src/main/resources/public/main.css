@@ -81,6 +81,7 @@ i {
     border: #27ae60 0.2em solid;
     margin-top: 1.5em;
     font-weight: bold;
+    cursor: pointer;
  }
 
 .submit-button:hover{
@@ -209,6 +210,7 @@ tr:nth-child(odd) {background: #FFF}
     text-decoration: none;
     margin-left: 0.5em;
     margin-right: 0.5em;
+    cursor: pointer;
 }
 
 .btn-borrar:hover{
@@ -223,6 +225,7 @@ tr:nth-child(odd) {background: #FFF}
     border-radius: 1em;
     color: white;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .btn-agregar:hover{
