@@ -53,7 +53,7 @@ public class ItemsController implements WithGlobalEntityManager, TransactionalOp
         Item nuevoItem = new Item(descripcion, precioUnitario, cantidad);
 
         withTransaction(() ->{
-            entityManager().persist(nuevoItem);
+            RepositorioItems.instancia.agregarItem(nuevoItem);
             Egreso egreso = RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(request.params(":idEgreso")));
             egreso.agregarItem(nuevoItem);
         });

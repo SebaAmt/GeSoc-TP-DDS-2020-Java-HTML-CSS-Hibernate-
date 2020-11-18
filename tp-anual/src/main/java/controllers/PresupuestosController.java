@@ -7,10 +7,7 @@ import model.entidades.Entidad;
 import org.eclipse.jetty.http.HttpStatus;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
-import repositorios.RepositorioEgresos;
-import repositorios.RepositorioEntidades;
-import repositorios.RepositorioMonedas;
-import repositorios.RepositorioProveedores;
+import repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -70,9 +67,9 @@ public class PresupuestosController implements WithGlobalEntityManager, Transact
         Presupuesto nuevoPresupuesto = new Presupuesto(proveedor, documentoComercial, moneda, itemsPresupuesto);
 
         withTransaction(() ->{
-            entityManager().persist(documentoComercial);
-            itemsPresupuesto.stream().forEach(i -> entityManager().persist(i));
-            entityManager().persist(nuevoPresupuesto);
+            RepositorioDocumentosComerciales.instancia.agregarDocumentoComercial(documentoComercial);
+            RepositorioItems.instancia.agregarListaItems(itemsPresupuesto);
+            RepositorioPresupuestos.instancia.agregarPresupuesto(nuevoPresupuesto);
             egreso.agregarPresupuesto(nuevoPresupuesto);
         });
 

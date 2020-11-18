@@ -71,7 +71,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             Arrays.stream(etiquetas).forEach(e -> nuevoEgreso.etiquetar(e));
 
         withTransaction(() ->{
-            entityManager().persist(documentoComercial);
+            RepositorioDocumentosComerciales.instancia.agregarDocumentoComercial(documentoComercial);
             RepositorioEgresos.instancia.agregarEgreso(nuevoEgreso);
             Entidad entidad = RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(request.params(":idEntidad")));
             entidad.nuevoEgreso(nuevoEgreso);
