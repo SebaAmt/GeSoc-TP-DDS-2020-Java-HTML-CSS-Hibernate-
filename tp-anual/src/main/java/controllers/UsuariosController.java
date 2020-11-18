@@ -1,15 +1,13 @@
 package controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import com.mysql.cj.xdevapi.CreateIndexParams;
-import model.usuario.CreadorDeUsuario;
 import model.usuario.Usuario;
 import repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UsuariosController {
 
@@ -19,11 +17,8 @@ public class UsuariosController {
 
     public Void iniciarSesion(Request request, Response response) {
         String password = request.queryParams("password");
-        CreadorDeUsuario creador = new CreadorDeUsuario(null);
-        String passwordEncriptada = creador.encriptarPassword(password);
         String username = request.queryParams("username");
-        Usuario usuario = RepositorioUsuarios.instancia.listar().stream()
-                .filter(u -> u.getPassword().equals(passwordEncriptada) && u.getUsername().equals(username)).findFirst().get();
+        Usuario usuario = RepositorioUsuarios.instancia.getUsuarioConPassword(username, password);
 
         request.session().attribute("userName", usuario.getUsername());
         request.session().attribute("rol", usuario.getTipo());
