@@ -4,6 +4,7 @@ import model.documentoComercial.DocumentoComercial;
 import model.documentoComercial.TipoDocumentoComercial;
 import model.egreso.*;
 import model.entidades.Entidad;
+import org.eclipse.jetty.http.HttpStatus;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import repositorios.RepositorioEgresos;
@@ -46,7 +47,7 @@ public class PresupuestosController implements WithGlobalEntityManager, Transact
             return new ModelAndView(modelo, "form-creacion-presupuesto.html.hbs");
         }
         catch (Exception ex){
-            response.status(400);
+            response.status(HttpStatus.BAD_REQUEST_400);
             return null;
         }
     }

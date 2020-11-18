@@ -6,6 +6,7 @@ import model.entidades.EntidadBase;
 import model.entidades.EntidadJuridica;
 import model.entidades.Organizacion;
 import model.usuario.Usuario;
+import org.eclipse.jetty.http.HttpStatus;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import repositorios.RepositorioCategorias;
@@ -61,7 +62,7 @@ public class OrganizacionesController implements WithGlobalEntityManager {
             return new ModelAndView(modelo, "detalle-organizacion.html.hbs");
         }
         catch (Exception ex){
-            response.status(400);
+            response.status(HttpStatus.BAD_REQUEST_400);
             return null;
         }
     }
