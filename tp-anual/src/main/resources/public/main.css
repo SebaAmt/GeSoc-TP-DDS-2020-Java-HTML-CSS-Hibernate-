@@ -31,6 +31,10 @@ i {
     top: 0.2em;
 }
 
+.breadcrumb {
+    margin-top: 0.5em;
+}
+
 .msg-box {
      padding: 5px;
      font-size: 16px;
@@ -273,32 +277,14 @@ hr{
     background-size: cover;
 }
 
-.login-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background:white;
-    width:300px;
-    border-radius:6px;
-    margin: 0 auto 0 auto;
-    padding:0px 0px 70px 0px;
-    border: #2980b9 4px solid;
+.container-login {
+    border-radius: 1em;
+    padding-top: 1em;
+    width: 25%;
 }
 
-.login-body input[type=text], .login-body input[type=password] {
-    background:#ecf0f1;
-    border: #ccc 0.1em solid;
-    border-bottom: #ccc 0.3em solid;
-    padding: 8px;
-    width:250px;
-    color:#AAAAAA;
-    margin-top:10px;
-    font-size: 0.8em;
-}
-
-.login-title {
-    margin-top: 1em;
+.container-login h2 {
+    text-align: center;
 }
 
 footer{
