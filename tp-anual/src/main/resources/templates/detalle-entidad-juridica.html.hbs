@@ -1,69 +1,94 @@
 {{# partial "contenido" }}
-<div class="detalle">
-	{{#entidad}}
-	<h1>{{nombreFicticio}}</h1>
-	<hr>
-	<div class="seccion-texto-detalle">
-		<div class="elemento-detalle">
-			<form
-				action="/organizaciones/{{idOrganizacion}}/entidades/juridica/{{this.id}}"
-				method="POST">
-				<span class="span-detalle" for="categoria">Categoría:</span><p class="valor-detalle">{{categoria.nombreCategoria}}</p>
-				<p class="valor-detalle">
-					<select name="categoria">
-						{{#each categorias}}
-						<option value="{{this.id}}">{{this.nombreCategoria}}</option>
-						{{/each}}
-					</select>
-					<input class="btn-modificar" type="submit" value="Modificar"></input>
-					</p>
-			</form>
-		</div>
-		<div class="elemento-detalle">
-			<span class="span-detalle">Razón social</span>
-			<p class="valor-detalle">{{razonSocial}}</p>
-			<p>
-		</div>
-		<div class="elemento-detalle">
-			<span class="span-detalle">CUIT</span>
-			<p class="valor-detalle">{{cuit}}</p>
-			<p>
-		</div>
-		<div class="elemento-detalle">
-			<span class="span-detalle">Dirección Postal</span>
-			<p class="valor-detalle">{{direccionPostal}}</p>
-			<p>
-		</div>
-		<div class="elemento-detalle">
-			<span class="span-detalle">Código inscripción IGJ</span>
-			<p class="valor-detalle">{{codigoInscripcionIGJ}}</p>
-		</div>
-	</div>
-	<hr>
-	<h4 class="span-detalle">Egresos<a class="btn-nuevo-egreso" href="{{entidad.id}}/egresos/nuevo">Nuevo</a></h4>
-	<p>
-		<table>
-			{{#each egresos}}
-			<tr>
-				<td class="primer-columna">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</td>
-				<td class="celda-botones">
-					<a class="btn-detalle" href="{{entidad.id}}/egresos/{{this.egreso_id}}">
-						<i class="small material-icons">description</i>Ver detalle</a>				
-					<a href="#" class="btn-modificar">
-						<i class="small material-icons">edit</i>
-						Modificar
-					</a>
-					<a href="#" class="btn-borrar">
-						<i class="small material-icons">delete</i>
-						Borrar
-					</a>
-				</td>
-			</tr>
-			{{/each}}
-		</table>
-		<p>
-		 <hr>	
-{{/entidad}}
+{{#entidad}}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/organizaciones/{{idOrganizacion}}">{{nombreOrganizacion}}</a></li></li>
+        <li class="breadcrumb-item active" aria-current="page">{{nombreFicticio}}</li>
+    </ol>
+    </nav>
+<h1>{{nombreFicticio}}</h1>
+<hr>
+<div class="seccion-texto-detalle">
+    <div class="elemento-detalle">
+        <form action="/organizaciones/{{idOrganizacion}}/entidades/juridica/{{this.id}}" method="POST">
+            <span class="span-detalle" for="categoria">Categoría</span>
+            <p class="valor-detalle">{{categoria.nombreCategoria}}</p>
+            <select name="categoria">
+                {{#each categorias}}
+                <option value="{{this.id}}">{{this.nombreCategoria}}</option>
+                {{/each}}
+            </select>
+            <input class="btn btn-warning" type="submit" value="Modificar" />
+        </form>
+    </div>
+    <div class="elemento-detalle">
+        <span class="span-detalle">Razón social</span>
+        <p class="valor-detalle">{{razonSocial}}</p>
+        <p>
+    </div>
+    <div class="elemento-detalle">
+        <span class="span-detalle">CUIT</span>
+        <p class="valor-detalle">{{cuit}}</p>
+        <p>
+    </div>
+    <div class="elemento-detalle">
+        <span class="span-detalle">Dirección Postal</span>
+        <p class="valor-detalle">{{direccionPostal}}</p>
+        <p>
+    </div>
+    <div class="elemento-detalle">
+        <span class="span-detalle">Código inscripción IGJ</span>
+        <p class="valor-detalle">{{codigoInscripcionIGJ}}</p>
+    </div>
 </div>
+<hr>
+<h4 class="span-detalle">
+    Egresos
+    <a href="{{entidad.id}}/egresos/nuevo" class="btn btn-primary btn-nueva" type="submit"/>
+    <i class="small material-icons">add_circle_outline</i> Agregar
+    </a>
+</h4>
+{{#if egresos}}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Proveedor</th>
+            <th scope="col">Estado</th>
+            <th scope="col" style="width: 35%">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each egresos}}
+            <tr>
+                <td>{{egreso_id}}</td>
+                <td>{{fechaDeOperacion}}</td>
+                <td>{{proveedor.nombre}}</td>
+                <td>{{estado}}</td>
+                <td>
+                    <a class="btn btn-info" href="{{entidad.id}}/egresos/{{egreso_id}}">
+                        <i class="small material-icons">description</i>Ver detalle</a>
+                    <a href="#" class="btn btn-warning">
+                        <i class="small material-icons">edit</i>
+                        Modificar
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="small material-icons">delete</i>
+                        Borrar
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <div class="alert alert-danger text-center" role="alert">
+        No se encontró ninguna egreso.
+    </div>
+{{/if}}
+<hr>
+{{/entidad}}
 {{/partial}}
 {{> layout.html.hbs }}
