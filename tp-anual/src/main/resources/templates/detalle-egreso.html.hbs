@@ -35,12 +35,12 @@
         </div>
     </div>
     <hr>
-    <h4 class="span-detalle">Revisores
+    <h3 class="span-detalle">Revisores
         <a class="btn btn-primary btn-nueva" href="#">
             <i class="small material-icons">add_circle_outline</i>
             Agregar
         </a>
-    </h4>
+    </h3>
 
     {{#if revisores}}
         <table class="table table-striped">
@@ -70,12 +70,12 @@
         </div>
     {{/if}}
 
-    <h4 class="span-detalle">Items
+    <h3 class="span-detalle">Items
         <a class="btn btn-primary btn-nueva" href="{{egreso_id}}/items/nuevo">
             <i class="small material-icons">add_circle_outline</i>
             Agregar
         </a>
-    </h4>
+    </h3>
     {{#if items}}
         <table class="table table-striped">
             <thead>
@@ -112,12 +112,12 @@
         </div>
     {{/if}}
     <hr>
-    <h4 class="span-detalle">Presupuestos
+    <h3 class="span-detalle">Presupuestos
         <a class="btn btn-primary btn-nueva" href="{{egreso_id}}/presupuestos/nuevo">
             <i class="small material-icons">add_circle_outline</i>
             Agregar
         </a>
-    </h4>
+    </h3>
     {{#if presupuestos}}
         <table class="table table-striped">
             <thead>
@@ -154,7 +154,7 @@
         </div>
     {{/if}}
     <hr>
-    <h4 class="span-detalle">Etiquetas asignadas</h4>
+    <h3 class="span-detalle">Etiquetas asignadas</h3>
         {{#each etiquetasAsignadas}}
             <div class="div-etiqueta">
                 <i class="small material-icons">local_offer</i><span class="etiqueta">{{this}}</span>
