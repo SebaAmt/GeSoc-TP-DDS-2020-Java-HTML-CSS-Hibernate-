@@ -36,6 +36,9 @@ public class ItemsController implements WithGlobalEntityManager, TransactionalOp
             modelo.put("idEntidad", Long.parseLong(idEntidad));
             modelo.put("idOrganizacion", Long.parseLong(idOrg));
             modelo.put("idEgreso", Long.parseLong(idEgreso));
+            modelo.put("tipoEntidad", request.params(":tipoEntidad"));
+            modelo.put("nombreOrganizacion", RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(idOrg)).getNombre());
+            modelo.put("nombreEntidad", RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad)).getNombreFicticio());
 
             return new ModelAndView(modelo, "form-creacion-item.html.hbs");
         }
