@@ -7,57 +7,73 @@
         <li class="breadcrumb-item active" aria-current="page">{{nombreFicticio}}</li>
     </ol>
 </nav>
-<div class="detalle">
-	<h1>{{nombreFicticio}}</h1>
-	<hr>
-	<div class="seccion-texto-detalle">
-		<div class="elemento-detalle">
-			<span class="span-detalle">Descripción</span>
-			<p class="valor-detalle">{{descripcion}}</p>
-			<p>
-		</div>
-		<div class="elemento-detalle">
-			<form
-				action="/organizaciones/{{idOrganizacion}}/entidades/base/{{this.id}}"
-				method="POST">
-				<label class="span-detalle" for="categoria">Categoría</label><p class="valor-detalle">{{categoria.nombreCategoria}}</p>
-				
-				<p class="valor-detalle">
-					<select name="categoria">
-						{{#each categorias}}
-						<option value="{{this.id}}">{{this.nombreCategoria}}</option>
-						{{/each}}
-					</select>
-					<input class="btn-modificar" type="submit" value="Modificar"></input>
-					</p>
-			</form>
-		</div>
-	</div>
-	<hr>
-	<h4 class="span-detalle">Egresos<a class="btn-nuevo-egreso" href="{{entidad.id}}/egresos/nuevo">Nuevo</a></h4> 
-	<p>
-		<table>
-			{{#each egresos}}
-			<tr>
-				<td class="primer-columna">Egreso {{this.egreso_id}} ({{this.fechaDeOperacion}})</td>
-				<td class="celda-botones">
-					<a class="btn-detalle" href="{{entidad.id}}/egresos/{{this.egreso_id}}">
-						<i class="small material-icons">description</i>Ver detalle</a>
-					<a href="#" class="btn-modificar">
-						<i class="small material-icons">edit</i>
-						Modificar
-					</a>
-					<a href="#" class="btn-borrar">
-						<i class="small material-icons">delete</i>
-						Borrar
-					</a>
-				</td>
-			</tr>
-			{{/each}}
-		</table>
-		<p>
-			<hr>
-{{/entidad}}
+<h1>{{nombreFicticio}}</h1>
+<hr>
+<div class="seccion-texto-detalle">
+    <div class="elemento-detalle">
+        <span class="span-detalle">Descripción</span>
+        <p class="valor-detalle">{{descripcion}}</p>
+    </div>
+    <div class="elemento-detalle">
+        <form action="/organizaciones/{{idOrganizacion}}/entidades/base/{{this.id}}" method="POST">
+            <label class="span-detalle" for="categoria">Categoría</label>
+            <p class="valor-detalle">{{categoria.nombreCategoria}}</p>
+            <select name="categoria">
+                {{#each categorias}}
+                <option value="{{this.id}}">{{this.nombreCategoria}}</option>
+                {{/each}}
+            </select>
+            <input class="btn btn-warning" type="submit" value="Modificar"></input>
+        </form>
+    </div>
 </div>
+<hr>
+<h4 class="span-detalle">
+    Egresos
+    <a href="{{entidad.id}}/egresos/nuevo" class="btn btn-primary btn-nueva" type="submit" value="Nueva"/>
+    <i class="small material-icons">add_circle_outline</i> Agregar
+    </a>
+</h4>
+{{#if egresos}}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Proveedor</th>
+            <th scope="col">Estado</th>
+            <th scope="col" style="width: 35%">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each egresos}}
+            <tr>
+                <td>{{egreso_id}}</td>
+                <td>{{fechaDeOperacion}}</td>
+                <td>{{proveedor.nombre}}</td>
+                <td>{{estado}}</td>
+                <td>
+                    <a class="btn btn-info" href="{{entidad.id}}/egresos/{{egreso_id}}">
+                        <i class="small material-icons">description</i>Ver detalle</a>
+                    <a href="#" class="btn btn-warning">
+                        <i class="small material-icons">edit</i>
+                        Modificar
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="small material-icons">delete</i>
+                        Borrar
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <div class="alert alert-danger text-center" role="alert">
+        No se encontró ninguna egreso.
+    </div>
+{{/if}}
+<hr>
+{{/entidad}}
 {{/partial}}
 {{> layout.html.hbs }}
