@@ -84,11 +84,17 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
     public ModelAndView getDetalleEgreso(Request request, Response response){
         String idOrg = request.params(":idOrg");
         String idEgreso = request.params(":idEgreso");
+        String idEntidad = request.params(":idEntidad");
         try{
             SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(idOrg));
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("egreso", RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(idEgreso)));
+            modelo.put("idOrganizacion", idOrg);
+            modelo.put("nombreOrganizacion", RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(idOrg)).getNombre());
+            modelo.put("idEntidad", idEntidad);
+            modelo.put("nombreEntidad", RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad)).getNombreFicticio());
+            modelo.put("tipoEntidad", request.params(":tipoEntidad"));
 
             return new ModelAndView(modelo, "detalle-egreso.html.hbs");
         }
