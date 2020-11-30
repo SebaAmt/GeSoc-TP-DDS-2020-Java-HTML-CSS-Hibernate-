@@ -38,8 +38,8 @@ public class Routes {
         Spark.get("/organizaciones/:id", (request, response) -> organizacionesController.getDetalleOrganizacion(request, response), engine);
         //Mensajes
         Spark.get("/mensajes", (request, response) -> usuariosController.getMensajes(request, response), engine);
-        //Entidades
 
+        //Entidades
         Spark.get("/organizaciones/:idOrg/entidades/base/nueva", (request, response) -> entidadesController.getFormCreacionEntidadBase(request, response), engine);
         Spark.post("/organizaciones/:idOrg/entidades/base/nueva", (request, response) -> entidadesController.createEntidadBase(request, response), engine);
         Spark.get("/organizaciones/:idOrg/entidades/base/:idEntidad", (request, response) -> entidadesController.getDetalleEntidadBase(request, response), engine);

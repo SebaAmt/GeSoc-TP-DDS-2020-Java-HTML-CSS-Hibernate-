@@ -1,82 +1,109 @@
 {{#partial "contenido"}}
-<div class="detalle">
 {{#organizacion}}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{nombre}}</li>
+    </ol>
+</nav>
 <h1>{{nombre}}</h1>
 <hr>
-
 <h2 class="span-detalle">Entidades</h2>
 	<section style="display:inline-block;">
 	<form action="/organizaciones/{{this.id}}"
 		method="GET" style="display:inline-block;">
 		<span class="span-detalle" for="categoria" >Seleccione una categoría</span>
-
 		<select name="filtro" >
 			{{#each categorias}}
 				<option value="{{this.id}}">{{this.nombreCategoria}}</option>
 			{{/each}}
 		</select>
-		<input class="btn-modificar" type="submit" value="    Filtrar    " ></input>
+		<input class="btn btn-warning" type="submit" value="Filtrar"></input>
     </form>
 	<form action="/organizaciones/{{this.id}}"
 		method="GET" style="display:inline-block;">
-		 <input class="btn-borrar"  type="submit" value="Remover  Filtro" style="margin-left:0"></input>
+		 <input class="btn btn-danger" type="submit" value="Remover Filtro" style="margin-left:0"></input>
 	</form>
 		</section>
 {{/organizacion}}
-		
 
-		<h3 class="span-detalle">Entidades Base 
-			<form action="{{organizacion.id}}/entidades/base/nueva" method="GET" style="display:inline-block;">
-				<input class="btn-agregar" type="submit" value="Nueva" style="margin-left:0"/>
-			</form>
-		</h3>
-	
-		<table>		
-    		{{#each entidadesBase}}
-    		<tr>
-    			<td class="primer-columna"><a class="elemento-detalle">{{this.nombreFicticio}}</a></td>
-    			<td class="celda-botones">
-					<a class="btn-detalle" href="{{organizacion.id}}/entidades/base/{{this.id}}">
-						<i class="small material-icons">description</i>Ver detalle</a>
-					<a href="#" class="btn-modificar">
-						<i class="small material-icons">edit</i>
-						Modificar
-					</a>
-					<a href="#" class="btn-borrar">
-						<i class="small material-icons">delete</i>
-						Borrar
-					</a>
-				</td>
-			</tr>
-    		{{/each}}
- 		</table>
- 		
- 		<h3 class="span-detalle">Entidades Jurídicas
- 			<form action="{{organizacion.id}}/entidades/juridica/nueva" method="GET" style="display:inline-block;">
-				<input class="btn-agregar" type="submit" value="Nueva" style="margin-left:0"/>
-			</form>
- 		</h3>
- 		<table> 
-    		{{#each entidadesJuridicas}}
-    		<tr>
-        		<td class="primer-columna"><a>{{this.nombreFicticio}}</a></td>
-        		<td class="celda-botones">
-					<a class="btn-detalle" href="{{organizacion.id}}/entidades/juridica/{{this.id}}">
-						<i class="small material-icons">description</i>Ver detalle</a>
-					<a href="#" class="btn-modificar">
-						<i class="small material-icons">edit</i>
-						Modificar
-					</a>
-					<a href="#" class="btn-borrar">
-						<i class="small material-icons">delete</i>
-						Borrar
-					</a>
-				</td>
-			</tr>
-			{{/each}}
-		</table>
-	
+<h3 class="span-detalle">Entidades Base
+    <a href="{{organizacion.id}}/entidades/base/nueva" class="btn btn-primary btn-nueva" type="submit" value="Nueva"/>
+        <i class="small material-icons">add_circle_outline</i> Agregar
+    </a>
+</h3>
 
+{{#if entidadesBase}}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#each entidadesBase}}
+            <tr>
+                <td>{{nombreFicticio}}</td>
+                <td>
+                    <a class="btn btn-info" href="{{organizacion.id}}/entidades/base/{{this.id}}">
+                        <i class="small material-icons">description</i>Ver detalle</a>
+                    <a href="#" class="btn btn-warning">
+                        <i class="small material-icons">edit</i>
+                        Modificar
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="small material-icons">delete</i>
+                        Borrar
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <div class="alert alert-danger text-center" role="alert">
+        No se encontró ninguna entidad base.
+    </div>
+{{/if}}
+<h3 class="span-detalle">Entidades Jurídicas
+    <a href="{{organizacion.id}}/entidades/juridica/nueva" class="btn btn-primary btn-nueva" type="submit" value="Nueva"/>
+        <i class="small material-icons">add_circle_outline</i> Agregar
+    </a>
+</h3>
+{{#if entidadesJuridicas}}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each entidadesJuridicas}}
+            <tr>
+                <td>{{nombreFicticio}}</td>
+                <td>
+                    <a class="btn btn-info" href="{{organizacion.id}}/entidades/juridica/{{this.id}}">
+                        <i class="small material-icons">description</i>Ver detalle</a>
+                    <a href="#" class="btn btn-warning">
+                        <i class="small material-icons">edit</i>
+                        Modificar
+                    </a>
+                    <a href="#" class="btn btn-danger">
+                        <i class="small material-icons">delete</i>
+                        Borrar
+                    </a>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <div class="alert alert-danger text-center" role="alert">
+        No se encontró ninguna entidad jurídica.
+    </div>
+{{/if}}
 
 {{#organizacion}}
 <hr>
@@ -102,6 +129,5 @@
     </ul>
     <hr>
 {{/organizacion}}
-</div>
 {{/partial}}
 {{> layout.html.hbs }}

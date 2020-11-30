@@ -59,7 +59,8 @@ public class ItemsController implements WithGlobalEntityManager, TransactionalOp
         });
 
         //response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":idEntidad") + "/egresos/" + request.params(":idEgreso"));
-        response.redirect("../" + request.params(":idEgreso"));
+        //response.redirect("../" + request.params(":idEgreso"));
+        response.redirect(request.uri().replace("/items", ""));
         return null;
     }
 }
