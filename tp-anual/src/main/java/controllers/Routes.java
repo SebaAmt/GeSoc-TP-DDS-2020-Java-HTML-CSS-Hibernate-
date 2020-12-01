@@ -41,10 +41,10 @@ public class Routes {
 
         //Entidades
         Spark.get("/organizaciones/:idOrg/entidades/base/nueva", (request, response) -> entidadesController.getFormCreacionEntidadBase(request, response), engine);
-        Spark.post("/organizaciones/:idOrg/entidades/base/nueva", (request, response) -> entidadesController.createEntidadBase(request, response), engine);
+        Spark.post("/organizaciones/:idOrg/entidades/base", (request, response) -> entidadesController.createEntidadBase(request, response), engine);
         Spark.get("/organizaciones/:idOrg/entidades/base/:idEntidad", (request, response) -> entidadesController.getDetalleEntidadBase(request, response), engine);
         Spark.get("/organizaciones/:idOrg/entidades/juridica/nueva", (request, response) -> entidadesController.getFormCreacionEntidadJuridica(request, response), engine);
-        Spark.post("/organizaciones/:idOrg/entidades/juridica/nueva", (request, response) -> entidadesController.createEntidadJuridica(request, response), engine);
+        Spark.post("/organizaciones/:idOrg/entidades/juridica", (request, response) -> entidadesController.createEntidadJuridica(request, response), engine);
         Spark.get("/organizaciones/:idOrg/entidades/juridica/:idEntidad", (request, response) -> entidadesController.getDetalleEntidadJuridica(request, response), engine);
         Spark.post("/organizaciones/:idOrg/entidades/:tipoEntidad/:idEntidad", (request, response) ->entidadesController.modificarCategoria(request, response));
         

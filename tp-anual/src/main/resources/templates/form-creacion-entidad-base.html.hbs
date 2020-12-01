@@ -1,28 +1,31 @@
 {{# partial "contenido" }}
-<section class="detalle">
-<div class="div-form-alta">
-	<form class="form-alta"
-		action="/organizaciones/{{idOrganizacion}}/entidades/base/nueva"
-		method="POST">
-		<h1>Nueva Entidad Básica</h1>
-		<label for="nombre">Nombre</label>
-		<input type="text" id="nombre" name="nombre"
-			placeholder="Ingrese nombre de la entidad">
-			<br>
-		<label for="categorias">Categorias</label>
-		<select id="categorias" name="categoria">
-			{{#each categorias}}
-				<option value="{{this.id}}">{{this.nombreCategoria}}</option>
-			{{/each}}
-		</select>
-		<br>
-		<label for="descripcion">Descripcion</label><br>
-		<textarea rows=5 cols=30 name="descripcion"
-			placeholder="Ingrese la descripcion de la entidad base"></textarea>
-			<br>
-		<input type="submit" class="submit-button" value="Crear Entidad">
-	</form>
-</div>
-</section>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/organizaciones/{{idOrganizacion}}">{{nombreOrganizacion}}</a></li></li>
+        <li class="breadcrumb-item active" aria-current="page">Nueva entidad base</li>
+    </ol>
+</nav>
+<h1>Nueva entidad base</h1>
+<form action="/organizaciones/{{idOrganizacion}}/entidades/base" method="POST">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input class="form-control" type="text" id="nombre" name="nombre">
+        <label for="categorias">Categorias</label>
+        <select class="form-control" id="categorias" name="categoria">
+            {{#each categorias}}
+                <option value="{{this.id}}">{{this.nombreCategoria}}</option>
+            {{/each}}
+        </select>
+        <label for="descripcion">Descripcion</label><br>
+        <textarea rows=5 cols=30 name="descripcion" class="form-control"></textarea>
+    </div>
+    <hr>
+    <div class="text-center">
+        <input type="submit" class="btn btn-success btn-block" value="Crear entidad">
+        <br>
+        <a href="/organizaciones/{{idOrganizacion}}" class="btn btn-danger">Cancelar</a>
+    </div>
+</form>
 {{/partial}}
 {{> layout.html.hbs }}

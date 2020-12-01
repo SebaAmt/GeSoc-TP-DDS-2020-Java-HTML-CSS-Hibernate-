@@ -38,6 +38,7 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("idOrganizacion", Long.parseLong(idOrg));
+            modelo.put("nombreOrganizacion", RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(idOrg)).getNombre());
             modelo.put("categorias", RepositorioOrganizaciones.instancia.obtenerCategoriasDeOrganizacion((Long.parseLong(idOrg))));
             return new ModelAndView(modelo, form);
         }
