@@ -104,30 +104,64 @@
         No se encontró ninguna entidad jurídica.
     </div>
 {{/if}}
-
 {{#organizacion}}
 <hr>
-<h3 class="span-detalle">Categorías</h3>
-<ul>
-    {{#each categorias}}
-        <li class="valor-detalle">{{this.nombreCategoria}}</li>
-    {{/each}}
-</ul>
-<hr>
-<h3 class="span-detalle">Validaciones para egresos</h3>
-<ul>
-    {{#each validacionesEgresos}}
-        <li class="valor-detalle">{{this.nombre}}</li>
-    {{/each}}
-</ul>
-<hr>
-<h3 class="span-detalle">Etiquetas disponibles</h3>
-    <ul>
-    	{{#each etiquetasDisponibles}}
-        	<li class="valor-detalle">{{this}}</li>
-    	{{/each}}
-    </ul>
-    <hr>
+<div class="accordion" id="accordionOrganizacion">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <h3>Categorías <span class="badge badge-primary">{{cantidadCategorias}}</span></h3>
+                </button>
+            </h2>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionOrganizacion">
+            <div class="card-body">
+                <ul>
+                    {{#each categorias}}
+                        <li class="valor-detalle">{{this.nombreCategoria}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <h3>Validaciones para egresos <span class="badge badge-primary">{{cantidadValidaciones}}</span></h3>
+                </button>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionOrganizacion">
+            <div class="card-body">
+                <ul>
+                    {{#each validacionesEgresos}}
+                        <li class="valor-detalle">{{this.nombre}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <h3>Etiquetas disponibles <span class="badge badge-primary">{{cantidadEtiquetas}}</span></h3>
+                </button>
+            </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionOrganizacion">
+            <div class="card-body">
+                <ul>
+                    {{#each etiquetasDisponibles}}
+                        <li class="valor-detalle">{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 {{/organizacion}}
 {{/partial}}
 {{> layout.html.hbs }}

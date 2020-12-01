@@ -58,6 +58,9 @@ public class OrganizacionesController implements WithGlobalEntityManager {
             modelo.put("organizacion", organizacion);
             modelo.put("entidadesBase", entidadesBase);
             modelo.put("entidadesJuridicas", entidadesJuridicas);
+            modelo.put("cantidadCategorias", organizacion.getCategorias().stream().count());
+            modelo.put("cantidadEtiquetas", organizacion.getEtiquetasDisponibles().stream().count());
+            modelo.put("cantidadValidaciones", organizacion.getValidacionesEgresos().stream().count());
             
             return new ModelAndView(modelo, "detalle-organizacion.html.hbs");
         }
