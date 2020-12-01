@@ -117,9 +117,9 @@
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionOrganizacion">
             <div class="card-body">
-                <ul>
+                <ul class="list-group list-group-flush">
                     {{#each categorias}}
-                        <li class="valor-detalle">{{this.nombreCategoria}}</li>
+                        <li class="list-group-item">{{this.nombreCategoria}}</li>
                     {{/each}}
                 </ul>
             </div>
@@ -135,9 +135,9 @@
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionOrganizacion">
             <div class="card-body">
-                <ul>
+                <ul class="list-group list-group-flush">
                     {{#each validacionesEgresos}}
-                        <li class="valor-detalle">{{this.nombre}}</li>
+                        <li class="list-group-item">{{this.nombre}}</li>
                     {{/each}}
                 </ul>
             </div>
@@ -153,9 +153,9 @@
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionOrganizacion">
             <div class="card-body">
-                <ul>
+                <ul class="list-group list-group-flush">
                     {{#each etiquetasDisponibles}}
-                        <li class="valor-detalle">{{this}}</li>
+                        <li class="list-group-item">{{this}}</li>
                     {{/each}}
                 </ul>
             </div>

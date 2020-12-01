@@ -36,6 +36,9 @@ public class PresupuestosController implements WithGlobalEntityManager, Transact
             modelo.put("idEntidad", Long.parseLong(idEntidad));
             modelo.put("idOrganizacion", Long.parseLong(idOrg));
             modelo.put("idEgreso", Long.parseLong(idEgreso));
+            modelo.put("nombreOrganizacion", RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(idOrg)).getNombre());
+            modelo.put("nombreEntidad", RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad)).getNombreFicticio());
+            modelo.put("tipoEntidad", request.params(":tipoEntidad"));
             modelo.put("monedaEgreso", RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(idEgreso)).getMoneda());
             modelo.put("itemsEgreso", RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(idEgreso)).getItems());
             modelo.put("proveedores", RepositorioProveedores.instancia.obtenerProveedores());

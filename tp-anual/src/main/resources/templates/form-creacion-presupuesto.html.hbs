@@ -1,54 +1,72 @@
 {{# partial "contenido" }}
-    <div class="div-form-alta">
-        <h1>Nuevo Presupuesto</h1>
-        <form class="form-alta" action="../presupuestos" method="POST">
-
-            <label for="proveedores">Proveedores</label>
-            <select id="proveedores" name="proveedor">
-                {{#each proveedores}}
-                    <option value="{{id}}">{{nombre}}</option>
-                {{/each}}
-            </select>
-
-            <label for="moneda" class="nombre-campo">Moneda</label>
-            <select id="moneda" name="moneda">
-                {{#monedaEgreso}}
-                    <option selected="true" value="{{id}}" name="moneda">{{description}}</option>
-                {{/monedaEgreso}}
-            </select>
-
-            <hr>
-            <span>Documento Comercial</span>
-            <label for="tipoDocCom">Tipo</label>
-            <select id="tipoDocCom" name="tipo-doc-comercial">
-                {{#each tiposDocumentoComercial}}
-                    <option value="{{this}}">{{this.nombre}}</option>
-                {{/each}}
-            </select>
-            <label for="numeroDocCom">Número</label>
-            <input type="number" id="numeroDocCom" name="numeroDocComercial">
-            <hr>
-
-            <span>Ítems</span>
-            <table class="tabla-items-alta-presupuesto">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/organizaciones/{{idOrganizacion}}">{{nombreOrganizacion}}</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}">{{nombreEntidad}}</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}/egresos/{{idEgreso}}">Egreso {{idEgreso}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nuevo presupuesto</li>
+    </ol>
+</nav>
+<h1>Nuevo Presupuesto</h1>
+<form class="form-alta" action="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}/egresos/{{idEgreso}}/presupuestos" method="POST">
+    <div class="form-group">
+        <label for="proveedores">Proveedores</label>
+        <select id="proveedores" name="proveedor" class="form-control">
+            {{#each proveedores}}
+                <option value="{{id}}">{{nombre}}</option>
+            {{/each}}
+        </select>
+        <label for="moneda" class="nombre-campo">Moneda</label>
+        <select id="moneda" name="moneda" class="form-control">
+            {{#monedaEgreso}}
+                <option selected="true" value="{{id}}" name="moneda">{{description}}</option>
+            {{/monedaEgreso}}
+        </select>
+        <hr>
+        <h5>Documento Comercial</h5>
+        <label for="tipoDocCom">Tipo</label>
+        <select id="tipoDocCom" name="tipo-doc-comercial" class="form-control">
+            {{#each tiposDocumentoComercial}}
+                <option value="{{this}}">{{this.nombre}}</option>
+            {{/each}}
+        </select>
+        <label for="numeroDocCom">Número</label>
+        <input type="number" id="numeroDocCom" name="numeroDocComercial" class="form-control">
+        <hr>
+        <h5>Ítems</h5>
+        {{#if itemsEgreso}}
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <th>Descripción</th>
-                    <th>Cantidad de unidades</th>
-                    <th>Precio unitario</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Cantidad de unidades</th>
+                    <th scope="col">Precio unitario</th>
                 </tr>
-                {{#itemsEgreso}}
-                <tr>
-                    <td>{{descripcion}}</td>
-                    <td>{{cantidadUnidades}}</td>
-                    <td><input type="number" name="{{id}}"></td>
-                </tr>
-                {{/itemsEgreso}}
+                </thead>
+                <tbody>
+                {{#each itemsEgreso}}
+                    <tr>
+                        <td>{{descripcion}}</td>
+                        <td>{{cantidadUnidades}}</td>
+                        <td><input type="number" name="{{id}}"></td>
+                    </tr>
+                {{/each}}
+                </tbody>
             </table>
-            <hr>
-
-            <input type="submit" class="submit-button" value="Crear Presupuesto">
-        </form>
+        {{else}}
+            <div class="alert alert-danger text-center" role="alert">
+                No se encontró ningún ítem.
+            </div>
+        {{/if}}
+        <hr>
+        <div class="text-center">
+            <input type="submit" class="btn btn-success btn-block" value="Crear presupuesto">
+            <br>
+            <a href="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}/egresos/{{idEgreso}}" class="btn btn-danger">Cancelar</a>
+        </div>
     </div>
+</form>
 {{/partial}}
 {{> layout.html.hbs }}
 
