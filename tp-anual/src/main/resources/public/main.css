@@ -51,52 +51,6 @@ i {
      outline:none;
 }
 
-
-
-.page-button {
-	box-shadow:inset 0px 1px 0px 0px #ffffff;
-	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-	background-color:#ededed;
-	border-radius:6px;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	cursor:pointer;
-	color:#777777;
-	font-family:Arial;
-	font-size:12px;
-	font-weight:bold;
-	padding:1px 10px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
-}
-
-.page-button:hover {
-	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
-	background-color:#dfdfdf;
-}
-
-.page-button:active {
-	position:relative;
-	top:1px;
-}
-
-.submit-button {
-    background: #2ecc71;
-    width: -webkit-fill-available;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: white;
-    border-radius: 1em;
-    border: #27ae60 0.2em solid;
-    margin-top: 1.5em;
-    font-weight: bold;
-    cursor: pointer;
- }
-
-.submit-button:hover{
-    background: #28AD60;
-}
-
 .detalle {
     display: flex;
     flex-direction: column;
@@ -143,106 +97,9 @@ form .valor-detalle{
     vertical-align: middle;
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.center tr:nth-child(even) {background: #FFFFFF}
-
 th {
     padding-bottom: 0.8em;
     text-transform: uppercase;
-}
-
-.celda-botones {
-    text-align: left;
-    padding: 0.5em;
-    background: white;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
-}
-
-.btn-detalle{
-    background: #99BFCC;
-    padding: 0.4em;
-    text-align: center;
-    border-radius: 1em;
-    color: white;
-    text-decoration: none;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-}
-
-.btn-detalle:hover{
-    background: #7C9BA6;
-}
-
-.btn-modificar{
-    background: #FF8C00;
-    padding: 0.4em;
-    text-align: center;
-    border-radius: 1em;
-    color: white;
-    text-decoration: none;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    cursor: pointer;
-}
-
-
-.btn-modificar:hover{
-    background: #CC7000;
-}
-
-.btn-nuevo-egreso{
-    background: #007bff;
-    padding: 0.4em;
-    padding-top: 0.1em;
-    padding-bottom: 0.2em;
-    text-align: center;
-    border-radius: 1em;
-    color: white;
-    text-decoration: none;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    font-weight: normal;
-}
-
-.btn-nuevo-egreso:hover{
-    background: #0069D9;
-}
-
-
-.btn-borrar{
-    background: #DC143C;
-    padding: 0.4em;
-    text-align: center;
-    border-radius: 1em;
-    color: white;
-    text-decoration: none;
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    cursor: pointer;
-}
-
-.btn-borrar:hover{
-    background:#B81132;
-}
-
-.btn-agregar{
-    background: #007bff;
-    padding: 0.5em;
-    margin: 1em;
-    text-align: center;
-    border-radius: 1em;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.btn-agregar:hover{
-    background: #0069D9;
 }
 
 .btn-nueva {
@@ -251,16 +108,6 @@ th {
 
 hr{
     width: 50%;
-}
-
-.div-etiqueta{
-    display: flex;
-    margin: 0.4em;
-}
-
-.etiqueta{
-    padding: 0.3em;
-    font-style: italic;
 }
 
 /* Login */
@@ -292,59 +139,6 @@ footer{
     top: 180px;
     text-align: center;
     background-color: DEDDE4;
-}
-
-/* Form Alta */
-.div-form-alta{
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    margin: 1em;
-}
-
-.form-alta span {
-    display: flex;
-    font-weight:bold;
-    color: black;
-    margin-bottom: 0.5em;
-}
-
-.form-alta input[type=text], .form-alta input[type=number], .form-alta input[type=date] {
-    margin: 0.3em;
-    border-radius: 5px;
-    margin-bottom: 0.8em;
-    padding: 0.3em;
-    width: 100%;
-}
-
-.form-alta select {
-    margin: 0.3em;
-    border-radius: 5px;
-    margin-bottom: 0.8em;
-    padding: 0.3em;
-    width: 100%;
-}
-
-.form-alta hr {
-    width: 80%
-}
-
-.form-alta .checkbox-label-div{
-    width: 100%;
-    margin-bottom: 0.8em;
-}
-
-.tabla-items-alta-presupuesto {
-    width: 150%;
-}
-
-.tabla-items-alta-presupuesto td{
-    padding: 1em;
-}
-
-.tabla-items-alta-presupuesto th{
-    padding: 0;
-    text-transform: initial;
 }
 
 .form-group label {
