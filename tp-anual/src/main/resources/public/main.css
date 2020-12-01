@@ -346,3 +346,8 @@ footer{
     padding: 0;
     text-transform: initial;
 }
+
+.form-group label {
+    margin-top: .5rem;
+    margin-bottom: .2rem;
+}

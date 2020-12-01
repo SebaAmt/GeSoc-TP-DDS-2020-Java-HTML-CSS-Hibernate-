@@ -1,67 +1,85 @@
 {{# partial "contenido" }}
-<section class="detalle">
-    <div class="div-form-alta">
-        <h1>Nuevo Egreso</h1>
-        <form class="form-alta" action="../egresos/nuevo" method="POST">
-            <label for="fechaOp">Fecha de operación</label>
-            <input type="date" id="fechaOp" name="fechaOperacion" value="2020-01-01">
-            <label for="proveedores">Proveedores</label>
-            <select id="proveedores" name="proveedor">
-                {{#each proveedores}}
-                    <option value="{{this.id}}">{{this.nombre}}</option>
-                {{/each}}
-            </select>
-            <label for="medioPago">Medio de pago</label>
-            <select id="medioPago" name="medioDePago">
-                {{#each mediosDePago}}
-                    <option value="{{this.id}}">{{this.identificador}} - {{this.medio}}</option>
-                {{/each}}
-            </select>
-            <label for="moneda">Moneda</label>
-            <select id="moneda" name="moneda">
-                {{#each monedas}}
-                    <option value="{{this.id}}">{{this.description}}</option>
-                {{/each}}
-            </select>
-            <hr>
-            <span>Documento Comercial</span>
-            <label for="tipoDocCom">Tipo</label>
-            <select id="tipoDocCom" name="tipo-doc-comercial">
-                {{#each tiposDocumentoComercial}}
-                    <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
-            <label for="numeroDocCom">Número</label>
-            <input type="number" id="numeroDocCom" name="numeroDocComercial" max="999999999">
-            <hr>
-            <span>Etiquetas</span>
-            {{#each etiquetasDisponibles}}
-                <div class="checkbox-label-div">
-                    <label for="{{this}}">{{this}}</label>
-                    <input type="checkbox" id="{{this}}" name="etiquetas" value="{{this}}" id={{this}}>
-                </div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/organizaciones/{{idOrganizacion}}">{{nombreOrganizacion}}</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}">{{nombreEntidad}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nuevo egreso</li>
+    </ol>
+</nav>
+<h1>Nuevo Egreso</h1>
+<form action="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}/egresos" method="POST">
+    <div class="form-group">
+        <label for="fechaOp">Fecha de operación</label>
+        <input type="date" class="form-control" id="fechaOp" name="fechaOperacion" value="2020-01-01">
+        <label for="proveedores">Proveedores</label>
+        <select id="proveedores"  class="form-control" name="proveedor">
+            {{#each proveedores}}
+                <option value="{{this.id}}">{{this.nombre}}</option>
             {{/each}}
-            <hr>
-            <span>Presupuestos</span>
-            <div class="checkbox-label-div">
-                <label for="presupuestos">Requiere presupuestos</label>
-                <input type="checkbox" name="presupuestoCheck" id="presupuestos">
-            </div>
-            <label for="criterioSeleccion">Criterio de selección de presupuesto</label>
-            <select id="criterioSeleccion" name="criterioSeleccionPresupuesto">
-                {{#each criteriosSeleccionPresupuesto}}
-                    <option selected disabled hidden style='display: none' value=''></option>
-                    <option value="{{this}}">{{this}}</option>
+        </select>
+        <label for="medioPago">Medio de pago</label>
+        <select id="medioPago"  class="form-control" name="medioDePago">
+            {{#each mediosDePago}}
+                <option value="{{this.id}}">{{this.identificador}} - {{this.medio}}</option>
+            {{/each}}
+        </select>
+        <label for="moneda">Moneda</label>
+        <select id="moneda" class="form-control"  name="moneda">
+            {{#each monedas}}
+                <option value="{{this.id}}">{{this.description}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <hr>
+    <div class="form-group">
+        <h5>Documento Comercial</h5>
+        <label for="tipoDocCom">Tipo</label>
+        <select id="tipoDocCom"  class="form-control" name="tipo-doc-comercial">
+            {{#each tiposDocumentoComercial}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+        <label for="numeroDocCom">Número</label>
+        <input type="number" id="numeroDocCom"  class="form-control" name="numeroDocComercial" max="999999999">
+    </div>
+    <hr>
+    <div class="form-group">
+        <h5>Etiquetas</h5>
+            <select multiple class="form-control" id="etiquetas" name="etiquetas">
+                {{#each etiquetasDisponibles}}
+                <option value="{{this}}">{{this}}</option>
                 {{/each}}
             </select>
-            <hr>
-            <div class="checkbox-label-div">
-                <label for="revisor">Quiero ser revisor de este egreso</label>
-                <input type="checkbox" name="revisorCheck" id="revisor">
-            </div>
-            <input class="submit-button" type="submit" value="Crear Egreso"></input>
-        </form>
     </div>
-    </section>
+    <hr>
+    <div class="form-group">
+        <h5>Presupuestos</h5>
+        <div class="checkbox-label-div">
+            <label for="presupuestos">Requiere presupuestos</label>
+            <input type="checkbox" name="presupuestoCheck" id="presupuestos">
+        </div>
+        <label for="criterioSeleccion">Criterio de selección de presupuesto</label>
+        <select id="criterioSeleccion"  class="form-control" name="criterioSeleccionPresupuesto">
+            {{#each criteriosSeleccionPresupuesto}}
+                <option selected disabled hidden style='display: none' value=''></option>
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <hr>
+    <div class="form-group">
+        <div class="checkbox-label-div">
+            <label for="revisor">Quiero ser revisor de este egreso</label>
+            <input type="checkbox" name="revisorCheck" id="revisor">
+        </div>
+    </div>
+    <hr>
+    <div class="text-center">
+        <input type="submit" class="btn btn-success btn-block" value="Crear egreso">
+        <br>
+        <a href="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}" class="btn btn-danger">Cancelar</a>
+    </div>
+</form>
 {{/partial}}
 {{> layout.html.hbs }}

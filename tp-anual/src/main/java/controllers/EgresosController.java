@@ -35,6 +35,8 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             modelo.put("tipoEntidad", tipoEntidad);
             modelo.put("idEntidad", Long.parseLong(idEntidad));
             modelo.put("idOrganizacion", Long.parseLong(idOrg));
+            modelo.put("nombreOrganizacion", RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(idOrg)).getNombre());
+            modelo.put("nombreEntidad", RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad)).getNombreFicticio());
             modelo.put("mediosDePago", RepositorioMediosDePago.instancia.obtenerMediosDePago());
             modelo.put("etiquetasDisponibles", RepositorioOrganizaciones.instancia.obtenerEtiquetasDeOrganizacion(Long.parseLong(idOrg)));
             modelo.put("tiposDocumentoComercial", TipoDocumentoComercial.values());
