@@ -6,7 +6,7 @@ import model.exception.ValidacionEgresoFallidaException;
 
 public enum ValidacionEgreso {
 
-    CANTIDAD_MINIMA{
+    CANTIDAD_MINIMA("Cantidad mínima"){
         private int cantidadMinimaPresupuestos = 3; // configurable
         @Override
         public void validar(Egreso egreso) {
@@ -14,7 +14,7 @@ public enum ValidacionEgreso {
                 throw new ValidacionEgresoFallidaException("El egreso no cumple con la cantidad minima de presupuestos cargados");
         }
     },
-    COINCIDE_CON_CRITERIO{
+    COINCIDE_CON_CRITERIO("Coincide con criterio"){
         @Override
         public void validar(Egreso egreso) {
             if(egreso.getCriterio() == null)
@@ -24,7 +24,7 @@ public enum ValidacionEgreso {
                 throw new ValidacionEgresoFallidaException("El egreso no se corresponde con el presupuesto seleccionado por criterio");
         }
     },
-    COINCIDE_CON_PRESUPUESTO_CARGADO{
+    COINCIDE_CON_PRESUPUESTO_CARGADO("Coincide con presupuesto cargado"){
         @Override
         public void validar(Egreso egreso){
             if(!egreso.getPresupuestos().stream().anyMatch(presupuesto -> egreso.tieneMismoProveedor(presupuesto) && egreso.tieneMismoValorTotal(presupuesto)))
@@ -33,5 +33,15 @@ public enum ValidacionEgreso {
     };
 
     public abstract void validar(Egreso egreso);
+
+    private String nombre;
+
+    ValidacionEgreso(String nombre){
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 }
 

@@ -22,7 +22,7 @@
             <label for="tipoDocCom">Tipo</label>
             <select id="tipoDocCom" name="tipo-doc-comercial">
                 {{#each tiposDocumentoComercial}}
-                    <option value="{{this}}">{{this}}</option>
+                    <option value="{{this}}">{{this.nombre}}</option>
                 {{/each}}
             </select>
             <label for="numeroDocCom">Número</label>

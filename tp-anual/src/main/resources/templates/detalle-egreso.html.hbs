@@ -21,17 +21,20 @@
             <span class="span-detalle">Proveedor</span><p class="valor-detalle">{{proveedor.nombre}}</p>
         </div>
         <div class="elemento-detalle">
+            <span class="span-detalle">Medio de pago</span><p class="valor-detalle">{{medioDePago.identificador}} - {{medioDePago.medio.nombre}}</p>
+        </div>
+        <div class="elemento-detalle">
             <span class="span-detalle">Moneda</span><p class="valor-detalle">{{moneda.description}}</p>
         </div>
         <div class="elemento-detalle">
             <span class="span-detalle">Requiere presupuestos</span><p class="valor-detalle">{{#if requierePresupuestos}}SÍ{{else}}NO{{/if}}</p>
         </div>
         <div class="elemento-detalle">
-            <span class="span-detalle">Criterio selección presupuesto</span><p class="valor-detalle">{{#if criterio}}{{criterio}}{{else}}Sin criterio{{/if}}</p>
+            <span class="span-detalle">Criterio selección presupuesto</span><p class="valor-detalle">{{#if criterio}}{{criterio.nombre}}{{else}}Sin criterio{{/if}}</p>
         </div>
         <div class="elemento-detalle">
             <span class="span-detalle">Documento Comercial</span>
-            <p class="valor-detalle">{{documentoComercial.tipoDocumentoComercial}} {{documentoComercial.identificadorDocumento}}</p>
+            <p class="valor-detalle">{{documentoComercial.tipoDocumentoComercial.nombre}} {{documentoComercial.identificadorDocumento}}</p>
         </div>
     </div>
     <hr>
