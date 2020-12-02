@@ -95,6 +95,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             modelo.put("nombreEntidad", RepositorioEntidades.instancia.obtenerEntidadPorId(Long.parseLong(idEntidad)).getNombreFicticio());
             modelo.put("tipoEntidad", request.params(":tipoEntidad"));
             modelo.put("cantidadEtiquetas", RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(idEgreso)).getEtiquetasAsignadas().stream().count());
+            modelo.put("usuarioLogueadoEstaComoRevisor", RepositorioEgresos.instancia.esRevisor(Long.parseLong(idEgreso), SessionHelper.getUsuarioLogueado(request).getUsername()));
 
             return new ModelAndView(modelo, "detalle-egreso.html.hbs");
         }

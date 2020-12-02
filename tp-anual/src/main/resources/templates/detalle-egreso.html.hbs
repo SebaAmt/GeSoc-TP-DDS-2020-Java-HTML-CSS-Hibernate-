@@ -39,10 +39,12 @@
     </div>
     <hr>
     <h3 class="span-detalle">Revisores
-        <a class="btn btn-primary btn-nueva" href="#">
-            <i class="small material-icons">add_circle_outline</i>
-            Agregar
-        </a>
+        {{#unless usuarioLogueadoEstaComoRevisor}}
+            <a class="btn btn-primary btn-nueva" href="#">
+                <i class="small material-icons">add_circle_outline</i>
+                Agregar
+            </a>
+        {{/unless}}
     </h3>
     {{#if revisores}}
         <table class="table table-striped">
