@@ -32,7 +32,7 @@ public class Routes {
         PresupuestosController presupuestosController = new PresupuestosController();
 
         before((request, response) -> {
-            if(request.uri().equals("/login") || request.uri().equals("/main.css"))
+            if(request.uri().equals("/login") || request.uri().equals("/main.css") ||request.uri().equals("/images/login-background.png"))
                 return;
             String username = request.session().attribute("userName");
             SessionHelper.validarLogueado(request, response);
