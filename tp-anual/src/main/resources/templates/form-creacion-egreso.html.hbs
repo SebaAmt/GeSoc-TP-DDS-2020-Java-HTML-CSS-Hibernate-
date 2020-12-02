@@ -11,7 +11,7 @@
 <form action="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}/egresos" method="POST">
     <div class="form-group">
         <label for="fechaOp">Fecha de operación</label>
-        <input type="date" class="form-control" id="fechaOp" name="fechaOperacion" value="2020-01-01">
+        <input type="date" class="form-control" id="fechaOp" name="fechaOperacion" value="{{fechaHoy}}">
         <label for="proveedores">Proveedores</label>
         <select id="proveedores"  class="form-control" name="proveedor">
             {{#each proveedores}}

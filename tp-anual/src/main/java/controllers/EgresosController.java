@@ -41,6 +41,7 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             modelo.put("criteriosSeleccionPresupuesto", CriterioSeleccionPresupuesto.values());
             modelo.put("monedas", RepositorioMonedas.instancia.obtenerMonedas());
             modelo.put("proveedores", RepositorioProveedores.instancia.obtenerProveedores());
+            modelo.put("fechaHoy", LocalDate.now());
 
             return new ModelAndView(modelo, "form-creacion-egreso.html.hbs");
         }
