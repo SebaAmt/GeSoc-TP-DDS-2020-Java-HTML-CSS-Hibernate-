@@ -40,10 +40,12 @@
     <hr>
     <h3 class="span-detalle">Revisores
         {{#unless usuarioLogueadoEstaComoRevisor}}
-            <a class="btn btn-primary btn-nueva" href="#">
-                <i class="small material-icons">add_circle_outline</i>
-                Agregar
-            </a>
+            <form action="/organizaciones/{{idOrganizacion}}/entidades/{{tipoEntidad}}/{{idEntidad}}/egresos/{{egreso_id}}/nuevoRevisor" method="POST" style="margin-bottom: -1em;" class="float-right">
+                <button type="submit" class="btn btn-primary btn-nueva">
+                    <i class="small material-icons">add_circle_outline</i>
+                    Agregar
+                </button>
+            </form>
         {{/unless}}
     </h3>
     {{#if revisores}}

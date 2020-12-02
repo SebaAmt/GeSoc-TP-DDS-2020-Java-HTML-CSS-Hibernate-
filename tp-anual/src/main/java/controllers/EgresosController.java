@@ -86,7 +86,6 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
         String idEgreso = request.params(":idEgreso");
         String idEntidad = request.params(":idEntidad");
         try{
-
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("egreso", RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(idEgreso)));
             modelo.put("idOrganizacion", idOrg);
@@ -103,5 +102,17 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
             response.status(HttpStatus.BAD_REQUEST_400);
             return null;
         }
+    }
+
+    public Void agregarRevisor(Request request, Response response){
+        Usuario usuario = SessionHelper.getUsuarioLogueado(request);
+        Egreso egreso = RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(request.params(":idEgreso")));
+
+        withTransaction(() ->{
+            RepositorioEgresos.instancia.agregarRevisorAEgreso(egreso, usuario);
+        });
+
+        response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":tipoEntidad") + "/" + request.params(":idEntidad") + "/egresos/" + request.params(":idEgreso"));
+        return null;
     }
 }
