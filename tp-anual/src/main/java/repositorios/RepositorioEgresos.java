@@ -27,8 +27,8 @@ public class RepositorioEgresos implements WithGlobalEntityManager {
         return usernames.contains(username);
     }
 
-    public void agregarRevisorAEgreso(Egreso egreso, Usuario usuario){
-        egreso.agregarRevisor(usuario);
+    public void actualizarEgresos(List<Egreso> egresos){
+        egresos.forEach(e -> entityManager().merge(e));
     }
 
 }

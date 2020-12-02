@@ -53,9 +53,10 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col" style="width: 8%">#</th>
             <th scope="col">Fecha</th>
             <th scope="col">Proveedor</th>
+            <th scope="col">Documento Comercial</th>
             <th scope="col">Estado</th>
             <th scope="col" style="width: 35%">Acciones</th>
         </tr>
@@ -66,6 +67,7 @@
                 <td>{{egreso_id}}</td>
                 <td>{{fechaDeOperacion}}</td>
                 <td>{{proveedor.nombre}}</td>
+                <td>{{documentoComercial.tipoDocumentoComercial.nombre}} - {{documentoComercial.identificadorDocumento}}</td>
                 <td>{{estado}}</td>
                 <td>
                     <a class="btn btn-info" href="{{entidad.id}}/egresos/{{egreso_id}}">

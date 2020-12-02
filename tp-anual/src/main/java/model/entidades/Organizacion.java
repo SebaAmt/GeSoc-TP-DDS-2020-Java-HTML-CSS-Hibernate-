@@ -68,9 +68,9 @@ public class Organizacion {
 
 			if (mensajesDeError.size() == 0) {
 				egresoPendiente.cambiarEstado(EstadoEgreso.ACEPTADO,
-						"El Egreso " + egresoPendiente.toString() + " fue ACEPTADO");
+						"El " + egresoPendiente.toString() + " fue ACEPTADO");
 			} else {
-				egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El Egreso " + egresoPendiente.toString()
+				egresoPendiente.cambiarEstado(EstadoEgreso.RECHAZADO, "El " + egresoPendiente.toString()
 						+ " fue RECHAZADO: " + String.join(", ", mensajesDeError));
 			}
 

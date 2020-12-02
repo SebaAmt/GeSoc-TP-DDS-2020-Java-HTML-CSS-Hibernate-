@@ -109,10 +109,11 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
         Egreso egreso = RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(request.params(":idEgreso")));
 
         withTransaction(() ->{
-            RepositorioEgresos.instancia.agregarRevisorAEgreso(egreso, usuario);
+            egreso.agregarRevisor(usuario);
         });
 
         response.redirect("/organizaciones/" + request.params(":idOrg") + "/entidades/" + request.params(":tipoEntidad") + "/" + request.params(":idEntidad") + "/egresos/" + request.params(":idEgreso"));
         return null;
     }
+
 }

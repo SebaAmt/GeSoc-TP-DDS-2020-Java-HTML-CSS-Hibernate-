@@ -1,5 +1,6 @@
 package repositorios;
 
+import model.egreso.Egreso;
 import model.usuario.CreadorDeUsuario;
 import model.usuario.Usuario;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -28,4 +29,7 @@ public class RepositorioUsuarios implements WithGlobalEntityManager {
         return entityManager().find(Usuario.class, username);
     }
 
+    public void actualizarUsuarios(List<Usuario> usuarios){
+        usuarios.forEach(u -> entityManager().merge(u));
+    }
 }

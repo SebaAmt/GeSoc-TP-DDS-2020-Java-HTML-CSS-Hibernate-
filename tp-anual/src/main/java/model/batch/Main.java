@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import model.direccion.Direccion;
 import model.documentoComercial.DocumentoComercial;
@@ -27,6 +28,11 @@ import model.usuario.Usuario;
 import model.validacionesEgresos.ValidacionEgreso;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
+import repositorios.RepositorioEgresos;
+import repositorios.RepositorioOrganizaciones;
+import repositorios.RepositorioUsuarios;
 
 public class Main {
 
@@ -79,11 +85,7 @@ public class Main {
 
 	public static void main(String[] args) throws SchedulerException {
 
-		initBatch();
-		System.out.println("-- Datos de prueba inicializados --");
-
-		List<Organizacion> organizaciones = new ArrayList<>();
-		organizaciones.add(organizacion1);
+		List<Organizacion> organizaciones = RepositorioOrganizaciones.instancia.listar();
 
 		JobDetail validacionDeEgresos = JobBuilder.newJob(ValidacionEgresosJob.class).build();
 		validacionDeEgresos.getJobDataMap().put("organizaciones", organizaciones);
@@ -96,116 +98,6 @@ public class Main {
 
 	}
 
-	private static void initBatch() {
-		System.out.println("Inicializando datos de prueba...");
-
-		direccion1 = new Direccion
-				.DireccionBuilder()
-				.calleBuild("Av. Cabildo")
-				.alturaBuild(190)
-				.pisoBuild(10)
-				.departamentoBuild("D")
-				.direccionPostalBuilder("1420")
-				.buildDireccion();
-
-		direccion2 = new Direccion
-				.DireccionBuilder()
-				.calleBuild("Av. Rivadavia")
-				.alturaBuild(4400)
-				.pisoBuild(null)
-				.departamentoBuild(null)
-				.direccionPostalBuilder("1406")
-				.buildDireccion();
-		
-		proveedor1 = new Proveedor("Telas SA", 30258741, direccion1);
-		proveedor2 = new Proveedor("Edenor", 40987654, direccion2);
-		proveedor3 = new Proveedor("Edesur", 458712452, direccion1);
-
-		creadorPesos = new CreadorMoneda(CurrencyID.ARS);
-		peso = creadorPesos.getMoneda();
-
-		item1 = new Item("Rollo tela", new BigDecimal(300), 3);
-		item2 = new Item("Lamina de cuero", new BigDecimal(300), 4);
-		item3 = new Item("Botella de tintura", new BigDecimal(50), 1);
-		item4 = new Item("Rollo tela", new BigDecimal(200), 3);
-		item5 = new Item("Lamina de cuero", new BigDecimal(350), 4);
-		item6 = new Item("Botella de tintura", new BigDecimal(70), 1);
-		item7 = new Item("Rollo tela", new BigDecimal(220), 3);
-		item8 = new Item("Lamina de cuero", new BigDecimal(400), 4);
-		item9 = new Item("Botella de tintura", new BigDecimal(90), 1);
-
-		items1.add(item1);
-		items1.add(item2);
-		items1.add(item3);
-
-		items2.add(item4);
-		items2.add(item5);
-		items2.add(item6);
-
-		items3.add(item7);
-		items3.add(item8);
-		items3.add(item9);
-
-		egresosPendientes1 = new ArrayList<>();
-		egresosPendientes2 = new ArrayList<>();
-		validaciones1 = new ArrayList<>();
-		validaciones2 = new ArrayList<>();
-		validaciones1.add(ValidacionEgreso.CANTIDAD_MINIMA);
-		validaciones1.add(ValidacionEgreso.COINCIDE_CON_CRITERIO);
-		validaciones2.add(ValidacionEgreso.COINCIDE_CON_PRESUPUESTO_CARGADO);
-
-		usuario1 = new Usuario("Pablo", "pablok421", TipoUsuario.ESTANDAR);
-		usuario2 = new Usuario("Valeria42", "valeria565", TipoUsuario.ADMINISTRADOR);
-		usuario3 = new Usuario("Juan10", "juanchi23", TipoUsuario.ESTANDAR);
-
-		usuariosRevisores1.add(usuario1);
-		usuariosRevisores1.add(usuario2);
-		usuariosRevisores2.add(usuario1);
-		usuariosRevisores2.add(usuario2);
-		usuariosRevisores2.add(usuario3);
-
-		documento1 = new DocumentoComercial(TipoDocumentoComercial.FACTURA, 1234);
-		documento2 = new DocumentoComercial(TipoDocumentoComercial.ORDEN_DE_COMPRA, 7890);
-
-		medioDePago1 = new MedioDePago(TipoMedioDePago.CAJERO, "159753456");
-		medioDePago2 = new MedioDePago(TipoMedioDePago.DINERO_EN_CUENTA, "456852159");
-
-		criterio1 = CriterioSeleccionPresupuesto.MENOR_VALOR;
-
-		presupuesto1 = new Presupuesto(proveedor1, documento1, peso, items1);
-		presupuesto2 = new Presupuesto(proveedor2, documento2, peso, items2);
-		presupuesto3 = new Presupuesto(proveedor3, documento2, peso, items3);
-
-		presupuestos1.add(presupuesto1);
-		presupuestos1.add(presupuesto2);
-		presupuestos2.add(presupuesto1);
-		presupuestos2.add(presupuesto2);
-		presupuestos2.add(presupuesto3);
-
-		egreso1 = new Egreso(LocalDate.of(2020, 9, 12), proveedor1, documento1, medioDePago1, peso, items2,
-				usuariosRevisores2, presupuestos2, true, null);
-
-		egreso2 = new Egreso(LocalDate.of(2020, 7, 15), proveedor2, documento2, medioDePago2, peso, items2,
-				usuariosRevisores1, presupuestos1, true, criterio1);
-
-		entidadBase1 = new EntidadBase("IT Hardware SA", "Entidad de prueba");
-		entidadBase2 = new EntidadBase("Plásticos SA", "Otra Entidad de prueba");
-		entidadJuridica1 = new EntidadJuridica("Software Solutions SRL", "S&S", "38421526123", "Av. San Juan 1056",
-				"C1063ACD");
-
-		entidadBase1.nuevoEgreso(egreso1);
-		entidadBase2.nuevoEgreso(egreso2);
-		entidadJuridica1.agregarEntidadBase(entidadBase1);
-		entidadJuridica1.agregarEntidadBase(entidadBase2);
-
-		organizacion1 = new Organizacion("Pablo Giménez Enterprises");
-		organizacion1.agregarEntidadJuridica(entidadJuridica1);
-		organizacion1.agregarValidacionEgreso(ValidacionEgreso.COINCIDE_CON_CRITERIO);
-		organizacion1.agregarValidacionEgreso(ValidacionEgreso.CANTIDAD_MINIMA);
-
-		System.out.println("Datos de prueba inicializados.");
-	}
-
 	private static void imprimirResultadoDeValidacion(List<Egreso> egresos) {
 		for (Egreso egreso : egresos) {
 			System.out.println("Egreso validado: " + egreso.toString() + " | Resultado -> Estado:" + " " + egreso.getEstado().toString());
@@ -213,7 +105,7 @@ public class Main {
 		}
 	}
 
-	public static class ValidacionEgresosJob implements Job {
+	public static class ValidacionEgresosJob implements Job, WithGlobalEntityManager, TransactionalOps {
 
 		@Override
 		public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -223,7 +115,13 @@ public class Main {
 			organizaciones.stream().forEach(organizacion -> {
 				System.out.println(organizacion);
 				List<Egreso> egresosAValidar = organizacion.obtenerEgresosParaValidar();
-				organizacion.validarEgresos();
+				List<Usuario> usuariosRevisores = egresosAValidar.stream().flatMap(e -> e.getRevisores().stream()).collect(Collectors.toList());
+
+				withTransaction(() ->{
+					organizacion.validarEgresos();
+					RepositorioEgresos.instancia.actualizarEgresos(egresosAValidar);
+					RepositorioUsuarios.instancia.actualizarUsuarios(usuariosRevisores);
+				});
 				imprimirResultadoDeValidacion(egresosAValidar);
 			});
 			System.out.println(">> FIN VALIDACIÓN DE EGRESOS <<");

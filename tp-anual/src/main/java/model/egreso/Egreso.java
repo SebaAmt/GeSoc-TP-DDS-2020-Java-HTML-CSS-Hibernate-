@@ -143,10 +143,10 @@ public class Egreso {
 
 	@Override
 	public String toString() {
-		return "Egreso{" + "Documento Comercial= " + this.documentoComercial.getTipoDocumentoComercial() + " - Nro. "
-				+ this.documentoComercial.getIdentificadorDocumento() +
-
-				", Fecha de operacion=" + fechaDeOperacion + '}';
+		return "Egreso con "
+				+ this.documentoComercial.getTipoDocumentoComercial().getNombre() + " Id. "
+				+ this.documentoComercial.getIdentificadorDocumento()
+				+ ", Fecha de operacion: " + fechaDeOperacion;
 	}
 
 	private void tieneLosMismosItems(Presupuesto presupuesto) {
