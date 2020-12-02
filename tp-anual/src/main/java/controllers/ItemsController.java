@@ -30,8 +30,6 @@ public class ItemsController implements WithGlobalEntityManager, TransactionalOp
                 response.redirect("/error", 404); // not found
             }
 
-            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(idOrg));
-
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("idEntidad", Long.parseLong(idEntidad));
             modelo.put("idOrganizacion", Long.parseLong(idOrg));

@@ -29,7 +29,6 @@ public class UsuariosController {
     }
 
     public ModelAndView getMensajes(Request request, Response response){
-        SessionHelper.validarLogueado(request, response);
         Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
         Map<String, Object> modelo = new HashMap<>();
         modelo.put("mensajes", usuarioLogueado.getBandejaDeMensajes());

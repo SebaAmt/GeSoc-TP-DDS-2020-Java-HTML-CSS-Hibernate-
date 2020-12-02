@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class OrganizacionesController implements WithGlobalEntityManager {
 
     public ModelAndView getOrganizaciones(Request request, Response response){
-        SessionHelper.validarLogueado(request, response);
         Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
         Map<String, Object> modelo = new HashMap<>();
         modelo.put("organizaciones", RepositorioOrganizaciones.instancia.obtenerOrganizacionPorUsuario(usuarioLogueado));
@@ -32,15 +31,13 @@ public class OrganizacionesController implements WithGlobalEntityManager {
     }
 
     public ModelAndView getDetalleOrganizacion(Request request, Response response){
-        String id = request.params(":id");
+        String id = request.params(":idOrg");
         try{
             Organizacion organizacion = RepositorioOrganizaciones.instancia.obtenerOrganizacionPorId(Long.parseLong(id));
 
             if(organizacion == null){
                 response.redirect("/error", 404); // not found
             }
-            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(id));
-            Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
 
             List<EntidadBase> entidadesBase;
             List<EntidadJuridica> entidadesJuridicas;

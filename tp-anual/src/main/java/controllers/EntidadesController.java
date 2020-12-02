@@ -34,7 +34,6 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
 	private ModelAndView getFormCreacionEntidad(Request request, Response response, String form) {
         String idOrg = request.params(":idOrg");
         try{
-            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(idOrg));
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("idOrganizacion", Long.parseLong(idOrg));
@@ -106,8 +105,6 @@ public class EntidadesController implements WithGlobalEntityManager, Transaction
             if(entidad == null){
                 response.redirect("/error", 404); // not found
             }
-
-            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(idOrg));
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("entidad", entidad);

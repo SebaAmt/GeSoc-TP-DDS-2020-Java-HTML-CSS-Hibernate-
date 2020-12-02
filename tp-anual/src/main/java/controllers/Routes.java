@@ -1,11 +1,17 @@
 package controllers;
 
 import controllers.HomeController;
+import org.eclipse.jetty.http.HttpStatus;
 import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
+import spark.Request;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import static spark.Spark.after;
+import java.lang.ref.ReferenceQueue;
+import java.util.Map;
+import java.util.Set;
+
+import static spark.Spark.*;
 
 public class Routes {
 
@@ -25,6 +31,21 @@ public class Routes {
         ItemsController itemsController = new ItemsController();
         PresupuestosController presupuestosController = new PresupuestosController();
 
+        before((request, response) -> {
+            if(request.uri().equals("/login") || request.uri().equals("/main.css"))
+                return;
+            String username = request.session().attribute("userName");
+            SessionHelper.validarLogueado(request, response);
+        });
+
+        before("/organizaciones/:idOrg", (request,response) -> {
+            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(request.params(":idOrg")));
+        });
+
+        before("/organizaciones/:idOrg/*", (request,response) -> {
+            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(request.params(":idOrg")));
+        });
+
         //Login
         Spark.get("/login", (request, response) -> usuariosController.getFormularioLogin(request, response), engine);
         Spark.post("/login", (request, response) -> usuariosController.iniciarSesion(request, response));
@@ -35,7 +56,7 @@ public class Routes {
 
         //Organizaciones
         //Spark.get("/organizaciones", (request, response) -> organizacionesController.getOrganizaciones(request, response), engine);
-        Spark.get("/organizaciones/:id", (request, response) -> organizacionesController.getDetalleOrganizacion(request, response), engine);
+        Spark.get("/organizaciones/:idOrg", (request, response) -> organizacionesController.getDetalleOrganizacion(request, response), engine);
         //Mensajes
         Spark.get("/mensajes", (request, response) -> usuariosController.getMensajes(request, response), engine);
 

@@ -29,8 +29,6 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
                 response.redirect("/error", 404); // not found
             }
 
-            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(idOrg));
-
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("tipoEntidad", tipoEntidad);
             modelo.put("idEntidad", Long.parseLong(idEntidad));
@@ -88,7 +86,6 @@ public class EgresosController implements WithGlobalEntityManager, Transactional
         String idEgreso = request.params(":idEgreso");
         String idEntidad = request.params(":idEntidad");
         try{
-            SessionHelper.validarOrganizacionUsuarioLogueado(request, response, Long.parseLong(idOrg));
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("egreso", RepositorioEgresos.instancia.getEgresoPorId(Long.parseLong(idEgreso)));

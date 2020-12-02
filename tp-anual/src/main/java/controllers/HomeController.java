@@ -11,7 +11,6 @@ import java.util.Map;
 public class HomeController {
 
     public ModelAndView getHome(Request request, Response response) {
-        SessionHelper.validarLogueado(request, response);
         Usuario usuarioLogueado = SessionHelper.getUsuarioLogueado(request);
         Map<String, Object> modelo = new HashMap<>();
         modelo.put("organizaciones", RepositorioOrganizaciones.instancia.obtenerOrganizacionPorUsuario(usuarioLogueado));
