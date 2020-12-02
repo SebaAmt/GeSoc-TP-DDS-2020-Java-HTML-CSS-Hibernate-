@@ -1,9 +1,7 @@
 
 {{#partial "contenido"}}
 {{#block "mensajes"}}
-<section class="detalle">
 <h1>Tus Mensajes</h1>
-
 {{#if bandejaVacia}}
 <p class="msg-box" style="background-color:#f7d9c1">No hay mensajes</p>
 
@@ -19,7 +17,6 @@
    {{/each}}
  </ol>
 {{/if}}
-</section>
 {{/block}}
 {{/partial}}
 {{> layout.html.hbs }}

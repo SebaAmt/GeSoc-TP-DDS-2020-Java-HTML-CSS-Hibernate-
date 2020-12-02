@@ -1,44 +1,41 @@
 {{# partial "contenido" }}
-        <h1>GeSoc - DDS</h1>
-        <h2>Sobre nuestro sitio</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta neque sed nisi rutrum, eu ultricies lacus
-            rutrum. In sagittis, nunc a pellentesque egestas, lacus odio tincidunt nunc, nec facilisis ipsum lorem sit amet
-            mauris. Maecenas vel mi turpis. Morbi ac lacus auctor ante dignissim aliquam vitae vel turpis. Suspendisse
-            tincidunt mi id commodo consectetur. Suspendisse ut gravida justo. Praesent a lectus ut nisl iaculis bibendum.
-            Nam nec sem sit amet sapien pharetra sodales. Proin congue, tortor ut condimentum fringilla, risus mauris
-            ultrices enim, vitae semper diam leo ac nisi.
-        </p>
-        <h2>Organizaciones</h2>
-        {{#if organizaciones}}
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-        <!--                <th scope="col"># Entidades Base</th>-->
-        <!--                <th scope="col"># Entidades Jurídicas</th>-->
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {{#organizaciones}}
-                    <tr>
-                        <td>{{nombre}}</td>
-        <!--                <td>{{entidadesBase}}</td>-->
-        <!--                <td>{{entidadesJuridicas}}</td>-->
-                        <td>
-                            <a class="btn btn-info" href="organizaciones/{{id}}"><i class="small material-icons">description</i>Ver detalle</a>
-                            <a href="#" class="btn btn-warning"><i class="small material-icons">edit</i>Modificar</a>
-                            <a href="#" class="btn btn-danger"><i class="small material-icons">delete</i>Borrar</a>
-                        </td>
-                    </tr>
-                {{/organizaciones}}
-                </tbody>
-            </table>
-        {{else}}
-            <div class="alert alert-danger text-center" role="alert">
-                No se encontró ninguna organización.
-            </div>
-        {{/if}}
+<h1>GeSoc - DDS</h1>
+<h2>Sobre nuestro sitio</h2>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porta neque sed nisi rutrum, eu ultricies lacus
+    rutrum. In sagittis, nunc a pellentesque egestas, lacus odio tincidunt nunc, nec facilisis ipsum lorem sit amet
+    mauris. Maecenas vel mi turpis. Morbi ac lacus auctor ante dignissim aliquam vitae vel turpis. Suspendisse
+    tincidunt mi id commodo consectetur. Suspendisse ut gravida justo. Praesent a lectus ut nisl iaculis bibendum.
+    Nam nec sem sit amet sapien pharetra sodales. Proin congue, tortor ut condimentum fringilla, risus mauris
+    ultrices enim, vitae semper diam leo ac nisi.
+</p>
+<h2>Organizaciones</h2>
+{{#if organizaciones}}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#organizaciones}}
+            <tr>
+                <td>{{nombre}}</td>
+                <td>
+                    <a class="btn btn-info" href="organizaciones/{{id}}"><i class="small material-icons">description</i>Ver detalle</a>
+                    <a href="#" class="btn btn-warning"><i class="small material-icons">edit</i>Modificar</a>
+                    <a href="#" class="btn btn-danger"><i class="small material-icons">delete</i>Borrar</a>
+                </td>
+            </tr>
+        {{/organizaciones}}
+        </tbody>
+    </table>
+{{else}}
+    <div class="alert alert-danger text-center" role="alert">
+        No se encontró ninguna organización.
+    </div>
+{{/if}}
+<hr>
 {{/partial}}
 {{> layout.html.hbs }}

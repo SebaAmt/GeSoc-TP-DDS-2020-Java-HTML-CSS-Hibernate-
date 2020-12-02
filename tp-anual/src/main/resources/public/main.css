@@ -135,10 +135,10 @@ hr{
 }
 
 footer{
-    position: relative;
-    top: 180px;
+    height: 3em;
     text-align: center;
-    background-color: DEDDE4;
+    background-color: #F5F5F6;
+    padding: .7em;
 }
 
 .form-group label {
